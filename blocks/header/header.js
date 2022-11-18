@@ -40,14 +40,41 @@ export default async function decorate(block) {
     const navSections = [...nav.children][1];
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
+        // deal with top level dropdowns first
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+        // replacing bold nav titles with divs for styling
+        if (navSection.querySelector('strong')) {
+          const sectionHeading = navSection.querySelector('strong');
+          const sectionHeadingNew = document.createElement('div');
+          sectionHeadingNew.classList.add('section-heading');
+          sectionHeadingNew.textContent = sectionHeading.textContent;
+          navSection.replaceChild(sectionHeadingNew, sectionHeading);
+        }
         navSection.addEventListener('click', () => {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           collapseAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         });
+        // add classes for the lower level descriptions
+        navSection.querySelectorAll(':scope > ul > li').forEach((levelTwo) => {
+          levelTwo.classList.add('level-two');
+        });
+        navSection.querySelectorAll(':scope > ul > li > ul > li').forEach((levelThree) => {
+          levelThree.classList.add('level-three');
+        });
       });
     }
+
+    // add page scroll listener to know when header turns to sticky
+    const header = block.parentNode;
+    window.addEventListener('scroll', () => {
+      const scrollAmount = window.scrollY;
+      if (scrollAmount > header.offsetHeight) {
+        header.classList.add('is-sticky');
+      } else {
+        header.classList.remove('is-sticky');
+      }
+    });
 
     // hamburger for mobile
     const hamburger = document.createElement('div');
@@ -58,7 +85,7 @@ export default async function decorate(block) {
       document.body.style.overflowY = expanded ? '' : 'hidden';
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
-    nav.prepend(hamburger);
+    nav.append(hamburger);
     nav.setAttribute('aria-expanded', 'false');
     decorateIcons(nav);
     block.append(nav);

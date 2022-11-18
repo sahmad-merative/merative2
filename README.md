@@ -1,9 +1,11 @@
-# Your Project's Title...
-Your project's description...
+# Merative.com
+merative.com on Adobe Franklin.
+Phase 1: Merative blog section (Current Active)
+Phase 2: Merative remaining site
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+- Preview: https://main--merative--hlxsites.hlx.page/
+- Live: https://main--merative--hlxsites.hlx.live/
 
 ## Installation
 
