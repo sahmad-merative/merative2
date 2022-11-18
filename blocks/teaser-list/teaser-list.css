@@ -1,0 +1,55 @@
+.teaser-list {
+    position: relative;
+    display: block;
+}
+
+.teaser-list .teaser-card {
+    padding: 1em;
+}
+
+.teaser-list .teaser-list-block {
+    min-height: 727px;
+}
+
+.teaser-list .teaser-card h6 {
+    font-family: 'Alliance Medium', sans-serif;
+    font-size: 21px;
+    letter-spacing: .16px;
+    line-height: 160%;
+    color: #20201f;
+}
+
+.teaser-list .teaser-card .teaser-link {
+    text-decoration: none;
+    font-family: 'Alliance Medium', sans-serif;
+    font-size: 16px;
+    letter-spacing: .16px;
+    line-height: 120%;
+    border-bottom: 2px solid #90f;
+    color: #90f;
+}
+
+@media (min-width: 600px) {
+    .teaser-list {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto auto auto auto;
+        gap: 25px;
+    }
+    
+    .teaser-list .teaser-card {
+        padding: 1em;
+        border-bottom: 1px solid #e7e2da;
+        min-height: 200px;
+    }
+    
+    .teaser-list .teaser-list-block {
+        min-height: 727px;
+    }
+    
+    .teaser-list .teaser-card:last-child,
+    .teaser-list .teaser-card:nth-last-of-type(-n+2):not(:nth-child(even)) {
+        border-bottom: unset;
+    }
+}
