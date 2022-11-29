@@ -27,6 +27,21 @@
 
 .related-articles[data-block-status="loaded"] > .blog-card {
     position: relative;
+    overflow: hidden;
+}
+
+.related-articles[data-block-status="loaded"] > div:hover {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
+}
+
+.related-articles[data-block-status="loaded"] > div:hover > picture > img {
+    transform: scale(1.05);
+}
+
+.related-articles[data-block-status="loaded"] > div:hover a {
+    color: #90f;
+    text-decoration-line: underline;
 }
 
 .related-articles-container[data-section-status="loaded"] h2 {
