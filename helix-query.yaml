@@ -68,6 +68,6 @@ indices:
       author:
         select: head > meta[name="author"]
         value: attribute(el, "content")
-      readTime:        
-        select: head > meta[name="readTime"]
+      readtime:        
+        select: head > meta[name="readtime"]
         value: attribute(el, "content")
