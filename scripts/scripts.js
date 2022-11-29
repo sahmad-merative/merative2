@@ -105,6 +105,26 @@ export async function lookupPages(pathnames) {
 }
 
 /**
+ * Gets details about blogs that are indexed
+ * @param {Array} pathnames list of pathnames
+ */
+
+ export async function lookupBlogs(pathnames) {
+  if (!window.blogIndex) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
+    const json = await resp.json();
+    const lookup = {};
+    json.data.forEach((row) => {
+      lookup[row.path] = row;
+      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+    });
+    window.blogIndex = { data: json.data, lookup };
+  }
+  const result = pathnames.map((path) => window.blogIndex.lookup[path]).filter((e) => e);
+  return (result);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
