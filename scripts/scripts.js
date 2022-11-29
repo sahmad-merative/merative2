@@ -109,7 +109,7 @@ export async function lookupPages(pathnames) {
  * @param {Array} pathnames list of pathnames
  */
 
- export async function lookupBlogs(pathnames) {
+export async function lookupBlogs(pathnames) {
   if (!window.blogIndex) {
     const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
     const json = await resp.json();
