@@ -1,6 +1,6 @@
 
    footer {
-    --footer-font-color: #fff;
+    --footer-font-color: var(--neutral-white);
  
     background-color: #202020;
   }
@@ -32,7 +32,7 @@
   footer .footer-links > div > div> h4{
     color: #8B8883;
     font-size: 18px;
-    font-family: "Alliance Light",sans-serif;
+    font-family: var(--sans-serif-font-light);
     margin-bottom: 24px;
     font-weight: 300;
   }
@@ -54,7 +54,7 @@
   footer .footer-links .icon-footer-logo {
     border-radius: 0%;
     background-color: transparent;
-    font-family: "Source Serif4 Regular", sans-serif;
+    font-family: var(--serif-font);
     font-size: 16px;
     margin-top: 0;
     margin-bottom: 0;
@@ -114,7 +114,7 @@
 
   footer .footer-links ul li a{
     color: var(--footer-font-color);
-    font-family: "Alliance Regular", sans-serif;
+    font-family: var(--sans-serif-font-regular);
     font-size: 14px;
     text-decoration: none;
   }
@@ -159,7 +159,7 @@
       max-width: 70rem;
       max-height: 36.75rem;
       margin: 0 auto;
-      font-size: var(--body-font-size-s);
+      font-size: var(--font-size-16);
     }
 
     footer .footer-links {
