@@ -5,12 +5,12 @@ header {
   clear: none;
   border-bottom: 1.5px solid #e6e6e6;
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--neutral-bone);
   left: 0;
   top: 0;
   transition: all .5s ease;
   z-index: 99999;
-  font-family: var(--header-font-family);
+  font-family: var(--sans-serif-font-medium);
 }
 
 .header.block {
@@ -71,9 +71,9 @@ header nav .nav-sections>ul>li {
   }
 
   header.is-sticky {
-    background: #20201f;
-    border-bottom: 1px solid #20201f;
-    color: #fff;
+    background: var(--neutral-carbon);
+    border-bottom: 1px solid var(--neutral-carbon);
+    color: var(--neutral-white);
     padding: 0;
     height: var(--sticky-nav-height);
   }
@@ -217,7 +217,7 @@ header nav .nav-sections>ul>li {
   }
 
   header nav .nav-sections > ul > li > ul:any-link {
-    font-size: var(--body-font-size-m);
+    font-size: var(--font-size-16);
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
@@ -238,7 +238,7 @@ header nav .nav-sections>ul>li {
     top: calc(var(--nav-height) + 37px);
     margin: 0;
     background-color: white;
-    color: var(--text-color);
+    color: var(--neutral-carbon);
     height: 100vh;
     max-height: none;
     width: 100vw;
@@ -269,7 +269,7 @@ header nav .nav-sections>ul>li {
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two .level-three {
-    font-family: var(--body-font-family);
+    font-family: var(--sans-serif-font-light);
   }
 }
 
@@ -338,8 +338,8 @@ header nav .nav-sections>ul>li {
     right: 100%;
     bottom: 100%;
     margin: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--neutral-bone);
+    color: var(--neutral-carbon);
     height: 100vh;
     max-height: none;
     width: 100vw;
