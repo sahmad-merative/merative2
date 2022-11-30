@@ -33,4 +33,41 @@ indices:
       teaser-link-text:
         select: head > meta[name="teaser-link-text"]
         value: attribute(el, "content")
-        
+  blogs:
+    include:
+      - /blog/**
+    target: /blog-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, "content")
+      date:
+        select: head > meta[name="publication-date"]
+        value: parseTimestamp(attribute(el, "content"), "MM/DD/YYYY")
+      category:
+        select: head > meta[name="category"]
+        value: attribute(el, "content")
+      audience:
+        select: head > meta[name="audience:tag"]
+        value: attribute(el, "content")
+      topic:
+        select: head > meta[name="topic:tag"]
+        value: attribute(el, "content")
+      author:
+        select: head > meta[name="author"]
+        value: attribute(el, "content")
+      readtime:        
+        select: head > meta[name="readtime"]
+        value: attribute(el, "content")
