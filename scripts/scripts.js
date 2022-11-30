@@ -115,7 +115,7 @@ export async function getAllBlogs() {
     json.data.forEach((row) => {
       if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
     });
-    window.allBlogs = { data: json.data };
+    window.allBlogs = json.data;
   }
   return (window.allBlogs);
 }
