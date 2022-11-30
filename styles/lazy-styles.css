@@ -25,3 +25,9 @@
   src: url("/styles/fonts/Alliance/AllianceNo.1-Medium.woff2") format("woff2");
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Alliance No.1 Semibold";
+  src: url("/styles/fonts/Alliance/AllianceNo.1-SemiBold.woff2") format("woff2");
+  font-display: swap;
+}
