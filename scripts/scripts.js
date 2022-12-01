@@ -126,6 +126,22 @@ export async function lookupBlogs(pathnames) {
 }
 
 /**
+ * Gets details about all blogs that are indexed
+ */
+
+ export async function getAllBlogs() {
+  if (!window.allBlogs) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
+    const json = await resp.json();
+    json.data.forEach((row) => {
+      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+    });
+    window.allBlogs = json.data;
+  }
+  return (window.allBlogs);
+}
+
+/**
  * Creates a Card using a JSON object and style associated with the card
  * @param {Object} row JSON Object typically coming from an index array item
  * @param {String} style Class name that needs to be added to the card root div
@@ -167,22 +183,6 @@ export async function createCard(row, style) {
 
   card.append(cardContent);
   return (card);
-}
-
-/**
- * Gets details about all blogs that are indexed
- */
-
-export async function getAllBlogs() {
-  if (!window.allBlogs) {
-    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
-    const json = await resp.json();
-    json.data.forEach((row) => {
-      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
-    });
-    window.allBlogs = json.data;
-  }
-  return (window.allBlogs);
 }
 
 /**
