@@ -152,7 +152,7 @@ export async function createCard(row, style) {
   const link = document.createElement('a');
   link.classList.add('blog-link');
   link.href = row.path;
-  if (row.title) link.innerHTML += `<h5>${row.title}</h5>`;
+  if (row.title) link.innerHTML += `${row.title}`;
   cardContent.append(link);
   if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
   const author = document.createElement('div');
