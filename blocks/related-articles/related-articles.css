@@ -1,5 +1,13 @@
 .related-articles-container[data-section-status="loaded"] {
-    padding: 64px 24px;
+    padding: var(--spacer-layout-05) var(--spacer-layout-02);
+}
+
+.related-articles-container[data-section-status="loaded"] h2 {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: var(--line-height-120);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 .related-articles[data-block-status="loaded"] {
@@ -7,27 +15,20 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 48px;
-    gap: 48px;
-
-    /* Desktop/Body/Paragraph 3 */
-    font-family: 'Alliance Regular', sans-serif;
+    padding-top: var(--spacer-layout-04);
+    gap: var(--spacer-layout-03);
+    font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
-    line-height: 160%;
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-160);
     letter-spacing: 0.01em;
-
-    /* Neutrals/Carbon */
-    color: #20201F;
-
-    /* Neutrals/Bone */
-    background: #FAF8F6;
+    color: var(--neutral-carbon);
+    background: var(--neutral-bone);
 }
 
 .related-articles[data-block-status="loaded"] > .blog-card {
     position: relative;
-    overflow: hidden;
 }
 
 .related-articles[data-block-status="loaded"] > div:hover {
@@ -35,26 +36,23 @@
     box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
 }
 
-.related-articles[data-block-status="loaded"] > div:hover > picture > img {
-    transform: scale(1.05);
-}
-
 .related-articles[data-block-status="loaded"] > div:hover a {
-    color: #90f;
+    color: var(--primary-purple);
     text-decoration-line: underline;
 }
 
-.related-articles-container[data-section-status="loaded"] h2 {
-    /* Mobile/Eyebrow/Eyebrow */
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 120%;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+.related-articles[data-block-status="loaded"] > div.blog-card > div.card-image,
+.related-articles[data-block-status="loaded"] > div.blog-card:hover > div.card-image {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    height: auto;
+    width: 100%;
 }
 
-.related-articles[data-block-status="loaded"] > .blog-card > .card-content {
-    padding: 32px 24px;
+.related-articles[data-block-status="loaded"] > div.blog-card:hover > div.card-image > picture > img {
+    transition: all .3s ease-in-out;
+    transform: scale(1.05);
 }
 
 .related-articles[data-block-status="loaded"] .blog-link {
@@ -63,6 +61,10 @@
 
 .related-articles[data-block-status="loaded"] .blog-link h5 {
     font-weight: 400;
+}
+
+.related-articles[data-block-status="loaded"] > .blog-card > .card-content {
+    padding: var(--spacer-element-08) var(--spacer-element-07);
 }
 
 .related-articles[data-block-status="loaded"] > .blog-card > .card-content > .blog-author {
@@ -75,24 +77,34 @@
     background-color: #fff;
     opacity: 0.85;
     border-radius: 100px;
-    left: 16px;
-    padding: 4px 16px;
+    left: var(--spacer-element-05);
+    padding: var(--spacer-element-02) var(--spacer-element-05);
     position: absolute;
-    top: 24px;
+    top: var(--spacer-element-07);
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
+    .related-articles-container[data-section-status="loaded"] {
+        padding: var(--spacer-layout-05) var(--spacer-layout-036);
+    }
+
     .related-articles[data-block-status="loaded"] {
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        gap: var(--spacer-element-10) var(--spacer-element-07);
     }
 }
 
-@media (min-width: 1440px) {
+@media only screen and (min-width: 1200px) {
+    .related-articles-container[data-section-status="loaded"] {
+        padding: var(--spacer-layout-06) var(--spacer-layout-07);
+    }
+
     .related-articles[data-block-status="loaded"] {
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--spacer-element-10) var(--spacer-element-07);
     }
 }
