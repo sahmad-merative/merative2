@@ -14,7 +14,7 @@ import {
   createOptimizedPicture,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['header', 'hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
 function buildHeroBlock(main) {
