@@ -72,7 +72,7 @@
     font-size: 12px;
 }
 
-.related-articles[data-block-status="loaded"] > .blog-card > .card-content > .blog-category {
+.related-articles[data-block-status="loaded"] > .blog-card > .card-content > .blog-category:not(:empty) {
     font-size: 14px;
     letter-spacing: .16px;
     background-color: #fff;
