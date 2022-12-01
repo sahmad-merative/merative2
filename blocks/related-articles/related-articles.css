@@ -3,10 +3,12 @@
 }
 
 .related-articles-container[data-section-status="loaded"] h2 {
-    font-weight: 500;
-    font-size: 11px;
+    font-family: var(--sans-serif-font-regular);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-14);
     line-height: var(--line-height-120);
-    letter-spacing: 0.2em;
+    color: var(--primary-black);
+    letter-spacing: var(--letter-spacing-02-em);
     text-transform: uppercase;
 }
 
@@ -19,10 +21,10 @@
     gap: var(--spacer-layout-03);
     font-family: var(--sans-serif-font-regular);
     font-style: normal;
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     font-size: var(--font-size-16);
     line-height: var(--line-height-160);
-    letter-spacing: 0.01em;
+    letter-spacing: var(--letter-spacing-001-em);
     color: var(--neutral-carbon);
     background: var(--neutral-bone);
 }
