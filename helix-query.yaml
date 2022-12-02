@@ -60,10 +60,10 @@ indices:
         select: head > meta[name="category"]
         value: attribute(el, "content")
       audience:
-        select: head > meta[name="audience:tag"]
+        select: head > meta[name="audience"]
         value: attribute(el, "content")
       topic:
-        select: head > meta[name="topic:tag"]
+        select: head > meta[name="topic"]
         value: attribute(el, "content")
       author:
         select: head > meta[name="author"]
