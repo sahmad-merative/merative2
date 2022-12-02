@@ -1,46 +1,74 @@
-import { getAllBlogs } from '../../scripts/scripts.js';
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { getAllBlogs, createCard } from '../../scripts/scripts.js';
 
-function createCard(row, style) {
-    console.log(`Row ${row.title}`);
-    // Create card div
-    const card = document.createElement('div');
-    if (style) card.classList.add(style);
-    // Add the image to the card first
-    if (row.image && row.title) card.prepend(createOptimizedPicture(row.image, row.title));
-    // Create a separate child div for the card content
-    const cardContent = document.createElement('div');
-    cardContent.classList.add('card-content');
-    // Create and add the link, title, author, readtime and category to card content and card
-    const link = document.createElement('a');
-    link.classList.add('blog-link');
-    link.href = row.path;
-    if (row.title) link.innerHTML += `<h5>${row.title}</h5>`;
-    cardContent.append(link);
-    if (row.description) cardContent.innerHTML += `<p>${row.description}</p>`;
-    const author = document.createElement('div');
-    author.classList.add('blog-author');
-    if (row.author && row.author !== '0') author.innerHTML += `By ${row.author}`;
-    if (row.readtime && row.readtime !== '0') author.innerHTML += ` | ${row.readtime}`;
-    cardContent.append(author);
-    const category = document.createElement('div');
-    category.classList.add('blog-category');
-    if (row.category && row.category !== '0') category.innerHTML += row.category;
-    cardContent.append(category);
-    card.append(cardContent);
-    return (card);
+function createCheckboxList(label, elementName) {
+    const cleanedLabel = label.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    const div = document.createElement('div');
+    const inputEl = document.createElement('input');
+    inputEl.setAttribute('type', 'checkbox');
+    inputEl.setAttribute('name', elementName);    
+    inputEl.setAttribute('id', cleanedLabel);
+    inputEl.setAttribute('value', cleanedLabel);
+    const labelEl = document.createElement('label');
+    labelEl.setAttribute('for', cleanedLabel);
+    labelEl.innerHTML(label);
+    div.append(inputEl);
+    div.append(labelEl);
 }
 
 export default async function decorate(block) {
     block.textContent = '';
     // Make a call to get all blog details from the blog index
     const blogList = await getAllBlogs();
+    const topics = new Set();
+    const audiences = new Set();
     if (blogList.length) {
-        blogList.forEach((row) => {
+        const blogCards = document.createElement('div');
+        blogCards.classList.add('blog-cards');
+        blogList.forEach(async (row) => {
+            const blogCard = await createCard(row, 'blog-card');
+
+            if (row.topic && row.topic != '0') {
+                blogCard.setAttribute('topics',row.topic);
+                const topicValues = row.topic.split(',');
+                topicValues.forEach((topicValue) => {
+                    topics.add(topicValue);
+                });
+            }
+            if (row.audience && row.audience != '0') {
+                blogCard.setAttribute('audiences', row.audience);
+                const audienceValues = row.audience.split(',');
+                audienceValues.forEach((audienceValue) => {
+                    audiences.add(audienceValue);
+                });
+            }
             // if (row.category !== '0') {
-                block.append(createCard(row, 'blog-card'));
+                blogCards.append(blogCard);
             // }
         });
+        block.append(blogCards);
+
+        // Create DOM elements for topics and audiences to display in the left nav
+        const filters = document.createElement('div');
+        filters.classList.add('filters');
+
+        const topicsElement = document.createElement('div');
+        topicsElement.classList.add('topics');        
+        if (topics.length) {
+            topics.forEach((topic) => {
+                topicsElement.append(createCheckboxList(topic, 'topic'));
+            });
+            filters.append(topicsElement);
+        }
+
+        const audiencesElement = document.createElement('div');
+        audiencesElement.classList.add('audiences');
+        if (audiences.length) {
+            audiences.forEach((audience) => {
+                audiencesElement.append(createCheckboxList(audience, 'audience'));
+            });
+            filters.append(audiencesElement);
+        }
+        block.prepend(filters);
     } else {
         block.remove();
     }
