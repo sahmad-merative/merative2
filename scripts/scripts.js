@@ -127,9 +127,11 @@ export async function lookupBlogs(pathnames) {
 
 /**
  * Gets details about all blogs that are indexed
+ * or only blogs belonging to a specific category
+ * @param {String} category name of the category
  */
 
- export async function getAllBlogs() {
+ export async function getAllBlogs(category) {
   if (!window.allBlogs) {
     const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
     const json = await resp.json();
@@ -138,7 +140,46 @@ export async function lookupBlogs(pathnames) {
     });
     window.allBlogs = json.data;
   }
-  return (window.allBlogs);
+  if(category) {
+    // return only blogs that have the same category
+    const result = window.allBlogs.filter((e) => {
+      if(e.category.trim() === category) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return (result);
+  } else {
+    // return all blogs
+    return (window.allBlogs);
+  }
+}
+
+
+/**
+ * Gets details about all blog category pages that are indexed
+ * for left nav
+ */
+
+ export async function getBlogCategoryPages() {
+  if (!window.allBlogs) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
+    const json = await resp.json();
+    json.data.forEach((row) => {
+      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+    });
+    window.allBlogs = json.data;
+  }
+    // return only blog category pages for left navigation
+    const result = window.allBlogs.filter((e) => {
+      if(e.template === 'Category') {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return (result);
 }
 
 /**
