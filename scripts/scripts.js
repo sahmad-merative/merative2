@@ -38,10 +38,29 @@ function buildCtaBlock(main) {
       if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
            && (numChildren === 2)) {
         div.classList.add('cta');
-      }
+              }
     }
+
+    if (p) {
+     const b = p.querySelector('a');
+      // eslint-disable-next-line no-bitwise
+    if (h2 && p && p && b && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
+         && (numChildren === 3)) {
+        div.classList.add('cta');
+             }
+    }
+
   });
 }
+
+
+// ||
+           // (h2 && p && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
+            //&& (numChildren === 3))
+            
+
+
+
 
 function buildBackToTopBlock(main) {
   const element = document.createElement('div');
