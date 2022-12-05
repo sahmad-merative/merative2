@@ -17,6 +17,7 @@
   /* stylelint-disable-next-line color-hex-length */
   --primary-purple: #9900FF; /* Merative figma design spec */
   --primary-red: #FA1E32;
+  --primary-black: #000;
 
   /* secondary */
   --secondary-blue: #1385E2;
@@ -59,6 +60,7 @@
   --font-size-21: 21px;
   --font-size-18: 18px;
   --font-size-16: 16px;
+  --font-size-14: 14px;
 
   /* font weight */
   --font-weight-light: light;
@@ -72,8 +74,10 @@
   /* letter spacing */
   --letter-spacing-0: 0;
   --letter-spacing-1: 1%;
-  --letter-spacing-1-75 : 1.75%;
-  --letter-spacing-20 : 20%;
+  --letter-spacing-1-75: 1.75%;
+  --letter-spacing-20: 20%;
+  --letter-spacing-001-em: 0.01em;
+  --letter-spacing-02-em: 0.2em;
 
 
   /* element spacers */
@@ -92,6 +96,7 @@
   --spacer-layout-01: 16px;
   --spacer-layout-02: 24px;
   --spacer-layout-03: 32px;
+  --spacer-layout-036: 36px;
   --spacer-layout-04: 48px;
   --spacer-layout-05: 64px;
   --spacer-layout-06: 96px;
