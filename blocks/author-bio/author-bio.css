@@ -1,0 +1,38 @@
+main .author-bio {
+    font-family: var(--sans-serif-font-light);
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-160);
+    letter-spacing: var(--letter-spacing-1);
+    display: flex;
+    align-items: center;
+    color: var(--neutral-carbon);
+}
+
+
+main .author-bio .author-img{
+    width: 48px;
+    border-radius: 50%;
+    height: auto;
+}
+
+@media only screen and (width >= 1200px) {
+    main .author-bio .author-img{
+        width: 64px;
+    }
+}
+
+
+main .author-bio .author-name {
+    margin-left: 16px;
+}
+
+main .author-bio .author-name-hightlight {
+    border-bottom: 2px solid var(--neutral-carbon);
+}
+
+main .author-bio .pipe {
+    color: var(--neutral-sand);
+    font-size: 20px;
+    margin: 0 16px;
+}
