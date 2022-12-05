@@ -218,6 +218,7 @@ margin: var(--spacer-layout-04) auto;
   
   h2 {
     font-size: var(--font-size-32);
+    
   }
   
   h3 {
@@ -642,3 +643,29 @@ main .section.article-content>:last-child{
   border-bottom: 1px solid var(--neutral-sand);
   }
 
+ .tags{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    margin-bottom: 32px;
+}
+
+.tags .tag{
+    font-family: var(--sans-serif-font-regular);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-160);
+    letter-spacing: var(--letter-spacing-1);
+    color: var(--neutral-carbon);
+    background-color: var(--neutral-bone);
+    border-radius: 100px;
+    padding: 4px 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+}
+
+@media only screen and (width >= 1200px) {
+    .tags{
+        margin-bottom: 48px;
+    }
+}
