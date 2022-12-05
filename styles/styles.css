@@ -40,9 +40,6 @@
   --feedback-green: #059641;
   --feedback-red: #D21313;
 
-  /* ootb block colors */
-  
-
   /* ----typography--- */
 
   /* fonts family */
@@ -124,7 +121,6 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 
 body{
   margin: 0;
-  padding:0;
   border:0;
   font-size: 100%;
   display: none;
@@ -132,7 +128,7 @@ body{
   font-family: var(--sans-serif-font-light);
 }
 
-body.blog{
+body.blog-article{
   background-color: var(--neutral-white);
 }
 
@@ -147,6 +143,11 @@ main{
 
 main .section {
   padding: 32px;
+}
+
+h1, h2, h3, h4, h5
+{
+margin: var(--spacer-layout-04) auto;
 }
 
 /* Mobile */
@@ -323,6 +324,60 @@ button {
   margin: 0;
 }
 
+  main .article-content picture img{
+    border-radius: 10px;
+    margin-bottom: 48px;
+  }
+  
+  main .article-content .icon > svg{
+  width: 32px;
+  height: 32px;
+  }
+  
+  main .article-content a+.icon > svg{
+    width: 20px;
+    height: 20px;
+    }
+  
+  main .article-content.iconnect-content p{
+    font-family: var(--sans-serif-font-light);
+    font-weight: var(--font-weight-light);
+  }
+  
+  main .article-content p:has(a:first-child){
+    text-align: center;
+  }
+  
+  main .article-content p > a:only-of-type{
+    text-decoration: none;
+    }  
+  
+  main .article-content.iconnect-content
+  {
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-160);
+    letter-spacing: var(--letter-spacing-1);
+    vertical-align: top;
+    color: var(--neutral-carbon);
+  }
+  
+  main .article-content.iconnect-content h5
+  {
+    font-family: var(--sans-serif-font-medium);
+    font-weight: var(--font-weight-medium);
+    margin: 16px auto;
+  }
+  
+  main .article-content.article-content.iconnect-content p:has(a:first-child){
+    text-align: unset;
+  }
+  
+  main .article-content.article-content.iconnect-content p > a{
+    text-decoration: underline;
+    }  
+
+
+
 /* Back to top button */
 main .section.back-to-top {
   display: none;
@@ -336,24 +391,8 @@ main pre {
   white-space: pre;
 }
 
-main blockquote {
-  font-style: italic;
-  margin: 3rem;
-  text-indent: -1rem;
-  hanging-punctuation: first;
-}
 
-main blockquote p::before {
-  content: "“";
-  line-height: 0;
-}
-
-main blockquote p::after {
-  content: "”";
-  line-height: 0;
-}
-
-.section-bottom > div img{
+main .section-bottom > div img{
   width : auto;
 }
 
@@ -591,4 +630,9 @@ main .section.back-to-top.active:hover::before {
     min-height: 730px;
   }
 }
+
+/* blog article */
+main .section.article-content>:last-child{
+  border-bottom: 1px solid #E7E2DA;
+  }
 
