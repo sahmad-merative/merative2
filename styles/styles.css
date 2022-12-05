@@ -638,6 +638,7 @@ main .section.back-to-top.active:hover::before {
 
 /* blog article */
 main .section.article-content>:last-child{
-  border-bottom: 1px solid #E7E2DA;
+  padding-bottom: var( --spacer-layout-05);
+  border-bottom: 1px solid var(--neutral-sand);
   }
 
