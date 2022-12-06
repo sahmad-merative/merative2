@@ -56,6 +56,9 @@ indices:
       date:
         select: head > meta[name="publication-date"]
         value: parseTimestamp(attribute(el, "content"), "MM/DD/YYYY")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
       category:
         select: head > meta[name="category"]
         value: attribute(el, "content")
