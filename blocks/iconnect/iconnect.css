@@ -1,18 +1,19 @@
-main .article-content .iconnect p{
+main .iconnect p{
     font-family: var(--sans-serif-font-light);
     font-weight: var(--font-weight-light);
   }
 
-  main .article-content .iconnect
+  main .iconnect
   {
     font-size: var(--font-size-16);
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-1);
     vertical-align: top;
     color: var(--neutral-carbon);
+    margin: var(--spacer-element-10) 0;
   }
   
-  main .article-content .iconnect h5
+  main .iconnect h5
   {
     font-family: var(--sans-serif-font-medium);
     font-weight: var(--font-weight-medium);
@@ -23,7 +24,7 @@ main .article-content .iconnect p{
     text-align: unset;
   }
   
-  main .iconnect p > a{
+  main  .iconnect p > a{
     text-decoration: underline;
     }  
 
