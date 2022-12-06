@@ -2,86 +2,26 @@ import { getAllBlogs, createCard, getBlogCategoryPages } from '../../scripts/scr
 
 async function addEventListeners(checkboxes) {
     checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            const checkedList = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
-            .filter((i) => i.checked) // Use Array.filter to remove unchecked checkboxes.
-            .map((i) => i.value); // Use Array.map to extract only the checkbox values from the array of objects.                
-
-            if(checkedList.length) {
-                // hide cards that don't match to the filters that are selected
-                showHideCards();
-                
-                // display tags at the top of the content
-                const selectedFilters = document.querySelector("div.selected-filters");
-                const selectedFiltersTitle = selectedFilters.querySelector(":scope > div.selected-filters-title");
-                selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-                const selectedFiltersList = selectedFilters.querySelector(":scope > div.selected-filters-list");
-
-                // Clear out any existing filters before showing the new ones based on filterGroup
-                selectedFiltersList.textContent = '';
-
-                checkedList.forEach((val) => {
-                    const selectedValue = document.createElement('div');
-                    selectedValue.classList.add('selectedValue');
-                    selectedValue.append(val);
-                    selectedFiltersList.append(selectedValue);
-                    selectedValue.addEventListener('click', function() {
-                        uncheckCheckbox(val);
-                        selectedValue.innerText = '';
-                    });
-                });
-            } else {
-                clearFilters();
-            }
-        })
+        checkbox.addEventListener('change', refreshCards);
     });
 }
 
-function showHideCards() {
-    // hide cards that don't match to the filters that are selected
-    const checkboxes = document.querySelectorAll("input[type=checkbox]");
-    const checkedList = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
-        .filter((i) => i.checked) // Use Array.filter to remove unchecked checkboxes.
-        .map((i) => i.value); // Use Array.map to extract only the checkbox values from the array of objects.                
-    if (checkedList.length) {
-        const blogCards = document.querySelectorAll(".blog-card");
-        blogCards.forEach((card) => {
-            card.setAttribute('aria-hidden', 'true');
-            if (card.hasAttribute('topics')) {
-                const filterGroupValues = card.getAttribute('topics').split(',');
-                const found = filterGroupValues.some((checkedItem) => checkedList.includes(checkedItem.trim()));
-                if (found) {
-                    card.removeAttribute('aria-hidden');
-                }
-            }
-            if (card.hasAttribute('audiences')) {
-                const filterGroupValues = card.getAttribute('audiences').split(',');
-                const found = filterGroupValues.some((checkedItem) => checkedList.includes(checkedItem.trim()));
-                if (found) {
-                    card.removeAttribute('aria-hidden');
-                }
-            }
-        });
-    } else {
-        clearFilters();
-    }
-}
-
 function uncheckCheckbox(val) {
-    // Deselect it from the checkbox list
-    const checkboxes = document.querySelectorAll("input[type=checkbox]");
+    // Deselect val from the checkbox list if it is selected
+    const checkboxes = document.querySelectorAll("input[type=checkbox][name=blogFilters]");
     if (checkboxes.length) {
         const selectedCheckboxes = Array.from(checkboxes).filter((i) => i.checked);
-        if(selectedCheckboxes.length) {
+        if (selectedCheckboxes.length) {
             selectedCheckboxes.forEach((checkbox) => {
                 if ((checkbox.value === val) && (checkbox.checked === true)) {
                     checkbox.checked = false;
-                    showHideCards();
+                    // update the cards to reflect the deselection
+                    refreshCards();
                 }
             });
         }
     }
-} 
+}
 
 function clearFilters() {
     // get's called when nothing is selected. every card shows
@@ -112,18 +52,69 @@ async function createCheckboxList(label) {
     return (div);
 }
 
+function refreshCards() {
+    // hide cards that don't match to the filters that are selected
+    const checkboxes = document.querySelectorAll("input[type=checkbox][name=blogFilters]");
+    const checkedList = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+        .filter((i) => i.checked) // Use Array.filter to remove unchecked checkboxes.
+        .map((i) => i.value); // Use Array.map to extract only the checkbox values from the array of objects.                
+    if (checkedList.length) {
+        const blogCards = document.querySelectorAll(".blog-card");
+        blogCards.forEach((card) => {
+            card.setAttribute('aria-hidden', 'true');
+            if (card.hasAttribute('topics')) {
+                const filterGroupValues = card.getAttribute('topics').split(',');
+                const found = filterGroupValues.some((checkedItem) => checkedList.includes(checkedItem.trim()));
+                if (found) {
+                    card.removeAttribute('aria-hidden');
+                }
+            }
+            if (card.hasAttribute('audiences')) {
+                const filterGroupValues = card.getAttribute('audiences').split(',');
+                const found = filterGroupValues.some((checkedItem) => checkedList.includes(checkedItem.trim()));
+                if (found) {
+                    card.removeAttribute('aria-hidden');
+                }
+            }
+        });
+
+        // refresh selected filters at the top
+        const selectedFilters = document.querySelector("div.selected-filters");
+        const selectedFiltersTitle = selectedFilters.querySelector(":scope > div.selected-filters-title");
+        selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
+        const selectedFiltersList = selectedFilters.querySelector(":scope > div.selected-filters-list");
+
+        // Clear out any existing filters before showing the new ones based on filterGroup
+        selectedFiltersList.textContent = '';
+
+        checkedList.forEach((val) => {
+            const selectedValue = document.createElement('div');
+            selectedValue.classList.add('selectedValue');
+            selectedValue.append(val);
+            selectedFiltersList.append(selectedValue);
+            // Add another event listener for click events to remove this item and uncheck the checkbox
+            selectedValue.addEventListener('click', function () {
+                uncheckCheckbox(val);
+                selectedValue.innerText = '';
+            });
+        });
+    } else {
+        clearFilters();
+    }
+}
+
 async function createFilters(categories, topics, audiences) {
     // Create DOM elements for topics and audiences to display in the left nav
     const filters = document.createElement('div');
     filters.classList.add('filters');
     const topicsElement = document.createElement('div');
     topicsElement.classList.add('topics');
-    topicsElement.setAttribute('aria-expanded','true');
+    topicsElement.setAttribute('aria-expanded', 'true');
     const topicLabel = document.createElement('p');
     topicLabel.classList.add('list-title');
     topicLabel.append('Topic');
     topicsElement.append(topicLabel);
-    topicLabel.addEventListener('click', () => { 
+    topicLabel.addEventListener('click', () => {
         const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
         topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
@@ -136,12 +127,12 @@ async function createFilters(categories, topics, audiences) {
 
     const audiencesElement = document.createElement('div');
     audiencesElement.classList.add('audiences');
-    audiencesElement.setAttribute('aria-expanded','true');
+    audiencesElement.setAttribute('aria-expanded', 'true');
     const audienceLabel = document.createElement('p');
     audienceLabel.classList.add('list-title');
     audienceLabel.append('Audience');
     audiencesElement.append(audienceLabel);
-    audienceLabel.addEventListener('click', () => { 
+    audienceLabel.addEventListener('click', () => {
         const expanded = audiencesElement.getAttribute('aria-expanded') === 'true';
         audiencesElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
@@ -162,12 +153,12 @@ async function createFilters(categories, topics, audiences) {
     blogHomeEl.classList.add('blog-home');
     const blogHomeLink = document.createElement('a');
     blogHomeLink.classList.add('category-link');
-    if(/(^\/blog\/$)/.test(window.location.pathname)) {
+    if (/(^\/blog\/$)/.test(window.location.pathname)) {
         blogHomeLink.classList.add('active');
     }
     blogHomeLink.href = '/blog/';
     blogHomeLink.innerHTML += 'Merative Blog';
-    blogHomeEl.append(blogHomeLink);    
+    blogHomeEl.append(blogHomeLink);
     filters.prepend(blogHomeEl);
     return (filters);
 }
@@ -179,11 +170,11 @@ async function createCategories(categoriesList) {
     catLabel.classList.add('category-title');
     catLabel.append('Categories');
     categoriesElement.append(catLabel);
-    categoriesList.forEach ((row) => {
-        if((row.path !== '0') && (row.title !== '0')) {
+    categoriesList.forEach((row) => {
+        if ((row.path !== '0') && (row.title !== '0')) {
             const link = document.createElement('a');
             link.classList.add('category-link');
-            if(window.location.pathname === row.path) {
+            if (window.location.pathname === row.path) {
                 link.classList.add('active');
             }
             link.href = row.path;
@@ -207,9 +198,9 @@ export default async function decorate(block) {
         blogContent.classList.add('blog-content');
         // Create the selected filters DOM structure
         const selectedFilters = document.createElement('div');
-        selectedFilters.classList.add('selected-filters');    
+        selectedFilters.classList.add('selected-filters');
         const selectedFiltersTitle = document.createElement('div');
-        selectedFiltersTitle.classList.add('selected-filters-title');    
+        selectedFiltersTitle.classList.add('selected-filters-title');
         const selectedFiltersList = document.createElement('div');
         selectedFiltersList.classList.add('selected-filters-list');
         selectedFilters.append(selectedFiltersTitle);
