@@ -105,36 +105,14 @@ export function getMetadata(name) {
 }
 
 function buildTags(main) {
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
   const tagsElement = document.createElement('div');
   tagsElement.classList.add('tags');
-
-  const category = getMetadata('category');
-  let audience = getMetadata('audience');
-  let topic = getMetadata('topic');
-  let tags = [];
-  if (category) {
-    tags.push(category);
-    if (audience && topic) {
-      audience = audience.split(',').map((element) => element.trim());
-      topic = topic.split(',').map((element) => element.trim());
-      tags = tags.concat(audience, topic);
-    }
-  }
-  const uniqueTags = tags.filter(onlyUnique);
-  uniqueTags.forEach((item) => {
-    const tag = createTag('span', { class: 'tag' }); // can be changed to buttons to be clickable
-    tag.innerHTML = item;
-    tagsElement.append(tag);
-  });
+  tagsElement.append(buildBlock('tags', { elems: [] }));
   const firstH2 = main.querySelector('h2:first-of-type');
   const p = main.querySelector('p:first-of-type');
   // eslint-disable-next-line no-bitwise
   if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
-    firstH2.append(tagsElement);
+    firstH2.after(tagsElement);
   }
 }
 

@@ -5,11 +5,10 @@ export default function decorate(block) {
   const defaultAuthor = 'Merative';
 
   let authorImage = getMetadata('authorimage');
-  let readtime = getMetadata('readtime');
+  const readtime = getMetadata('readtime');
   let author = getMetadata('author');
 
   author = author || defaultAuthor;
-  readtime = readtime || '';
   authorImage = authorImage || defaultAuthorImageSrc;
 
   block.innerHTML = '';
@@ -21,9 +20,13 @@ export default function decorate(block) {
   const authorNameHighlight = createTag('span', { class: 'author-name-hightlight' });
   authorNameHighlight.innerHTML = `${author}`;
   authorNameTag.append(authorNameHighlight);
-  const pipeTag = createTag('span', { class: 'pipe' });
-  pipeTag.innerHTML = '|';
-  const readtimeTag = createTag('span', { class: 'readtime' });
-  readtimeTag.innerHTML = readtime;
-  block.append(authorImageTag, authorNameTag, pipeTag, readtimeTag);
+  block.append(authorImageTag, authorNameTag);
+
+  if (readtime) {
+    const pipeTag = createTag('span', { class: 'pipe' });
+    pipeTag.innerHTML = '|';
+    const readtimeTag = createTag('span', { class: 'readtime' });
+    readtimeTag.innerHTML = readtime;
+    block.append(pipeTag, readtimeTag);
+  }
 }
