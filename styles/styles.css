@@ -41,9 +41,6 @@
   --feedback-green: #059641;
   --feedback-red: #D21313;
 
-  /* ootb block colors */
-  
-
   /* ----typography--- */
 
   /* fonts family */
@@ -129,7 +126,6 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 
 body{
   margin: 0;
-  padding:0;
   border:0;
   font-size: 100%;
   display: none;
@@ -137,7 +133,7 @@ body{
   font-family: var(--sans-serif-font-light);
 }
 
-body.blog{
+body.blog-article{
   background-color: var(--neutral-white);
 }
 
@@ -152,6 +148,11 @@ main{
 
 main .section {
   padding: 32px;
+}
+
+h1, h2, h3, h4, h5
+{
+margin: var(--spacer-layout-04) auto;
 }
 
 /* Mobile */
@@ -217,6 +218,7 @@ main .section {
   
   h2 {
     font-size: var(--font-size-32);
+    
   }
   
   h3 {
@@ -328,6 +330,33 @@ button {
   margin: 0;
 }
 
+  main .article-content picture img{
+    border-radius: 10px;
+    margin-bottom: 48px;
+  }
+  
+  main .article-content .icon > svg{
+  width: 32px;
+  height: 32px;
+  }
+  
+  main .article-content a+.icon > svg{
+    width: 20px;
+    height: 20px;
+    }
+  
+
+  
+  main .article-content p:has(a:first-child){
+    text-align: center;
+  }
+  
+  main .article-content p > a:only-of-type{
+    text-decoration: none;
+    }  
+  
+  
+
 /* Back to top button */
 main .section.back-to-top {
   display: none;
@@ -341,24 +370,8 @@ main pre {
   white-space: pre;
 }
 
-main blockquote {
-  font-style: italic;
-  margin: 3rem;
-  text-indent: -1rem;
-  hanging-punctuation: first;
-}
 
-main blockquote p::before {
-  content: "“";
-  line-height: 0;
-}
-
-main blockquote p::after {
-  content: "”";
-  line-height: 0;
-}
-
-.section-bottom > div img{
+main .section-bottom > div img{
   width : auto;
 }
 
@@ -597,3 +610,38 @@ main .section.back-to-top.active:hover::before {
   }
 }
 
+/* blog article */
+
+ .tags[data-block-status="loaded"]{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    margin-bottom: 32px;
+}
+
+.tags .tag{
+    font-family: var(--sans-serif-font-regular);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-160);
+    letter-spacing: var(--letter-spacing-1);
+    color: var(--neutral-carbon);
+    background-color: var(--neutral-bone);
+    border-radius: 100px;
+    padding: 4px 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+}
+
+@media only screen and (width >= 1200px) {
+    .tags{
+        margin-bottom: 48px;
+    }
+}
+
+main .divider{
+  display:block;
+  width: auto;
+  margin: var( --spacer-layout-05) 0;
+  border: 1px solid var(--neutral-sand);
+  }

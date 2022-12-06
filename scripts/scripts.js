@@ -71,6 +71,65 @@ function buildBackToTopBlock(main) {
 }
 
 /**
+ * Helper function to create DOM elements
+ * @param {string} tag DOM element to be created
+ * @param {array} attributes attributes to be added
+ */
+
+export function createTag(tag, attributes, html) {
+  const el = document.createElement(tag);
+  if (html) {
+    if (html instanceof HTMLElement || html instanceof SVGElement) {
+      el.append(html);
+    } else {
+      el.insertAdjacentHTML('beforeend', html);
+    }
+  }
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, val]) => {
+      el.setAttribute(key, val);
+    });
+  }
+  return el;
+}
+
+/**
+ * Retrieves the content of a metadata tag.
+ * @param {string} name The metadata name (or property)
+ * @returns {string} The metadata value
+ */
+export function getMetadata(name) {
+  const attr = name && name.includes(':') ? 'property' : 'name';
+  const $meta = document.head.querySelector(`meta[${attr}="${name}"]`);
+  return $meta && $meta.content;
+}
+
+function buildTags(main) {
+  const tagsElement = document.createElement('div');
+  tagsElement.classList.add('tags');
+  tagsElement.append(buildBlock('tags', { elems: [] }));
+  const firstH2 = main.querySelector('h2:first-of-type');
+  const p = main.querySelector('p:first-of-type');
+  // eslint-disable-next-line no-bitwise
+  if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+    firstH2.after(tagsElement);
+  }
+}
+
+function buildPageDivider(main) {
+  const allPageDivider = main.querySelectorAll('code');
+
+  allPageDivider.forEach((el) => {
+    const alt = el.innerText.trim();
+    const lower = alt.toLowerCase();
+    if (lower === 'divider') {
+      el.innerText = '';
+      el.classList.add('divider');
+    }
+  });
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -79,6 +138,8 @@ function buildAutoBlocks(main) {
     buildHeroBlock(main);
     buildCtaBlock(main);
     buildBackToTopBlock(main);
+    buildTags(main);
+    buildPageDivider(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
