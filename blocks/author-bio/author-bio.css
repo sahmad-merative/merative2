@@ -10,14 +10,14 @@ main .author-bio {
 }
 
 
-main .author-bio .author-img{
+main .author-bio img.author-img{
     width: 48px;
     border-radius: 50%;
     height: auto;
 }
 
 @media only screen and (width >= 1200px) {
-    main .author-bio .author-img{
+    main .author-bio img.author-img {
         width: 64px;
     }
 }
