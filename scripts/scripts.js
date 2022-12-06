@@ -30,37 +30,30 @@ function buildHeroBlock(main) {
 
 function buildCtaBlock(main) {
   main.querySelectorAll(':scope > div').forEach((div) => {
-    const h2 = div.querySelector(':scope > h2');
-    const p = div.querySelector(':scope > p');
+    const h2 = div.querySelector('div > h2');
+    const p = div.querySelector('div > p');
+    const pa = div.querySelector('p > a');
     const numChildren = div.children.length;
-    if (p) {
-      const a = p.querySelector('a');
-      // eslint-disable-next-line no-bitwise
-      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
-           && (numChildren === 2)) {
+
+  //simple CTA - no inner text and H2 positioned before a link
+      if (pa != null 
+           && (h2.compareDocumentPosition(pa) == 4)
+           && (numChildren === 2)){
         div.classList.add('cta');
               }
-    }
 
-    if (p) {
-     const b = p.querySelector('a');
-      // eslint-disable-next-line no-bitwise
-    if (h2 && p && p && b && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
-         && (numChildren === 3)) {
+   //CTA with inner text -  H2 then text then a link
+      if (pa != null 
+           && (h2.compareDocumentPosition(p) == 4) 
+           && (p.compareDocumentPosition(pa) == 4)
+           && (h2.compareDocumentPosition(pa) == 4)
+           && (numChildren === 3)) {
         div.classList.add('cta');
-             }
-    }
+              }
 
   });
 }
-
-
-// ||
-           // (h2 && p && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
-            //&& (numChildren === 3))
-            
-
-
+           
 
 
 function buildBackToTopBlock(main) {
