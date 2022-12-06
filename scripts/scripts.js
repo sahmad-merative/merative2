@@ -140,19 +140,14 @@ export async function lookupBlogs(pathnames) {
     });
     window.allBlogs = json.data;
   }
+  const blogArticles = window.allBlogs.filter((e) => e.template !== 'Category');
   if(category) {
     // return only blogs that have the same category
-    const result = window.allBlogs.filter((e) => {
-      if(e.category.trim() === category) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    const result = blogArticles.filter((e) => e.category.trim() === category);
     return (result);
   } else {
     // return all blogs
-    return (window.allBlogs);
+    return (blogArticles);
   }
 }
 
@@ -172,13 +167,7 @@ export async function lookupBlogs(pathnames) {
     window.allBlogs = json.data;
   }
     // return only blog category pages for left navigation
-    const result = window.allBlogs.filter((e) => {
-      if(e.template === 'Category') {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    const result = window.allBlogs.filter((e) => e.template === 'Category');
     return (result);
 }
 

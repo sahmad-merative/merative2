@@ -137,7 +137,7 @@ body{
   font-family: var(--sans-serif-font-light);
 }
 
-body.blog{
+body.blog, body.blog-home {
   background-color: var(--neutral-white);
 }
 
