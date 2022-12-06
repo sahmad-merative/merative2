@@ -23,6 +23,12 @@ function uncheckCheckbox(val) {
     }
 }
 
+function updateFiltersCount(count) {
+    // update the number of checked filters to show in mobile and tablet views
+    const mobileFiltersCount = document.querySelector(".blog-home > .filters > .mobile-filters > .count");
+    mobileFiltersCount.innerHTML = count;
+}
+
 function clearFilters() {
     // get's called when nothing is selected. every card shows
     const hiddenBlogCards = document.querySelectorAll(".blog-card[aria-hidden]");
@@ -58,6 +64,7 @@ function refreshCards() {
     const checkedList = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
         .filter((i) => i.checked) // Use Array.filter to remove unchecked checkboxes.
         .map((i) => i.value); // Use Array.map to extract only the checkbox values from the array of objects.                
+    updateFiltersCount(checkedList.length);
     if (checkedList.length) {
         const blogCards = document.querySelectorAll(".blog-card");
         blogCards.forEach((card) => {
@@ -107,6 +114,13 @@ async function createFilters(categories, topics, audiences) {
     // Create DOM elements for topics and audiences to display in the left nav
     const filters = document.createElement('div');
     filters.classList.add('filters');
+    const mobileFilters = document.createElement('div');
+    mobileFilters.classList.add('mobile-filters');
+    mobileFilters.setAttribute('aria-expanded', 'false');
+    mobileFilters.innerHTML = '<h4>Filters</h4>';
+    const mobileFiltersCount = document.createElement('div');
+    mobileFiltersCount.classList.add('count');
+    mobileFilters.append(mobileFiltersCount);
     const topicsElement = document.createElement('div');
     topicsElement.classList.add('topics');
     topicsElement.setAttribute('aria-expanded', 'true');
@@ -150,16 +164,19 @@ async function createFilters(categories, topics, audiences) {
     filters.prepend(await createCategories(categories));
 
     const blogHomeEl = document.createElement('div');
-    blogHomeEl.classList.add('blog-home');
+    blogHomeEl.classList.add('blog-home-link');
     const blogHomeLink = document.createElement('a');
     blogHomeLink.classList.add('category-link');
+    blogHomeLink.href = '/blog/';
     if (/(^\/blog\/$)/.test(window.location.pathname)) {
         blogHomeLink.classList.add('active');
+        blogHomeLink.innerHTML += '<h5>Merative Blog</h5>';
+    } else {
+        blogHomeLink.innerHTML += 'Merative Blog';
     }
-    blogHomeLink.href = '/blog/';
-    blogHomeLink.innerHTML += 'Merative Blog';
     blogHomeEl.append(blogHomeLink);
     filters.prepend(blogHomeEl);
+    filters.prepend(mobileFilters);
     return (filters);
 }
 
@@ -174,11 +191,13 @@ async function createCategories(categoriesList) {
         if ((row.path !== '0') && (row.title !== '0')) {
             const link = document.createElement('a');
             link.classList.add('category-link');
+            link.href = row.path;
             if (window.location.pathname === row.path) {
                 link.classList.add('active');
+                if (row.title) link.innerHTML += `<h5>${row.title}</h5>`;
+            } else {
+                if (row.title) link.innerHTML += `${row.title}`;
             }
-            link.href = row.path;
-            if (row.title) link.innerHTML += `${row.title}`;
             categoriesElement.append(link);
         }
     });
@@ -196,6 +215,10 @@ export default async function decorate(block) {
     if (blogList.length) {
         const blogContent = document.createElement('div');
         blogContent.classList.add('blog-content');
+        // Get default content in this section and add it to blog-content
+        const defaultContent = document.querySelectorAll(".blog-home-container > .default-content-wrapper");
+        defaultContent.forEach((div) => blogContent.append(div));
+
         // Create the selected filters DOM structure
         const selectedFilters = document.createElement('div');
         selectedFilters.classList.add('selected-filters');
