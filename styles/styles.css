@@ -612,7 +612,7 @@ main .section.back-to-top.active:hover::before {
 
 /* blog article */
 
- .tags{
+ .tags[data-block-status="loaded"]{
     display: flex;
     flex-wrap: wrap;
     margin-top: 48px;

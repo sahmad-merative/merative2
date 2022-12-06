@@ -15,6 +15,7 @@ export default function decorate(block) {
   block.innerHTML = '';
   const authorImageTag = createTag('img', { class: 'author-img' });
   authorImageTag.setAttribute('src', authorImage);
+  authorImageTag.setAttribute('alt', 'author-image');
   const authorNameTag = createTag('span', { class: 'author-name' });
   authorNameTag.innerHTML = 'By ';
   const authorNameHighlight = createTag('span', { class: 'author-name-hightlight' });
