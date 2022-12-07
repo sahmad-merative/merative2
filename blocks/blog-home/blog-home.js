@@ -25,8 +25,8 @@ function uncheckCheckbox(val) {
 
 function updateFiltersCount(count) {
     // update the number of checked filters to show in mobile and tablet views
-    const mobileFiltersCount = document.querySelector(".blog-home > .filters > .mobile-filters > .count");
-    mobileFiltersCount.innerHTML = count;
+    const mobileFiltersCount = document.querySelector(".blog-home > .filters > .filters-header > h4");
+    mobileFiltersCount.innerHTML = `Filters (${count})`;
 }
 
 function clearFilters() {
@@ -112,15 +112,39 @@ function refreshCards() {
 
 async function createFilters(categories, topics, audiences) {
     // Create DOM elements for topics and audiences to display in the left nav
+    
+    // Root filters div
     const filters = document.createElement('div');
     filters.classList.add('filters');
-    const mobileFilters = document.createElement('div');
-    mobileFilters.classList.add('mobile-filters');
-    mobileFilters.setAttribute('aria-expanded', 'false');
-    mobileFilters.innerHTML = '<h4>Filters</h4>';
-    const mobileFiltersCount = document.createElement('div');
-    mobileFiltersCount.classList.add('count');
-    mobileFilters.append(mobileFiltersCount);
+    filters.setAttribute('aria-expanded', 'false');
+    
+    // Filters main section
+    const filtersMain = document.createElement('div');
+    filtersMain.classList.add('filters-main');
+    
+    //Filters footer section 
+    const filtersFooter = document.createElement('div');
+    filtersFooter.classList.add('filters-footer');
+    const applyDiv = document.createElement('div');
+    applyDiv.classList.add('apply');
+    const resetDiv = document.createElement('div');
+    resetDiv.classList.add('reset');
+    filtersFooter.append(applyDiv);
+    filtersFooter.append(resetDiv);
+
+    // Filters header section
+    const filtersHeader = document.createElement('div');
+    filtersHeader.classList.add('filters-header');
+    filtersHeader.innerHTML = '<h4>Filters</h4>';
+    filtersHeader.addEventListener('click', () => {
+        const expanded = filters.getAttribute('aria-expanded') === 'true';
+        filters.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    const filtersHeaderArrow = document.createElement('div');
+    filtersHeaderArrow.classList.add('arrow');
+    filtersHeader.append(filtersHeaderArrow);
+    
+    // Topic filters
     const topicsElement = document.createElement('div');
     topicsElement.classList.add('topics');
     topicsElement.setAttribute('aria-expanded', 'true');
@@ -136,9 +160,9 @@ async function createFilters(categories, topics, audiences) {
         await topics.forEach(async (topic) => {
             topicsElement.append(await createCheckboxList(topic));
         });
-        filters.append(topicsElement);
+        filtersMain.append(topicsElement);
     }
-
+    // Audience filters
     const audiencesElement = document.createElement('div');
     audiencesElement.classList.add('audiences');
     audiencesElement.setAttribute('aria-expanded', 'true');
@@ -154,15 +178,17 @@ async function createFilters(categories, topics, audiences) {
         await audiences.forEach(async (audience) => {
             audiencesElement.append(await createCheckboxList(audience));
         });
-        filters.append(audiencesElement);
+        filtersMain.append(audiencesElement);
     }
 
-    const blogFilters = filters.querySelectorAll("input[type=checkbox][name=blogFilters]");
-
+    // Add event listeners to all Checkboxes
+    const blogFilters = filtersMain.querySelectorAll("input[type=checkbox][name=blogFilters]");
     await addEventListeners(blogFilters);
 
-    filters.prepend(await createCategories(categories));
+    // Add Categories to filters main section
+    filtersMain.prepend(await createCategories(categories));
 
+    // Add Blog home link to the top of filters main section
     const blogHomeEl = document.createElement('div');
     blogHomeEl.classList.add('blog-home-link');
     const blogHomeLink = document.createElement('a');
@@ -175,8 +201,10 @@ async function createFilters(categories, topics, audiences) {
         blogHomeLink.innerHTML += 'Merative Blog';
     }
     blogHomeEl.append(blogHomeLink);
-    filters.prepend(blogHomeEl);
-    filters.prepend(mobileFilters);
+    filtersMain.prepend(blogHomeEl);
+    filters.prepend(filtersHeader);
+    filters.append(filtersMain);
+    filters.append(filtersFooter);
     return (filters);
 }
 
