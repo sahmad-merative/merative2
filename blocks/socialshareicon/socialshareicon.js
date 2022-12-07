@@ -38,7 +38,7 @@ function setFocus(e) {
 }
 
 function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
-  let aLink = document.createElement('a');
+  const aLink = document.createElement('a');
   const linkText = document.createTextNode(contentLink);
   aLink.append(linkText);
   aLink.setAttribute('id', `${contentLinkId}-leftnav`);
@@ -61,7 +61,7 @@ function AnchorTagSocialMediaCreation(scoialMedia, block) {
   document.getElementById(sid).addEventListener('click', openLink);
 }
 export default function decorate(block) {
-  const w = (document.documentElement.clientWidth || window.innerWidth);
+  //const w = (document.documentElement.clientWidth|| window.innerWidth);
   const socialshareicon = block.parentNode.parentNode;
   let contentLinkId = '';
   let contentLink = '';
