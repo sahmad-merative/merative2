@@ -39,7 +39,7 @@ function setFocus(e) {
 
 function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
   let aLink = document.createElement('a');
-  const linkText = document.createTextNode(content_link);
+  const linkText = document.createTextNode(contentLink);
   aLink.append(linkText);
   aLink.setAttribute('id', `${contentLinkId}-leftnav`);
   aLink.classList.add('content_link');
