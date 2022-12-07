@@ -37,13 +37,13 @@ function setFocus(e) {
   });
 }
 
-function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
+function AnchorTagLinkCreation(contentLinkId, contentLink) {
   const aLink = document.createElement('a');
   const linkText = document.createTextNode(contentLink);
   aLink.append(linkText);
   aLink.setAttribute('id', `${contentLinkId}-leftnav`);
   aLink.classList.add('content_link');
-  aLink.href = 'xjavascript:void(0)';
+  aLink.href = 'javascript:;';
   document.getElementById('blog-content-link').append(aLink);
   document.getElementsByClassName('content_link')[0].classList.add('active');
   document.getElementById(`${contentLinkId}-leftnav`).addEventListener('click', setFocus);
@@ -56,7 +56,7 @@ function AnchorTagSocialMediaCreation(scoialMedia, block) {
   aLink.setAttribute('class', clsName);
   aLink.setAttribute('id', sid);
   aLink.title = scoialMedia;
-  aLink.href = 'xjavascript:void(0)';
+  aLink.href = 'javascript:;';
   block.append(aLink);
   document.getElementById(sid).addEventListener('click', openLink);
 }
