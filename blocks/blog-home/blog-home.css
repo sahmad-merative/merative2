@@ -366,6 +366,23 @@ body[filters-open="true"] {
         grid-template-columns: 1fr 1fr;
         gap: var(--spacer-element-10) var(--spacer-element-07);
     }
+
+
+    .blog-home > .filters[aria-expanded="true"] {
+        max-width: 387px;
+        padding: 24px 18px 0;
+    }
+
+    .blog-home > .filters[aria-expanded="true"]::after {
+        background-color: #faf8f6;
+        content: '';
+        height: 100%;
+        left: 387px;
+        opacity: .9;
+        position: absolute;
+        top: 0;
+        width: calc(100vw - 387px);
+    }
 }
 
 /* Desktop styles */
