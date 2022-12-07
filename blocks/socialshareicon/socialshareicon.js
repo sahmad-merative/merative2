@@ -37,35 +37,35 @@ function setFocus(e) {
   });
 }
 
-function AnchorTagLinkCreation(content_link_id, content_link, block) {
-  let _a = document.createElement('a');
-  let linkText = document.createTextNode(content_link);
-  _a.append(linkText);
-  _a.setAttribute('id', `${content_link_id}-leftnav`);
-  _a.classList.add('content_link');
-  _a.href = 'javascript:void(0)';
-  document.getElementById('blog-content-link').append(_a);
+function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
+  let a_ = document.createElement('a');
+  const linkText = document.createTextNode(content_link);
+  a_.append(linkText);
+  a_.setAttribute('id', `${contentLinkId}-leftnav`);
+  a_.classList.add('content_link');
+  a_.href = 'javascript:void(0)';
+  document.getElementById('blog-content-link').append(a_);
   document.getElementsByClassName('content_link')[0].classList.add('active');
-  document.getElementById(`${content_link_id}-leftnav`).addEventListener('click', setFocus);
+  document.getElementById(`${contentLinkId}-leftnav`).addEventListener('click', setFocus);
 }
 
 function AnchorTagSocialMediaCreation(scoialMedia, block) {
-  let clsName = `social-share-${scoialMedia}`;
-  let txtNode = scoialMedia;
-  let _sid = `social_share_link${scoialMedia}`;
-  let _a = document.createElement('a');
-  _a.setAttribute('class', clsName);
-  _a.setAttribute('id', _sid);
-  _a.title = scoialMedia;
-  _a.href = 'javascript:void(0)';
-  block.append(_a);
-  document.getElementById(_sid).addEventListener('click', openLink);
+  const clsName = `social-share-${scoialMedia}`;
+  const txtNode = scoialMedia;
+  const sid_ = `social_share_link${scoialMedia}`;
+  let a_ = document.createElement('a');
+  a_.setAttribute('class', clsName);
+  a_.setAttribute('id', sid_);
+  a_.title = scoialMedia;
+  a_.href = 'javascript:void(0)';
+  block.append(a_);
+  document.getElementById(sid_).addEventListener('click', openLink);
 }
 export default function decorate(block) {
   let w = document.documentElement.clientWidth || window.innerWidth;
   const socialshareicon = block.parentNode.parentNode;
-  let content_link_id = '';
-  let content_link = '';
+  let contentLinkId = '';
+  let contentLink = '';
   block.textContent = '';
   const blogContent = document.createElement('div');
   blogContent.classList.add('blog-content');
@@ -97,14 +97,14 @@ export default function decorate(block) {
     }*/
   });
   childrenH2.forEach((h2) => {
-    content_link_id = h2.getAttribute('id');
-    content_link = h2.textContent;
-    AnchorTagLinkCreation(content_link_id, content_link, block);
+    contentLinkId = h2.getAttribute('id');
+    contentLink = h2.textContent;
+    AnchorTagLinkCreation(contentLinkId, contentLink, block);
   });
   childrenH3.forEach((h3) => {
-    content_link_id = h3.getAttribute('id');
-    content_link = h3.textContent;
-    AnchorTagLinkCreation(content_link_id, content_link, block);
+    contentLinkId = h3.getAttribute('id');
+    contentLink = h3.textContent;
+    AnchorTagLinkCreation(contentLinkId, contentLink, block);
   });
   //  document.getElementById('wrapper').remove();
   document.getElementById('blog-right-nav').remove();
