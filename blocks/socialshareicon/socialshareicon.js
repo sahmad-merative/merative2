@@ -61,7 +61,6 @@ function AnchorTagSocialMediaCreation(scoialMedia, block) {
   document.getElementById(sid).addEventListener('click', openLink);
 }
 export default function decorate(block) {
-  // const w = (document.documentElement.clientWidth|| window.innerWidth);
   const socialshareicon = block.parentNode.parentNode;
   let contentLinkId = '';
   let contentLink = '';
@@ -74,30 +73,11 @@ export default function decorate(block) {
   blogContentLink.classList.add('blog-content-link-cs');
   blogContentLink.setAttribute('id', 'blog-content-link');
   block.parentNode.prepend(blogContentLink);
-  /* 
-  if (w <= 768) {
-  block.parentNode.append(blogContentLink);
-  }
-  */
   const childrenDiv = document.getElementById('blog-right-nav').querySelectorAll('div');
   const childrenH2 = document.getElementById('blog-right-nav').querySelectorAll('h2');
   const childrenH3 = document.getElementById('blog-right-nav').querySelectorAll('h3');
   childrenDiv.forEach((div) => {
     blogContent.append(div);
-    /*
-    if (w <= 768) {
-    block.parentNode.setAttribute('id', 'wrapper');
-    blogContent.append(div);
-    if (div.getAttribute('data-block-name') == 'author-bio') {
-    const socialSharenDiv = document.getElementById('wrapper').querySelectorAll('div');
-    socialSharenDiv.forEach(div => {
-    blogContent.append(div);
-    });
-    }
-    } else {
-    blogContent.append(div);
-    }
-    */
   });
   childrenH2.forEach((h2) => {
     contentLinkId = h2.getAttribute('id');
@@ -109,7 +89,6 @@ export default function decorate(block) {
     contentLink = h3.textContent;
     AnchorTagLinkCreation(contentLinkId, contentLink, block);
   });
-  //  document.getElementById('wrapper').remove();
   document.getElementById('blog-right-nav').remove();
   AnchorTagSocialMediaCreation('linkedIn', block);
   AnchorTagSocialMediaCreation('twitter', block);
