@@ -24,7 +24,7 @@ function buildHeroBlock(main) {
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
     section.append(buildBlock('hero', {
-      elems: [picture, h1]
+      elems: [picture, h1],
     }));
     main.prepend(section);
   }
@@ -38,8 +38,8 @@ function buildCtaBlock(main) {
     if (p) {
       const a = p.querySelector('a');
       // eslint-disable-next-line no-bitwise
-      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING) &&
-        (numChildren === 2)) {
+      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
+         && (numChildren === 2)) {
         div.classList.add('cta');
       }
     }
@@ -80,7 +80,7 @@ function buildSocialIconBlock(main) {
     const leftNav = document.createElement('div');
     leftNav.classList.add('socialshareicon');
     leftNav.append(buildBlock('socialshareicon', {
-      elems: []
+      elems: [],
     }));
     main.children[0].setAttribute('id', 'blog-right-nav');
     main.prepend(leftNav);
@@ -125,7 +125,7 @@ function buildTags(main) {
   const tagsElement = document.createElement('div');
   tagsElement.classList.add('tags');
   tagsElement.append(buildBlock('tags', {
-    elems: []
+    elems: [],
   }));
   const firstH2 = main.querySelector('h2:first-of-type');
   const p = main.querySelector('p:first-of-type');
@@ -182,7 +182,7 @@ export async function lookupPages(pathnames) {
     });
     window.pageIndex = {
       data: json.data,
-      lookup
+      lookup,
     };
   }
   const result = pathnames.map((path) => window.pageIndex.lookup[path]).filter((e) => e);
@@ -205,7 +205,7 @@ export async function lookupBlogs(pathnames) {
     });
     window.blogIndex = {
       data: json.data,
-      lookup
+      lookup,
     };
   }
   const result = pathnames.map((path) => window.blogIndex.lookup[path]).filter((e) => e);
@@ -308,7 +308,7 @@ async function loadLazy(doc) {
   await loadBlocks(main);
 
   const {
-    hash
+    hash,
   } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
@@ -329,8 +329,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() =>
-    import('./delayed.js'), 3000);
+  window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
 }
 
