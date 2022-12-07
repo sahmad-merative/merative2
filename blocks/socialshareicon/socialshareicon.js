@@ -1,7 +1,7 @@
 function openLink(e) {
   const idName = e.target.getAttribute('id');
   let url = null;
-  let currentUrl = window.location.href;
+  const currentUrl = window.location.href;
   if (idName !== null) {
     if (idName.includes('linkedIn')) {
       url = `https://www.linkedin.com/sharing/share-offsite/?url= ${currentUrl}`;
@@ -23,7 +23,7 @@ function setFocus(e) {
   const link = e.target.parentNode.querySelectorAll('a');
   link.forEach((a) => {
     const linkId = a.getAttribute('id');
-    if (linkId == idName) {
+    if (linkId === idName) {
       e.target.classList.add('active');
     } else {
       document.getElementById(linkId).classList.remove('active');
@@ -31,9 +31,9 @@ function setFocus(e) {
   });
   idName = idName.replace('-leftnav', '');
   document.getElementById(idName).scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-    inline: "end"
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'end'
   });
 }
 
@@ -41,24 +41,23 @@ function AnchorTagLinkCreation(content_link_id, content_link, block) {
   let _a = document.createElement('a');
   let linkText = document.createTextNode(content_link);
   _a.append(linkText);
-  _a.setAttribute('id', content_link_id + '-leftnav');
-  _a.classList.add("content_link");
+  _a.setAttribute('id', `${content_link_id}-leftnav`);
+  _a.classList.add('content_link');
   _a.href = 'javascript:void(0)';
   document.getElementById('blog-content-link').append(_a);
   document.getElementsByClassName('content_link')[0].classList.add('active');
-  document.getElementById(content_link_id + '-leftnav').addEventListener('click', setFocus);
-
+  document.getElementById(`${content_link_id}-leftnav`).addEventListener('click', setFocus);
 }
 
 function AnchorTagSocialMediaCreation(scoialMedia, block) {
-  let clsName = "social-share-" + scoialMedia;
+  let clsName = `social-share-${scoialMedia}`;
   let txtNode = scoialMedia;
-  let _sid = "social_share_link" + scoialMedia;
+  let _sid = `social_share_link${scoialMedia}`;
   let _a = document.createElement('a');
   _a.setAttribute('class', clsName);
-  _a.setAttribute("id", _sid);
+  _a.setAttribute('id', _sid);
   _a.title = scoialMedia;
-  _a.href = "javascript:void(0)";
+  _a.href = 'javascript:void(0)';
   block.append(_a);
   document.getElementById(_sid).addEventListener('click', openLink);
 }
@@ -109,8 +108,8 @@ export default function decorate(block) {
   });
   //  document.getElementById('wrapper').remove();
   document.getElementById('blog-right-nav').remove();
-  AnchorTagSocialMediaCreation("linkedIn", block);
-  AnchorTagSocialMediaCreation("twitter", block);
-  AnchorTagSocialMediaCreation("facebook", block);
-  AnchorTagSocialMediaCreation("shareLink", block);
+  AnchorTagSocialMediaCreation('linkedIn', block);
+  AnchorTagSocialMediaCreation('twitter', block);
+  AnchorTagSocialMediaCreation('facebook', block);
+  AnchorTagSocialMediaCreation('shareLink', block);
 }
