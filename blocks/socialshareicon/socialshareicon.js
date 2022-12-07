@@ -38,13 +38,13 @@ function setFocus(e) {
 }
 
 function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
-  let a_ = document.createElement('a');
+  let aLink = document.createElement('a');
   const linkText = document.createTextNode(content_link);
-  a_.append(linkText);
-  a_.setAttribute('id', `${contentLinkId}-leftnav`);
-  a_.classList.add('content_link');
-  a_.href = 'javascript:void(0)';
-  document.getElementById('blog-content-link').append(a_);
+  aLink.append(linkText);
+  aLink.setAttribute('id', `${contentLinkId}-leftnav`);
+  aLink.classList.add('content_link');
+  aLink.href = 'javascript:void(0)';
+  document.getElementById('blog-content-link').append(aLink);
   document.getElementsByClassName('content_link')[0].classList.add('active');
   document.getElementById(`${contentLinkId}-leftnav`).addEventListener('click', setFocus);
 }
@@ -52,17 +52,17 @@ function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
 function AnchorTagSocialMediaCreation(scoialMedia, block) {
   const clsName = `social-share-${scoialMedia}`;
   const txtNode = scoialMedia;
-  const sid_ = `social_share_link${scoialMedia}`;
-  let a_ = document.createElement('a');
-  a_.setAttribute('class', clsName);
-  a_.setAttribute('id', sid_);
-  a_.title = scoialMedia;
-  a_.href = 'javascript:void(0)';
-  block.append(a_);
-  document.getElementById(sid_).addEventListener('click', openLink);
+  const sid = `social_share_link${scoialMedia}`;
+  let aLink = document.createElement('a');
+  aLink.setAttribute('class', clsName);
+  aLink.setAttribute('id', sid);
+  aLink.title = scoialMedia;
+  aLink.href = 'javascript:void(0)';
+  block.append(aLink);
+  document.getElementById(sid).addEventListener('click', openLink);
 }
 export default function decorate(block) {
-  let w = document.documentElement.clientWidth || window.innerWidth;
+  const w = document.documentElement.clientWidth || window.innerWidth;
   const socialshareicon = block.parentNode.parentNode;
   let contentLinkId = '';
   let contentLink = '';
@@ -75,14 +75,17 @@ export default function decorate(block) {
   blogContentLink.classList.add('blog-content-link-cs');
   blogContentLink.setAttribute('id', 'blog-content-link');
   block.parentNode.prepend(blogContentLink);
+
   /* if (w <= 768) {
   block.parentNode.append(blogContentLink);
   }*/
+
   const childrenDiv = document.getElementById('blog-right-nav').querySelectorAll('div');
   const childrenH2 = document.getElementById('blog-right-nav').querySelectorAll('h2');
   const childrenH3 = document.getElementById('blog-right-nav').querySelectorAll('h3');
   childrenDiv.forEach((div) => {
     blogContent.append(div);
+
     /*if (w <= 768) {
     block.parentNode.setAttribute('id', 'wrapper');
     blogContent.append(div);
@@ -95,6 +98,7 @@ export default function decorate(block) {
     } else {
     blogContent.append(div);
     }*/
+
   });
   childrenH2.forEach((h2) => {
     contentLinkId = h2.getAttribute('id');
