@@ -1,26 +1,27 @@
-  function openLink(e) {
-  let idName = e.target.getAttribute('id');
+function openLink(e) {
+  const idName = e.target.getAttribute('id');
+  let url =null;
   if (idName !== null) {
   if (idName.includes('linkedIn')) {
-  var url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href;
+  url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href;
   window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=300,width=800,height=500');
   } else if (idName.includes('twitter')) {
-  var url = 'https://twitter.com/share?url=' + window.location.href;
+  url = 'https://twitter.com/share?url=' + window.location.href;
   window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=300,width=800,height=500');
   } else if (idName.includes('facebook')) {
-  var url = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
+  url = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
   window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=300,width=800,height=500');
   } else if (idName.includes('shareLink')) {
   navigator.clipboard.writeText(window.location.href);
   }
 
   }
-  }
+}
 
-  function setFocus(e) {
+function setFocus(e) {
   let idName = e.target.getAttribute("id");
   const _link = e.target.parentNode.querySelectorAll('a');
-  _link.forEach(a => {
+  _link.forEach(a =>{
   const link_id = a.getAttribute('id');
   if (link_id == idName)
   e.target.classList.add('active');
@@ -29,9 +30,9 @@
   });
   idName = idName.replace('-leftnav', '');
   document.getElementById(idName).scrollIntoView({ behavior: "smooth", block: "start", inline: "end" });
-  }
+}
 
-  function AnchorTagLinkCreation(content_link_id, content_link, block) {
+function AnchorTagLinkCreation(content_link_id, content_link, block) {
   let _a = document.createElement('a');
   let linkText = document.createTextNode(content_link);
   _a.append(linkText);
@@ -42,9 +43,9 @@
   document.getElementsByClassName('content_link')[0].classList.add('active');
   document.getElementById(content_link_id + '-leftnav').addEventListener('click', setFocus);
 
-  }
+}
 
-  function AnchorTagSocialMediaCreation(scoialMedia, block) {
+function AnchorTagSocialMediaCreation(scoialMedia, block) {
   let clsName = "social-share-" + scoialMedia;
   let txtNode = scoialMedia;
   let _sid = "social_share_link" + scoialMedia;
@@ -55,9 +56,8 @@
   _a.href = "javascript:void(0)";
   block.append(_a);
   document.getElementById(_sid).addEventListener('click', openLink);
-  }
-
-  export default function decorate(block) {
+}
+export default function decorate(block) {
   let w = document.documentElement.clientWidth || window.innerWidth;
   const socialshareicon = block.parentNode.parentNode;
   let content_link_id = '';
@@ -77,7 +77,7 @@
   const childrenDiv = document.getElementById('blog-right-nav').querySelectorAll('div');
   const childrenH2 = document.getElementById('blog-right-nav').querySelectorAll('h2');
   const childrenH3 = document.getElementById('blog-right-nav').querySelectorAll('h3');
-  childrenDiv.forEach(div => {
+  childrenDiv.forEach(div =>{
   blogContent.append(div);
   /*if (w <= 768) {
   block.parentNode.setAttribute('id', 'wrapper');
@@ -108,4 +108,4 @@
   AnchorTagSocialMediaCreation("twitter", block);
   AnchorTagSocialMediaCreation("facebook", block);
   AnchorTagSocialMediaCreation("shareLink", block);
-  }
+}
