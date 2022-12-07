@@ -106,13 +106,16 @@ export function getMetadata(name) {
 
 function buildTags(main) {
   const tagsElement = document.createElement('div');
+  const category = getMetadata('category');
   tagsElement.classList.add('tags');
-  tagsElement.append(buildBlock('tags', { elems: [] }));
-  const firstH2 = main.querySelector('h2:first-of-type');
-  const p = main.querySelector('p:first-of-type');
-  // eslint-disable-next-line no-bitwise
-  if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
-    firstH2.after(tagsElement);
+  if (category) {
+    tagsElement.append(buildBlock('tags', { elems: [] }));
+    const firstH2 = main.querySelector('h2:first-of-type');
+    const p = main.querySelector('p:first-of-type');
+    // eslint-disable-next-line no-bitwise
+    if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      firstH2.after(tagsElement);
+    }
   }
 }
 
