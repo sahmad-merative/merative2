@@ -16,6 +16,7 @@ function openLink(e) {
       navigator.clipboard.writeText(window.location.href);
     }
   }
+  e.preventDefault();
 }
 
 function setFocus(e) {
@@ -35,6 +36,7 @@ function setFocus(e) {
     block: 'start',
     inline: 'end',
   });
+  e.preventDefault();
 }
 
 function AnchorTagLinkCreation(contentLinkId, contentLink) {
