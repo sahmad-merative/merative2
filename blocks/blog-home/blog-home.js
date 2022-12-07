@@ -6,6 +6,19 @@ async function addEventListeners(checkboxes) {
     });
 }
 
+function deselectAllCheckboxes() {
+    // Deselect val from the checkbox list if it is selected
+    const checkboxes = document.querySelectorAll("input[type=checkbox][name=blogFilters]");
+    if (checkboxes.length) {
+        const selectedCheckboxes = Array.from(checkboxes).filter((i) => i.checked);
+        if (selectedCheckboxes.length) {
+            selectedCheckboxes.forEach((checkbox) => {
+                checkbox.checked = false;
+            });
+        }
+    }
+}
+
 function uncheckCheckbox(val) {
     // Deselect val from the checkbox list if it is selected
     const checkboxes = document.querySelectorAll("input[type=checkbox][name=blogFilters]");
@@ -20,6 +33,16 @@ function uncheckCheckbox(val) {
                 }
             });
         }
+    }
+}
+
+function toggleBodyOverflow(val) {
+    const body = document.querySelector("body");
+    if(val) {
+        body.setAttribute('filters-open', val);
+    } else {
+        const filtersOpen = body.getAttribute('filters-open') === 'true';
+        body.setAttribute('filters-open', filtersOpen ? 'false' : 'true');
     }
 }
 
@@ -41,6 +64,7 @@ function clearFilters() {
     selectedFiltersList.textContent = '';
     const selectedFiltersTitle = selectedFilters.querySelector(":scope > div.selected-filters-title");
     selectedFiltersTitle.textContent = '';
+    updateFiltersCount("0");
 }
 
 async function createCheckboxList(label) {
@@ -127,8 +151,10 @@ async function createFilters(categories, topics, audiences) {
     filtersFooter.classList.add('filters-footer');
     const applyDiv = document.createElement('div');
     applyDiv.classList.add('apply');
+    applyDiv.innerHTML = 'Apply';
     const resetDiv = document.createElement('div');
     resetDiv.classList.add('reset');
+    resetDiv.innerHTML = 'Reset';
     filtersFooter.append(applyDiv);
     filtersFooter.append(resetDiv);
 
@@ -139,11 +165,34 @@ async function createFilters(categories, topics, audiences) {
     filtersHeader.addEventListener('click', () => {
         const expanded = filters.getAttribute('aria-expanded') === 'true';
         filters.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        toggleBodyOverflow();
     });
     const filtersHeaderArrow = document.createElement('div');
     filtersHeaderArrow.classList.add('arrow');
     filtersHeader.append(filtersHeaderArrow);
-    
+
+    // Add sticky shadow to header if any scroll
+    filtersMain.addEventListener('scroll', () => {
+        if (filtersMain.scrollTop > 0) {
+            filtersHeader.classList.add('is-sticky');
+        } else {
+            filtersHeader.classList.remove('is-sticky');
+        }
+    });
+
+    // Add Apply and Reset listeners
+    applyDiv.addEventListener('click', () => {
+        toggleBodyOverflow();
+        filters.setAttribute('aria-expanded', 'false');        
+    });
+    resetDiv.addEventListener('click', () => {
+        // clear the filters & refresh cards, deselect any checked checkboxes, 
+        // close the filter modal and make sure body scroll is back to normal
+        clearFilters();
+        deselectAllCheckboxes();        
+        toggleBodyOverflow("false");
+        filters.setAttribute('aria-expanded', 'false');
+    });
     // Topic filters
     const topicsElement = document.createElement('div');
     topicsElement.classList.add('topics');

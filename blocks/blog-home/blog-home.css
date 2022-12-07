@@ -2,6 +2,9 @@
 /* .blog-home-container {
     padding: var(--spacer-layout-05) var(--spacer-layout-02);
 } */
+body[filters-open="true"] {
+    overflow: hidden;
+}
 
 .blog-home .blog-content {
     padding: var(--spacer-layout-04) var(--spacer-layout-01);
@@ -122,7 +125,6 @@
     background-color: #fff;
     margin-bottom: 48px;
     padding: 24px 16px 0;
-    overflow: scroll;
     z-index: 100000;
 }
 
@@ -132,21 +134,26 @@
 }
 
 .blog-home > .filters[aria-expanded="true"] > .filters-header {
-    position: fixed;
+    /* position: fixed; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 8px 0 32px;
-    width: 100%;
+    width: auto;
     /* height: 100%; */
     background-color: #fff;
     align-items: center;
-    box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 15%);
+    z-index: 1000000;
+}
+
+.blog-home > .filters[aria-expanded="true"] > .filters-header.is-sticky {
+    box-shadow: 0 4px 4px -4px rgb(0 0 0 / 15%);
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
+    z-index: 1000000;
 }
 
 .blog-home > .filters[aria-expanded="false"] > .filters-header {
@@ -172,8 +179,52 @@
     background-size: cover;
 }
 
+/* Filter main section */
+.blog-home > .filters[aria-expanded="true"] > .filters-main {
+    height: 79vh;
+    margin-top: 8px;
+    overflow-y: scroll;
+    padding-bottom: 50px;
+    overscroll-behavior: contain;
+}
+
+/* Filter footer section */
+.blog-home > .filters[aria-expanded="true"] > .filters-footer {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-top: 1px solid #e7e2da;
+    bottom: 0;
+    justify-content: space-between;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.blog-home > .filters[aria-expanded="true"] > .filters-footer > div {
+    position: relative;
+    font-family: var(--sans-serif-font-light);
+    font-size: 18px;
+    letter-spacing: .16px;
+    line-height: 160%;
+    background-color: transparent;
+    border: 0;
+    padding: 25.5px 0 33.5px;
+    width: 50%;
+    text-align: center;
+}
+
+.blog-home > .filters[aria-expanded="true"] > .filters-footer > .apply::before {
+    background-color: var(--neutral-sand);
+    content: "";
+    height: var(--spacer-element-08);
+    position: absolute;
+    right: 0;
+    width: 1px;
+}
+
 /* Filter items */
-.blog-home > .filters > .filters-main > div:not(:first-of-type) {
+.blog-home > .filters > .filters-main > div {
     border-bottom: 1px solid var(--neutral-sand);
     padding-bottom: var(--spacer-element-07);
 }
