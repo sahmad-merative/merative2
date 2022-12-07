@@ -1,3 +1,24 @@
+/* stylelint-disable media-feature-range-operator-space-after */
+
+
+/* stylelint-disable comment-whitespace-inside */
+
+
+/* stylelint-disable rule-empty-line-before */
+
+
+/* stylelint-disable function-url-quotes */
+
+
+/* stylelint-disable no-descending-specificity */
+
+
+/* stylelint-disable selector-class-pattern */
+
+
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+
+
 /* Start Social Share Icons */
 
 .socialshareicon.block::before {
@@ -34,7 +55,6 @@
     background: url(../../icons/twitter-black.svg) no-repeat center;
     background-color: #faf8f6;
     border-radius: 50%;
-    display: -ms-inline-flexbox;
     display: inline-flex;
     height: 37.83px;
     justify-content: center;
