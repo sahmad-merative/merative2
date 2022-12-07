@@ -43,7 +43,7 @@ function AnchorTagLinkCreation(contentLinkId, contentLink, block) {
   aLink.append(linkText);
   aLink.setAttribute('id', `${contentLinkId}-leftnav`);
   aLink.classList.add('content_link');
-  aLink.href = 'javascript:void(0)';
+  aLink.href = `javascript:void(0)`;
   document.getElementById('blog-content-link').append(aLink);
   document.getElementsByClassName('content_link')[0].classList.add('active');
   document.getElementById(`${contentLinkId}-leftnav`).addEventListener('click', setFocus);
@@ -56,12 +56,12 @@ function AnchorTagSocialMediaCreation(scoialMedia, block) {
   aLink.setAttribute('class', clsName);
   aLink.setAttribute('id', sid);
   aLink.title = scoialMedia;
-  aLink.href = 'javascript:void(0)';
+  aLink.href = `javascript:void(0)`;
   block.append(aLink);
   document.getElementById(sid).addEventListener('click', openLink);
 }
 export default function decorate(block) {
-  //const w = (document.documentElement.clientWidth|| window.innerWidth);
+  // const w = (document.documentElement.clientWidth|| window.innerWidth);
   const socialshareicon = block.parentNode.parentNode;
   let contentLinkId = '';
   let contentLink = '';
