@@ -43,7 +43,7 @@ function AnchorTagLinkCreation(contentLinkId, contentLink) {
   aLink.append(linkText);
   aLink.setAttribute('id', `${contentLinkId}-leftnav`);
   aLink.classList.add('content_link');
-  aLink.href = 'javascript:;';
+  aLink.href = '#';
   document.getElementById('blog-content-link').append(aLink);
   document.getElementsByClassName('content_link')[0].classList.add('active');
   document.getElementById(`${contentLinkId}-leftnav`).addEventListener('click', setFocus);
@@ -56,7 +56,7 @@ function AnchorTagSocialMediaCreation(scoialMedia, block) {
   aLink.setAttribute('class', clsName);
   aLink.setAttribute('id', sid);
   aLink.title = scoialMedia;
-  aLink.href = 'javascript:;';
+  aLink.href = '#';
   block.append(aLink);
   document.getElementById(sid).addEventListener('click', openLink);
 }
