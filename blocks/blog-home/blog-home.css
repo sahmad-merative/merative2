@@ -13,6 +13,10 @@
     text-transform: uppercase;
 }
 
+.blog-home h4, h5 {
+    margin: unset;
+}
+
 .blog-home[data-block-status="loaded"] > div.blog-content > div.blog-cards {
     position: relative;
     display: flex;
