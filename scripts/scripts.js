@@ -35,24 +35,21 @@ function buildCtaBlock(main) {
     const pa = div.querySelector('p > a');
     const numChildren = div.children.length;
 
-  //simple CTA - no inner text and H2 positioned before a link
-      if (h2 && p && pa && (h2.compareDocumentPosition(pa) == 4)
-           && (numChildren === 2)){
-        div.classList.add('cta');
-              }
+    // simple CTA - no inner text and H2 positioned before a link
+    if (h2 && p && pa && (h2.compareDocumentPosition(pa) === 4)
+           && (numChildren === 2)) {
+      div.classList.add('cta');
+    }
 
-   //CTA with inner text -  H2 then text then a link
-      if (h2 && p && pa && (h2.compareDocumentPosition(p) == 4) 
-           && (p.compareDocumentPosition(pa) == 4)
-           && (h2.compareDocumentPosition(pa) == 4)
+    // CTA with inner text -  H2 then text then a link
+    if (h2 && p && pa && (h2.compareDocumentPosition(p) === 4)
+           && (p.compareDocumentPosition(pa) === 4)
+           && (h2.compareDocumentPosition(pa) === 4)
            && (numChildren === 3)) {
-        div.classList.add('cta');
-              }
-
+      div.classList.add('cta');
+    }
   });
 }
-           
-
 
 function buildBackToTopBlock(main) {
   const element = document.createElement('div');
