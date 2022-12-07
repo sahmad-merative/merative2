@@ -1,0 +1,248 @@
+/* Start Social Share Icons */
+
+.socialshareicon.block::before {
+    content: "SHARE VIA";
+    font-family: 'Alliance No.1';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    margin-top: 24px;
+}
+
+.socialshareicon.block .social-share-linkedIn:hover {
+    background: url(../../icons/linkedin-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
+}
+
+.socialshareicon.block .social-share-linkedIn {
+    margin: 8px;
+    background: url(../../icons/linkedin-black.svg) no-repeat center;
+    background-color: #faf8f6;
+    border-radius: 50%;
+    display: inline-flex;
+    height: 37.83px;
+    justify-content: center;
+    width: 40.75px;
+    border: 1px solid #e7e2da;
+    background-size: 20px 20px;
+}
+
+.socialshareicon.block .social-share-twitter {
+    margin: 8px;
+    background: url(../../icons/twitter-black.svg) no-repeat center;
+    background-color: #faf8f6;
+    border-radius: 50%;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    height: 37.83px;
+    justify-content: center;
+    width: 40.75px;
+    border: 1px solid #e7e2da;
+    background-size: 20px 20px;
+}
+
+.socialshareicon.block .social-share-twitter:hover {
+    background: url(../../icons/twitter-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
+}
+
+.socialshareicon.block .social-share-facebook {
+    margin: 8px;
+    background: url(../../icons/facebook-black.svg) no-repeat center;
+    background-color: #faf8f6;
+    border-radius: 50%;
+    display: inline-flex;
+    height: 37.83px;
+    justify-content: center;
+    width: 40.75px;
+    border: 1px solid #e7e2da;
+    background-size: 20px 20px;
+}
+
+.socialshareicon.block .social-share-facebook:hover {
+    background: url(../../icons/facebook-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
+}
+
+.socialshareicon.block .social-share-shareLink {
+    margin: 8px;
+    background: url(../../icons/sharelink-black.svg) no-repeat center;
+    background-color: #faf8f6;
+    border-radius: 50%;
+    display: inline-flex;
+    height: 37.83px;
+    justify-content: center;
+    width: 40.75px;
+    border: 1px solid #e7e2da;
+    background-size: 20px 20px;
+}
+
+.socialshareicon.block .social-share-shareLink:hover {
+    background: url(../../icons/sharelink-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
+}
+
+.blog-content-link-cs::before {
+    content: "IN THIS ARTICLE";
+    font-family: 'Alliance No.1';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    width: 153px;
+    height: 17px;
+    color: #20201F;
+    margin-bottom: 24px;
+}
+
+.blog-content-link-cs {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 230px;
+    height: auto;
+}
+
+.content_link.active {
+    text-decoration-line: none;
+    border-image: linear-gradient(180deg, #90f, #fa1e32) 0 1;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    padding-left: 16px;
+    width: 240px;
+    font-family: 'Alliance No.1';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #20201F;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.content_link {
+    text-decoration-line: none;
+    padding-left: 16px;
+    width: 240px;
+    font-family: 'Alliance No.1';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #20201F;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 1120px) {
+    .socialshareicon-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .socialshareicon-wrapper {
+        width: 240px !important;
+        margin: 70px 60px 0 0 !important;
+    }
+    .socialshareicon.block {
+        position: sticky;
+        top: 350px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .socialshareicon.block::before {
+        order: -1;
+        flex: 1 0 100%;
+    }
+}
+
+
+/* ipad , tabs */
+
+@media only screen and (width <=1119px) {
+    .socialshareicon-container {
+        margin: 0 auto;
+    }
+    .socialshareicon.block {
+        display: flex;
+        top: 20px;
+        position: relative;
+    }
+    .blog-content-link-cs {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        height: auto;
+        margin-bottom: 80px;
+        background: #FAF8F6;
+    }
+    .socialshareicon.block::before {
+        font-size: 11px;
+    }
+    .blog-content-link-cs::before {
+        font-size: 11px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1119px) {
+    .socialshareicon-container {
+        margin: 0 auto;
+        max-width: 732px;
+    }
+    .socialshareicon.block {
+        display: flex;
+        top: 20px;
+        position: relative;
+    }
+    .blog-content-link-cs {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        height: auto;
+        margin-bottom: 80px;
+        background: #FAF8F6;
+    }
+    .socialshareicon.block::before {
+        font-size: 11px;
+    }
+    .blog-content-link-cs::before {
+        font-size: 11px;
+    }
+}
+
+
+/* mobile devices*/
+
+@media (max-device-width: 768px) {
+    .socialshareicon-container {
+        max-width: 768px;
+        margin: 0 auto;
+    }
+    .socialshareicon.block {
+        display: flex;
+        top: 20px;
+        position: relative;
+    }
+    .blog-content-link-cs {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        height: auto;
+        margin-bottom: 80px;
+        background: #FAF8F6;
+    }
+    .socialshareicon.block::before {
+        font-size: 11px;
+    }
+    .blog-content-link-cs::before {
+        font-size: 11px;
+    }
+}
+
+
+/* end Social Share Icons */
