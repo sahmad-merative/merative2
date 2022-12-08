@@ -38,13 +38,6 @@ function setFocus(e) {
   document.querySelector(idName).scrollIntoView({
     behavior: 'smooth',
   });
-
-  /*document.getElementById(idName).scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-      inline: 'end',
-  });*/
-
 }
 
 function AnchorTagLinkCreation(contentLinkId, contentLink) {
@@ -110,7 +103,6 @@ export default function decorate(block) {
   AnchorTagSocialMediaCreation('twitter', block);
   AnchorTagSocialMediaCreation('facebook', block);
   AnchorTagSocialMediaCreation('shareLink', block);
-
   // add page scroll listener to know when header turns to sticky
   const header = block;
   window.addEventListener('scroll', () => {
