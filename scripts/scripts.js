@@ -38,8 +38,8 @@ function buildCtaBlock(main) {
     if (p) {
       const a = p.querySelector('a');
       // eslint-disable-next-line no-bitwise
-      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING) &&
-        (numChildren === 2)) {
+      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
+          && (numChildren === 2)) {
         div.classList.add('cta');
       }
     }
@@ -329,8 +329,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() =>
-    import('./delayed.js'), 3000);
+  window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
 }
 
