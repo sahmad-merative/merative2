@@ -21,7 +21,7 @@
 
 /* Start Social Share Icons */
 
-.socialshareicon.block::before {
+.blog-left-nav.block::before {
     content: "SHARE VIA";
     font-family: 'Alliance No.1';
     font-style: normal;
@@ -33,11 +33,15 @@
     margin-top: 24px;
 }
 
-.socialshareicon.block .social-share-linkedIn:hover {
+.scrollMargin {
+    scroll-margin-top: 100px;
+}
+
+.blog-left-nav.block .social-share-linkedIn:hover {
     background: url(../../icons/linkedin-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
 }
 
-.socialshareicon.block .social-share-linkedIn {
+.blog-left-nav.block .social-share-linkedIn {
     margin: 8px;
     background: url(../../icons/linkedin-black.svg) no-repeat center;
     background-color: #faf8f6;
@@ -50,7 +54,7 @@
     background-size: 20px 20px;
 }
 
-.socialshareicon.block .social-share-twitter {
+.blog-left-nav.block .social-share-twitter {
     margin: 8px;
     background: url(../../icons/twitter-black.svg) no-repeat center;
     background-color: #faf8f6;
@@ -63,11 +67,11 @@
     background-size: 20px 20px;
 }
 
-.socialshareicon.block .social-share-twitter:hover {
+.blog-left-nav.block .social-share-twitter:hover {
     background: url(../../icons/twitter-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
 }
 
-.socialshareicon.block .social-share-facebook {
+.blog-left-nav.block .social-share-facebook {
     margin: 8px;
     background: url(../../icons/facebook-black.svg) no-repeat center;
     background-color: #faf8f6;
@@ -80,11 +84,11 @@
     background-size: 20px 20px;
 }
 
-.socialshareicon.block .social-share-facebook:hover {
+.blog-left-nav.block .social-share-facebook:hover {
     background: url(../../icons/facebook-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
 }
 
-.socialshareicon.block .social-share-shareLink {
+.blog-left-nav.block .social-share-shareLink {
     margin: 8px;
     background: url(../../icons/sharelink-black.svg) no-repeat center;
     background-color: #faf8f6;
@@ -97,7 +101,7 @@
     background-size: 20px 20px;
 }
 
-.socialshareicon.block .social-share-shareLink:hover {
+.blog-left-nav.block .social-share-shareLink:hover {
     background: url(../../icons/sharelink-white.svg) no-repeat center, linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
 }
 
@@ -122,6 +126,10 @@
     position: sticky;
     top: 230px;
     height: auto;
+}
+
+.blog-content-link-cs-is-sticky {
+    margin-bottom: 130px;
 }
 
 .content_link.active {
@@ -160,22 +168,22 @@
 }
 
 @media only screen and (min-width: 1120px) {
-    .socialshareicon-container {
+    .blog-left-nav-container {
         display: flex;
         max-width: 1200px;
         margin: 0 auto;
     }
-    .socialshareicon-wrapper {
+    .blog-left-nav-wrapper {
         width: 240px !important;
         margin: 70px 60px 0 0 !important;
     }
-    .socialshareicon.block {
+    .blog-left-nav.block {
         position: sticky;
         top: 350px;
         display: flex;
         flex-wrap: wrap;
     }
-    .socialshareicon.block::before {
+    .blog-left-nav.block::before {
         order: -1;
         flex: 1 0 100%;
     }
@@ -185,10 +193,10 @@
 /* ipad , tabs */
 
 @media only screen and (width <=1119px) {
-    .socialshareicon-container {
+    .blog-left-nav-container {
         margin: 0 auto;
     }
-    .socialshareicon.block {
+    .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
@@ -201,7 +209,7 @@
         margin-bottom: 80px;
         background: #FAF8F6;
     }
-    .socialshareicon.block::before {
+    .blog-left-nav.block::before {
         font-size: 11px;
     }
     .blog-content-link-cs::before {
@@ -210,11 +218,11 @@
 }
 
 @media (min-width: 768px) and (max-width: 1119px) {
-    .socialshareicon-container {
+    .blog-left-nav-container {
         margin: 0 auto;
         max-width: 732px;
     }
-    .socialshareicon.block {
+    .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
@@ -227,7 +235,7 @@
         margin-bottom: 80px;
         background: #FAF8F6;
     }
-    .socialshareicon.block::before {
+    .blog-left-nav.block::before {
         font-size: 11px;
     }
     .blog-content-link-cs::before {
@@ -239,11 +247,11 @@
 /* mobile devices*/
 
 @media (max-device-width: 768px) {
-    .socialshareicon-container {
+    .blog-left-nav-container {
         max-width: 768px;
         margin: 0 auto;
     }
-    .socialshareicon.block {
+    .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
@@ -256,7 +264,7 @@
         margin-bottom: 80px;
         background: #FAF8F6;
     }
-    .socialshareicon.block::before {
+    .blog-left-nav.block::before {
         font-size: 11px;
     }
     .blog-content-link-cs::before {
