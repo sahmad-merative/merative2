@@ -1,5 +1,25 @@
 import { getAllBlogs, createCard, getBlogCategoryPages } from '../../scripts/scripts.js';
 
+const NUM_CARDS_SHOWN_AT_A_TIME = 6;
+
+function loadMoreCards(el) {
+  // Get cards that are not hidden and not active to load them
+  const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
+  if (activeCards) {
+    activeCards.forEach((activeCard, i) => {
+      if (i < NUM_CARDS_SHOWN_AT_A_TIME) activeCard.setAttribute('card-active', 'true');
+    });
+    if (activeCards.length > NUM_CARDS_SHOWN_AT_A_TIME) {
+      el.innerHTML = `Load More (${(activeCards.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+    } else {
+      el.innerHTML = 'Load More (0)';
+      el.setAttribute('aria-hidden', 'true');
+    }
+  } else {
+    el.setAttribute('aria-hidden', 'true');
+  }
+}
+
 function deselectAllCheckboxes() {
   // Deselect val from the checkbox list if it is selected
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
@@ -31,10 +51,12 @@ function updateFiltersCount(count) {
 
 function clearFilters() {
   // get's called when nothing is selected. every card shows
-  const hiddenBlogCards = document.querySelectorAll('.blog-card[aria-hidden]');
-  hiddenBlogCards.forEach((card) => {
+  const hiddenCards = document.querySelectorAll('.blog-card[aria-hidden]');
+  hiddenCards.forEach((card) => {
     card.removeAttribute('aria-hidden');
+    card.removeAttribute('card-active');
   });
+
   // clear our selected filters on the top
   const selectedFilters = document.querySelector('div.selected-filters');
   const selectedFiltersList = selectedFilters.querySelector(':scope > div.selected-filters-list');
@@ -42,6 +64,7 @@ function clearFilters() {
   const selectedFiltersTitle = selectedFilters.querySelector(':scope > div.selected-filters-title');
   selectedFiltersTitle.textContent = '';
   updateFiltersCount('0');
+  loadMoreCards();
 }
 
 async function createCheckboxList(label) {
@@ -127,6 +150,7 @@ function refreshCards() {
         selectedValue.innerText = '';
       });
     });
+    loadMoreCards();
   } else {
     clearFilters();
   }
@@ -309,9 +333,13 @@ export default async function decorate(block) {
     // Create blog cards DOM structure
     const blogCards = document.createElement('div');
     blogCards.classList.add('blog-cards');
-    await blogList.forEach(async (row) => {
+    await blogList.forEach(async (row, i) => {
       const blogCard = await createCard(row, 'blog-card');
-
+      if (i < NUM_CARDS_SHOWN_AT_A_TIME) {
+        blogCard.setAttribute('card-active', 'true');
+      } else {
+        blogCard.setAttribute('card-active', 'false');
+      }
       if (row.topic && row.topic !== '0') {
         blogCard.setAttribute('topics', row.topic);
         const topicValues = row.topic.split(',');
@@ -328,8 +356,23 @@ export default async function decorate(block) {
       }
       blogCards.append(blogCard);
     });
+
+    // Load More button
+    const loadMoreButton = document.createElement('div');
+    loadMoreButton.classList.add('load-more');
+    if (blogList.length > NUM_CARDS_SHOWN_AT_A_TIME) {
+      loadMoreButton.innerHTML = `Load More (${(blogList.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+    } else {
+      loadMoreButton.innerHTML = 'Load More (0)';
+      loadMoreButton.setAttribute('aria-hidden', 'true');
+    }
+    loadMoreButton.addEventListener('click', (el) => {
+      loadMoreCards(el.currentTarget);
+    });
+
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
+    blogContent.append(loadMoreButton);
     block.append(blogContent);
     block.prepend(await createFilters(categoriesList, topics, audiences));
   } else {

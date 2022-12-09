@@ -45,12 +45,21 @@ body[filters-open="true"] {
     text-decoration: none;
 }
 
+.blog-home > .blog-content > .load-more {
+    display: block;
+}
+
+.blog-home > .blog-content > .load-more[aria-hidden="true"] {
+    display: none;
+}
+
 .blog-home > div.blog-content > .blog-cards > .blog-card {
     position: relative;
     background: var(--neutral-bone);
     height: 100%;
 }
 
+.blog-home > div.blog-content > div.blog-cards > .blog-card[card-active="false"],
 .blog-home > div.blog-content > div.blog-cards > .blog-card[aria-hidden="true"] {
     display: none;
 }
