@@ -32,7 +32,6 @@ function setFocus(e) {
   });
   e.preventDefault();
   idName = idName.replace('-leftnav', '');
-  console.log(idName);
   document.getElementById(idName).classList.add('scrollMargin');
   idName = `#${idName}`;
   document.querySelector(idName).scrollIntoView({
