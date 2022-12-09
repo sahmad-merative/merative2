@@ -23,25 +23,30 @@ function buildHeroBlock(main) {
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
-    section.append(buildBlock('hero', {
-      elems: [picture, h1],
-    }));
+    section.append(buildBlock('hero', { elems: [picture, h1] }));
     main.prepend(section);
   }
 }
 
 function buildCtaBlock(main) {
   main.querySelectorAll(':scope > div').forEach((div) => {
-    const h2 = div.querySelector(':scope > h2');
-    const p = div.querySelector(':scope > p');
+    const h2 = div.querySelector('div > h2');
+    const p = div.querySelector('div > p');
+    const pa = div.querySelector('p > a');
     const numChildren = div.children.length;
-    if (p) {
-      const a = p.querySelector('a');
-      // eslint-disable-next-line no-bitwise
-      if (h2 && p && a && (h2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)
-          && (numChildren === 2)) {
-        div.classList.add('cta');
-      }
+
+    // simple CTA - no inner text and H2 positioned before a link
+    if (h2 && p && pa && (h2.compareDocumentPosition(pa) === 4)
+           && (numChildren === 2)) {
+      div.classList.add('cta');
+    }
+
+    // CTA with inner text -  H2 then text then a link
+    if (h2 && p && pa && (h2.compareDocumentPosition(p) === 4)
+           && (p.compareDocumentPosition(pa) === 4)
+           && (h2.compareDocumentPosition(pa) === 4)
+           && (numChildren === 3)) {
+      div.classList.add('cta');
     }
   });
 }
@@ -71,9 +76,7 @@ function buildBackToTopBlock(main) {
     });
   });
 }
-
 // auto block build for social media share as left nav
-
 function buildSocialIconBlock(main) {
   const isBlogPage = /(\/blog\/.*)/.test(window.location.pathname);
   if (isBlogPage) {
@@ -123,15 +126,16 @@ export function getMetadata(name) {
 
 function buildTags(main) {
   const tagsElement = document.createElement('div');
+  const category = getMetadata('category');
   tagsElement.classList.add('tags');
-  tagsElement.append(buildBlock('tags', {
-    elems: [],
-  }));
-  const firstH2 = main.querySelector('h2:first-of-type');
-  const p = main.querySelector('p:first-of-type');
-  // eslint-disable-next-line no-bitwise
-  if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
-    firstH2.after(tagsElement);
+  if (category) {
+    tagsElement.append(buildBlock('tags', { elems: [] }));
+    const firstH2 = main.querySelector('h2:first-of-type');
+    const p = main.querySelector('p:first-of-type');
+    // eslint-disable-next-line no-bitwise
+    if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      firstH2.after(tagsElement);
+    }
   }
 }
 
@@ -180,10 +184,7 @@ export async function lookupPages(pathnames) {
       lookup[row.path] = row;
       if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
     });
-    window.pageIndex = {
-      data: json.data,
-      lookup,
-    };
+    window.pageIndex = { data: json.data, lookup };
   }
   const result = pathnames.map((path) => window.pageIndex.lookup[path]).filter((e) => e);
   return (result);
@@ -203,10 +204,7 @@ export async function lookupBlogs(pathnames) {
       lookup[row.path] = row;
       if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
     });
-    window.blogIndex = {
-      data: json.data,
-      lookup,
-    };
+    window.blogIndex = { data: json.data, lookup };
   }
   const result = pathnames.map((path) => window.blogIndex.lookup[path]).filter((e) => e);
   return (result);
@@ -307,9 +305,7 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
-  const {
-    hash,
-  } = window.location;
+  const { hash } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
 
