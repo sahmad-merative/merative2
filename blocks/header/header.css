@@ -453,7 +453,7 @@ header nav .nav-sections>ul>li {
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul>li.level-two {
     text-align: left;
     font-size: 1.125rem;
-    padding: 3%;
+    padding: 3% 0;
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul>li.level-two:not(:last-child) {
