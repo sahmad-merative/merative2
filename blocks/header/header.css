@@ -10,7 +10,7 @@ header {
   top: 0;
   transition: all .5s ease;
   z-index: 99999;
-  font-family: var(--sans-serif-font-semibold);
+  font-family: var(--sans-serif-font-medium);
 }
 
 .header.block {
@@ -24,9 +24,9 @@ header nav {
   grid-template:
     'brand tools hamburger' var(--nav-height) 'sections sections sections' 1fr / 50px 1fr 50px;
   align-items: center;
-  justify-content: center;
+/*   justify-content: center; */
   z-index: 1;
-  width: 100vw;
+  width: 100%;
   height: var(--nav-height-mobile);
   box-sizing: border-box;
 }
@@ -46,16 +46,18 @@ header nav .nav-brand p {
 }
 
 header nav .nav-brand img {
-  width: 100%;
+  width: 159px;
   height: auto;
 }
 
 /* sections */
 header nav .nav-sections ul {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   list-style: none;
   padding-left: 0;
+  letter-spacing: .01em;
+  line-height: 160%;
 }
 
 header nav .nav-sections>ul>li {
@@ -68,6 +70,7 @@ header nav .nav-sections>ul>li {
   /* header */
   header {
     padding: 37px 0 0;
+    max-height: 130px;
   }
 
   header.is-sticky {
@@ -85,7 +88,7 @@ header nav .nav-sections>ul>li {
   /* nav */
   header nav {
     display: flex;
-    justify-content: space-between;
+  /*   justify-content: space-between; */
     height: var(--nav-height);
     max-width: 1120px;
   }
@@ -101,7 +104,9 @@ header nav .nav-sections>ul>li {
   /* nav brand (logo) */
   header nav .nav-brand {
     width: auto;
-    padding-bottom: 18px;
+    padding: 0 0 33px;
+/*     align-self: baseline; */
+    margin-right: 125px;
   }
 
   header.is-sticky .nav-brand {
@@ -119,7 +124,11 @@ header nav .nav-sections>ul>li {
   header nav .nav-tools {
     grid-area: tools;
     flex: 0 0 auto;
-    height: 22px;
+    height: auto;
+    margin: 0.5rem 0;
+    margin-left: auto;
+    margin-right: 0;
+    position: relative;
   }
 
   header nav .nav-tools p {
@@ -130,8 +139,14 @@ header nav .nav-sections>ul>li {
   header nav .nav-tools a {
     text-decoration: none;
     padding-right: 25px;
-    padding-left: 25px;
     background: url('../../icons/envelope-icon.svg') no-repeat right center;
+    font-family: var(--sans-serif-font-medium);
+    font-size: 16px;
+    font-weight: 400;
+    list-style: none;
+    padding-left: 0;
+    letter-spacing: .01em;
+    line-height: 160%;
   }
 
   header.is-sticky nav .nav-tools a {
@@ -154,6 +169,12 @@ header nav .nav-sections>ul>li {
   /* nav sections */
   header nav .nav-sections {
     display: unset;
+    margin: 0.5rem 0;
+    background-color: initial !important;
+    overflow: initial;
+    transition: initial;
+    left: 0;
+    top: -100vh;
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
@@ -172,16 +193,14 @@ header nav .nav-sections>ul>li {
 
   /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections > ul > li {
-    padding: 0 16px;
-    font-size: 18px;
-    margin: 0;
+    margin-right: 27px;
+    font-size: 16px;
     cursor: pointer;
-    padding-top: 0;
+    padding: 1.4rem 0;
   }
 
   header nav .nav-sections > ul > li.nav-drop {
     padding-right: 25px;
-    padding-left: 25px;
     background: url('../../icons/arrow-down-black.svg') no-repeat right center;
   }
 
@@ -228,24 +247,53 @@ header nav .nav-sections>ul>li {
 
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul {
     display: grid;
-    grid-template-columns: repeat(3, 20%);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto auto auto auto auto;
-    gap: 50px 100px;
-    justify-content: center;
+    gap: 3.5rem 5.937rem;
     position: fixed;
-    left: 0;
     padding-top: 3%;
     top: calc(var(--nav-height) + 37px);
-    margin: 0;
-    background-color: white;
+    /* left: calc((100vw - var(--section-width))/2); */
+    left: 0;
+    justify-content: space-between;
+    padding-left: calc((100vw - var(--section-width))/2); 
+    padding-right: calc((100vw - var(--section-width))/2); 
     color: var(--neutral-carbon);
     height: 100vh;
     max-height: none;
     width: 100vw;
-    text-align: center;
-    justify-items: center;
     overflow: hidden;
+    z-index: 0;
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul::before {
+    background-color: white;
+    height: 659px;
+    width: 100vw;
+    content: '';
     z-index: -1;
+    position: fixed;
+    max-height: none;
+    left: 0;
+    top: calc(var(--nav-height) + 37px);
+    margin: 0;
+  }
+
+
+  header.is-sticky nav .nav-sections > ul > li[aria-expanded='true'] > ul::before {
+    top: calc(var(--nav-height) - 20px);
+  }
+  
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul::after {
+    background-color: var(--neutral-carbon);
+    content: '';
+    height: 100vh;
+    opacity: .5;
+    position: absolute;
+    /* top: calc(var(--nav-height) + 37px); */
+    width: 100vw;
+    z-index: -2;
   }
 
   header.is-sticky nav .nav-sections>ul>li[aria-expanded='true']>ul {
@@ -253,12 +301,16 @@ header nav .nav-sections>ul>li {
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two {
-    padding: 1% 5%;
+    padding: 1% 0;
     width: 280px;
+   
+    
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two a {
     text-decoration: none;
+    margin-bottom: 16px;
+   
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two > a:hover {
@@ -266,10 +318,12 @@ header nav .nav-sections>ul>li {
     padding-right: 25px;
     background: url('../../icons/arrow-purple.svg') no-repeat right center;
     transform: rotate(-90deg);
+   
   }
-
+  
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two .level-three {
     font-family: var(--sans-serif-font-light);
+    margin-top: 16px;
   }
 }
 
@@ -298,7 +352,7 @@ header nav .nav-sections>ul>li {
 
   header nav .nav-brand img {
     height: 45px;
-    width: auto;
+    width: 159px;
   }
 
   /* set sections and tools to off for now */
@@ -334,7 +388,7 @@ header nav .nav-sections>ul>li {
     justify-content: center;
     position: fixed;
     left: 0;
-    top: calc(var(--nav-height-mobile) + 1px);
+    top: var(--nav-height-mobile);
     right: 100%;
     bottom: 100%;
     margin: 0;
@@ -346,7 +400,6 @@ header nav .nav-sections>ul>li {
     text-align: center;
     justify-items: center;
     overflow: hidden;
-    transition: top .5s ease-in;
     z-index: -1;
   }
 
