@@ -83,18 +83,24 @@ body[filters-open="true"] {
     display: none;
 }
 
-.blog-home > div.blog-content > .blog-cards > div:hover {
+.blog-home > div.blog-content > .blog-cards > .blog-card.featured {
+    position: relative;
+    background: var(--neutral-bone);
+    height: 100%;
+}
+
+.blog-home > div.blog-content > .blog-cards > .blog-card:hover {
     border-radius: 0 0 10px 10px;
     box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
 }
 
-.blog-home > div.blog-content > .blog-cards > div:hover a {
+.blog-home > div.blog-content > .blog-cards > .blog-card:hover a {
     color: var(--primary-purple);
     text-decoration-line: underline;
 }
 
-.blog-home > div.blog-content > div.blog-cards > div.blog-card > div.card-image,
-.blog-home > div.blog-content > div.blog-cards > div.blog-card:hover > div.card-image {
+.blog-home > .blog-content > .blog-cards > .blog-card > .card-image,
+.blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
     aspect-ratio: 3 / 2;
@@ -102,7 +108,7 @@ body[filters-open="true"] {
     width: 100%;
 }
 
-.blog-home > div.blog-content > div.blog-cards > div.blog-card:hover > div.card-image > picture > img {
+.blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image > picture > img {
     transition: all .3s ease-in-out;
     transform: scale(1.05);
 }
@@ -113,15 +119,15 @@ body[filters-open="true"] {
     color: inherit;
 }
 
-.blog-home > div.blog-content > div.blog-cards > .blog-card > .card-content {
+.blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
     padding: var(--spacer-element-08) var(--spacer-element-07);
 }
 
-.blog-home > div.blog-content > div.blog-cards > .blog-card > .card-content > .blog-author {
+.blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
     font-size: 12px;
 }
 
-.blog-home > div.blog-content > div.blog-cards > .blog-card > .card-content > .blog-category:not(:empty) {
+.blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-category:not(:empty) {
     font-size: 14px;
     letter-spacing: .16px;
     background-color: #fff;
