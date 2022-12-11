@@ -1,8 +1,9 @@
 import { getAllBlogs, createCard, getBlogCategoryPages } from '../../scripts/scripts.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
+let loadMoreElement;
 
-function loadMoreCards(el) {
+function loadMoreCards() {
   // Get cards that are not hidden and not active to load them
   const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
   if (activeCards) {
@@ -10,13 +11,15 @@ function loadMoreCards(el) {
       if (i < NUM_CARDS_SHOWN_AT_A_TIME) activeCard.setAttribute('card-active', 'true');
     });
     if (activeCards.length > NUM_CARDS_SHOWN_AT_A_TIME) {
-      el.innerHTML = `Load More (${(activeCards.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+      if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
+      loadMoreElement.innerHTML = `Load More (${(activeCards.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
     } else {
-      el.innerHTML = 'Load More (0)';
-      el.setAttribute('aria-hidden', 'true');
+      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.setAttribute('aria-hidden', 'true');
     }
   } else {
-    el.setAttribute('aria-hidden', 'true');
+    loadMoreElement.innerHTML = 'Load More (0)';
+    loadMoreElement.setAttribute('aria-hidden', 'true');
   }
 }
 
@@ -51,10 +54,10 @@ function updateFiltersCount(count) {
 
 function clearFilters() {
   // get's called when nothing is selected. every card shows
-  const hiddenCards = document.querySelectorAll('.blog-card[aria-hidden]');
+  const hiddenCards = document.querySelectorAll('.blog-card');
   hiddenCards.forEach((card) => {
     card.removeAttribute('aria-hidden');
-    card.removeAttribute('card-active');
+    card.setAttribute('card-active', 'false');
   });
 
   // clear our selected filters on the top
@@ -101,6 +104,7 @@ function uncheckCheckbox(val) {
 }
 
 function refreshCards() {
+  let hits = 0;
   // hide cards that don't match to the filters that are selected
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   // Convert checkboxes to an array to use filter and map.
@@ -112,6 +116,7 @@ function refreshCards() {
     const blogCards = document.querySelectorAll('.blog-card');
     blogCards.forEach((card) => {
       card.setAttribute('aria-hidden', 'true');
+      card.setAttribute('card-active', 'false');
       if (card.hasAttribute('topics')) {
         const filterGroupValues = card.getAttribute('topics').split(',');
         const found = filterGroupValues
@@ -128,7 +133,18 @@ function refreshCards() {
           card.removeAttribute('aria-hidden');
         }
       }
+      if (!(card.hasAttribute('aria-hidden'))) hits += 1;
+      if (hits < NUM_CARDS_SHOWN_AT_A_TIME) card.setAttribute('card-active', 'true');
     });
+
+    // update load more number
+    if (hits.length > NUM_CARDS_SHOWN_AT_A_TIME) {
+      if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
+      loadMoreElement.innerHTML = `Load More (${(hits.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+    } else {
+      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.setAttribute('aria-hidden', 'true');
+    }
 
     // refresh selected filters at the top
     const selectedFilters = document.querySelector('div.selected-filters');
@@ -150,7 +166,6 @@ function refreshCards() {
         selectedValue.innerText = '';
       });
     });
-    loadMoreCards();
   } else {
     clearFilters();
   }
@@ -358,21 +373,21 @@ export default async function decorate(block) {
     });
 
     // Load More button
-    const loadMoreButton = document.createElement('div');
-    loadMoreButton.classList.add('load-more');
+    loadMoreElement = document.createElement('div');
+    loadMoreElement.classList.add('load-more');
     if (blogList.length > NUM_CARDS_SHOWN_AT_A_TIME) {
-      loadMoreButton.innerHTML = `Load More (${(blogList.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+      loadMoreElement.innerHTML = `Load More (${(blogList.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
     } else {
-      loadMoreButton.innerHTML = 'Load More (0)';
-      loadMoreButton.setAttribute('aria-hidden', 'true');
+      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.setAttribute('aria-hidden', 'true');
     }
-    loadMoreButton.addEventListener('click', (el) => {
+    loadMoreElement.addEventListener('click', (el) => {
       loadMoreCards(el.currentTarget);
     });
 
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
-    blogContent.append(loadMoreButton);
+    blogContent.append(loadMoreElement);
     block.append(blogContent);
     block.prepend(await createFilters(categoriesList, topics, audiences));
   } else {
