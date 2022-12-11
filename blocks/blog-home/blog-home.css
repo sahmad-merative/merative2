@@ -46,7 +46,26 @@ body[filters-open="true"] {
 }
 
 .blog-home > .blog-content > .load-more {
+    position: relative;
     display: block;
+    margin: 48px auto 0;
+    text-decoration: none;
+    background: #90f;
+    border-radius: 40px;
+    min-height: 62px;
+    padding: 25px;
+    width: 240px;
+    font-family: var(--sans-serif-font-medium);
+    font-size: var(--font-size-16);
+    letter-spacing: var(--letter-spacing-1);
+    line-height: var(--line-height-120);
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.blog-home > .blog-content > .load-more:hover {
+    background: var(--gradient-diagonal-up);
 }
 
 .blog-home > .blog-content > .load-more[aria-hidden="true"] {
