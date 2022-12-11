@@ -3,16 +3,17 @@ import { getAllBlogs, createCard, getBlogCategoryPages } from '../../scripts/scr
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
 
-function loadMoreCards() {
+function loadMoreCards(num) {
+  const numCards = num !== undefined ? num : NUM_CARDS_SHOWN_AT_A_TIME;
   // Get cards that are not hidden and not active to load them
   const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
   if (activeCards) {
     activeCards.forEach((activeCard, i) => {
-      if (i < NUM_CARDS_SHOWN_AT_A_TIME) activeCard.setAttribute('card-active', 'true');
+      if (i < numCards) activeCard.setAttribute('card-active', 'true');
     });
-    if (activeCards.length > NUM_CARDS_SHOWN_AT_A_TIME) {
+    if (activeCards.length > numCards) {
       if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
-      loadMoreElement.innerHTML = `Load More (${(activeCards.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+      loadMoreElement.innerHTML = `Load More (${(activeCards.length - numCards)})`;
     } else {
       loadMoreElement.innerHTML = 'Load More (0)';
       loadMoreElement.setAttribute('aria-hidden', 'true');
@@ -67,7 +68,7 @@ function clearFilters() {
   const selectedFiltersTitle = selectedFilters.querySelector(':scope > div.selected-filters-title');
   selectedFiltersTitle.textContent = '';
   updateFiltersCount('0');
-  loadMoreCards();
+  loadMoreCards(7);
 }
 
 async function createCheckboxList(label) {
@@ -350,7 +351,12 @@ export default async function decorate(block) {
     blogCards.classList.add('blog-cards');
     await blogList.forEach(async (row, i) => {
       const blogCard = await createCard(row, 'blog-card');
-      if (i < NUM_CARDS_SHOWN_AT_A_TIME) {
+      // first render show featured article and 6 cards so total 7
+      // If featured article, then add class name and make active no matter what
+      if (row.featuredArticle && row.featuredArticle === 'true') {
+        blogCard.classList.add('featured-article');
+      }
+      if (i < (NUM_CARDS_SHOWN_AT_A_TIME + 1)) {
         blogCard.setAttribute('card-active', 'true');
       } else {
         blogCard.setAttribute('card-active', 'false');
@@ -375,14 +381,14 @@ export default async function decorate(block) {
     // Load More button
     loadMoreElement = document.createElement('div');
     loadMoreElement.classList.add('load-more');
-    if (blogList.length > NUM_CARDS_SHOWN_AT_A_TIME) {
-      loadMoreElement.innerHTML = `Load More (${(blogList.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+    if (blogList.length > (NUM_CARDS_SHOWN_AT_A_TIME + 1)) {
+      loadMoreElement.innerHTML = `Load More (${(blogList.length - (NUM_CARDS_SHOWN_AT_A_TIME + 1))})`;
     } else {
       loadMoreElement.innerHTML = 'Load More (0)';
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
-    loadMoreElement.addEventListener('click', (el) => {
-      loadMoreCards(el.currentTarget);
+    loadMoreElement.addEventListener('click', () => {
+      loadMoreCards();
     });
 
     blogContent.append(selectedFilters);

@@ -202,6 +202,18 @@ export async function getAllBlogs(category) {
     window.allBlogs = json.data;
   }
   const blogArticles = window.allBlogs.filter((e) => e.template !== 'Category');
+  blogArticles.sort((a, b) => {
+    if (a.lastModified < b.lastModified) return -1;
+    if (a.lastModified > b.lastModified) return 1;
+    return 0;
+  });
+
+  // move featured article to the top of the sorted list
+  const featuredArticleIndex = blogArticles.findIndex((el) => (el.featuredArticle === 'true'));
+  const featuredArticle = blogArticles[featuredArticleIndex];
+  blogArticles.splice(featuredArticleIndex, 1);
+  blogArticles.unshift(featuredArticle);
+
   if (category) {
     // return only blogs that have the same category
     const result = blogArticles.filter((e) => e.category.trim() === category);
