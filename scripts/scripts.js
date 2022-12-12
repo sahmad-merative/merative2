@@ -201,7 +201,7 @@ export async function getAllBlogs(category) {
     });
     window.allBlogs = json.data;
   }
-  const blogArticles = window.allBlogs.filter((e) => e.template !== 'Category');
+  const blogArticles = window.allBlogs.filter((e) => e.template === 'Blog Article');
   blogArticles.sort((a, b) => {
     if (a.lastModified < b.lastModified) return -1;
     if (a.lastModified > b.lastModified) return 1;

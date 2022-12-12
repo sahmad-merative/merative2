@@ -304,8 +304,8 @@ async function createFilters(categories, topics, audiences) {
   blogHomeEl.classList.add('blog-home-link');
   const blogHomeLink = document.createElement('a');
   blogHomeLink.classList.add('category-link');
-  blogHomeLink.href = '/blog/';
-  if (/(^\/blog\/$)/.test(window.location.pathname)) {
+  blogHomeLink.href = '/blog';
+  if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
     blogHomeLink.innerHTML += '<h5>Merative Blog</h5>';
   } else {
