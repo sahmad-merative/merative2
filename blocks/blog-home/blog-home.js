@@ -49,7 +49,7 @@ function toggleBodyOverflow(val) {
 
 function updateFiltersCount(count) {
   // update the number of checked filters to show in mobile and tablet views
-  const mobileFiltersCount = document.querySelector('.blog-home > .filters > .filters-header > h4');
+  const mobileFiltersCount = document.querySelector('.blog-home .filters > .filters-header > h4');
   mobileFiltersCount.innerHTML = `Filters (${count})`;
 }
 
@@ -62,10 +62,10 @@ function clearFilters() {
   });
 
   // clear our selected filters on the top
-  const selectedFilters = document.querySelector('div.selected-filters');
-  const selectedFiltersList = selectedFilters.querySelector(':scope > div.selected-filters-list');
+  const selectedFilters = document.querySelector('.blog-home .selected-filters');
+  const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
   selectedFiltersList.textContent = '';
-  const selectedFiltersTitle = selectedFilters.querySelector(':scope > div.selected-filters-title');
+  const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
   selectedFiltersTitle.textContent = '';
   updateFiltersCount('0');
   loadMoreCards(7);
@@ -147,10 +147,10 @@ function refreshCards() {
     }
 
     // refresh selected filters at the top
-    const selectedFilters = document.querySelector('div.selected-filters');
-    const selectedFiltersTitle = selectedFilters.querySelector(':scope > div.selected-filters-title');
+    const selectedFilters = document.querySelector('.blog-home .selected-filters');
+    const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
     selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-    const selectedFiltersList = selectedFilters.querySelector(':scope > div.selected-filters-list');
+    const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
 
     // Clear out any existing filters before showing the new ones based on filterGroup
     selectedFiltersList.textContent = '';
@@ -389,11 +389,11 @@ export default async function decorate(block) {
       loadMoreCards();
     });
 
+    blogContent.append(await createFilters(categoriesList, topics, audiences));
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
     blogContent.append(loadMoreElement);
     block.append(blogContent);
-    block.prepend(await createFilters(categoriesList, topics, audiences));
   } else {
     block.remove();
   }
