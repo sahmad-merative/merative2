@@ -106,7 +106,6 @@ function uncheckCheckbox(val) {
 
 function refreshCards() {
   let hits = 0;
-  // hide cards that don't match to the filters that are selected
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   // Convert checkboxes to an array to use filter and map.
   // Use Array.filter to remove unchecked checkboxes.
@@ -200,7 +199,6 @@ async function createCategories(categoriesList) {
 
 async function createFilters(categories, topics, audiences) {
   // Create DOM elements for topics and audiences to display in the left nav
-
   // Root filters div
   const filters = document.createElement('div');
   filters.classList.add('filters');

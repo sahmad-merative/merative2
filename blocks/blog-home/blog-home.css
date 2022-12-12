@@ -12,19 +12,6 @@ body[filters-open="true"] {
     margin: unset;
 }
 
-/* 
-.blog-home[data-block-status="loaded"] > .blog-content  {
-    display: flex;
-    flex-direction: column; 
-}
-
-.blog-home[data-block-status="loaded"] > .blog-content > .default-content-wrapper {
-    order: 2;
-}
-.blog-home[data-block-status="loaded"] > .blog-content > .blog-cards {
-    order: 1;
-} */
-
 .blog-home[data-block-status="loaded"] > div.blog-content > div.blog-cards {
     position: relative;
     display: flex;
