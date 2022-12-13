@@ -60,9 +60,6 @@
     font-size: 16px;
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  footer .footer-links .icon-footer-logo > svg{
     height: 56px;
     width: 158.06px;
   }
@@ -339,7 +336,7 @@
     padding-top: 4px;
   }
   
-  footer .footer-links .icon-footer-logo > svg {
+  footer .footer-links .icon-footer-logo {
     height: 45px;
     width: 127px;
   }
