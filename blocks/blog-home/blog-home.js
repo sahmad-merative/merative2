@@ -255,24 +255,7 @@ async function createFilters(categories, topics, audiences) {
     toggleBodyOverflow('false');
     filters.setAttribute('aria-expanded', 'false');
   });
-  // Topic filters
-  const topicsElement = document.createElement('div');
-  topicsElement.classList.add('topics');
-  topicsElement.setAttribute('aria-expanded', 'true');
-  const topicLabel = document.createElement('p');
-  topicLabel.classList.add('list-title');
-  topicLabel.append('Topic');
-  topicsElement.append(topicLabel);
-  topicLabel.addEventListener('click', () => {
-    const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
-    topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  });
-  if (topics.size) {
-    await topics.forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic));
-    });
-    filtersMain.append(topicsElement);
-  }
+
   // Audience filters
   const audiencesElement = document.createElement('div');
   audiencesElement.classList.add('audiences');
@@ -290,6 +273,25 @@ async function createFilters(categories, topics, audiences) {
       audiencesElement.append(await createCheckboxList(audience));
     });
     filtersMain.append(audiencesElement);
+  }
+
+  // Topic filters
+  const topicsElement = document.createElement('div');
+  topicsElement.classList.add('topics');
+  topicsElement.setAttribute('aria-expanded', 'true');
+  const topicLabel = document.createElement('p');
+  topicLabel.classList.add('list-title');
+  topicLabel.append('Topic');
+  topicsElement.append(topicLabel);
+  topicLabel.addEventListener('click', () => {
+    const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
+    topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  if (topics.size) {
+    await topics.forEach(async (topic) => {
+      topicsElement.append(await createCheckboxList(topic));
+    });
+    filtersMain.append(topicsElement);
   }
 
   // Add event listeners to all Checkboxes
