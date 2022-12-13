@@ -143,7 +143,7 @@ function buildPageDivider(main) {
 
 // auto block build for social media share as left nav
 function buildBlogLeftNavBlock(main) {
-  if (getMetadata('template') == 'Blog Article') {
+  if (getMetadata('template') === 'Blog Article') {
     const blogLeftNav = document.createElement('div');
     blogLeftNav.classList.add('blog-left-nav');
     blogLeftNav.append(buildBlock('blog-left-nav', {
@@ -156,7 +156,7 @@ function buildBlogLeftNavBlock(main) {
 
 // auto block to create breadcrumb for blog articles
 function buildBlogBreadCrumbBlock(main) {
-  if (getMetadata('template') == 'Blog Article') {
+  if (getMetadata('template') === 'Blog Article') {
     const blogBreadCrumb = document.createElement('div');
     blogBreadCrumb.classList.add('blog-breadcrumb');
     blogBreadCrumb.append(buildBlock('blog-breadcrumb', {
