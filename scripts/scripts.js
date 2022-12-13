@@ -118,9 +118,7 @@ function buildTags(main) {
   const category = getMetadata('category');
   tagsElement.classList.add('tags');
   if (category) {
-    tagsElement.append(buildBlock('tags', {
-      elems: []
-    }));
+    tagsElement.append(buildBlock('tags', { elems: [] }));
     const firstH2 = main.querySelector('h2:first-of-type');
     const p = main.querySelector('p:first-of-type');
     // eslint-disable-next-line no-bitwise
