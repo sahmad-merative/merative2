@@ -197,6 +197,61 @@ export async function lookupBlogs(pathnames) {
 }
 
 /**
+ * Gets details about all blogs that are indexed
+ * or only blogs belonging to a specific category
+ * @param {String} category name of the category
+ */
+
+export async function getAllBlogs(category) {
+  if (!window.allBlogs) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
+    const json = await resp.json();
+    json.data.forEach((row) => {
+      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+    });
+    window.allBlogs = json.data;
+  }
+  const blogArticles = window.allBlogs.filter((e) => e.template === 'Blog Article');
+  blogArticles.sort((a, b) => {
+    if (a.lastModified < b.lastModified) return -1;
+    if (a.lastModified > b.lastModified) return 1;
+    return 0;
+  });
+
+  // move featured article to the top of the sorted list
+  const featuredArticleIndex = blogArticles.findIndex((el) => (el.featuredArticle === 'true'));
+  const featuredArticle = blogArticles[featuredArticleIndex];
+  blogArticles.splice(featuredArticleIndex, 1);
+  blogArticles.unshift(featuredArticle);
+
+  if (category) {
+    // return only blogs that have the same category
+    const result = blogArticles.filter((e) => e.category.trim() === category);
+    return (result);
+  }
+  return (blogArticles);
+}
+
+/**
+ * Gets details about all blog category pages that are indexed
+ * for left nav
+ */
+
+export async function getBlogCategoryPages() {
+  if (!window.allBlogs) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
+    const json = await resp.json();
+    json.data.forEach((row) => {
+      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+    });
+    window.allBlogs = json.data;
+  }
+  // return only blog category pages for left navigation
+  const result = window.allBlogs.filter((e) => e.template === 'Category');
+  return (result);
+}
+
+/**
  * Creates a Card using a JSON object and style associated with the card
  * @param {Object} row JSON Object typically coming from an index array item
  * @param {String} style Class name that needs to be added to the card root div
