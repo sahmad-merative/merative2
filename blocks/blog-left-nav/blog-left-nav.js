@@ -101,7 +101,7 @@ export default function decorate(block) {
   childrenH3.forEach((h3) => {
     anchorTagLinkCreation(h3.getAttribute('id'), h3.textContent, block);
   });
-  // document.getElementById('blog-right-nav').remove();
+  document.getElementById('blog-right-nav').remove();
   anchorTagSocialMediaCreation('linkedIn', block);
   anchorTagSocialMediaCreation('twitter', block);
   anchorTagSocialMediaCreation('facebook', block);
