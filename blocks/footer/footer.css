@@ -143,6 +143,8 @@
     padding-top: 1rem;
     padding-left: 0;
     justify-content: space-between;
+    max-width: 80vw;
+    margin: auto;
   }
 
   footer .footer-links+ul li{
