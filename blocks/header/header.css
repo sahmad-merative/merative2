@@ -24,7 +24,8 @@ header nav {
   grid-template:
     'brand tools hamburger' var(--nav-height) 'sections sections sections' 1fr / 50px 1fr 50px;
   align-items: center;
-/*   justify-content: center; */
+
+  /*   justify-content: center; */
   z-index: 1;
   width: 100%;
   height: var(--nav-height-mobile);
@@ -88,7 +89,8 @@ header nav .nav-sections>ul>li {
   /* nav */
   header nav {
     display: flex;
-  /*   justify-content: space-between; */
+  
+    /*   justify-content: space-between; */
     height: var(--nav-height);
     max-width: 1120px;
   }
@@ -105,7 +107,8 @@ header nav .nav-sections>ul>li {
   header nav .nav-brand {
     width: auto;
     padding: 0 0 33px;
-/*     align-self: baseline; */
+
+    /*     align-self: baseline; */
     margin-right: 125px;
   }
 
@@ -253,6 +256,7 @@ header nav .nav-sections>ul>li {
     position: fixed;
     padding-top: 3%;
     top: calc(var(--nav-height) + 37px);
+    
     /* left: calc((100vw - var(--section-width))/2); */
     left: 0;
     justify-content: space-between;
@@ -291,6 +295,7 @@ header nav .nav-sections>ul>li {
     height: 100vh;
     opacity: .5;
     position: absolute;
+    
     /* top: calc(var(--nav-height) + 37px); */
     width: 100vw;
     z-index: -2;
@@ -310,15 +315,26 @@ header nav .nav-sections>ul>li {
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two a {
     text-decoration: none;
     margin-bottom: 16px;
-   
+    position: relative;   
   }
 
-  header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two > a:hover {
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two > a::after {
+    display: inline-block;
+    content: '';
+    position: relative;
+    height: 12px;
+    width: 15px;
     color: #90f;
     padding-right: 25px;
     background: url('../../icons/arrow-purple.svg') no-repeat right center;
+    opacity: 0;
     transform: rotate(-90deg);
-   
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two:hover > a::after {
+    opacity: 1;
+    transform: rotate(0);   
+    transition: transform .3s;  
   }
   
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two .level-three {
