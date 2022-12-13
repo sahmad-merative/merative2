@@ -1,9 +1,4 @@
-import {
-  getMetadata
-} from '../../scripts/scripts.js';
-let currentPathName = window.location.pathname;
-currentPathName = currentPathName.replace('/blog/', '');
-
+import { getMetadata } from '../../scripts/scripts.js';
 function openLink(e) {
   let idName = e.target.getAttribute('id');
   let url = null;
@@ -48,7 +43,6 @@ function breadCrumbCreation(id, name, ulFlag) {
   document.getElementById(id).append(ul);
   document.getElementById(sid).addEventListener('click', openLink);
 }
-
 window.mobileCheck = function () {
   let check = false;
   (function (a) {
@@ -56,12 +50,10 @@ window.mobileCheck = function () {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
-
-
 export default function decorate(block) {
   block.textContent = '';
   block.setAttribute('id', 'breadCrumb-id');
-  breadCrumbCreation(block.getAttribute('id'), 'Merative Blog', true); // pass true to create first time ul element 
-  breadCrumbCreation(block.getAttribute('id'), getMetadata('category'), false); // pass false to use created ul element from previous function call.
-  breadCrumbCreation(block.getAttribute('id'), document.title, false); // pass false to use created ul element from previous function call.
+  breadCrumbCreation(block.getAttribute('id'), 'Merative Blog', true);
+  breadCrumbCreation(block.getAttribute('id'), getMetadata('category'), false);
+  breadCrumbCreation(block.getAttribute('id'), document.title, false);
 }
