@@ -142,30 +142,6 @@ function buildPageDivider(main) {
     }
   });
 }
-// auto block build for social media share as left nav
-function buildBlogLeftNavBlock(main) {
-  if (getMetadata('template') == 'Blog Article') {
-    const blogLeftNav = document.createElement('div');
-    blogLeftNav.classList.add('blog-left-nav');
-    blogLeftNav.append(buildBlock('blog-left-nav', {
-      elems: [],
-    }));
-    main.children[0].setAttribute('id', 'blog-right-nav');
-    main.prepend(blogLeftNav);
-  }
-}
-
-// auto block to create breadcrumb for blog articles
-function buildBlogBreadCrumbBlock(main) {
-  if (getMetadata('template') == 'Blog Article') {
-    const blogBreadCrumb = document.createElement('div');
-    blogBreadCrumb.classList.add('blog-breadcrumb');
-    blogBreadCrumb.append(buildBlock('blog-breadcrumb', {
-      elems: [],
-    }));
-    main.prepend(blogBreadCrumb);
-  }
-}
 
 /**
  * Builds all synthetic blocks in a container element.
@@ -176,8 +152,6 @@ function buildAutoBlocks(main) {
     buildHeroBlock(main);
     buildCtaBlock(main);
     buildBackToTopBlock(main);
-    buildBlogLeftNavBlock(main);
-    buildBlogBreadCrumbBlock(main);
     buildTags(main);
     buildPageDivider(main);
   } catch (error) {
