@@ -43,7 +43,7 @@
     text-decoration: underline;
 }
 
-.breadcrumb-navigation li:after {
+.breadcrumb-navigation li::after {
     padding: 10px;
     content: ">";
 }
