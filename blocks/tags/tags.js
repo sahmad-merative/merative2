@@ -6,11 +6,12 @@ export default function decorate(block) {
   const topic = getMetadata('topic');
 
   if (category) {
-    let uniqueTags = new Set(category);
+    let uniqueTags = new Set();
+    uniqueTags = [category];
     if (audience && topic) {
       const audienceSet = new Set(audience.split(',').map((element) => element.trim()));
       const topicSet = new Set(topic.split(',').map((element) => element.trim()));
-      uniqueTags = ([...audienceSet, ...topicSet]);
+      uniqueTags = ([category, ...audienceSet, ...topicSet]);
     }
     block.innerHTML = '';
     uniqueTags.forEach((item) => {
