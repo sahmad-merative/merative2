@@ -1,29 +1,11 @@
-/* stylelint-disable media-feature-range-operator-space-after */
 
-
-/* stylelint-disable comment-whitespace-inside */
-
-
-/* stylelint-disable rule-empty-line-before */
-
-
-/* stylelint-disable function-url-quotes */
-
-
-/* stylelint-disable no-descending-specificity */
-
-
-/* stylelint-disable selector-class-pattern */
-
-
-/* stylelint-disable font-family-no-missing-generic-family-keyword */
-
-
-/* Start Social Share Icons */
+html {
+    scroll-behavior: smooth;
+}
 
 .blog-left-nav.block::before {
     content: "SHARE VIA";
-    font-family: 'Alliance No.1', sans-serif;
+    font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 500;
     font-size: var(--font-size-14);
