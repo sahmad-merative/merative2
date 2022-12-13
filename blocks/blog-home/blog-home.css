@@ -91,7 +91,7 @@ body[filters-open="true"] {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
     aspect-ratio: 3 / 2;
-    max-width: 396px;
+    width: 100%;
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image > picture > img {
@@ -476,10 +476,5 @@ body[filters-open="true"] {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
         grid-area: loadmore;
-    }
-
-    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content {
-        padding: 28px 48px;
-        vertical-align: center;
     }
 }
