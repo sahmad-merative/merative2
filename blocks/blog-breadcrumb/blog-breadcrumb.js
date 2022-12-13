@@ -17,7 +17,7 @@ function openLink(e) {
   e.preventDefault();
 }
 function isMobile() {
-    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
+  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
 }
 function breadCrumbCreation(id, name, ulFlag) {
   let ul = null;
@@ -29,7 +29,7 @@ function breadCrumbCreation(id, name, ulFlag) {
   } else {
     ul = document.getElementById('crumbs-list-id');
   }
-  let li = document.createElement('li');
+  const li = document.createElement('li');
   const aLink = document.createElement('a');
   if (isMobile() && ulFlag) {
     linkText = document.createTextNode('...');
