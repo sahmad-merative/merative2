@@ -19,7 +19,7 @@ function openLink(e) {
   e.preventDefault();
 }
 
-const sections = new Array();
+const sections = [];
 
 function anchorTagLinkCreation(contentLinkId, contentLink) {
   const aLink = document.createElement('a');
@@ -37,19 +37,15 @@ function anchorTagLinkCreation(contentLinkId, contentLink) {
       if (scrollAmount >= ((element.offsetTop) - 130)) {
         let idName = element.getAttribute('id');
         idName = idName.replace('-leftnav', '');
-        if (idName == contentLinkId) {
+        if (idName === contentLinkId) {
           aLink.classList.add('active');
         } else {
           aLink.classList.remove('active');
         }
-
       }
     });
-
   });
-
 }
-
 function anchorTagSocialMediaCreation(scoialMedia, block) {
   const clsName = `social-share-${scoialMedia}`;
   const sid = `social_share_link${scoialMedia}`;
