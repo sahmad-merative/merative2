@@ -15,8 +15,6 @@ html {
     margin-top: 24px;
 }
 
-
-
 .blog-left-nav.block .social-share-linkedIn {
     margin: 8px;
     background: url("../../icons/linkedin-black.svg") no-repeat center;
@@ -29,9 +27,11 @@ html {
     border: 1px solid var(--neutral-sand);
     background-size: 20px 20px;
 }
+
 .blog-left-nav.block .social-share-linkedIn:hover {
     background: url("../../icons/linkedin-white.svg") no-repeat center, var(--gradient-left-right);
 }
+
 .blog-left-nav.block .social-share-twitter {
     margin: 8px;
     background: url("../../icons/twitter-black.svg") no-repeat center;
@@ -85,7 +85,7 @@ html {
 
 .blog-content-link-cs::before {
     content: "IN THIS ARTICLE";
-    font-family: 'Alliance No.1';
+    font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 500;
     font-size: var(--font-size-14);
@@ -113,7 +113,7 @@ html {
     border-width: 5px 0 5px 5px;
     padding-left: 16px;
     width: 240px;
-    font-family: 'Alliance No.1';
+    font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -129,7 +129,7 @@ html {
     text-decoration-line: none;
     padding-left: 16px;
     width: 240px;
-    font-family: 'Alliance No.1';
+    font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -178,7 +178,7 @@ html {
 
 /* ipad , tabs */
 
-@media only screen and (width <=1119px) {
+@media only screen and (width <= 1119px) {
     .blog-left-nav-container {
         margin: 0 auto;
     }
@@ -195,7 +195,6 @@ html {
         position: relative;
         height: auto;
         background: var(--neutral-bone);
-        top: 0px;
     }
     
     .blog-left-nav.block::before {
@@ -239,7 +238,7 @@ html {
 }
 
 
-/* mobile devices*/
+/* mobile devices */
 
 @media (max-device-width: 768px) {
     .blog-left-nav-container {
