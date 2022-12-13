@@ -1,0 +1,53 @@
+/* stylelint-disable media-feature-range-operator-space-after */
+
+
+/* stylelint-disable comment-whitespace-inside */
+
+
+/* stylelint-disable rule-empty-line-before */
+
+
+/* stylelint-disable function-url-quotes */
+
+
+/* stylelint-disable no-descending-specificity */
+
+
+/* stylelint-disable selector-class-pattern */
+
+
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+
+.breadcrumb-navigation {
+    padding: 10px 18px;
+    height: 26px;
+}
+
+.breadcrumb-navigation>li {
+    display: inline;
+}
+
+.breadcrumb-navigation>li>a {
+    color: var(--neutral-carbon);
+    text-decoration: none;
+    font-family: 'Alliance No.1';
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-160);
+    letter-spacing: 0.01em;
+}
+
+.breadcrumb-navigation>li>a:hover {
+    color: var(--primary-purple);
+    text-decoration: underline;
+}
+
+.breadcrumb-navigation li:after {
+    padding: 10px;
+    content: ">";
+}
+
+.breadcrumb-navigation li:hover::after {
+    color: var(--primary-purple);
+}
