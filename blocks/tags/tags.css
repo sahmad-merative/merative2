@@ -1,4 +1,4 @@
-.article-content .tags{
+.article-content .tags[data-block-status="loaded"]{
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 32px;
@@ -19,7 +19,7 @@
 }
 
 @media only screen and (width >= 1200px) {
-    .article-content .tags{
+    .article-content .tags[data-block-status="loaded"]{
         margin-bottom: 48px;
     }
 }

@@ -74,3 +74,7 @@ indices:
       readtime:        
         select: head > meta[name="readtime"]
         value: attribute(el, "content")
+      featuredArticle:        
+        select: head > meta[name="featured-article"]
+        value: attribute(el, "content")
+        
