@@ -15,13 +15,11 @@ html {
     margin-top: 24px;
 }
 
-.blog-left-nav.block .social-share-linkedIn:hover {
-    background: url(../../icons/linkedin-white.svg) no-repeat center, var(--gradient-left-right);
-}
+
 
 .blog-left-nav.block .social-share-linkedIn {
     margin: 8px;
-    background: url(../../icons/linkedin-black.svg) no-repeat center;
+    background: url("../../icons/linkedin-black.svg") no-repeat center;
     background-color: var(--neutral-bone);
     border-radius: 50%;
     display: inline-flex;
@@ -31,10 +29,12 @@ html {
     border: 1px solid var(--neutral-sand);
     background-size: 20px 20px;
 }
-
+.blog-left-nav.block .social-share-linkedIn:hover {
+    background: url("../../icons/linkedin-white.svg") no-repeat center, var(--gradient-left-right);
+}
 .blog-left-nav.block .social-share-twitter {
     margin: 8px;
-    background: url(../../icons/twitter-black.svg) no-repeat center;
+    background: url("../../icons/twitter-black.svg") no-repeat center;
     background-color: var(--neutral-bone);
     border-radius: 50%;
     display: inline-flex;
@@ -46,12 +46,12 @@ html {
 }
 
 .blog-left-nav.block .social-share-twitter:hover {
-    background: url(../../icons/twitter-white.svg) no-repeat center, var(--gradient-left-right);
+    background: url("../../icons/twitter-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
 .blog-left-nav.block .social-share-facebook {
     margin: 8px;
-    background: url(../../icons/facebook-black.svg) no-repeat center;
+    background: url("../../icons/facebook-black.svg") no-repeat center;
     background-color: var(--neutral-bone);
     border-radius: 50%;
     display: inline-flex;
@@ -63,12 +63,12 @@ html {
 }
 
 .blog-left-nav.block .social-share-facebook:hover {
-    background: url(../../icons/facebook-white.svg) no-repeat center, var(--gradient-left-right);
+    background: url("../../icons/facebook-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
 .blog-left-nav.block .social-share-shareLink {
     margin: 8px;
-    background: url(../../icons/sharelink-black.svg) no-repeat center;
+    background: url("../../icons/sharelink-black.svg") no-repeat center;
     background-color: var(--neutral-bone);
     border-radius: 50%;
     display: inline-flex;
@@ -80,7 +80,7 @@ html {
 }
 
 .blog-left-nav.block .social-share-shareLink:hover {
-    background: url(../../icons/sharelink-white.svg) no-repeat center, var(--gradient-left-right);
+    background: url("../../icons/sharelink-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
 .blog-content-link-cs::before {
@@ -147,26 +147,32 @@ html {
         max-width: 1200px;
         margin: 0 auto;
     }
+    
     .blog-left-nav-wrapper {
         width: 240px !important;
         margin: 70px 60px 0 0 !important;
     }
+    
     .blog-left-nav.block {
         position: sticky;
         top: 350px;
         display: flex;
         flex-wrap: wrap;
     }
+    
     .blog-left-nav.block::before {
         order: -1;
         flex: 1 0 100%;
     }
+    
     .scrollMargin {
         scroll-margin-top: 100px;
     }
+    
     .blog-content-link-cs-is-sticky {
         margin-bottom: 130px;
     }
+    
 }
 
 
@@ -176,11 +182,13 @@ html {
     .blog-left-nav-container {
         margin: 0 auto;
     }
+    
     .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
     }
+    
     .blog-content-link-cs {
         display: flex;
         flex-direction: column;
@@ -189,12 +197,15 @@ html {
         background: var(--neutral-bone);
         top: 0px;
     }
+    
     .blog-left-nav.block::before {
         font-size: 11px;
     }
+    
     .blog-content-link-cs::before {
         font-size: 11px;
     }
+    
 }
 
 @media (min-width: 768px) and (max-width: 1119px) {
@@ -202,11 +213,13 @@ html {
         margin: 0 auto;
         max-width: 732px;
     }
+    
     .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
     }
+    
     .blog-content-link-cs {
         display: flex;
         flex-direction: column;
@@ -214,12 +227,15 @@ html {
         height: auto;
         background: var(--neutral-bone);
     }
+    
     .blog-left-nav.block::before {
         font-size: 11px;
     }
+    
     .blog-content-link-cs::before {
         font-size: 11px;
     }
+    
 }
 
 
@@ -230,11 +246,13 @@ html {
         max-width: 768px;
         margin: 0 auto;
     }
+    
     .blog-left-nav.block {
         display: flex;
         top: 20px;
         position: relative;
     }
+    
     .blog-content-link-cs {
         display: flex;
         flex-direction: column;
@@ -242,12 +260,15 @@ html {
         height: auto;
         background: var(--neutral-bone);
     }
+    
     .blog-left-nav.block::before {
         font-size: 11px;
     }
+    
     .blog-content-link-cs::before {
         font-size: 11px;
     }
+    
 }
 
 
