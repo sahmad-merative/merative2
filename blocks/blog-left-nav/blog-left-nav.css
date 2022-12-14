@@ -228,7 +228,7 @@ html {
 
 /* devices */
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
     .section.article-content {
         margin: 0 auto;
         max-width: 732px;
@@ -267,7 +267,7 @@ html {
 
 /* mobile devices */
 
-@media (max-device-width: 768px) {
+@media only screen and (max-device-width: 768px) {
     .section.article-content {
         max-width: 768px;
         margin: 0 auto;
