@@ -133,6 +133,16 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Gets random default image for cards
+ */
+
+export function getRandomDefaultImage() {
+  // get a random image from a set of 5 default images to use for this card
+  const randomNumber = Math.floor(Math.random() * 5) + 1;
+  return `/styles/default-images/default-card-image-${randomNumber}.png`;
+}
+
+/**
  * Gets details about pages that are indexed
  * @param {Array} pathnames list of pathnames
  */
@@ -164,7 +174,11 @@ export async function lookupBlogs(pathnames) {
     const lookup = {};
     json.data.forEach((row) => {
       lookup[row.path] = row;
-      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      if (row.image.startsWith('/default-meta-image.png')) {
+        row.image = getRandomDefaultImage();
+      } else {
+        row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      }
     });
     window.blogIndex = { data: json.data, lookup };
   }
@@ -183,7 +197,11 @@ export async function getAllBlogs(category) {
     const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
     const json = await resp.json();
     json.data.forEach((row) => {
-      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      if (row.image.startsWith('/default-meta-image.png')) {
+        row.image = getRandomDefaultImage();
+      } else {
+        row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      }
     });
     window.allBlogs = json.data;
   }
@@ -218,7 +236,11 @@ export async function getBlogCategoryPages() {
     const resp = await fetch(`${window.hlx.codeBasePath}/blog-index.json`);
     const json = await resp.json();
     json.data.forEach((row) => {
-      if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      if (row.image.startsWith('/default-meta-image.png')) {
+        row.image = getRandomDefaultImage();
+      } else {
+        row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      }
     });
     window.allBlogs = json.data;
   }
