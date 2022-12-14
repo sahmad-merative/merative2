@@ -28,29 +28,6 @@ function buildHeroBlock(main) {
   }
 }
 
-function buildCtaBlock(main) {
-  main.querySelectorAll(':scope > div').forEach((div) => {
-    const h2 = div.querySelector('div > h2');
-    const p = div.querySelector('div > p');
-    const pa = div.querySelector('p > a');
-    const numChildren = div.children.length;
-
-    // simple CTA - no inner text and H2 positioned before a link
-    if (h2 && p && pa && (h2.compareDocumentPosition(pa) === 4)
-           && (numChildren === 2)) {
-      div.classList.add('cta');
-    }
-
-    // CTA with inner text -  H2 then text then a link
-    if (h2 && p && pa && (h2.compareDocumentPosition(p) === 4)
-           && (p.compareDocumentPosition(pa) === 4)
-           && (h2.compareDocumentPosition(pa) === 4)
-           && (numChildren === 3)) {
-      div.classList.add('cta');
-    }
-  });
-}
-
 function buildBackToTopBlock(main) {
   const element = document.createElement('div');
   element.classList.add('back-to-top');
@@ -146,7 +123,6 @@ function buildPageDivider(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
-    buildCtaBlock(main);
     buildBackToTopBlock(main);
     buildTags(main);
     buildPageDivider(main);

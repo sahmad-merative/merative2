@@ -27,7 +27,6 @@
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-001-em);
     color: var(--neutral-carbon);
-    background: var(--neutral-bone);
 }
 
 .related-articles[data-block-status="loaded"] > .blog-card {
@@ -85,7 +84,7 @@
 }
 
 /* Tablet small and large styles */
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 576px) {
     .related-articles-container[data-section-status="loaded"] {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
