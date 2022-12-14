@@ -32,14 +32,6 @@
     color: var(--primary-purple);
 }
 
-
-
-@media only screen and (width < 768px){
-    .blog-breadcrumb[data-block-status="loaded"]{
-        padding: 0 32px 10px;
-    }
-}
-
 @media only screen and (width >= 576px){
     .blog-breadcrumb[data-block-status="loaded"]{
         padding: 0 0 10px;
