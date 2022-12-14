@@ -1,9 +1,9 @@
 function openLink(e) {
-  const idName = e.target.getAttribute('id');
+  const idName = e.target.getAttribute('title');
   let url = null;
   const currentUrl = window.location.href;
   if (idName !== null) {
-    if (idName.includes('linkedIn')) {
+    if (idName.includes('linkedin')) {
       url = `https://www.linkedin.com/sharing/share-offsite/?url= ${currentUrl}`;
       window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=300,width=800,height=500');
     } else if (idName.includes('twitter')) {
@@ -12,20 +12,36 @@ function openLink(e) {
     } else if (idName.includes('facebook')) {
       url = `https://www.facebook.com/sharer/sharer.php?u= ${currentUrl}`;
       window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=300,width=800,height=500');
-    } else if (idName.includes('shareLink')) {
+    } else if (idName.includes('share')) {
       navigator.clipboard.writeText(window.location.href);
     }
   }
   e.preventDefault();
 }
+const sections = [];
 
 function anchorTagLinkCreation(contentLinkId, contentLink) {
   const aLink = document.createElement('a');
-  // const linkText = document.createTextNode(contentLink);
   aLink.append(contentLink);
   aLink.classList.add('content-link');
   aLink.href = `#${contentLinkId}`;
-  return aLink;
+  document.getElementById('blog-content-link').append(aLink);
+  document.getElementsByClassName('content-link')[0].classList.add('active');
+  document.getElementById(contentLinkId).classList.add('scroll-margin');
+  sections.push(document.getElementById(contentLinkId));
+  window.addEventListener('scroll', () => {
+    const scrollAmount = window.scrollY;
+    sections.forEach((element) => {
+      if (scrollAmount >= ((element.offsetTop) - 130)) {
+        const idName = element.getAttribute('id');
+        if (idName === contentLinkId) {
+          aLink.classList.add('active');
+        } else {
+          aLink.classList.remove('active');
+        }
+      }
+    });
+  });
 }
 
 function anchorTagSocialMediaCreation(socialMedia) {
@@ -49,55 +65,41 @@ export default function decorate(block) {
   contentDivs.forEach((div) => {
     articleContentWrapper.append(div);
   });
-
+  articleContent.textContent = '';
+  articleContent.append(block);
+  articleContent.append(articleContentWrapper);
   const blogContentLink = document.createElement('div');
   blogContentLink.classList.add('blog-content-links');
-  const headerTags = articleContentWrapper.querySelectorAll('h1, h2, h3');
-
-  headerTags.forEach((headerTag, i) => {
-    const contentLinkId = headerTag.getAttribute('id');
-    headerTag.classList.add('scroll-margin');
-    const aLink = anchorTagLinkCreation(contentLinkId, headerTag.textContent);
-    if (i === 0) aLink.classList.add('active');
-    blogContentLink.append(aLink);
-    // sections.push(document.getElementById(contentLinkId));
-    window.addEventListener('scroll', () => {
-      const scrollAmount = window.scrollY;
-      // headerTags.forEach((element) => {
-      if (scrollAmount >= headerTag.offsetTop) {
-        // if (idName === contentLinkId) {
-        aLink.classList.add('active');
-      } else {
-        aLink.classList.remove('active');
-      }
-      // });
-    });
-  });
+  blogContentLink.setAttribute('id', 'blog-content-link');
   block.textContent = '';
   block.append(blogContentLink);
 
+  const headerTags = articleContentWrapper.querySelectorAll('h1, h2, h3');
+  headerTags.forEach((headerTag) => {
+    anchorTagLinkCreation(headerTag.getAttribute('id'), headerTag.textContent);
+  });
+
   const socialShareLinks = document.createElement('div');
   socialShareLinks.classList.add('social-share-links');
+  socialShareLinks.setAttribute('id', 'social-share-links-id');
   socialShareLinks.append(anchorTagSocialMediaCreation('linkedin'));
   socialShareLinks.append(anchorTagSocialMediaCreation('twitter'));
   socialShareLinks.append(anchorTagSocialMediaCreation('facebook'));
   socialShareLinks.append(anchorTagSocialMediaCreation('share'));
 
   block.append(socialShareLinks);
-
-  // add page scroll listener to know when leftnav turns sticky
+  // add page scroll listener to know when header turns to sticky
   window.addEventListener('scroll', () => {
     const scrollAmount = window.scrollY;
-    if (scrollAmount > block.offsetHeight) {
-      blogContentLink.classList.add('blog-content-links-is-sticky');
+    const linksHeight = document.getElementById('blog-content-link').clientHeight;
+    const socialTop = linksHeight + 250;
+    document.getElementById('social-share-links-id').style.setProperty('top', `${socialTop}px`);
+    if (scrollAmount >= (articleContentWrapper.offsetHeight) - 130) {
+      document.getElementById('blog-content-link').classList.add('blog-content-links-is-sticky');
     } else {
-      blogContentLink.classList.remove('blog-content-links-is-sticky');
+      document.getElementById('blog-content-link').classList.remove('blog-content-links-is-sticky');
     }
   });
-  articleContent.textContent = '';
-  articleContent.append(block);
-  articleContent.append(articleContentWrapper);
-
   // clean up the old div
   const main = document.querySelector('main');
   const blogLeftNavContainer = main.querySelector('.section.blog-left-nav-container');

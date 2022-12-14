@@ -16,9 +16,11 @@ function openLink(e) {
   }
   e.preventDefault();
 }
+
 function isMobile() {
   return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
 }
+
 function breadCrumbCreation(id, name, ulFlag) {
   let ul = null;
   let linkText = null;
@@ -39,6 +41,7 @@ function breadCrumbCreation(id, name, ulFlag) {
   const sid = `${name}-breadcrumb`;
   aLink.href = '#';
   aLink.append(linkText);
+  aLink.title = name;
   aLink.setAttribute('id', sid);
   aLink.href = '#';
   li.appendChild(aLink);
