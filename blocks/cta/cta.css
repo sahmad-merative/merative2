@@ -1,0 +1,68 @@
+/* CTA Auto Block Section */
+.section.cta-container[data-section-status='loaded'] {
+    position: relative;
+    display: block;
+    padding: unset;
+}
+  
+.section.cta-container {
+    background-color: #e7e2da;
+    margin: unset;
+    text-align: center;
+    min-height: 291px;
+}
+
+.section.cta-container .cta.block {
+    padding-top: 96px;
+    padding-bottom: 96px;
+}  
+
+.section.cta-container .cta.block .h2 {
+    margin: unset;
+}
+
+.section.cta-container .cta.block .p {
+    padding-top: 24px;
+}
+
+/* CTA Button */
+.section.cta-container .cta.block .button-container {
+    padding-top: 24px;
+}
+
+.section.cta-container .cta.block .button-container > a {
+    position:relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background: #90f;
+    border-radius: 40px;
+    cursor: pointer;
+    padding: 11px 16px 11px 24px;
+    width: auto;
+    height: auto;
+    align-items: center;
+    text-align: left;
+    vertical-align: middle;
+    justify-content: space-between;
+    font-family: var(--sans-serif-font-medium);
+    font-size: var(--font-size-16);
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-1);
+    line-height: var(--line-height-160);
+}
+  
+.section.cta-container .cta.block .button-container > a::after {
+    display: inline-block;
+    content: '';
+    margin-left: 24px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background: url('../../icons/arrow-white.svg') no-repeat right center;
+    background-size: contain;
+}
+  
+.section.cta-container .cta.block .button-container > a:hover {
+    background: var(--gradient-diagonal-up);
+}

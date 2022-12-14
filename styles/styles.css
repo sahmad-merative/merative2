@@ -491,56 +491,6 @@ main .section.what-we-do > .default-content-wrapper > h4 {
   margin-bottom: 32px;
 }   
 
-
-/* CTA Auto Block Section */
-main .section.cta[data-section-status='loaded'] {
-  position: relative;
-  display: block;
-}
-
-main .section.cta {
-  background-color: #e7e2da;
-  margin: unset;
-  text-align: center;
-  min-height: 291px;
-}
-
-main .section.cta > .default-content-wrapper > * {
-  padding-top: 1em;
-}
-
-/* CTA Button */
-main .section.cta > .default-content-wrapper > .button-container > a {
-  position:relative;
-  display: inline-block;
-  text-decoration: none;
-  background: #90f;
-  border-radius: 40px;
-  cursor: pointer;
-  min-height: 62px;
-  padding: 25px;
-  width: 240px;
-  font-family: var(--sans-serif-font-medium);
-  font-size: var(--font-size-16);
-  letter-spacing: var(--letter-spacing-1);
-  line-height: var(--line-height-120);
-  color: #fff;
-  text-align: left;
-}
-
-main .section.cta > .default-content-wrapper > .button-container > a::before {
-  content: '';
-  position: absolute;
-  right: 10%;
-  width: 24px;
-  height: 22px;
-  background: url('../icons/arrow-white.svg') no-repeat right center;
-}
-
-main .section.cta > .default-content-wrapper > .button-container > a:hover {
-  background: var(--gradient-diagonal-up);
-}
-
 /* Back to top button */
 main .section.back-to-top.active[data-section-status='loaded'] {
   position: fixed;
