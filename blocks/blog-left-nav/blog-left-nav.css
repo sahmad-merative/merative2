@@ -231,7 +231,7 @@ html {
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
     .section.article-content {
         margin: 0 auto;
-        max-width: 732px;
+        width: var(--section-width);
     }
 
     .blog-content-links {
