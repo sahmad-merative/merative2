@@ -1,58 +1,54 @@
-import { getMetadata } from '../../scripts/scripts.js';
+import { getMetadata, getBlogCategoryPages } from '../../scripts/scripts.js';
 
-function openLink(e) {
-  let idName = e.target.getAttribute('id');
-  let url = null;
-  idName = idName.replace('-breadcrumb', '');
-  if (idName === 'Merative Blog') { // blog page
-    window.open('https://www.merative.com/blog', '_self');
-  } else if (idName === document.title) { // current page
-    // do nothing
-  } else { // category page
-    let pathName = idName.replace(/ /g, '-');
-    pathName = pathName.toLowerCase();
-    url = `https://www.merative.com/blog/${pathName}`;
-    window.open(url, '_self');
-  }
-  e.preventDefault();
-}
+const MOBILE_WIDTH = 576;
 
-function isMobile() {
-  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent));
-}
-
-function breadCrumbCreation(id, name, ulFlag) {
-  let ul = null;
-  let linkText = null;
-  if (ulFlag) {
-    ul = document.createElement('ul');
-    ul.classList.add('breadcrumb-navigation');
-    ul.setAttribute('id', 'crumbs-list-id');
-  } else {
-    ul = document.getElementById('crumbs-list-id');
-  }
-  const li = document.createElement('li');
+function createLink(href, linkText, linkTitle) {
   const aLink = document.createElement('a');
-  if (isMobile() && ulFlag) {
-    linkText = document.createTextNode('...');
-  } else {
-    linkText = document.createTextNode(name);
-  }
-  const sid = `${name}-breadcrumb`;
-  aLink.href = '#';
   aLink.append(linkText);
-  aLink.title = name;
-  aLink.setAttribute('id', sid);
-  aLink.href = '#';
-  li.appendChild(aLink);
-  ul.appendChild(li);
-  document.getElementById(id).append(ul);
-  document.getElementById(sid).addEventListener('click', openLink);
+  aLink.title = linkTitle;
+  aLink.href = href;
+  return aLink;
 }
-export default function decorate(block) {
+
+function changeHomeText() {
+  const homeLink = document.querySelector('.blog-breadcrumb li.home a');
+  if (homeLink) {
+    homeLink.innerHTML = '';
+    if (window.innerWidth >= MOBILE_WIDTH) {
+      homeLink.append('Merative Blog');
+    } else {
+      homeLink.append('...');
+    }
+  }
+}
+
+export default async function decorate(block) {
   block.textContent = '';
-  block.setAttribute('id', 'breadCrumb-id');
-  breadCrumbCreation(block.getAttribute('id'), 'Merative Blog', true);
-  breadCrumbCreation(block.getAttribute('id'), getMetadata('category'), false);
-  breadCrumbCreation(block.getAttribute('id'), document.title, false);
+  // block.setAttribute('id', 'breadCrumb-id');
+  const ul = document.createElement('ul');
+  ul.classList.add('breadcrumb-navigation');
+
+  // Create Home link
+  const liHome = document.createElement('li');
+  liHome.classList.add('home');
+  if (window.innerWidth >= MOBILE_WIDTH) {
+    liHome.append(createLink('/blog', 'Merative Blog', 'Merative Blog'));
+  } else {
+    liHome.append(createLink('/blog', '...', 'Merative Blog'));
+  }
+
+  // Create Category link
+  const liCategory = document.createElement('li');
+  liCategory.classList.add('category');
+  const categoryName = getMetadata('category');
+  const categoryBlogPages = await getBlogCategoryPages();
+  categoryBlogPages.forEach((row) => {
+    if ((row.path !== '0') && (row.title === categoryName)) {
+      liCategory.append(createLink(row.path, categoryName, categoryName));
+    }
+  });
+  ul.append(liHome);
+  ul.append(liCategory);
+  block.append(ul);
+  window.addEventListener('resize', changeHomeText);
 }
