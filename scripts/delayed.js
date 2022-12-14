@@ -2,6 +2,8 @@ import { sampleRUM, fetchPlaceholders } from './lib-franklin.js';
 
 const placeholders = await fetchPlaceholders();
 // const isProd = window.location.hostname.endsWith(placeholders.hostname);
+const productionLib = 'e5193f58fe47/launch-16c4e407bfc6';
+const previewLib = 'ccb695f49426/launch-f7e352870932-development';
 
 const loadScript = (url, attrs) => {
   const head = document.querySelector('head');
@@ -30,6 +32,12 @@ if (otId) {
     'data-domain-script': `${otId}`,
   });
 
-  window.OptanonWrapper = () => {};
+  window.OptanonWrapper = () => {
+    if (window.location.host.endsWith('.page') || window.location.host.startsWith('localhost')) {
+      loadScript(`https://assets.adobedtm.com/868c1e78d208/${previewLib}.min.js`);
+    } else {
+      loadScript(`https://assets.adobedtm.com/868c1e78d208/${productionLib}.min.js`);
+    }
+  };
 }
 // OneTrust Cookies Consent Notice end

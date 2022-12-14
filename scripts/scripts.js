@@ -23,7 +23,9 @@ function buildHeroBlock(main) {
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
+    section.append(buildBlock('hero', {
+      elems: [picture, h1],
+    }));
     main.prepend(section);
   }
 }
@@ -116,6 +118,28 @@ function buildPageDivider(main) {
   });
 }
 
+// auto block build for blog left nav
+function buildBlogLeftNavBlock(main) {
+  if (getMetadata('template') === 'Blog Article') {
+    const section = document.createElement('div');
+    section.append(buildBlock('blog-left-nav', {
+      elems: [],
+    }));
+    main.prepend(section);
+  }
+}
+
+// auto block to create breadcrumb for blog articles
+function buildBlogBreadCrumbBlock(main) {
+  if (getMetadata('template') === 'Blog Article') {
+    const section = document.createElement('div');
+    section.append(buildBlock('blog-breadcrumb', {
+      elems: [],
+    }));
+    main.prepend(section);
+  }
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -124,6 +148,8 @@ function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
     buildBackToTopBlock(main);
+    buildBlogLeftNavBlock(main);
+    buildBlogBreadCrumbBlock(main);
     buildTags(main);
     buildPageDivider(main);
   } catch (error) {
@@ -156,7 +182,10 @@ export async function lookupPages(pathnames) {
       lookup[row.path] = row;
       if (row.image || row.image.startsWith('/default-meta-image.png')) row.image = `/${window.hlx.codeBasePath}${row.image}`;
     });
-    window.pageIndex = { data: json.data, lookup };
+    window.pageIndex = {
+      data: json.data,
+      lookup,
+    };
   }
   const result = pathnames.map((path) => window.pageIndex.lookup[path]).filter((e) => e);
   return (result);
@@ -180,7 +209,10 @@ export async function lookupBlogs(pathnames) {
         row.image = `/${window.hlx.codeBasePath}${row.image}`;
       }
     });
-    window.blogIndex = { data: json.data, lookup };
+    window.blogIndex = {
+      data: json.data,
+      lookup,
+    };
   }
   const result = pathnames.map((path) => window.blogIndex.lookup[path]).filter((e) => e);
   return (result);
@@ -344,7 +376,9 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
-  const { hash } = window.location;
+  const {
+    hash,
+  } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
 

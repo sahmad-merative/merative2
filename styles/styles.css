@@ -30,7 +30,8 @@
   --gradient-diagonal-down: linear-gradient(129.09deg, var(--primary-purple) 14.97%, var(--primary-red) 85.31%);
   --gradient-diagonal-up: linear-gradient(214.42deg, var(--primary-red) 12.94%, var(--primary-purple) 88.28%);;
   --gradient-vertical: linear-gradient(90deg,var(--primary-purple) 0%, var(--primary-red) 100%);
-
+  --gradient-left-right: linear-gradient(270deg, var(--primary-red), var(--primary-purple));
+  
   /* neutrals */
   --neutral-carbon: #20201F;
   --neutral-sand: #E7E2DA;
