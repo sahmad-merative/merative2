@@ -141,16 +141,14 @@ function buildPageDivider(main) {
   });
 }
 
-// auto block build for social media share as left nav
+// auto block build for blog left nav
 function buildBlogLeftNavBlock(main) {
   if (getMetadata('template') === 'Blog Article') {
-    const blogLeftNav = document.createElement('div');
-    blogLeftNav.classList.add('blog-left-nav');
-    blogLeftNav.append(buildBlock('blog-left-nav', {
+    const section = document.createElement('div');
+    section.append(buildBlock('blog-left-nav', {
       elems: [],
     }));
-    main.children[0].setAttribute('id', 'blog-right-nav');
-    main.prepend(blogLeftNav);
+    main.prepend(section);
   }
 }
 
@@ -342,6 +340,8 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  // need to build these auto blocks after decorating other sections and blocks
+  // buildAdditionalAutoBlocks(main);
 }
 
 /**

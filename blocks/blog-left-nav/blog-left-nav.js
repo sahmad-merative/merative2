@@ -19,83 +19,87 @@ function openLink(e) {
   e.preventDefault();
 }
 
-const sections = [];
-
 function anchorTagLinkCreation(contentLinkId, contentLink) {
   const aLink = document.createElement('a');
-  const linkText = document.createTextNode(contentLink);
-  aLink.append(linkText);
-  aLink.classList.add('content_link');
+  // const linkText = document.createTextNode(contentLink);
+  aLink.append(contentLink);
+  aLink.classList.add('content-link');
   aLink.href = `#${contentLinkId}`;
-  document.getElementById('blog-content-link').append(aLink);
-  document.getElementsByClassName('content_link')[0].classList.add('active');
-  document.getElementById(contentLinkId).classList.add('scrollMargin');
-  sections.push(document.getElementById(contentLinkId));
-  window.addEventListener('scroll', () => {
-    const scrollAmount = window.scrollY;
-    sections.forEach((element) => {
-      if (scrollAmount >= ((element.offsetTop) - 130)) {
-        let idName = element.getAttribute('id');
-        idName = idName.replace('-leftnav', '');
-        if (idName === contentLinkId) {
-          aLink.classList.add('active');
-        } else {
-          aLink.classList.remove('active');
-        }
-      }
-    });
-  });
+  return aLink;
 }
-function anchorTagSocialMediaCreation(scoialMedia, block) {
-  const clsName = `social-share-${scoialMedia}`;
-  const sid = `social_share_link${scoialMedia}`;
+
+function anchorTagSocialMediaCreation(socialMedia) {
+  const clsName = `social-share-${socialMedia}`;
+  // const sid = `social_share_link${socialMedia}`;
   const aLink = document.createElement('a');
   aLink.setAttribute('class', clsName);
-  aLink.setAttribute('id', sid);
-  aLink.title = scoialMedia;
+  // aLink.setAttribute('id', sid);
+  aLink.title = socialMedia;
   aLink.href = '#';
-  block.append(aLink);
-  document.getElementById(sid).addEventListener('click', openLink);
+  aLink.addEventListener('click', openLink);
+  return aLink;
 }
+
 export default function decorate(block) {
-  const socialshareicon = block.parentNode.parentNode;
-  block.textContent = '';
-  const blogContent = document.createElement('div');
-  blogContent.classList.add('blog-article');
-  blogContent.setAttribute('id', 'blog-article-id');
-  socialshareicon.append(blogContent);
+  // find the article content div
+  const articleContent = document.querySelector('.article-content');
+  const contentDivs = articleContent.querySelectorAll(':scope > div');
+  const articleContentWrapper = document.createElement('div');
+  articleContentWrapper.classList.add('article-content-wrapper');
+  contentDivs.forEach((div) => {
+    articleContentWrapper.append(div);
+  });
+
   const blogContentLink = document.createElement('div');
-  blogContentLink.classList.add('blog-content-link-cs');
-  blogContentLink.setAttribute('id', 'blog-content-link');
-  block.parentNode.prepend(blogContentLink);
-  const childrenDiv = document.getElementById('blog-right-nav').querySelectorAll('div');
-  const childrenH1 = document.getElementById('blog-right-nav').querySelectorAll('h1');
-  const childrenH2 = document.getElementById('blog-right-nav').querySelectorAll('h2');
-  const childrenH3 = document.getElementById('blog-right-nav').querySelectorAll('h3');
-  childrenDiv.forEach((div) => {
-    blogContent.append(div);
+  blogContentLink.classList.add('blog-content-links');
+  const headerTags = articleContentWrapper.querySelectorAll('h1, h2, h3');
+
+  headerTags.forEach((headerTag, i) => {
+    const contentLinkId = headerTag.getAttribute('id');
+    headerTag.classList.add('scroll-margin');
+    const aLink = anchorTagLinkCreation(contentLinkId, headerTag.textContent);
+    if (i === 0) aLink.classList.add('active');
+    blogContentLink.append(aLink);
+    // sections.push(document.getElementById(contentLinkId));
+    window.addEventListener('scroll', () => {
+      const scrollAmount = window.scrollY;
+      // headerTags.forEach((element) => {
+      if (scrollAmount >= headerTag.offsetTop) {
+        // if (idName === contentLinkId) {
+        aLink.classList.add('active');
+      } else {
+        aLink.classList.remove('active');
+      }
+      // });
+    });
   });
-  childrenH1.forEach((h1) => {
-    anchorTagLinkCreation(h1.getAttribute('id'), h1.textContent, block);
-  });
-  childrenH2.forEach((h2) => {
-    anchorTagLinkCreation(h2.getAttribute('id'), h2.textContent, block);
-  });
-  childrenH3.forEach((h3) => {
-    anchorTagLinkCreation(h3.getAttribute('id'), h3.textContent, block);
-  });
-  document.getElementById('blog-right-nav').remove();
-  anchorTagSocialMediaCreation('linkedIn', block);
-  anchorTagSocialMediaCreation('twitter', block);
-  anchorTagSocialMediaCreation('facebook', block);
-  anchorTagSocialMediaCreation('shareLink', block);
-  // add page scroll listener to know when header turns to sticky
+  block.textContent = '';
+  block.append(blogContentLink);
+
+  const socialShareLinks = document.createElement('div');
+  socialShareLinks.classList.add('social-share-links');
+  socialShareLinks.append(anchorTagSocialMediaCreation('linkedin'));
+  socialShareLinks.append(anchorTagSocialMediaCreation('twitter'));
+  socialShareLinks.append(anchorTagSocialMediaCreation('facebook'));
+  socialShareLinks.append(anchorTagSocialMediaCreation('share'));
+
+  block.append(socialShareLinks);
+
+  // add page scroll listener to know when leftnav turns sticky
   window.addEventListener('scroll', () => {
     const scrollAmount = window.scrollY;
     if (scrollAmount > block.offsetHeight) {
-      document.getElementById('blog-content-link').classList.add('blog-content-link-cs-is-sticky');
+      blogContentLink.classList.add('blog-content-links-is-sticky');
     } else {
-      document.getElementById('blog-content-link').classList.remove('blog-content-link-cs-is-sticky');
+      blogContentLink.classList.remove('blog-content-links-is-sticky');
     }
   });
+  articleContent.textContent = '';
+  articleContent.append(block);
+  articleContent.append(articleContentWrapper);
+
+  // clean up the old div
+  const main = document.querySelector('main');
+  const blogLeftNavContainer = main.querySelector('.section.blog-left-nav-container');
+  main.removeChild(blogLeftNavContainer);
 }
