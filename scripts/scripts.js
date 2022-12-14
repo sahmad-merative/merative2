@@ -129,17 +129,16 @@ function buildBlogLeftNavBlock(main) {
   }
 }
 
-// // auto block to create breadcrumb for blog articles
-// function buildBlogBreadCrumbBlock(main) {
-//   if (getMetadata('template') === 'Blog Article') {
-//     const blogBreadCrumb = document.createElement('div');
-//     blogBreadCrumb.classList.add('blog-breadcrumb');
-//     blogBreadCrumb.append(buildBlock('blog-breadcrumb', {
-//       elems: [],
-//     }));
-//     main.prepend(blogBreadCrumb);
-//   }
-// }
+// auto block to create breadcrumb for blog articles
+function buildBlogBreadCrumbBlock(main) {
+  if (getMetadata('template') === 'Blog Article') {
+    const section = document.createElement('div');
+    section.append(buildBlock('blog-breadcrumb', {
+      elems: [],
+    }));
+    main.prepend(section);
+  }
+}
 
 /**
  * Builds all synthetic blocks in a container element.
@@ -150,7 +149,7 @@ function buildAutoBlocks(main) {
     buildHeroBlock(main);
     buildBackToTopBlock(main);
     buildBlogLeftNavBlock(main);
-    // buildBlogBreadCrumbBlock(main);
+    buildBlogBreadCrumbBlock(main);
     buildTags(main);
     buildPageDivider(main);
   } catch (error) {
@@ -316,8 +315,6 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
-  // need to build these auto blocks after decorating other sections and blocks
-  // buildAdditionalAutoBlocks(main);
 }
 
 /**
