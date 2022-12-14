@@ -129,17 +129,17 @@ function buildBlogLeftNavBlock(main) {
   }
 }
 
-// auto block to create breadcrumb for blog articles
-function buildBlogBreadCrumbBlock(main) {
-  if (getMetadata('template') === 'Blog Article') {
-    const blogBreadCrumb = document.createElement('div');
-    blogBreadCrumb.classList.add('blog-breadcrumb');
-    blogBreadCrumb.append(buildBlock('blog-breadcrumb', {
-      elems: [],
-    }));
-    main.prepend(blogBreadCrumb);
-  }
-}
+// // auto block to create breadcrumb for blog articles
+// function buildBlogBreadCrumbBlock(main) {
+//   if (getMetadata('template') === 'Blog Article') {
+//     const blogBreadCrumb = document.createElement('div');
+//     blogBreadCrumb.classList.add('blog-breadcrumb');
+//     blogBreadCrumb.append(buildBlock('blog-breadcrumb', {
+//       elems: [],
+//     }));
+//     main.prepend(blogBreadCrumb);
+//   }
+// }
 
 /**
  * Builds all synthetic blocks in a container element.
@@ -150,7 +150,7 @@ function buildAutoBlocks(main) {
     buildHeroBlock(main);
     buildBackToTopBlock(main);
     buildBlogLeftNavBlock(main);
-    buildBlogBreadCrumbBlock(main);
+    // buildBlogBreadCrumbBlock(main);
     buildTags(main);
     buildPageDivider(main);
   } catch (error) {
