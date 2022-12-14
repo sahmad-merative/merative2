@@ -30,10 +30,10 @@ function buildHeroBlock(main) {
 
 function buildCtaBlock(main) {
   main.querySelectorAll(':scope > div').forEach((div) => {
-    const h2 = div.querySelector('div > h2');
-    const p = div.querySelector('div > p');
-    const pa = div.querySelector('p > a');
-    const numChildren = div.children.length;
+    const h2 = div.querySelector('.default-content-wrapper > h2');
+    const p = div.querySelector('.default-content-wrapper > p');
+    const pa = div.querySelector('.default-content-wrapper > p > a');
+    const numChildren = div.querySelector('.default-content-wrapper').children.length;
 
     // simple CTA - no inner text and H2 positioned before a link
     if (h2 && p && pa && (h2.compareDocumentPosition(pa) === 4)
