@@ -420,7 +420,7 @@ body[filters-open="true"] {
 }
 
 /* Desktop styles */
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 1200px) {
     .blog-home-container {
         padding: var(--spacer-layout-06) var(--spacer-layout-07);
     }
