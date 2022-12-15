@@ -174,7 +174,7 @@
 
   @media screen and (min-width: 1120px) {
     footer .footer {
-      max-width: var(--section-width);
+      max-width: var(--section-width-desktop);
       max-height: auto;
       margin: 0 auto;
       font-size: var(--font-size-16);

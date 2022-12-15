@@ -388,12 +388,7 @@ button {
     width: 20px;
     height: 20px;
     }
-  
 
-  
-  main .article-content p:has(a:first-child){
-    text-align: center;
-  }
   
   main .article-content p > a:only-of-type{
     text-decoration: none;
