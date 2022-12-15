@@ -262,8 +262,8 @@ header nav .nav-sections>ul>li {
     top: calc(var(--nav-height) + 37px);
     left: 0;
     justify-content: space-between;
-    padding-left: calc((100vw - var(--section-width))/2); 
-    padding-right: calc((100vw - var(--section-width))/2); 
+    padding-left: calc((100vw - var(--section-width-desktop))/2); 
+    padding-right: calc((100vw - var(--section-width-desktop))/2); 
     color: var(--neutral-carbon);
     height: 100vh;
     max-height: none;
