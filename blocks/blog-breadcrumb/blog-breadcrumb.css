@@ -33,7 +33,7 @@
 }
 
 @media only screen and (width >= 576px){
-    .blog-breadcrumb[data-block-status="loaded"]{
+    .blog-breadcrumb{
         padding: 0 0 10px;
     }
 }
