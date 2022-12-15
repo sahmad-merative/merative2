@@ -1,3 +1,5 @@
+import { createTag } from '../../scripts/scripts.js';
+
 function openLink(e) {
   const idName = e.target.getAttribute('title');
   let url = null;
@@ -18,6 +20,7 @@ function openLink(e) {
   }
   e.preventDefault();
 }
+
 const sections = [];
 
 function anchorTagLinkCreation(contentLinkId, contentLink) {
@@ -60,16 +63,19 @@ export default function decorate(block) {
   // find the article content div
   const articleContent = document.querySelector('.article-content');
   const contentDivs = articleContent.querySelectorAll(':scope > div');
-  const articleContentWrapper = document.createElement('div');
-  articleContentWrapper.classList.add('article-content-wrapper');
+
+  const articleContentWrapper = createTag('div', { class: 'article-content-wrapper' });
   contentDivs.forEach((div) => {
     articleContentWrapper.append(div);
   });
+
+  const articleMainWrapper = createTag('div', { class: 'article-main-wrapper' });
+  articleMainWrapper.append(block);
+  articleMainWrapper.append(articleContentWrapper);
   articleContent.textContent = '';
-  articleContent.append(block);
-  articleContent.append(articleContentWrapper);
-  const blogContentLink = document.createElement('div');
-  blogContentLink.classList.add('blog-content-links');
+  articleContent.append(articleMainWrapper);
+
+  const blogContentLink = createTag('div', { class: 'blog-content-links' });
   blogContentLink.setAttribute('id', 'blog-content-link');
   block.textContent = '';
   block.append(blogContentLink);
@@ -79,15 +85,15 @@ export default function decorate(block) {
     anchorTagLinkCreation(headerTag.getAttribute('id'), headerTag.textContent);
   });
 
-  const socialShareLinks = document.createElement('div');
-  socialShareLinks.classList.add('social-share-links');
+  const socialLinks = ['linkedin', 'twitter', 'facebook', 'share'];
+  const socialShareLinks = createTag('div', { class: 'social-share-links' });
   socialShareLinks.setAttribute('id', 'social-share-links-id');
-  socialShareLinks.append(anchorTagSocialMediaCreation('linkedin'));
-  socialShareLinks.append(anchorTagSocialMediaCreation('twitter'));
-  socialShareLinks.append(anchorTagSocialMediaCreation('facebook'));
-  socialShareLinks.append(anchorTagSocialMediaCreation('share'));
 
+  socialLinks.forEach((item) => {
+    socialShareLinks.append(anchorTagSocialMediaCreation(item));
+  });
   block.append(socialShareLinks);
+
   // add page scroll listener to know when header turns to sticky
   window.addEventListener('scroll', () => {
     const scrollAmount = window.scrollY;
@@ -100,6 +106,7 @@ export default function decorate(block) {
       document.getElementById('blog-content-link').classList.remove('blog-content-links-is-sticky');
     }
   });
+
   // clean up the old div
   const main = document.querySelector('main');
   const blogLeftNavContainer = main.querySelector('.section.blog-left-nav-container');
