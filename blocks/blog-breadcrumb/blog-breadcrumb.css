@@ -1,4 +1,4 @@
-.section.blog-breadcrumb-container[data-section-status="loaded"] .breadcrumb-navigation {
+.section.blog-breadcrumb-container .breadcrumb-navigation {
     padding: 10px;
     height: 26px;
 }
