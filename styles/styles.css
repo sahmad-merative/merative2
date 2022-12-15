@@ -132,6 +132,7 @@ body{
   display: none;
   background: var(--neutral-bone);
   font-family: var(--sans-serif-font-light);
+  -webkit-font-smoothing: antialiased;
 }
 
 body.blog-article,
@@ -154,7 +155,7 @@ main .section {
 
 h1, h2, h3, h4, h5
 {
-margin: var(--spacer-layout-04) auto;
+  margin: var(--spacer-layout-04) auto;
 }
 
 /* Mobile */
