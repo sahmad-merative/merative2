@@ -142,7 +142,7 @@ body{
   -webkit-font-smoothing: antialiased;
 }
 
-body.blog-article,
+body.category, body.blog-article,
 body.blog-home {
   background-color: var(--neutral-white);
 }
