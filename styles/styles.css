@@ -371,6 +371,7 @@ main img {
 /* stylelint-disable property-no-vendor-prefix */
 [type=reset], [type=submit], button, html [type=button] {
   -webkit-appearance: button;
+  appearance: button;
 }
 
 button {
