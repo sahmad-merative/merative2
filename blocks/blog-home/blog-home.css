@@ -202,8 +202,8 @@ body[filters-open="true"] {
     display: unset;
     width: 16px;
     height: 16px;
-    background: url('../../icons/arrow-down-black.svg') no-repeat;
-    transform: rotate(270deg);
+    background: url('../../icons/arrow-up-black.svg') no-repeat;
+    transform: rotate(90deg);
 }
 
 .blog-home[data-block-status="loaded"] .filters[aria-expanded="true"] > .filters-header > .arrow {
@@ -268,6 +268,8 @@ body[filters-open="true"] {
 
 .blog-home .filters span.list-title,
 .blog-home .filters span.category-title {
+    position: relative;
+    display: block;
     font-family: var(--sans-serif-font-regular);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-14);
@@ -280,6 +282,7 @@ body[filters-open="true"] {
 }
 
 .blog-home .filters > .filters-main > div > span.list-title {
+    display: block;
     position: relative;
     justify-content: center;
 }
@@ -290,8 +293,7 @@ body[filters-open="true"] {
     width: 16px;
     height: 16px;
     right: var(--spacer-element-02);
-    background: url('../../icons/arrow-down-black.svg') no-repeat;
-    transform: rotate(180deg);
+    background: url('../../icons/arrow-up-black.svg') no-repeat;
 }
 
 .blog-home .filters label {
@@ -347,8 +349,8 @@ body[filters-open="true"] {
     width: 16px;
     height: 16px;
     right: var(--spacer-element-02);
-    background: url('../../icons/arrow-down-black.svg') no-repeat;
-    transform: unset;
+    background: url('../../icons/arrow-up-black.svg') no-repeat;
+    transform: rotate(180deg);
 }
 
 .blog-home .filters input {
