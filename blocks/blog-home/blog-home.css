@@ -85,7 +85,7 @@ body[filters-open="true"] {
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover {
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
+    box-shadow: 2px 4px 4px 2px rgba(0 0 0 / 15%);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover a {
