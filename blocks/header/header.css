@@ -321,6 +321,10 @@ header nav .nav-sections>ul>li {
     position: relative;   
   }
 
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two:hover > a {
+    color: #90f;
+  }
+
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two > a::after {
     display: inline-block;
     content: '';
