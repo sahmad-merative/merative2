@@ -362,6 +362,10 @@ p, dl, ol, ul, pre, blockquote {
   margin: var(--spacer-element-05) 0 var(--spacer-element-05);
 }
 
+ul {
+  margin-left: 25px;
+}
+
 main img {
   max-width: 100%;
   width: auto;
