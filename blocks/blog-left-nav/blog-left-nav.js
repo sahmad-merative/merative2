@@ -63,7 +63,8 @@ function decorateAnchorTagParents() {
   const anchorLinks = document.querySelectorAll('.article-content-wrapper .default-content-wrapper p a');
   anchorLinks.forEach((aLink) => {
     const parentElement = aLink.parentNode;
-    parentElement.classList.add('anchor-tag');
+    // add the class only if anchor link and text is by itself within the p tag
+    if (parentElement.childNodes.length === 2) parentElement.classList.add('anchor-tag');
   });
 }
 
