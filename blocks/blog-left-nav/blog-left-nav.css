@@ -15,18 +15,6 @@ html {
     border-top: 1px solid #e7e2da;
 }
 
-.blog-left-nav[data-block-status="loaded"] .social-share-links::before {
-    content: "SHARE VIA";
-    font-family: var(--sans-serif-font-regular);
-    font-weight: var( --font-weight-regular);
-    font-size: var(--font-size-14);
-    letter-spacing: var( --letter-spacing-20);
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    margin-top: 16px;
-    line-height: 120%;
-}
-
 .blog-left-nav[data-block-status="loaded"] .social-share-links .social-share-linkedin {
     margin: 8px;
     background: url("../../icons/linkedin-black.svg") no-repeat center;
@@ -95,13 +83,14 @@ html {
     background: url("../../icons/sharelink-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
+.blog-left-nav[data-block-status="loaded"] .social-share-links::before,
 .blog-left-nav[data-block-status="loaded"] .blog-content-links::before {
     content: "IN THIS ARTICLE";
-    font-family: var(--sans-serif-font-regular);
-    font-weight: var( --font-weight-regular);
+    font-family: var(--sans-serif-font-medium);
+    font-weight: 500;
     font-size: var(--font-size-14);
     line-height: var(--line-height-120);
-    letter-spacing: var( --letter-spacing-20);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--neutral-carbon);
     margin-bottom: 24px;
