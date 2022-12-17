@@ -256,6 +256,18 @@ async function createFilters(categories, topics, audiences) {
     filters.setAttribute('aria-expanded', 'false');
   });
 
+  // Adding some key press listeners as well
+  document.body.addEventListener('keyup', (e) => {
+    const filterExpanded = filters.getAttribute('aria-expanded');
+    if (filterExpanded === 'true') {
+      if (e.key === 'Escape') {
+        filters.setAttribute('aria-expanded', 'false');
+      } else if (e.key === 'Enter') {
+        filters.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
   // Audience filters
   const audiencesElement = document.createElement('div');
   audiencesElement.classList.add('audiences');
