@@ -400,6 +400,9 @@ button {
     text-decoration: none;
     }  
   
+  main .article-content-wrapper h2:first-of-type {
+    margin: unset;
+  }
   
 
 /* Back to top button */
