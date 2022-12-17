@@ -12,6 +12,11 @@ body[filters-open="true"] {
     margin: unset;
 }
 
+.blog-home > .blog-content,
+.blog-home > .blog-content > .blog-cards {
+    width: 328px;
+}
+
 .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards {
     position: relative;
     display: flex;
@@ -91,8 +96,19 @@ body[filters-open="true"] {
 .blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-    aspect-ratio: 3 / 2;
-    width: 100%;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.blog-home .blog-content  .blog-cards .blog-card .card-image img,
+.blog-home .blog-content  .blog-cards .blog-card .card-image {
+    width: 328px;
+    height: 219px;
+}
+
+.blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image img,
+.blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image {
+    width: 328px;
+    height: 287px;
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image > picture > img {
@@ -387,11 +403,21 @@ body[filters-open="true"] {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
 
+    .blog-home > .blog-content,
+    .blog-home > .blog-content > .blog-cards,
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article {
+        width: 696px;
+    }
+    
     .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards  {
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: var(--spacer-element-10) var(--spacer-element-07);
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card {
+        width: 336px;
     }
 
     .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards > .blog-card.featured-article {
@@ -400,6 +426,20 @@ body[filters-open="true"] {
         flex-direction: row;
         grid-column: 1 / 3;
         height: 100%;
+    }
+
+    .blog-home .blog-content  .blog-cards .blog-card .card-image,
+    .blog-home .blog-content  .blog-cards .blog-card .card-image img {
+        width: 336px;
+        height: 224px;
+    }
+
+    .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image,
+    .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image img {
+        width: 336px;
+        min-height: 294px;
+        height: 100%;
+        object-fit: cover;
     }
 
     .blog-home .filters[aria-expanded="true"] {
@@ -419,7 +459,8 @@ body[filters-open="true"] {
     }
 
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content {
-        padding: 64px 48px 48px;
+        width: 359px;
+        padding: 48px 32px 32px;
         vertical-align: center;
     }
 }
@@ -433,6 +474,12 @@ body[filters-open="true"] {
     .blog-home .blog-content {
         padding: unset;
     }
+    
+    .blog-home > .blog-content,
+    .blog-home > .blog-content > .blog-cards,
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article {
+        width: 816px;
+    }
 
     .blog-home[data-block-status="loaded"] .blog-content {
         display: grid;
@@ -443,6 +490,10 @@ body[filters-open="true"] {
             "leftnav cards"
             "leftnav loadmore";
         column-gap: var(--spacer-layout-04);
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card:not(.featured-article) {
+        width: 396px;
     }
 
     .blog-home .filters {
@@ -510,5 +561,21 @@ body[filters-open="true"] {
         letter-spacing: var(--letter-spacing-1);
     }
 
+    .blog-home .blog-content  .blog-cards .blog-card .card-image,
+    .blog-home .blog-content  .blog-cards .blog-card .card-image img {
+        width: 396px;
+        height: 264px;
+    }
 
+    .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image,
+    .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image img {
+        width: 396px;
+        min-height: 346px;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-content {
+        width: 420px;
+    }
 }
