@@ -1,6 +1,7 @@
 /* Mobile styles and defaults */
 .related-articles-container[data-section-status="loaded"] {
     padding: var(--spacer-layout-05) var(--spacer-layout-02);
+    background: var(--neutral-bone);
 }
 
 .related-articles-container[data-section-status="loaded"] h2 {
