@@ -121,11 +121,14 @@ body[filters-open="true"] {
     text-decoration: none;
     font-weight: 400;
     color: inherit;
-    
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
     padding: var(--spacer-element-08) var(--spacer-element-08);
+}
+
+.blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
+    font-size: 16px;
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
