@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Starter project for Adobe Helix",
   "scripts": {
-    "test": "wtr \"./blog/test/**/*.test.js\" --node-resolve --port=2000 --coverage",
+    "test": "wtr \"./test/**/*.test.js\" --node-resolve --port=2000 --coverage",
     "test:watch": "npm test -- --watch",
     "lint:js": "eslint .",
     "lint:css": "stylelint 'blog/blocks/**/*.css' 'blog/styles/*.css'",
