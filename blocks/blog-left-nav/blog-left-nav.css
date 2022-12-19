@@ -192,6 +192,10 @@ html {
         padding-top: 24px;
         padding-bottom: 24px !important;
     } */
+    .article-main-wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 
     .blog-content-links {
         display: none;
