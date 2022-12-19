@@ -313,7 +313,11 @@ export async function createCard(row, style) {
   if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
   const author = document.createElement('div');
   author.classList.add('blog-author');
-  if (row.author && row.author !== '0') author.innerHTML += `By ${row.author}`;
+  if (row.author && row.author !== '0') { 
+    author.innerHTML += `By ${row.author}`;
+  } else {
+    author.innerHTML += `By Merative`;
+  }
   if (row.readtime && row.readtime !== '0') author.innerHTML += ` | ${row.readtime}`;
   cardContent.append(author);
   const category = document.createElement('div');
