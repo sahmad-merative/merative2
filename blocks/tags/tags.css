@@ -18,7 +18,7 @@
     margin-top: 16px;
 }
 
-@media only screen and (width >= 1200px) {
+@media only screen and (min-width: 1200px) {
     .article-content .tags[data-block-status="loaded"]{
         margin-bottom: 48px;
     }

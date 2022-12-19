@@ -178,7 +178,7 @@ async function addEventListeners(checkboxes) {
 async function createCategories(categoriesList) {
   const categoriesElement = document.createElement('div');
   categoriesElement.classList.add('categories');
-  const catLabel = document.createElement('p');
+  const catLabel = document.createElement('span');
   catLabel.classList.add('category-title');
   catLabel.append('Categories');
   categoriesElement.append(catLabel);
@@ -256,11 +256,23 @@ async function createFilters(categories, topics, audiences) {
     filters.setAttribute('aria-expanded', 'false');
   });
 
+  // Adding some key press listeners as well
+  document.body.addEventListener('keyup', (e) => {
+    const filterExpanded = filters.getAttribute('aria-expanded');
+    if (filterExpanded === 'true') {
+      if (e.key === 'Escape') {
+        filters.setAttribute('aria-expanded', 'false');
+      } else if (e.key === 'Enter') {
+        filters.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
   // Audience filters
   const audiencesElement = document.createElement('div');
   audiencesElement.classList.add('audiences');
   audiencesElement.setAttribute('aria-expanded', 'true');
-  const audienceLabel = document.createElement('p');
+  const audienceLabel = document.createElement('span');
   audienceLabel.classList.add('list-title');
   audienceLabel.append('Audience');
   audiencesElement.append(audienceLabel);
@@ -279,7 +291,7 @@ async function createFilters(categories, topics, audiences) {
   const topicsElement = document.createElement('div');
   topicsElement.classList.add('topics');
   topicsElement.setAttribute('aria-expanded', 'true');
-  const topicLabel = document.createElement('p');
+  const topicLabel = document.createElement('span');
   topicLabel.classList.add('list-title');
   topicLabel.append('Topic');
   topicsElement.append(topicLabel);

@@ -1,6 +1,6 @@
 import { getMetadata, getBlogCategoryPages } from '../../scripts/scripts.js';
 
-const MOBILE_WIDTH = 576;
+const MOBILE_WIDTH = 768;
 
 function createLink(href, linkText, linkTitle) {
   const aLink = document.createElement('a');

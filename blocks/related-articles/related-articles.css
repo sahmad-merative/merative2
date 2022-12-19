@@ -1,6 +1,7 @@
 /* Mobile styles and defaults */
 .related-articles-container[data-section-status="loaded"] {
     padding: var(--spacer-layout-05) var(--spacer-layout-02);
+    background: var(--neutral-bone);
 }
 
 .related-articles-container[data-section-status="loaded"] h2 {
@@ -83,8 +84,8 @@
     top: var(--spacer-element-07);
 }
 
-/* Tablet small and large styles */
-@media only screen and (min-width: 576px) {
+/* Tablet styles */
+@media only screen and (min-width: 768px) {
     .related-articles-container[data-section-status="loaded"] {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
@@ -98,7 +99,7 @@
 }
 
 /* Desktop styles */
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 1200px) {
     .related-articles-container[data-section-status="loaded"] {
         padding: var(--spacer-layout-06) var(--spacer-layout-07);
     }
