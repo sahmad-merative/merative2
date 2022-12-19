@@ -481,6 +481,10 @@ body[filters-open="true"] {
 
 /* Desktop styles */
 @media only screen and (min-width: 1200px) {
+    main .section {
+        padding-top: 96px;
+    }
+    
     .blog-home-container {
         padding: var(--spacer-layout-06) var(--spacer-layout-156) 0 var(--spacer-layout-156);
     }
