@@ -202,7 +202,7 @@ header nav .nav-sections>ul>li {
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul>li.level-two>a {
     text-decoration: none;
-    padding-right: 4%;
+    padding-right: 25px;
     background: url('../../icons/arrow-purple.svg') no-repeat right;
   }
 
