@@ -192,6 +192,8 @@ html {
     .blog-left-nav.block {
         display: flex;
         flex-direction: column-reverse;
+        gap: 32px;
+        margin-bottom: 32px;
     }
 
     .blog-left-nav[data-block-status="loaded"] .social-share-links {
@@ -262,7 +264,6 @@ html {
         display: flex;
         flex-direction: column;
         height: auto;
-        position: relative;
         top: 44.5px !important;
         padding-top: 24px;
         padding-bottom: 24px !important;
