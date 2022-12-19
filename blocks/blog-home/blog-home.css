@@ -110,6 +110,8 @@ body[filters-open="true"] {
 .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image {
     width: 328px;
     height: 287px;
+    height: 100%;
+    object-fit: cover;
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image > picture > img {
