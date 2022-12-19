@@ -56,6 +56,7 @@ header nav .nav-sections ul {
   padding-left: 0;
   letter-spacing: .01em;
   line-height: 160%;
+  margin: unset;
 }
 
 header nav .nav-sections>ul>li {
@@ -155,7 +156,6 @@ header nav .nav-sections>ul>li {
     text-align: left;
     border-bottom: 1px solid #e6e6e6;
     font-size: 1.125rem;
-    padding: 3%;
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop>ul {
@@ -164,6 +164,7 @@ header nav .nav-sections>ul>li {
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop>div.section-heading {
     position: relative;
+    padding: 32px 16px;
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop>div.section-heading::before {
@@ -186,14 +187,17 @@ header nav .nav-sections>ul>li {
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    background-color: var(--neutral-white);
+
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul>li.level-two {
     text-align: left;
     font-size: 1.125rem;
-    padding: 3% 0;
+    padding: 32px 16px;
   }
 
   header nav[aria-expanded='true'] .nav-sections>ul>li.nav-drop[aria-expanded='true']>ul>li.level-two:not(:last-child) {
