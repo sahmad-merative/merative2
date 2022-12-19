@@ -110,6 +110,8 @@ body[filters-open="true"] {
 .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image {
     width: 328px;
     height: 287px;
+    height: 100%;
+    object-fit: cover;
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card:hover > .card-image > picture > img {
@@ -479,6 +481,10 @@ body[filters-open="true"] {
 
 /* Desktop styles */
 @media only screen and (min-width: 1200px) {
+    main .section {
+        padding-top: 96px;
+    }
+    
     .blog-home-container {
         padding: var(--spacer-layout-06) var(--spacer-layout-156) 0 var(--spacer-layout-156);
     }
