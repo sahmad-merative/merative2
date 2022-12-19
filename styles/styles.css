@@ -362,7 +362,7 @@ p, dl, ol, ul, pre, blockquote {
   margin: var(--spacer-element-05) 0 var(--spacer-element-05);
 }
 
-ul.article-content-wrapper {
+.article-content-wrapper ul {
   margin-left: 25px;
 }
 
