@@ -405,7 +405,7 @@ button {
     text-decoration: none;
   }  
 
-  main .article-content p.anchor-tag{
+  main .article-content-wrapper .default-content-wrapper p.button-container {
     text-align: center;
   }  
 

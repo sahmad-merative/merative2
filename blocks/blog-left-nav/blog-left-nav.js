@@ -59,15 +59,6 @@ function anchorTagSocialMediaCreation(socialMedia) {
   return aLink;
 }
 
-function decorateAnchorTagParents() {
-  const anchorLinks = document.querySelectorAll('.article-content-wrapper .default-content-wrapper p a');
-  anchorLinks.forEach((aLink) => {
-    const parentElement = aLink.parentNode;
-    // add the class only if anchor link and text is by itself within the p tag
-    if (parentElement.childNodes.length === 2) parentElement.classList.add('anchor-tag');
-  });
-}
-
 export default function decorate(block) {
   // find the article content div
   const articleContent = document.querySelector('.article-content');
@@ -120,5 +111,4 @@ export default function decorate(block) {
   const main = document.querySelector('main');
   const blogLeftNavContainer = main.querySelector('.section.blog-left-nav-container');
   main.removeChild(blogLeftNavContainer);
-  decorateAnchorTagParents();
 }
