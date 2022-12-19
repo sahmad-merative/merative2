@@ -16,7 +16,7 @@ main .author-bio img.author-img{
     height: 48px;
 }
 
-@media only screen and (width >= 1200px) {
+@media only screen and (min-width: 1200px) {
     main .author-bio img.author-img {
         width: 64px;
         height: 64px;

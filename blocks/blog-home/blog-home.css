@@ -401,7 +401,7 @@ body[filters-open="true"] {
 }
 
 /* Tablet small and large styles */
-@media only screen and (min-width: 576px) {
+@media only screen and (min-width: 768px) {
     .blog-home-container {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
@@ -477,7 +477,7 @@ body[filters-open="true"] {
 /* Desktop styles */
 @media only screen and (min-width: 1200px) {
     .blog-home-container {
-        padding: var(--spacer-layout-06) var(--spacer-layout-156) 0 var(--spacer-layout-156) !important ;
+        padding: var(--spacer-layout-06) var(--spacer-layout-156) 0 var(--spacer-layout-156);
     }
     
     .blog-home .blog-content {

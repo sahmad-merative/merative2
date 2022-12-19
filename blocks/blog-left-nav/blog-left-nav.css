@@ -83,14 +83,6 @@ html {
     background: url("../../icons/sharelink-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
-.blog-left-nav[data-block-status="loaded"] .social-share-links::before {
-    content: "SHARE VIA";
-}
-
-.blog-left-nav[data-block-status="loaded"] .blog-content-links::before {
-    content: "IN THIS ARTICLE";
-}
-
 .blog-left-nav[data-block-status="loaded"] .social-share-links::before,
 .blog-left-nav[data-block-status="loaded"] .blog-content-links::before {
     font-family: var(--sans-serif-font-medium);
@@ -103,6 +95,16 @@ html {
     margin-bottom: 24px;
 }
 
+.blog-left-nav[data-block-status="loaded"] .social-share-links::before {
+    content: "SHARE VIA";
+    align-self: center;
+    margin-bottom: unset;
+}
+
+.blog-left-nav[data-block-status="loaded"] .blog-content-links::before {
+    content: "IN THIS ARTICLE";
+}
+
 .blog-left-nav[data-block-status="loaded"] .blog-content-links {
     display: flex;
     flex-direction: column;
@@ -113,7 +115,7 @@ html {
     padding-bottom: 48px;
 }
 
-.blog-left-nav[data-block-status="loaded"] .content-link, .blog-left-nav[data-block-status="loaded"] .content-link.active  {
+.blog-left-nav .content-link  {
     text-decoration-line: none;
     padding-left: 16px;
     width: 240px;
@@ -127,7 +129,7 @@ html {
     text-overflow: ellipsis;
 }
 
-.blog-left-nav[data-block-status="loaded"] .content-link.active {
+.blog-left-nav .content-link.active {
     text-decoration-line: none;
     border-image: linear-gradient(180deg, #90f, #fa1e32) 0 1;
     border-style: solid;
@@ -167,11 +169,7 @@ html {
 
 }
 
-@media only screen and (width <= 1200px) {
-    .section.article-content {
-        margin: 0 auto;
-    }
-
+@media only screen and (max-width: 1200px) {
     .blog-content-links {
         display: flex;
         flex-direction: column;
@@ -206,11 +204,6 @@ html {
 /* devices */
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-    .section.article-content {
-        margin: 0 auto;
-        width: var(--section-width-desktop);
-    }
-
     .blog-content-links {
         display: flex;
         flex-direction: column;
@@ -220,6 +213,10 @@ html {
         top: 44.5px !important;
         padding-top: 24px;
         padding-bottom: 24px !important;
+    }
+
+    .blog-left-nav .content-link {
+        width: unset;
     }
 
     .social-share-links::before {
@@ -244,12 +241,7 @@ html {
 
 /* mobile devices */
 
-@media only screen and (max-device-width: 768px) {
-    .section.article-content {
-        max-width: 768px;
-        margin: 0 auto;
-    }
-
+@media only screen and (max-width: 768px) {
     .blog-content-links {
         display: flex;
         flex-direction: column;

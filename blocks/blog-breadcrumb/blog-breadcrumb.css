@@ -1,5 +1,5 @@
 .section.blog-breadcrumb-container .breadcrumb-navigation {
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     height: 26px;
 }
 
@@ -32,7 +32,7 @@
     color: var(--primary-purple);
 }
 
-@media only screen and (width >= 576px){
+@media only screen and (min-width: 768px){
     .blog-breadcrumb[data-block-status="loaded"]{
         padding: 0 0 10px;
     }
