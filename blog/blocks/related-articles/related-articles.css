@@ -12,6 +12,7 @@
     color: var(--primary-black);
     letter-spacing: var(--letter-spacing-02-em);
     text-transform: uppercase;
+    margin: unset;
 }
 
 .related-articles[data-block-status="loaded"] {
