@@ -3,31 +3,31 @@
 /* || Source Serif4 Font Family  */
 @font-face{
   font-family:"Source Serif Pro Light";
-  src:url("/styles/fonts/SourceSerif4/SourceSerifPro-Light.ttf");
+  src:url("../styles/fonts/SourceSerif4/SourceSerifPro-Light.ttf");
   font-display: swap;
 }
 
 /* || Alliance Font Family  */
 @font-face {
   font-family: "Alliance No.1 Light";
-  src: url("/styles/fonts/Alliance/AllianceNo.1-Light.woff2") format("woff2");
+  src: url("../styles/fonts/Alliance/AllianceNo.1-Light.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Alliance No.1 Regular";
-  src: url("/styles/fonts/Alliance/AllianceNo.1-Regular.woff2") format("woff2");
+  src: url("../styles/fonts/Alliance/AllianceNo.1-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Alliance No.1 Medium";
-  src: url("/styles/fonts/Alliance/AllianceNo.1-Medium.woff2") format("woff2");
+  src: url("../styles/fonts/Alliance/AllianceNo.1-Medium.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Alliance No.1 Semibold";
-  src: url("/styles/fonts/Alliance/AllianceNo.1-SemiBold.woff2") format("woff2");
+  src: url("../styles/fonts/Alliance/AllianceNo.1-SemiBold.woff2") format("woff2");
   font-display: swap;
 }

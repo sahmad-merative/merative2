@@ -165,7 +165,7 @@ function buildAutoBlocks(main) {
 export function getRandomDefaultImage() {
   // get a random image from a set of 5 default images to use for this card
   const randomNumber = Math.floor(Math.random() * 5) + 1;
-  return `/styles/default-images/default-card-image-${randomNumber}.png`;
+  return `/blog/styles/default-images/default-card-image-${randomNumber}.png`;
 }
 
 /**
