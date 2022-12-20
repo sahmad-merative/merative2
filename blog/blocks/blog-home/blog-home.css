@@ -140,6 +140,7 @@ main .section {
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
     font-size: 12px;
+    font-family: var(--sans-serif-font-light);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-category:not(:empty) {
