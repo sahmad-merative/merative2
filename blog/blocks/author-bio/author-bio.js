@@ -1,7 +1,7 @@
 import { createTag, getMetadata } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const defaultAuthorImageSrc = '../../styles/favicon-thumbnail-merative.svg';
+  const defaultAuthorImageSrc = '../../blog/styles/favicon-thumbnail-merative.svg';
   const defaultAuthor = 'Merative';
 
   let authorImage = getMetadata('authorimage');

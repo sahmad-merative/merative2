@@ -170,9 +170,9 @@
 
   /* Media queries */
 
-  /* || Begin Styles for screen sizes greater than or equal to 1120 px */
+  /* || Begin Styles for screen sizes greater than or equal to 1200 px */
 
-  @media screen and (min-width: 1120px) {
+  @media screen and (min-width: 1200px) {
     footer .footer {
       max-width: var(--section-width-desktop);
       max-height: auto;
@@ -181,8 +181,8 @@
     }
 
     footer .footer-links {
-     margin: auto;
-     max-width: 80vw;
+      margin: auto;
+      max-width: 80vw;
     }
 
     footer .footer-links+ul>li:first-of-type{
@@ -197,8 +197,8 @@
     }
   }
 
-  /* || Begin Styles for screen sizes less than or equal to 1119 px */
-  @media  screen and (max-width: 1119px) {
+  /* || Begin Styles for screen sizes less than or equal to 1200 px */
+  @media  screen and (min-width: 768px) and (max-width: 1200px) {
     footer .footer-links {
       margin: auto;
       max-width: 85vw;
@@ -222,17 +222,17 @@
 
   }
 
-  /* || End Styles for screen sizes less than or equal to 1119 px */
+  /* || End Styles for screen sizes less than or equal to 1200px */
    
-  /* || Begin Styles for screen sizes less than or equal to 667 px */
+  /* || Begin Styles for screen sizes less than or equal to 576px */
 
-  @media screen and (max-width: 667px){
+  @media screen and (max-width: 768px){
     footer .footer{
       margin-bottom: 0;
       max-height: fit-content;
     }
 
-    footer .footer-links{
+    footer .footer-links {
       margin: 0;
       max-width: 100vw;
     }

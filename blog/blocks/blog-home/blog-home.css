@@ -4,8 +4,12 @@ body[filters-open="true"] {
     overflow: hidden;
 }
 
+main .section {
+    padding: unset;
+}
+
 .blog-home .blog-content {
-    padding: var(--spacer-layout-04) var(--spacer-layout-01);
+    padding-top: var(--spacer-layout-05);
 }
 
 .blog-home h1, h4, h5 {
@@ -40,7 +44,7 @@ body[filters-open="true"] {
 .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
     position: relative;
     display: block;
-    margin: 48px auto 160px;
+    margin: 48px auto 64px;
     text-decoration: none;
     background: #90f;
     border-radius: 40px;
@@ -126,15 +130,17 @@ body[filters-open="true"] {
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
-    padding: var(--spacer-element-08) var(--spacer-element-08);
+    padding: var(--spacer-element-08) var(--spacer-element-07);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
     font-size: 16px;
+    margin: var(--spacer-element-03) 0 var(--spacer-element-07);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
     font-size: 12px;
+    font-family: var(--sans-serif-font-light);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-category:not(:empty) {
@@ -471,12 +477,17 @@ body[filters-open="true"] {
         width: calc(100vw - 387px);
     }
 
+    .blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
+        padding: var(--spacer-element-08) var(--spacer-element-08);
+    }
+
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content {
         width: 359px;
         padding: 48px 32px 32px;
         vertical-align: center;
         border-radius: 0 10px 10px 0;
     }
+
 }
 
 /* Desktop styles */
@@ -548,11 +559,6 @@ body[filters-open="true"] {
         grid-area: defaultcontent;
     }
 
-
-    .blog-card .card-content > p{
-        margin: var(--spacer-element-03) 0 var(--spacer-element-07);
-    }
-
     .blog-card.featured-article .card-content > p{
         margin: var(--spacer-element-03) 0 var(--spacer-element-10);
     }
@@ -571,6 +577,7 @@ body[filters-open="true"] {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
         grid-area: loadmore;
+        margin: 48px auto 160px;
     }
 
 
@@ -595,6 +602,10 @@ body[filters-open="true"] {
         min-height: 346px;
         height: 100%;
         object-fit: cover;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
+        padding: var(--spacer-element-08) var(--spacer-element-08);
     }
 
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-content {
