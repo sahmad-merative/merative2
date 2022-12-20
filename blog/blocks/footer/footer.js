@@ -67,7 +67,7 @@ export default async function decorate(block) {
   const footerBaseLinks = document.querySelector('footer div:last-of-type > ul:last-of-type');
   const cookieConsentLi = createTag('li');
   if (footerBaseLinks) footerBaseLinks.append(cookieConsentLi);
-  const cookieConsent = createTag('a', { class: 'cookie-consent' });
+  const cookieConsent = createTag('span', { class: 'cookie-consent' });
   cookieConsent.innerText = 'Cookie preferences';
 
   cookieConsentLi.append(cookieConsent);

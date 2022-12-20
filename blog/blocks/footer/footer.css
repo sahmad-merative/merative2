@@ -157,7 +157,7 @@
     text-decoration: underline;
   }
 
-  footer div:last-of-type > ul:last-of-type > li:last-of-type a{
+  footer div:last-of-type > ul:last-of-type > li:last-of-type span.cookie-consent{
     border-bottom: 2px solid #90f;
   }
   
