@@ -67,7 +67,7 @@ main.error > .section h1{
   -webkit-text-fill-color: transparent;
 }
 
-main.error div.text-404 span.heading-h2{
+main.error div span.heading-h2{
   text-align: center;
   border: 0;
   margin: 0;
@@ -81,7 +81,7 @@ main.error div.text-404 span.heading-h2{
 
 }
 
-main.error div.text-404 span{
+main.error div span{
 text-align: center;
 font-kerning: inherit;
 text-transform: inherit;
