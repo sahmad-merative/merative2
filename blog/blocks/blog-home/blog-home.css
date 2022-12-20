@@ -135,6 +135,7 @@ main .section {
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
     font-size: 16px;
+    margin: var(--spacer-element-03) 0 var(--spacer-element-07);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
@@ -555,11 +556,6 @@ main .section {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .default-content-wrapper {
         grid-area: defaultcontent;
-    }
-
-
-    .blog-card .card-content > p{
-        margin: var(--spacer-element-03) 0 var(--spacer-element-07);
     }
 
     .blog-card.featured-article .card-content > p{
