@@ -31,3 +31,107 @@
   src: url("../styles/fonts/Alliance/AllianceNo.1-SemiBold.woff2") format("woff2");
   font-display: swap;
 }
+
+/* 404 error page styling */
+main.error {
+  background-color: var(--neutral-white);
+}
+
+main.error > .section{
+  margin: 0 auto;
+  border: 0;
+  padding: 0;
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+main.error > .section h1{
+  text-align: center;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+  font-family: var(--serif-font);
+  letter-spacing: .0175em;
+  font-weight: var(--font-weight-light);
+  background: linear-gradient(270deg,#fa1e32,#90f);
+  background-clip: text;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-background-clip: text;
+  display: inline-block;
+  font-size: 128px;
+  line-height: 154px;
+  -webkit-text-fill-color: transparent;
+}
+
+main.error div.text-404 span.heading-h2{
+  text-align: center;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: var(--serif-font);
+  line-height: 120%;
+  letter-spacing: .0175em;
+  font-weight: var(--font-weight-light);
+  font-size: 45px;
+
+}
+
+main.error div.text-404 span{
+text-align: center;
+font-kerning: inherit;
+text-transform: inherit;
+border: 0;
+margin: 0;
+padding: 0;
+box-sizing: inherit;
+letter-spacing: .01em;
+line-height: 160%;
+font-family: var(--sans-serif-font-light);
+font-weight: var(--font-weight-light);
+font-size: 21px;
+}
+
+main.error a.button-404{
+  text-align: center;
+  font-family: var(--sans-serif-font-medium);
+  letter-spacing: .01em;
+  line-height: 160%;
+  font-weight: var(--font-weight-medium);
+  font-size: 100%;
+  margin: 0;
+  text-decoration: none;
+  -webkit-box-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+  height: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  display: inline-flex;
+  justify-content: left;
+  min-height: unset;
+  padding: 0;
+  width: auto;
+}
+
+
+main.error a.button-404  span{
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans-serif-font-medium);
+  font-size: 16px;
+  letter-spacing: .01em;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  color: #90f;
+  border-bottom: 2px solid #90f;
+  line-height: 120%;
+}
