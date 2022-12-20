@@ -1,6 +1,6 @@
 import { sampleRUM, fetchPlaceholders } from './lib-franklin.js';
 
-const placeholders = await fetchPlaceholders();
+const placeholders = await fetchPlaceholders('blog');
 // const isProd = window.location.hostname.endsWith(placeholders.hostname);
 const productionLib = 'e5193f58fe47/launch-16c4e407bfc6';
 const previewLib = 'ccb695f49426/launch-f7e352870932-development';
