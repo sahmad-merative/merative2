@@ -4,6 +4,10 @@ body[filters-open="true"] {
     overflow: hidden;
 }
 
+main .section {
+    padding: unset;
+}
+
 .blog-home .blog-content {
     padding: var(--spacer-layout-04) var(--spacer-layout-01);
 }
@@ -40,7 +44,7 @@ body[filters-open="true"] {
 .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
     position: relative;
     display: block;
-    margin: 48px auto 160px;
+    margin: 48px auto 64px;
     text-decoration: none;
     background: #90f;
     border-radius: 40px;
@@ -571,6 +575,7 @@ body[filters-open="true"] {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
         grid-area: loadmore;
+        margin: 48px auto 160px;
     }
 
 
