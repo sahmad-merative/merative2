@@ -36,6 +36,7 @@
 main.error {
   background-color: var(--neutral-white);
   min-height: unset;
+  margin-top:64px;
 }
 
 main.error > .section{
