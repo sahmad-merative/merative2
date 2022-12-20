@@ -9,7 +9,7 @@ main .section {
 }
 
 .blog-home .blog-content {
-    padding: var(--spacer-layout-04) var(--spacer-layout-01);
+    padding-top: var(--spacer-layout-05);
 }
 
 .blog-home h1, h4, h5 {
