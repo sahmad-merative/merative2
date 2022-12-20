@@ -33,6 +33,8 @@
 
 .related-articles[data-block-status="loaded"] > .blog-card {
     position: relative;
+    background-color: #fff;
+    height: 100%;
 }
 
 .related-articles[data-block-status="loaded"] > div:hover {
@@ -52,6 +54,11 @@
     aspect-ratio: 3 / 2;
     height: auto;
     width: 100%;
+}
+
+.related-articles > div.blog-card > div.card-image img {
+    height: 100%;
+    object-fit: cover;
 }
 
 .related-articles[data-block-status="loaded"] > div.blog-card:hover > div.card-image > picture > img {
