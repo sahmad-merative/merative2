@@ -42,22 +42,25 @@
     }
 
     main.error .error-number text {
-      font-family: var(--fixed-font-family);
+      font-family: var(--serif-font);
     }
   </style>
-  <link rel="stylesheet" href="/styles/lazy-styles.css">
+  <link rel="stylesheet" href="/blog/styles/lazy-styles.css">
 </head>
 
 <body>
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
+        <h1>404 Error</h1>
+      <div>
+            <p><span class="heading-h2">Oops! We're sorry, we can't seems to find the page you're looking for.</span></p>
+            <p><span>Use the navigation links above or the "home" button below to help you find your way back.</span></p>
+      </div>
+
+        <a class="button-404" href="/">
+          <span>Go Home</span>
+        </a>
       </p>
     </div>
   </main>
