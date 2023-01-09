@@ -329,6 +329,19 @@ export async function createCard(row, style) {
   return (card);
 }
 
+export function decorateExternalLinks(main) {
+  main.querySelectorAll('a').forEach((a) => {
+    const href = a.getAttribute('href');
+    const extension = href.split('.').pop().trim();
+    if (!href.startsWith('/')
+      && !href.startsWith('#')) {
+      if (!href.includes('merative.com') || (extension === 'pdf')) {
+        a.setAttribute('target', '_blank');
+      }
+    }
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -337,6 +350,7 @@ export async function createCard(row, style) {
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
+  decorateExternalLinks(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
