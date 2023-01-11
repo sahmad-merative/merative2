@@ -377,14 +377,14 @@ export default async function decorate(block) {
         blogCard.setAttribute('topics', row.topic);
         const topicValues = row.topic.split(',');
         topicValues.forEach((topicValue) => {
-          topics.add(topicValue.trim());
+          if (topicValue.trim() !== '') topics.add(topicValue.trim());
         });
       }
       if (row.audience && row.audience !== '0') {
         blogCard.setAttribute('audiences', row.audience);
         const audienceValues = row.audience.split(',');
         audienceValues.forEach((audienceValue) => {
-          audiences.add(audienceValue.trim());
+          if (audienceValue.trim() !== '') audiences.add(audienceValue.trim());
         });
       }
       blogCards.append(blogCard);
