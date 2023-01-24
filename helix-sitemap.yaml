@@ -1,5 +1,0 @@
-sitemaps:
-   merative-blog:
-     origin: https://www.merative.com
-     source: /blog/blog-index.json
-     destination: /blog/sitemap.xml
