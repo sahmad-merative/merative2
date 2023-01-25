@@ -389,6 +389,14 @@ export default async function decorate(block) {
       }
       blogCards.append(blogCard);
     });
+ 
+// Full card should be clickable
+    blogCards.querySelectorAll('.blog-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const alink  = card.getElementsByClassName('blog-link');
+        document.location.href = alink[0].href;
+      });
+    });
 
     // Load More button
     loadMoreElement = document.createElement('div');
