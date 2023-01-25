@@ -601,7 +601,7 @@ main .section {
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image,
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image img {
         width: 396px;
-        min-height: 346px;
+        height: 346px;
         height: 100%;
         object-fit: cover;
     }
@@ -613,5 +613,13 @@ main .section {
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-content {
         width: 420px;
         border-radius: 0 0 10px 10px;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content {
+        padding: 64px 48px 48px;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content p {
+        margin: var(--spacer-element-03) 0 var(--spacer-element-10);
     }
 }
