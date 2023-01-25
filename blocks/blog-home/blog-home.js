@@ -13,13 +13,13 @@ function loadMoreCards(num) {
     });
     if (activeCards.length > numCards) {
       if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
-      loadMoreElement.innerHTML = `Load More (${(activeCards.length - numCards)})`;
+      loadMoreElement.innerHTML = `Load more (${(activeCards.length - numCards)})`;
     } else {
-      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.innerHTML = 'Load more (0)';
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
   } else {
-    loadMoreElement.innerHTML = 'Load More (0)';
+    loadMoreElement.innerHTML = 'Load more (0)';
     loadMoreElement.setAttribute('aria-hidden', 'true');
   }
 }
@@ -67,6 +67,8 @@ function clearFilters() {
   selectedFiltersList.textContent = '';
   const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
   selectedFiltersTitle.textContent = '';
+  const clearAllFilters = document.querySelector('.clear-all-filters');
+  clearAllFilters.textContent = '';
   updateFiltersCount('0');
   loadMoreCards(7);
 }
@@ -140,9 +142,9 @@ function refreshCards() {
     // update load more number
     if (hits.length > NUM_CARDS_SHOWN_AT_A_TIME) {
       if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
-      loadMoreElement.innerHTML = `Load More (${(hits.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
+      loadMoreElement.innerHTML = `Load more (${(hits.length - NUM_CARDS_SHOWN_AT_A_TIME)})`;
     } else {
-      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.innerHTML = 'Load more (0)';
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
 
@@ -154,6 +156,16 @@ function refreshCards() {
 
     // Clear out any existing filters before showing the new ones based on filterGroup
     selectedFiltersList.textContent = '';
+
+
+    // Clear out all filters
+    const clearAllFilters = document.querySelector('.clear-all-filters');
+    clearAllFilters.innerText = 'Clear all';
+    clearAllFilters.addEventListener('click', () => {
+    clearFilters();
+    deselectAllCheckboxes();
+    clearAllFilters.innerText = '';
+    });
 
     checkedList.forEach((val) => {
       const selectedValue = document.createElement('div');
@@ -351,11 +363,17 @@ export default async function decorate(block) {
     // Create the selected filters DOM structure
     const selectedFilters = document.createElement('div');
     selectedFilters.classList.add('selected-filters');
+    const selectedFiltersdiv = document.createElement('div');
+    selectedFiltersdiv.classList.add('selected-filters-div');
     const selectedFiltersTitle = document.createElement('div');
     selectedFiltersTitle.classList.add('selected-filters-title');
+    const clearAllFilters = document.createElement('div');
+    clearAllFilters.classList.add('clear-all-filters');
     const selectedFiltersList = document.createElement('div');
     selectedFiltersList.classList.add('selected-filters-list');
-    selectedFilters.append(selectedFiltersTitle);
+    selectedFiltersdiv.append(selectedFiltersTitle);
+    selectedFiltersdiv.append(clearAllFilters);
+    selectedFilters.append(selectedFiltersdiv);
     selectedFilters.append(selectedFiltersList);
 
     // Create blog cards DOM structure
@@ -402,9 +420,9 @@ export default async function decorate(block) {
     loadMoreElement = document.createElement('div');
     loadMoreElement.classList.add('load-more');
     if (blogList.length > (NUM_CARDS_SHOWN_AT_A_TIME + 1)) {
-      loadMoreElement.innerHTML = `Load More (${(blogList.length - (NUM_CARDS_SHOWN_AT_A_TIME + 1))})`;
+      loadMoreElement.innerHTML = `Load more (${(blogList.length - (NUM_CARDS_SHOWN_AT_A_TIME + 1))})`;
     } else {
-      loadMoreElement.innerHTML = 'Load More (0)';
+      loadMoreElement.innerHTML = 'Load more (0)';
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
     loadMoreElement.addEventListener('click', () => {
