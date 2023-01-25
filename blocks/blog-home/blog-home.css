@@ -324,8 +324,8 @@ main .section {
 
 .blog-home[data-block-status="loaded"] .filters a.category-link {
     display: block;
-    padding-bottom: 4px;
-    padding-top: 4px;
+    padding-bottom: 8px;
+ /*    padding-top: 4px; */
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
