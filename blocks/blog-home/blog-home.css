@@ -6,11 +6,10 @@ body[filters-open="true"] {
 
 main .section {
     padding: unset;
+    padding-top: calc(var(--spacer-layout-05) - 37px);
 }
 
-.blog-home .blog-content {
-    padding-top: var(--spacer-layout-05);
-}
+
 
 .blog-home h1, h4, h5 {
     margin: unset;
@@ -103,6 +102,7 @@ main .section {
     overflow: hidden;
     border-radius: 10px 10px 0 0;
 }
+
 
 /* stylelint-disable-next-line no-descending-specificity */
 .blog-home .blog-content  .blog-cards .blog-card .card-image img,
@@ -343,7 +343,7 @@ main .section {
     border: solid 1px;
     border-image: var(--gradient-horizontal-down) 0 1;
     border-style: solid;
-    border-width: 5px 0 5px 5px;
+    border-width: 5px 0 5px 4px;
     padding-bottom: unset;
     padding-top: unset;
     font-weight: 500;
@@ -399,13 +399,18 @@ main .section {
 
 /* Tablet small and large styles */
 @media only screen and (min-width: 768px) {
+    main .section {
+        padding-top: var(--spacer-layout-05);
+    }
+
+    
     .blog-home-container {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
 
     .blog-home > .blog-content,
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article {
-        width: 696px;
+        width: 695px;
     }
     
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article {
@@ -413,7 +418,7 @@ main .section {
     }
 
     .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards  {
-        width: 696px;
+        width: 695px;
         padding-bottom: 48px;
         position: relative;
         display: grid;
@@ -437,6 +442,15 @@ main .section {
     .blog-home .blog-content  .blog-cards .blog-card .card-image img {
         width: 336px;
         height: 224px;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card > .card-content a {
+        font-size: 18px;
+        font-family: var(--sans-serif-font-light);
+        font-style: light;
+        font-weight: var(--font-weight-light);
+        line-height: var(--line-height-160);
+        letter-spacing: var(--letter-spacing-1);
     }
 
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image,
@@ -469,10 +483,14 @@ main .section {
     }
 
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content {
-        width: 359px;
-        padding: 48px 48px 32px;
+        width: 336px;
+        padding: 48px 32px 32px;
         vertical-align: center;
         border-radius: 0 10px 10px 0;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content p {
+        margin: var(--spacer-element-03) 0 var(--spacer-element-10);
     }
 
 }
