@@ -35,6 +35,7 @@ main .section {
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-001-em);
     color: var(--neutral-carbon);
+    padding-bottom: 32px;
 }
 
 .blog-home a {
@@ -44,7 +45,7 @@ main .section {
 .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
     position: relative;
     display: block;
-    margin: 48px auto 64px;
+    margin: 0 auto 64px;
     text-decoration: none;
     background: #90f;
     border-radius: 40px;
@@ -397,6 +398,10 @@ main .section {
 
 /* Tablet small and large styles */
 @media only screen and (min-width: 768px) {
+    .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards {
+        padding-bottom: 48px;
+    }
+
     .blog-home-container {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
@@ -487,6 +492,11 @@ main .section {
     .blog-home .blog-content {
         padding: unset;
     }
+
+    .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards {
+        padding-bottom: 48px;
+    }
+
     
     .blog-home > .blog-content,
     .blog-home > .blog-content > .blog-cards,
@@ -560,7 +570,7 @@ main .section {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
         grid-area: loadmore;
-        margin: 48px auto 160px;
+        margin: 0 auto 160px;
     }
 
 

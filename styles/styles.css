@@ -555,8 +555,8 @@ main .section.back-to-top.active[data-section-status='loaded'] {
   padding: 0;
   right: 20px;
   bottom: 20px;
-  height: 49px;
-  width: 49px;
+  height: 78px;
+  width: 78px;
   z-index: 999;
 }
 
@@ -564,8 +564,8 @@ main .section.back-to-top.active::before,
 main .section.back-to-top.active::after {
   content: '';
   position: fixed;
-  width: 49px;
-  height: 49px;
+  width: 78px;
+  height: 78px;
   border: 2px solid #90f;
   border-radius: 50%;
   background-position: 50%;

@@ -8,7 +8,7 @@
   footer .footer-links>div{
     display: flex;
     padding-bottom: 1.5rem;
-    border-bottom: 0.1px solid  #636161;
+    border-bottom: 0.1px solid  #8B8883;
   }
 
   footer .footer > div > div {
@@ -65,15 +65,17 @@
   }
 
   footer .footer-links .icon-email > svg{
-    margin: 0.48rem auto;
+    margin: 0.5rem auto;
+    width: 26px;
+    height: 23.86px;
   }
 
   footer .footer-links .icon.icon-email, footer .footer-links .icon.icon-linkedin{
-    margin: 32px 0 36px;
+    margin: 0 0 36px;
   }
 
   footer .footer-links .icon.icon-twitter{
-    margin: 32px 21px 0 36px;
+    margin: 0 21px 0 36px;
   }
   
 
@@ -82,9 +84,9 @@
   }
 
   footer .footer-links .icon-linkedin > svg{
-    margin: 0.4rem auto;
-    width: 20px;
-    height: 20px;
+    margin: 0.5rem auto;
+    width: 20.75px;
+    height: 19.83px;
   }
 
   footer .footer-links .icon-twitter{
@@ -92,9 +94,9 @@
   }
 
   footer .footer-links .icon-twitter > svg{
-    margin: 0.5rem auto;
-    width: 20px;
-    height: 20px;
+    margin: 0.8rem auto;
+    width: 20.16px;
+    height: 16.38px;
   }
 
   footer .footer-links .icon:hover svg{
@@ -140,7 +142,7 @@
   footer .footer-links+ul{
     list-style: none;
     display: flex;
-    padding-top: 1rem;
+    padding-top: 32px;
     padding-left: 0;
     justify-content: space-between;
     max-width: 80vw;
@@ -157,10 +159,15 @@
     text-decoration: underline;
   }
 
-  footer div:last-of-type > ul:last-of-type > li:last-of-type span.cookie-consent{
+  /* footer div:last-of-type > ul:last-of-type > li:last-of-type span.cookie-consent{
     border-bottom: 2px solid #90f;
   }
-  
+   */
+
+   footer div:last-of-type > ul:last-of-type > li:last-of-type span.cookie-consent:hover {
+    text-decoration: underline;
+  }
+
   footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     border-bottom: 2px solid linear-gradient(270deg, rgb(250 30 50), rgb(153 0 255));
   }
