@@ -157,14 +157,13 @@ function refreshCards() {
     // Clear out any existing filters before showing the new ones based on filterGroup
     selectedFiltersList.textContent = '';
 
-
     // Clear out all filters
     const clearAllFilters = document.querySelector('.clear-all-filters');
     clearAllFilters.innerText = 'Clear all';
     clearAllFilters.addEventListener('click', () => {
-    clearFilters();
-    deselectAllCheckboxes();
-    clearAllFilters.innerText = '';
+      clearFilters();
+      deselectAllCheckboxes();
+      clearAllFilters.innerText = '';
     });
 
     checkedList.forEach((val) => {
@@ -407,11 +406,11 @@ export default async function decorate(block) {
       }
       blogCards.append(blogCard);
     });
- 
-// Full card should be clickable
-    blogCards.querySelectorAll('.blog-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        const alink  = card.getElementsByClassName('blog-link');
+
+    // Full card should be clickable
+    blogCards.querySelectorAll('.blog-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const alink = card.getElementsByClassName('blog-link');
         document.location.href = alink[0].href;
       });
     });
