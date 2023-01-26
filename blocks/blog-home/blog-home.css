@@ -550,6 +550,7 @@ main .section {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .default-content-wrapper {
         grid-area: defaultcontent;
+        width: 816px;
     }
 
     .blog-card.featured-article .card-content > p{
