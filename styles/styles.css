@@ -614,3 +614,39 @@ main .divider{
   margin: var( --spacer-layout-05) 0;
   border: 1px solid var(--neutral-sand);
   }
+
+
+main .section.leadership-head {
+  padding: 60px 32px;
+}
+
+.leadership-head img {
+  margin-bottom: -80px;
+  clip-path: circle(50% at 50% 100%);
+}
+
+main .section.leadership-content {
+  background: #fff;
+  padding: 80px 0 160px;
+}
+
+.leadership-content img {
+  border-radius: 15px;
+}
+
+main .section.leadership-content .columns>div>div {
+  margin-top: 75px;
+}
+main .section.leadership-content .columns>div>div>p {
+  font-size: 28px;  
+  letter-spacing: .0175em;
+  font-weight: 300;
+}
+
+main .section.leadership-content .columns>div>div>h6 {
+  font-family: "Alliance Medium";
+  line-height: 120%;
+  letter-spacing: .2em;
+  font-weight: 500;
+}
+
