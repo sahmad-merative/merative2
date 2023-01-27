@@ -408,6 +408,15 @@ main .section {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
 
+    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper p{
+        font-family: var(--sans-serif-font-light);
+        font-weight: var(--font-weight-light);
+        font-size: var( --font-size-18);
+        line-height: var(--line-height-160);
+        letter-spacing: var(--letter-spacing-1);
+    }
+
+
     .blog-home > .blog-content,
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article {
         width: 695px;
