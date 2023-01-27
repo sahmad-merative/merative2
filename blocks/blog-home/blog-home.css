@@ -257,7 +257,7 @@ main .section {
 /* stylelint-disable-next-line no-descending-specificity */
 .blog-home .filters[aria-expanded="true"] > .filters-footer > div {
     position: relative;
-    font-family: var(--sans-serif-font-light);
+    font-family: var(--sans-serif-font-medium);
     font-size: 18px;
     letter-spacing: .16px;
     line-height: 160%;
@@ -288,9 +288,9 @@ main .section {
 .blog-home .filters span.category-title {
     position: relative;
     display: block;
-    font-family: var(--sans-serif-font-regular);
+    font-family: var(--sans-serif-font-medium);
     font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-14);
+    font-size: 11px;
     line-height: var(--line-height-120);
     color: var(--neutral-carbon);
     letter-spacing: var(--letter-spacing-02-em);
@@ -308,8 +308,8 @@ main .section {
 .blog-home .filters > .filters-main > div > span.list-title::after {
     content: '';
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 14.5px;
+    height: 6.25px;
     right: var(--spacer-element-02);
     background: url('../../icons/arrow-up-black.svg') no-repeat;
 }
@@ -368,8 +368,8 @@ main .section {
 .blog-home .filters > .filters-main > div[aria-expanded = "false"] > span.list-title::after {
     content: '';
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 14.5px;
+    height: 6.25px;
     right: var(--spacer-element-02);
     background: url('../../icons/arrow-up-black.svg') no-repeat;
     transform: rotate(180deg);
