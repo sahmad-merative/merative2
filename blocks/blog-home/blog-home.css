@@ -44,7 +44,7 @@ main .section {
 .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
     position: relative;
     display: block;
-    margin: 0 auto 64px;
+    margin: 0 auto 84px;
     text-decoration: none;
     background: #90f;
     border-radius: 40px;
@@ -419,7 +419,7 @@ main .section {
 
     .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards  {
         width: 695px;
-        padding-bottom: 48px;
+        padding-bottom: 64px;
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -516,7 +516,7 @@ main .section {
     }
 
     .blog-home[data-block-status="loaded"] > .blog-content > .blog-cards {
-        padding-bottom: 48px;
+        padding-bottom: 64px;
     }
 
 
