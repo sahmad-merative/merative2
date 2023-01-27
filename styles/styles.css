@@ -182,6 +182,20 @@ sup {
     line-height: 115px;
 
   }
+
+
+    /* Back to top button */
+main .section.back-to-top.active[data-section-status='loaded'] {
+  height: 49px;
+  width: 49px;
+
+}
+
+main .section.back-to-top.active::before, 
+main .section.back-to-top.active::after {
+  width: 49px;
+  height: 49px;
+}
 }
 
 /* All except mobile */
@@ -208,6 +222,20 @@ sup {
   main .section.what-we-do > .default-content-wrapper {
     min-height: 730px;
   }
+
+
+    /* Back to top button */
+main .section.back-to-top.active[data-section-status='loaded'] {
+  height: 54px;
+  width: 54px;
+
+}
+
+main .section.back-to-top.active::before, 
+main .section.back-to-top.active::after {
+  width: 54px;
+  height: 54px;
+}
 }
 
 /* Tablet Small */
@@ -353,6 +381,19 @@ sup {
   .tags{
     margin-bottom: 48px;
   }
+
+  /* Back to top button */
+main .section.back-to-top.active[data-section-status='loaded'] {
+  height: 78px;
+  width: 78px;
+
+}
+
+main .section.back-to-top.active::before, 
+main .section.back-to-top.active::after {
+  width: 78px;
+  height: 78px;
+}
 }
 
 /* progressive section appearance */
@@ -555,8 +596,6 @@ main .section.back-to-top.active[data-section-status='loaded'] {
   padding: 0;
   right: 20px;
   bottom: 20px;
-  height: 49px;
-  width: 49px;
   z-index: 999;
 }
 
@@ -564,8 +603,6 @@ main .section.back-to-top.active::before,
 main .section.back-to-top.active::after {
   content: '';
   position: fixed;
-  width: 49px;
-  height: 49px;
   border: 2px solid #90f;
   border-radius: 50%;
   background-position: 50%;
