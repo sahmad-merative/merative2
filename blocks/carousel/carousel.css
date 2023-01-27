@@ -1,5 +1,94 @@
-@import url("../../styles/slick.css");
 
 .carousel {
-    color: red;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.carousel .carousel-slide-container {
+    width: 100%;
+    min-height: 350px;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.carousel .carousel-slide {
+    width: 100%;
+    position: absolute;
+    transition: all 0.5s;
+}
+
+.carousel .carousel-slide > div:nth-child(1) {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: .0175em;
+    font-weight: 300;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.carousel .carousel-slide figure {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 32px auto 0;
+    width: fit-content;
+}
+
+.carousel .carousel-slide figure img {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    margin-bottom: 0;
+    margin-right: 24px;
+}
+
+.carousel .carousel-slide figcaption.caption {
+    font-size: 16px;
+    letter-spacing: .01em;
+    line-height: 160%;
+    font-weight: 400;
+}
+
+.carousel .carousel-nav {
+    opacity: 0;
+    z-index: 2;
+    top: 214px;
+    height: 54px;
+    width: 54px;
+    position: absolute;
+    -webkit-transition: .5s;
+    transition: .5s;
+    cursor: pointer;
+    background: url('../../icons/testimonial.svg');
+}
+
+.carousel:hover .carousel-nav {
+    opacity: 1;
+}
+
+.carousel .carousel-nav:hover {
+    background: url('../../icons/testimonial-hover.svg');
+}
+
+.carousel .carousel-nav-prev {
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.carousel .carousel-nav-next {
+    right: 0;
 }
