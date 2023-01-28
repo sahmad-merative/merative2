@@ -36,7 +36,7 @@ indices:
   blogs:
     include:
       - /blog/**
-    target: /blog/blog-index.json
+    target: /blog/blog-index-p2.json
     properties:
       lastModified:
         select: none

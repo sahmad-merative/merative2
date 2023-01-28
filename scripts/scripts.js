@@ -198,7 +198,7 @@ export async function lookupPages(pathnames) {
 
 export async function lookupBlogs(pathnames) {
   if (!window.blogIndex) {
-    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index.json`);
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index-p2.json`);
     const json = await resp.json();
     const lookup = {};
     json.data.forEach((row) => {
@@ -226,7 +226,7 @@ export async function lookupBlogs(pathnames) {
 
 export async function getAllBlogs(category) {
   if (!window.allBlogs) {
-    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index.json`);
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index-p2.json`);
     const json = await resp.json();
     json.data.forEach((row) => {
       if (row.image.startsWith('/default-meta-image.png')) {
@@ -265,7 +265,7 @@ export async function getAllBlogs(category) {
 
 export async function getBlogCategoryPages() {
   if (!window.allBlogs) {
-    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index.json`);
+    const resp = await fetch(`${window.hlx.codeBasePath}/blog/blog-index-p2.json`);
     const json = await resp.json();
     json.data.forEach((row) => {
       if (row.image.startsWith('/default-meta-image.png')) {
