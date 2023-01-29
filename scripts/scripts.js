@@ -339,19 +339,18 @@ export async function createDocumentCard(row, style) {
   // Create card div
   const card = document.createElement('div');
   if (style) card.classList.add(style);
-
-  // Create a separate child div for the card content
-  const cardContent = document.createElement('div');
-  cardContent.classList.add('card-content');
-
-  // Create and add the title, description and link to card
+  // Get category
+  const category = document.createElement('div');
+  category.classList.add('document-category');
+  if (row.category && row.category !== '0') category.innerHTML += row.category;
+  card.append(category);
+  // Add the title, description and link to card
+  if (row.title) card.innerHTML += `<h3>${row.title}</h3>`;
+  if (row.description && row.description !== '0') card.innerHTML += `<p>${row.description}</p>`;
   const link = document.createElement('a');
   link.classList.add('document-link');
   link.href = row.path;
-  if (row.title) link.innerHTML += `${row.title}`;
-  cardContent.append(link);
-  if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
-  card.append(cardContent);
+  card.append(link);
   return (card);
 }
 
