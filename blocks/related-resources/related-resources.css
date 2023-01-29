@@ -1,8 +1,17 @@
+main .section.related-resources-container {
+    padding: 64px 24px;
+}
+
 /* Mobile styles and defaults */
 .related-resources-container {
-    padding: 0 24px 64px;
+    /* padding: 0 24px 64px; */
     background: #FFF;
     color: #20201F;
+}
+
+.related-resources-container.highlight {
+    background: #7E00D3;
+    color: #FFF;
 }
 
 .related-resources-container .default-content-wrapper h5,
@@ -40,7 +49,6 @@
     font-size: var(--font-size-16);
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-001-em);
-    color: var(--neutral-carbon);
 }
 
 .related-resources-container[data-section-status="loaded"] .related-resources[data-block-status="loaded"]::-webkit-scrollbar { /* WebKit */
@@ -59,6 +67,10 @@
     gap: 24px;
 }
 
+.related-resources-container.highlight .related-resources[data-block-status="loaded"] > .document-card {
+    background: #6400A6;
+}
+
 .related-resources .document-card > .document-category,
 .related-resources .document-card > p,
 .related-resources .document-card > h3 {
@@ -70,10 +82,10 @@
     box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
 }
 
-.related-resources > div:hover a {
+/* .related-resources > div:hover a {
     color: var(--primary-purple);
     text-decoration-line: underline;
-}
+} */
 
 .related-resources a.document-link {
     height: 54px;
@@ -93,10 +105,15 @@
     background-position: 50%;
 }
 
+.related-resources-container.highlight .related-resources a.document-link::before {
+    border: 2px solid #fff;
+    background: url('../../icons/right-arrow-white-large.svg') no-repeat center center;
+}
+
 /* Tablet styles */
 @media only screen and (min-width: 768px) {
-    .related-resources-container {
-        padding: 0 0 64px 36px;
+    main .section.related-resources-container {
+        padding: 64px 36px;
     }
 
     .related-resources[data-block-status="loaded"] > .document-card {
@@ -112,8 +129,8 @@
 
 /* Desktop styles */
 @media only screen and (min-width: 1200px) {
-    .related-resources-container {
-        padding: 0 156px 160px;
+    main .section.related-resources-container {
+        padding: 160px 156px;
     }
 
     .related-resources-container[data-section-status="loaded"] .related-resources[data-block-status="loaded"] {
@@ -127,7 +144,6 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        background: #FAF8F6;
         border-radius: 10px;
         width: 360px;
         height: 100%;
