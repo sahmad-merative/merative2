@@ -112,7 +112,9 @@ indices:
       topic:
         select: head > meta[name="topic"]
         value: attribute(el, "content")
+      readtime:        
+        select: head > meta[name="readtime"]
+        value: attribute(el, "content")
       documentLink:
         select: head > meta[name="document-link"]
         value: attribute(el, "content")
-        
