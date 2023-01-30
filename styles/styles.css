@@ -261,6 +261,10 @@ main .section.back-to-top.active::after {
     width: var(--section-width-tablet-small);
     margin: 0 auto;
   }
+
+  main .article-content picture img{
+    height: 468px;
+  }
 }
 
 /* Tablet Large */

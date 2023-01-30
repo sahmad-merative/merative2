@@ -19,25 +19,31 @@
 
 .section.cta-container .cta.block h2 {
     margin: unset;
-    margin-bottom: 8px;
-    font-size: 45px;
+    font-size: 32px;
+    padding-bottom: 16px;
 }
 
 .section.cta-container .cta.block p {
     font-family: var(--sans-serif-font-light);
     font-style: normal;
     font-weight: 300;
-    font-size: 21px;
+    font-size: 16px;
     line-height: 160%;
     text-align: center;
     letter-spacing: 0.01em;
+    margin: 0;
 }
 
 /* CTA Button */
 .section.cta-container .cta.block .button-container {
-    padding-top: 24px;
     margin: unset;
+    margin: 0 auto;
 }
+
+.section.cta-container .cta.block p.button-container{
+    padding-top: 32px;
+}
+
 
 .section.cta-container .cta.block .button-container > a {
     position:relative;
@@ -76,9 +82,32 @@
     background: var(--gradient-diagonal-up);
 }
 
+@media only screen and (min-width: 768px) {
+    .section.cta-container .cta.block p {
+        width: 375px;
+        margin: 0 auto;
+    }
+}
+
+
 @media only screen and (min-width: 1200px) {
     .section.cta-container .cta.block {
         padding-top: 96px;
         padding-bottom: 96px;
     }  
+
+    .section.cta-container .cta.block h2 {
+        font-size: 45px;
+        padding-bottom: 24px;
+    }
+
+    .section.cta-container .cta.block p {
+        width: 740px;
+        font-size: 21px;
+        margin: 0 auto;
+    }
+
+    .section.cta-container .cta.block p.button-container{
+        padding-top: 48px;
+    }
 }

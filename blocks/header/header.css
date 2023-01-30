@@ -70,16 +70,18 @@ header nav .nav-sections>ul>li {
 /* mobile nav width */
 @media only screen and (max-width: 768px) {
   header nav {
-    width: var(--section-width-mobile);
+    /* width: var(--section-width-mobile); */
     margin: 0 auto;
+    padding: 0 36px;
   }
 }
 
 /* tablet nav */
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
   header nav {
-    width: var(--section-width-tablet-small);
+    /* width: var(--section-width-tablet-small); */
     margin: 0 auto;
+    padding: 0 36px;
   }
 }
 
@@ -107,11 +109,22 @@ header nav .nav-sections>ul>li {
     display: none;
   }
 
+  header .nav-brand  .icon-merative-logo > svg {
+    width: 128.68px;
+    height: 45px;
+  }
+
+  header .nav-brand > p{
+    margin: var(--spacer-element-07) 0 var(--spacer-element-07);
+  }
+  
+
   /* hamburger */
   header nav>.nav-hamburger {
     height: 40px;
     width: 40px;
-    padding-top: 3px;
+    
+    /* padding-top: 3px; */
     cursor: pointer;
   }
 
