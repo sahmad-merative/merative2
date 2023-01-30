@@ -1,6 +1,8 @@
-
+/* Carousel block styles */
 .carousel {
     position: relative;
+    width: 100%;
+    order: 1;
     display: flex;
     flex-direction: row;
     align-content: flex-start;
@@ -28,13 +30,13 @@
 }
 
 .carousel .carousel-slide > div:nth-child(1) {
-    font-size: 32px;
+    width: 100%;
+    font-size: var(--font-size-32);
     line-height: 120%;
     letter-spacing: .0175em;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
     margin: 0 auto;
     text-align: center;
-    width: 100%;
 }
 
 .carousel .carousel-slide figure {
@@ -57,10 +59,11 @@
 }
 
 .carousel .carousel-slide figcaption.caption {
-    font-size: 16px;
+    font-family: var(--sans-serif-font-semibold);
+    font-size: var(--font-size-16);
     letter-spacing: .01em;
-    line-height: 160%;
-    font-weight: 400;
+    line-height: var(--line-height-160);
+    font-weight: var(--font-weight-medium);
 }
 
 .carousel .carousel-nav {
@@ -91,4 +94,34 @@
 
 .carousel .carousel-nav-next {
     right: 0;
+}
+
+.carousel ul.carousel-dots {
+    width: 100%;
+    left: 50%;
+    margin-top: 24px;
+    margin-bottom: 0;
+    order: 2;
+    max-width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.carousel .carousel-dots li {
+    width: 12px;
+    height: 12px;
+    margin-right: 20px;
+    box-shadow: inset 0 0 100px 100px var(--neutral-sand);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel .carousel-dots li.carousel-dots--active {
+    box-shadow: inset 0 0 100px 100px var(--primary-purple);
+}
+
+.carousel .carousel-dots button {
+    display: none;
 }
