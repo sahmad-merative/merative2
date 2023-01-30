@@ -123,6 +123,7 @@ header nav .nav-sections>ul>li {
   header nav>.nav-hamburger {
     height: 40px;
     width: 40px;
+    
     /* padding-top: 3px; */
     cursor: pointer;
   }
