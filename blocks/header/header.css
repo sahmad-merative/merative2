@@ -114,11 +114,16 @@ header nav .nav-sections>ul>li {
     height: 45px;
   }
 
+  header .nav-brand > p{
+    margin: var(--spacer-element-07) 0 var(--spacer-element-07);
+  }
+  
+
   /* hamburger */
   header nav>.nav-hamburger {
     height: 40px;
     width: 40px;
-    padding-top: 3px;
+    /* padding-top: 3px; */
     cursor: pointer;
   }
 
