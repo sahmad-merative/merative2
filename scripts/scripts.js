@@ -329,6 +329,58 @@ export async function createCard(row, style) {
   return (card);
 }
 
+/**
+ * Creates a Card using a JSON object and style associated with the card
+ * @param {Object} row JSON Object typically coming from an index array item
+ * @param {String} style Class name that needs to be added to the card root div
+ */
+
+export async function createDocumentCard(row, style) {
+  // Create card div
+  const card = document.createElement('div');
+  if (style) card.classList.add(style);
+  // Get category
+  const category = document.createElement('div');
+  category.classList.add('document-category');
+  if (row.category && row.category !== '0') category.innerHTML += row.category;
+  card.append(category);
+  // Add the title, description and link to card
+  if (row.title) card.innerHTML += `<a href="${row.path}"><h3>${row.title}</h3></a>`;
+  if (row.description && row.description !== '0') card.innerHTML += `<a href="${row.path}"><p>${row.description}</p></a>`;
+  const link = document.createElement('a');
+  link.classList.add('document-link');
+  link.href = row.path;
+  card.append(link);
+  return (card);
+}
+
+/**
+ * Gets details about blogs that are indexed
+ * @param {Array} pathnames list of pathnames
+ */
+
+export async function lookupDocuments(pathnames) {
+  if (!window.documentIndex) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/documents/document-index.json`);
+    const json = await resp.json();
+    const lookup = {};
+    json.data.forEach((row) => {
+      lookup[row.path] = row;
+      if (row.image.startsWith('/default-meta-image.png')) {
+        row.image = getRandomDefaultImage();
+      } else {
+        row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      }
+    });
+    window.documentIndex = {
+      data: json.data,
+      lookup,
+    };
+  }
+  const result = pathnames.map((path) => window.documentIndex.lookup[path]).filter((e) => e);
+  return (result);
+}
+
 export function decorateExternalLinks(main) {
   main.querySelectorAll('a').forEach((a) => {
     const href = a.getAttribute('href');
