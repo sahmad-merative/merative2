@@ -29,7 +29,7 @@ main .section.related-resources-container {
     font-family: var(--serif-font);
     font-style: normal;
     font-weight: 300;
-    font-size: 45px;
+    font-size: 32px;
     line-height: 120%;
 }
 
@@ -71,10 +71,22 @@ main .section.related-resources-container {
     background: #6400A6;
 }
 
-.related-resources .document-card > .document-category,
-.related-resources .document-card > p,
-.related-resources .document-card > h3 {
+.related-resources .document-card .document-category,
+.related-resources .document-card p,
+.related-resources .document-card h3 {
     margin: unset;
+}
+
+.related-resources .document-card .document-category {
+    font-size: 11px;
+}
+
+.related-resources .document-card h3 {
+    font-size: 28px;
+}
+
+.related-resources .document-card p {
+    font-size: 16px;
 }
 
 .related-resources > div:hover {
@@ -153,6 +165,10 @@ main .section.related-resources-container {
         padding: 160px 156px;
     }
 
+    .related-resources-container .default-content-wrapper h2 {
+        font-size: 45px;
+    }
+
     .related-resources-container[data-section-status="loaded"] .related-resources[data-block-status="loaded"] {
         position: relative;
         display: grid;
@@ -170,4 +186,12 @@ main .section.related-resources-container {
         padding: 48px 24px 24px;
         gap: 24px;
     }
+    
+    .related-resources .document-card .document-category {
+        font-size: 14px;
+    }
+
+    .related-resources .document-card h3 {
+        font-size: 32px;
+    }    
 }
