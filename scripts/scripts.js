@@ -345,8 +345,8 @@ export async function createDocumentCard(row, style) {
   if (row.category && row.category !== '0') category.innerHTML += row.category;
   card.append(category);
   // Add the title, description and link to card
-  if (row.title) card.innerHTML += `<h3>${row.title}</h3>`;
-  if (row.description && row.description !== '0') card.innerHTML += `<p>${row.description}</p>`;
+  if (row.title) card.innerHTML += `<a href="${row.path}"><h3>${row.title}</h3></a>`;
+  if (row.description && row.description !== '0') card.innerHTML += `<a href="${row.path}"><p>${row.description}</p></a>`;
   const link = document.createElement('a');
   link.classList.add('document-link');
   link.href = row.path;

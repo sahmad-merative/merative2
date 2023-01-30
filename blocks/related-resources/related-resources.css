@@ -82,16 +82,17 @@ main .section.related-resources-container {
     box-shadow: 0 20px 40px -14px rgb(0 0 0 / 25%);
 }
 
-/* .related-resources > div:hover a {
-    color: var(--primary-purple);
-    text-decoration-line: underline;
-} */
+.related-resources .document-card a {
+    color: inherit;
+    text-decoration: none;
+}
 
 .related-resources a.document-link {
     height: 54px;
 }
 
-.related-resources a.document-link::before {
+.related-resources a.document-link::before,
+.related-resources a.document-link::after {
     display: block;
     content: '';
     position: absolute;
@@ -101,13 +102,32 @@ main .section.related-resources-container {
     height: 54px;
     border: 2px solid #90f;
     border-radius: 50%;
-    background: url('../../icons/right-arrow-purple-large.svg') no-repeat center center;
     background-position: 50%;
 }
 
-.related-resources-container.highlight .related-resources a.document-link::before {
+.related-resources a.document-link::after {
+    background: url('../../icons/right-arrow-purple-large.svg') no-repeat center center;
+}
+
+.related-resources-container.highlight .related-resources a.document-link::before,
+.related-resources-container.highlight .related-resources a.document-link::after {
     border: 2px solid #fff;
-    background: url('../../icons/right-arrow-white-large.svg') no-repeat center center;
+}
+
+.related-resources-container.highlight .related-resources a.document-link::after {
+    background: url('../../icons/arrow-white.svg') no-repeat center center;
+}
+
+.related-resources .document-card:hover a.document-link::before,
+.related-resources-container.highlight .related-resources .document-card:hover a.document-link::before {
+    background: var(--gradient-diagonal-up);
+    border: unset;
+}
+
+.related-resources .document-card:hover a.document-link::after,
+.related-resources-container.highlight .related-resources .document-card:hover a.document-link::after {
+    background: url('../../icons/arrow-white.svg') no-repeat center center;
+    border: unset;
 }
 
 /* Tablet styles */
