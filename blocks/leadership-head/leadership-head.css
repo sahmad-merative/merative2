@@ -1,0 +1,14 @@
+.leadership-head {
+    color: red;
+}
+.leadership-head picture {
+    clip-path: circle(50% at 50% 100%);
+}
+
+.columns picture {
+    clip-path: circle(50% at 50% 100%);
+}
+
+.columns {
+    background: red;
+}
