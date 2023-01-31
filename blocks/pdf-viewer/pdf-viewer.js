@@ -25,6 +25,7 @@ export default async function decorate(block) {
     }
 
     if (pdfAPIKey) {
+      console.log(pdfAPIKey);
       document.addEventListener('adobe_dc_view_sdk.ready', () => {
         // eslint-disable-next-line no-undef
         const adobeDCView = new AdobeDC.View({ clientId: pdfAPIKey, divId: 'adobe-dc-view' });
