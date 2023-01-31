@@ -657,7 +657,7 @@ main .section.leadership-content .columns>div>div>p {
 }
 
 main .section.leadership-content .columns>div>div>h6 {
-  font-family: 'Alliance No.1';
+  font-family: var(--sans-serif-font-regular);
   font-style: normal;
   font-size: 11px;
   font-weight: 500;
