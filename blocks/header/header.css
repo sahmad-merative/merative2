@@ -270,6 +270,11 @@ header nav .nav-sections>ul>li {
     display: none;
   }
 
+  header .nav-brand  .icon-merative-logo > svg {
+    width: 159px;
+    height: 56px;
+  }
+
   header.is-sticky .nav-brand a span.icon-merative-mark {
     display: unset;
     position: relative;
