@@ -50,7 +50,9 @@ if (docUrl) {
 
   loadScript('https://documentservices.adobe.com/view-sdk/viewer.js');
   let pdfAPIKey;
-  if (window.location.host.endsWith('.page') || window.location.host.startsWith('localhost')) {
+  if (window.location.host.startsWith('localhost')) {
+    pdfAPIKey = placeholders.pdfapikeylocalhost;
+  } else if (window.location.host.endsWith('.page')) {
     pdfAPIKey = placeholders.pdfapikeypage;
   } else if (window.location.host.endsWith('.live')) {
     pdfAPIKey = placeholders.pdfapikeylive;
@@ -59,8 +61,6 @@ if (docUrl) {
   }
 
   if (pdfAPIKey) {
-    // eslint-disable-next-line no-console
-    console.log(`pdfAPIKey is ${pdfAPIKey}`);
     document.addEventListener('adobe_dc_view_sdk.ready', () => {
       // eslint-disable-next-line no-undef
       const adobeDCView = new AdobeDC.View({ clientId: pdfAPIKey, divId: 'adobe-dc-view' });
@@ -69,6 +69,10 @@ if (docUrl) {
         adobeDCView.previewFile({
           content: { location: { url: docUrl } },
           metaData: { fileName: docFilename },
+        }, {
+          embedMode: 'IN_LINE',
+          showPrintPDF: true,
+          showDownloadPDF: true,
         });
       }
     });
