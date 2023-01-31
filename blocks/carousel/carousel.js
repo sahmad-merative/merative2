@@ -31,8 +31,55 @@
  * </div>
  */
 
+let scrollInterval;
 let curSlide = 0;
 let maxSlide = 0;
+const slideWidth = 744;
+const slideCaptionSize = 64;
+
+function getLineCount(text, font, maxWidth) {
+  // re-use canvas object for better performance
+  const canvas = getLineCount.canvas || (getLineCount.canvas = document.createElement('canvas'));
+  const context = canvas.getContext('2d');
+  context.font = font;
+  context.letterSpacing = '.56px';
+  // determine how many lines wrapped text will use
+  const words = text.split(' ');
+  let testLine = '';
+  let lineCount = 1;
+  words.forEach((w, index) => {
+    testLine += `${w} `;
+    const { width: testWidth } = context.measureText(testLine);
+    if (testWidth > maxWidth && index > 0) {
+      lineCount += 1;
+      testLine = `${w} `;
+    }
+  });
+  return lineCount;
+}
+
+function calculateSlideHeight(carousel, slide) {
+  requestAnimationFrame(() => {
+    const slideBody = slide.firstElementChild.innerHTML;
+    const bodyStyle = window.getComputedStyle(slide.firstElementChild);
+    const lineCount = getLineCount(slideBody, `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`, slideWidth);
+    const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
+    carousel.style.height = `${bodyHeight + slideCaptionSize + 32}px`;
+  });
+}
+
+function startAutoScroll(block) {
+  if (!scrollInterval) {
+    scrollInterval = setInterval(() => {
+      scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
+    }, 8000);
+  }
+}
+
+function stopAutoScroll() {
+  clearInterval(scrollInterval);
+  scrollInterval = undefined;
+}
 
 function syncActiveDot(carousel, activeSlide) {
   carousel.querySelectorAll('li').forEach((item, index) => {
@@ -46,9 +93,11 @@ function syncActiveDot(carousel, activeSlide) {
 
 function scrollToSlide(carousel, slide = 0) {
   const carouselSlider = carousel.querySelector('.carousel-slide-container');
+  calculateSlideHeight(carouselSlider, carouselSlider.children[slide]);
   carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slide, behavior: 'smooth' });
   syncActiveDot(carousel, slide);
   curSlide = slide;
+  startAutoScroll(carousel);
 }
 
 /**
@@ -91,6 +140,7 @@ function buildNav(dir) {
       nextSlide = curSlide === maxSlide ? 0 : curSlide + 1;
     }
     const carousel = e.target.closest('.carousel');
+    stopAutoScroll();
     scrollToSlide(carousel, nextSlide);
   });
   return btn;
@@ -120,6 +170,7 @@ function buildDots(slides = []) {
     dotItem.addEventListener('click', (e) => {
       curSlide = index;
       const carousel = e.target.closest('.carousel');
+      stopAutoScroll();
       scrollToSlide(carousel, curSlide);
     });
     dots.append(dotItem);
@@ -150,10 +201,15 @@ export default function decorate(block) {
     prevScroll = startScroll;
   });
 
+  carousel.addEventListener('mouseenter', () => {
+    stopAutoScroll();
+  });
+
   carousel.addEventListener('mouseleave', () => {
     if (isDown) {
       snapScroll(carousel, carousel.scrollLeft > startScroll ? 1 : -1);
     }
+    startAutoScroll(block);
     isDown = false;
   });
 
@@ -184,8 +240,9 @@ export default function decorate(block) {
 
     const figureImg = document.createElement('img');
     figureImg.src = '/styles/images/MegaphoneSimple.jpeg';
-    figureImg.width = 64;
-    figureImg.height = 64;
+    figureImg.alt = 'Megaphone Icon with purple background';
+    figureImg.width = slideCaptionSize;
+    figureImg.height = slideCaptionSize;
 
     const figCaption = document.createElement('figcaption');
     figCaption.classList.add('caption');
@@ -199,6 +256,9 @@ export default function decorate(block) {
 
   block.append(carousel);
 
+  // calculate height of first slide
+  calculateSlideHeight(carousel, slides[0]);
+
   // add nav buttons and dots
   if (slides.length > 1) {
     const prevBtn = buildNav('prev');
@@ -208,8 +268,6 @@ export default function decorate(block) {
   }
 
   // auto scroll when visible
-  let scrollInterval;
-
   const intersectionOptions = {
     root: null,
     rootMargin: '0px',
@@ -219,16 +277,21 @@ export default function decorate(block) {
   const handleAutoScroll = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        scrollInterval = setInterval(() => {
-          scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
-        }, 8000);
-      } else if (scrollInterval) {
-        // cancel auto scroll
-        clearInterval(scrollInterval);
+        startAutoScroll(block);
+      } else {
+        stopAutoScroll();
       }
     });
   };
 
   const carouselObserver = new IntersectionObserver(handleAutoScroll, intersectionOptions);
   carouselObserver.observe(block);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoScroll();
+    } else {
+      startAutoScroll(block);
+    }
+  });
 }

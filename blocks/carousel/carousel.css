@@ -2,6 +2,7 @@
 .carousel {
     position: relative;
     width: 100%;
+    height: 100%;
     order: 1;
     display: flex;
     flex-direction: row;
@@ -16,15 +17,16 @@
 
 .carousel .carousel-slide-container {
     width: 100%;
-    min-height: 350px;
-    max-width: 800px;
+    max-width: 744px;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
+    transition: height 0.2s linear
 }
 
 .carousel .carousel-slide {
     width: 100%;
+    height: 100%;
     position: absolute;
     transition: all 0.5s;
 }
@@ -79,10 +81,6 @@
     background: url('../../icons/testimonial.svg');
 }
 
-.carousel:hover .carousel-nav {
-    opacity: 1;
-}
-
 .carousel .carousel-nav:hover {
     background: url('../../icons/testimonial-hover.svg');
 }
@@ -124,4 +122,12 @@
 
 .carousel .carousel-dots button {
     display: none;
+}
+
+/* Media queries */
+
+@media screen and (min-width: 1024px) {
+    .carousel:hover .carousel-nav {
+        opacity: 1;
+    }
 }
