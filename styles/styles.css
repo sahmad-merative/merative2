@@ -655,3 +655,78 @@ main .divider{
   margin: var( --spacer-layout-05) 0;
   border: 1px solid var(--neutral-sand);
   }
+
+main .section.leadership-head {
+  padding: 0 32px;
+}
+
+main .section.leadership-head h1 {
+  margin: 5px 0;
+}
+
+main .section.leadership-head p {
+  margin: 5px 0;
+}
+
+main .section.leadership-head .columns-2-cols>div>div:last-child {
+  margin: 0 -45px;
+}
+
+.leadership-head img {
+  clip-path: circle(50% at 50% 100%);
+  margin-bottom: -3px;
+}
+
+main .section.leadership-content {
+  background: #fff;
+  padding: 39px 0;
+}
+
+.leadership-content img {
+  border-radius: 15px;
+}
+
+main .section.leadership-content .columns>div>div {
+  margin: 25px 0;
+}
+main .section.leadership-content .columns>div>div>p {
+  font-style: normal;
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: 0.0175em;
+}
+
+main .section.leadership-content .columns>div>div>h6 {
+  font-family: var(--sans-serif-font-regular);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  main .section.leadership-content .columns > div,
+  main .section.leadership-head .columns > div {
+      align-items: normal;
+      flex-direction: unset;
+  }
+
+  main .section.leadership-content .columns > div > div,
+  main .section.leadership-head .columns > div > div {
+      flex: 1;
+      margin-left: 32px;
+  }
+
+  main .section.leadership-content .columns > div > div:first-of-type,
+  main .section.leadership-head .columns > div > div:first-of-type {
+      margin-left: unset;
+  }
+
+  main .section.leadership-head .columns > div > div:first-of-type {
+    align-self: center;
+  }
+}
+
+
