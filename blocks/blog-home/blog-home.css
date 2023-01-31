@@ -136,7 +136,7 @@ main .section {
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
     font-size: 16px;
-    margin: var(--spacer-element-03) 0 var(--spacer-element-07);
+    margin: var(--spacer-element-03) 0 var(--spacer-element-08);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
@@ -279,9 +279,14 @@ main .section {
 
 /* Filter items */
 /* stylelint-disable-next-line no-descending-specificity */
-.blog-home .filters > .filters-main > div {
+.blog-home .filters > .filters-main > div:not(:last-of-type) {
     border-bottom: 1px solid var(--neutral-sand);
-    padding-bottom: var(--spacer-element-08);
+    padding-bottom: var(--spacer-element-10);
+}
+
+.blog-home .filters > .filters-main > div:first-of-type {
+    border-bottom: 1px solid var(--neutral-sand);
+    padding-bottom: var(--spacer-element-07);
 }
 
 .blog-home .filters span.list-title,

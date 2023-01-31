@@ -14,6 +14,7 @@ main .author-bio img.author-img{
     width: 48px;
     border-radius: 50%;
     height: 48px;
+    border: 1px solid #E7E2DA;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -28,12 +29,8 @@ main .author-bio .author-name {
     margin-left: 16px;
 }
 
-main .author-bio .author-name-hightlight {
-    border-bottom: 2px solid var(--neutral-carbon);
-}
-
 main .author-bio .pipe {
     color: var(--neutral-sand);
     font-size: 20px;
-    margin: 0 16px;
+    margin: 0 13px;
 }

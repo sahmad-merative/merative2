@@ -398,6 +398,10 @@ main .section.back-to-top.active::after {
   width: 78px;
   height: 78px;
 }
+
+main .article-content{
+  padding-bottom: 160px;
+}
 }
 
 /* progressive section appearance */
@@ -436,9 +440,11 @@ button {
 
   main .article-content picture img{
     border-radius: 10px;
-    margin-bottom: 48px;
+    padding: 48px 0;
+    margin: 0;
+
   }
-  
+
   main .article-content .icon > svg{
   width: 32px;
   height: 32px;
@@ -451,11 +457,12 @@ button {
 
   
   main .article-content p > a:only-of-type{
-    text-decoration: none;
+    text-decoration:underline;
   }  
 
-  main .article-content-wrapper .default-content-wrapper p.button-container {
-    text-align: center;
+  main .article-content-wrapper .default-content-wrapper p.button-container > a {
+    /* text-align: center; */
+    text-decoration: none;
   }  
 
   main .article-content-wrapper h2:first-of-type {
