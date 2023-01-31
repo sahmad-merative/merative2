@@ -281,7 +281,12 @@ main .section {
 /* stylelint-disable-next-line no-descending-specificity */
 .blog-home .filters > .filters-main > div:not(:last-of-type) {
     border-bottom: 1px solid var(--neutral-sand);
-    padding-bottom: var(--spacer-element-08);
+    padding-bottom: var(--spacer-element-10);
+}
+
+.blog-home .filters > .filters-main > div:first-of-type {
+    border-bottom: 1px solid var(--neutral-sand);
+    padding-bottom: var(--spacer-element-07);
 }
 
 .blog-home .filters span.list-title,
