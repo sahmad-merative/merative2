@@ -5,7 +5,7 @@
 }
 
 .related-articles-container[data-section-status="loaded"] h2 {
-    font-family: var(--sans-serif-font-regular);
+    font-family: var(--sans-serif-font-medium);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-14);
     line-height: var(--line-height-120);
@@ -13,6 +13,20 @@
     letter-spacing: var(--letter-spacing-02-em);
     text-transform: uppercase;
     margin: unset;
+}
+
+.related-articles-container[data-section-status="loaded"] > .default-content-wrapper{
+    padding-bottom : 48px;
+}
+
+.related-articles-container[data-section-status="loaded"] > .default-content-wrapper h2{
+    font-family: var(--sans-serif-font-medium);
+    font-weight: var(--font-weight-medium);
+    font-size: 11px;
+    line-height: var(--line-height-120);
+    color: var(--primary-black);
+    letter-spacing: var(--letter-spacing-02-em);
+    text-transform: uppercase;
 }
 
 .related-articles[data-block-status="loaded"] {

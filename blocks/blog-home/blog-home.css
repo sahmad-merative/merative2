@@ -136,7 +136,7 @@ main .section {
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
     font-size: 16px;
-    margin: var(--spacer-element-03) 0 var(--spacer-element-07);
+    margin: var(--spacer-element-03) 0 var(--spacer-element-08);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
