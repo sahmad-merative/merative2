@@ -48,6 +48,7 @@ function scrollToSlide(carousel, slide = 0) {
   const carouselSlider = carousel.querySelector('.carousel-slide-container');
   carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slide, behavior: 'smooth' });
   syncActiveDot(carousel, slide);
+  curSlide = slide;
 }
 
 /**
@@ -69,7 +70,6 @@ function snapScroll(el, dir = 1) {
   const block = Math.floor(el.scrollLeft / el.offsetWidth);
   const pos = el.scrollLeft - (el.offsetWidth * block);
   const snapToBlock = pos <= threshold ? block : block + 1;
-  curSlide = snapToBlock;
   const carousel = el.closest('.carousel');
   scrollToSlide(carousel, snapToBlock);
 }
@@ -84,21 +84,14 @@ function buildNav(dir) {
   const btn = document.createElement('div');
   btn.classList.add('carousel-nav', `carousel-nav-${dir}`);
   btn.addEventListener('click', (e) => {
+    let nextSlide = 0;
     if (dir === 'prev') {
-      if (curSlide === 0) {
-        curSlide = maxSlide;
-      } else {
-        curSlide -= 1;
-      }
+      nextSlide = curSlide === 0 ? maxSlide : curSlide - 1;
     } else {
-      if (curSlide === maxSlide) {
-        curSlide = 0;
-      } else {
-        curSlide += 1;
-      }
+      nextSlide = curSlide === maxSlide ? 0 : curSlide + 1;
     }
     const carousel = e.target.closest('.carousel');
-    scrollToSlide(carousel, curSlide);
+    scrollToSlide(carousel, nextSlide);
   });
   return btn;
 }
@@ -136,9 +129,9 @@ function buildDots(slides = []) {
 }
 
 /**
- * Decorate and transform a carousel HTML block.
+ * Decorate and transform a carousel block.
  *
- * @param block HTML block from helix
+ * @param block HTML block from Franklin
  */
 export default function decorate(block) {
   const carousel = document.createElement('div');
@@ -213,4 +206,29 @@ export default function decorate(block) {
     const dots = buildDots(slides);
     block.append(prevBtn, nextBtn, dots);
   }
+
+  // auto scroll when visible
+  let scrollInterval;
+
+  const intersectionOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0,
+  };
+
+  const handleAutoScroll = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        scrollInterval = setInterval(() => {
+          scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
+        }, 8000);
+      } else if (scrollInterval) {
+        // cancel auto scroll
+        clearInterval(scrollInterval);
+      }
+    });
+  };
+
+  const carouselObserver = new IntersectionObserver(handleAutoScroll, intersectionOptions);
+  carouselObserver.observe(block);
 }
