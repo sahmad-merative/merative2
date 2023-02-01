@@ -1,0 +1,57 @@
+/* Container */
+main .stats-bar-container {
+    padding: 0;
+}
+
+main .stats-bar-container > .stats-bar-wrapper {
+    width: 100%;
+    margin: 0;
+}
+
+/* Column configuration */
+.stats-bar > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-bar img {
+    width: 100%;
+}
+
+@media (min-width: 900px) {
+    .stats-bar > div {
+        display: flex;
+        align-items: center;
+        flex-direction: unset;
+    }
+
+    .stats-bar > div > div {
+        flex: 1;
+        margin-left: 32px;
+    }
+
+    .stats-bar > div > div:first-of-type {
+        margin-left: unset;
+    }
+}
+
+/* Stats Bar styles */
+div.stats-bar {
+    background-color: var(--neutral-carbon);
+    color: var(--neutral-white);
+    padding: var(--spacer-layout-05) var(--spacer-layout-02) var(--spacer-layout-04);
+}
+
+div.stats-bar>div>div::before {
+    display: block;
+    content: " ";
+    height: 1px;
+    background-image: linear-gradient(270deg,#fa1e32,#90f);
+}
+
+div.stats-bar h1 {
+    font-size: 96px;
+}
+
+div.stats-bar > div > div {
+}
