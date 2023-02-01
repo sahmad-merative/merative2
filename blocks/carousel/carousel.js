@@ -37,13 +37,32 @@ let maxSlide = 0;
 const slideWidth = 744;
 const slideCaptionSize = 64;
 
-function getLineCount(text, font, maxWidth) {
+/**
+ * Clear any active scroll intervals
+ */
+function stopAutoScroll() {
+  clearInterval(scrollInterval);
+  scrollInterval = undefined;
+}
+
+/**
+ * Count how many lines a block of text will consume when wrapped within a container
+ * that has a maximum width.
+ * @param text The full text
+ * @param maxWidth Max width of container
+ * @param options Options to be applied to context (eg. font style)
+ *
+ * @return {number} The number of lines
+ */
+function getLineCount(text, maxWidth, options = {}) {
   // re-use canvas object for better performance
   const canvas = getLineCount.canvas || (getLineCount.canvas = document.createElement('canvas'));
   const context = canvas.getContext('2d');
-  context.font = font;
-  context.letterSpacing = '.56px';
-  // determine how many lines wrapped text will use
+  Object.entries(options).forEach(([key, value]) => {
+    if (key in context) {
+      context[key] = value;
+    }
+  });
   const words = text.split(' ');
   let testLine = '';
   let lineCount = 1;
@@ -58,46 +77,50 @@ function getLineCount(text, font, maxWidth) {
   return lineCount;
 }
 
+/**
+ * Calculate the actual height of a slide based on its contents.
+ *
+ * @param carousel The carousel
+ * @param slide A slide within the carousel
+ */
 function calculateSlideHeight(carousel, slide) {
   requestAnimationFrame(() => {
     const slideBody = slide.firstElementChild.innerHTML;
     const bodyStyle = window.getComputedStyle(slide.firstElementChild);
-    const lineCount = getLineCount(slideBody, `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`, slideWidth);
+    const textOptions = { font: `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`, letterSpacing: '0.0175em' };
+    const lineCount = getLineCount(slideBody, slideWidth, textOptions);
     const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
     carousel.style.height = `${bodyHeight + slideCaptionSize + 32}px`;
   });
 }
 
-function startAutoScroll(block) {
-  if (!scrollInterval) {
-    scrollInterval = setInterval(() => {
-      scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
-    }, 8000);
-  }
-}
-
-function stopAutoScroll() {
-  clearInterval(scrollInterval);
-  scrollInterval = undefined;
-}
-
+/**
+ * Keep active dot in sync with current slide
+ * @param carousel The carousel
+ * @param activeSlide {number} The active slide
+ */
 function syncActiveDot(carousel, activeSlide) {
   carousel.querySelectorAll('li').forEach((item, index) => {
     if (index === activeSlide) {
-      item.classList.add('carousel-dots--active');
+      item.classList.add('carousel-dots-active');
     } else {
-      item.classList.remove('carousel-dots--active');
+      item.classList.remove('carousel-dots-active');
     }
   });
 }
 
+/**
+ * Scroll a single slide into view.
+ *
+ * @param carousel The carousel
+ * @param slide {number}
+ */
 function scrollToSlide(carousel, slide = 0) {
   const carouselSlider = carousel.querySelector('.carousel-slide-container');
   calculateSlideHeight(carouselSlider, carouselSlider.children[slide]);
   carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slide, behavior: 'smooth' });
   syncActiveDot(carousel, slide);
   curSlide = slide;
-  startAutoScroll(carousel);
 }
 
 /**
@@ -177,6 +200,14 @@ function buildDots(slides = []) {
   });
 
   return dots;
+}
+
+function startAutoScroll(block) {
+  if (!scrollInterval) {
+    scrollInterval = setInterval(() => {
+      scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
+    }, 8000);
+  }
 }
 
 /**
@@ -265,6 +296,7 @@ export default function decorate(block) {
     const nextBtn = buildNav('next');
     const dots = buildDots(slides);
     block.append(prevBtn, nextBtn, dots);
+    syncActiveDot(block, 0);
   }
 
   // auto scroll when visible
