@@ -337,7 +337,7 @@ main .section {
 
 
 
-.blog-home[data-block-status="loaded"] .filters a.category-link {
+.blog-home[data-block-status="loaded"] .filters a.category-link, .blog-home .filters a.category-link.active {
     display: block;
     padding-bottom: 16px;
 
@@ -361,7 +361,6 @@ main .section {
 .blog-home .filters[aria-expanded="false"] > .filters-header,
 .blog-home .filters a.category-link.active {
     font-family: var(--sans-serif-font-semibold);
-    padding-bottom: unset;
     padding-top: unset;
     font-weight: 500;
     display: flex;
