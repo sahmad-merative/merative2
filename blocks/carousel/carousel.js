@@ -31,7 +31,6 @@
  * </div>
  */
 
-const SLIDE_WIDTH = 744;
 const SLIDE_CAPTION_SIZE = 64;
 const SLIDE_ID_PREFIX = 'carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'carousel-slide-control';
@@ -52,12 +51,12 @@ function stopAutoScroll() {
  * Count how many lines a block of text will consume when wrapped within a container
  * that has a maximum width.
  * @param text The full text
- * @param maxWidth Max width of container
+ * @param width Width of container
  * @param options Options to be applied to context (eg. font style)
  *
  * @return {number} The number of lines
  */
-function getLineCount(text, maxWidth, options = {}) {
+function getLineCount(text, width, options = {}) {
   // re-use canvas object for better performance
   const canvas = getLineCount.canvas || (getLineCount.canvas = document.createElement('canvas'));
   const context = canvas.getContext('2d');
@@ -72,7 +71,7 @@ function getLineCount(text, maxWidth, options = {}) {
   words.forEach((w, index) => {
     testLine += `${w} `;
     const { width: testWidth } = context.measureText(testLine);
-    if (testWidth > maxWidth && index > 0) {
+    if (testWidth > width && index > 0) {
       lineCount += 1;
       testLine = `${w} `;
     }
@@ -91,9 +90,11 @@ function calculateSlideHeight(carousel, slide) {
     const slideBody = slide.firstElementChild.innerHTML;
     const bodyStyle = window.getComputedStyle(slide.firstElementChild);
     const textOptions = { font: `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`, letterSpacing: '0.0175em' };
-    const lineCount = getLineCount(slideBody, SLIDE_WIDTH, textOptions);
+    const lineCount = getLineCount(slideBody, parseInt(bodyStyle.width, 10), textOptions);
     const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
-    carousel.style.height = `${bodyHeight + SLIDE_CAPTION_SIZE + 32}px`;
+    const figureStyle = window.getComputedStyle(slide.querySelector('figure'));
+    const figureHeight = figureStyle ? parseFloat(figureStyle.height) : SLIDE_CAPTION_SIZE;
+    carousel.style.height = `${bodyHeight + figureHeight + 32}px`;
   });
 }
 
