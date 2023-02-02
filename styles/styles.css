@@ -137,14 +137,9 @@ body{
   border:0;
   font-size: 100%;
   display: none;
-  background: var(--neutral-bone);
+  background: var(--neutral-white);
   font-family: var(--sans-serif-font-light);
   -webkit-font-smoothing: antialiased;
-}
-
-body.category, body.blog-article,
-body.blog-home {
-  background-color: var(--neutral-white);
 }
 
 body.appear {

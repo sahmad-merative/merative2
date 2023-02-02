@@ -31,11 +31,14 @@
  * </div>
  */
 
+const SLIDE_WIDTH = 744;
+const SLIDE_CAPTION_SIZE = 64;
+const SLIDE_ID_PREFIX = 'carousel-slide';
+const SLIDE_CONTROL_ID_PREFIX = 'carousel-slide-control';
+
 let scrollInterval;
 let curSlide = 0;
 let maxSlide = 0;
-const slideWidth = 744;
-const slideCaptionSize = 64;
 
 /**
  * Clear any active scroll intervals
@@ -88,9 +91,9 @@ function calculateSlideHeight(carousel, slide) {
     const slideBody = slide.firstElementChild.innerHTML;
     const bodyStyle = window.getComputedStyle(slide.firstElementChild);
     const textOptions = { font: `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`, letterSpacing: '0.0175em' };
-    const lineCount = getLineCount(slideBody, slideWidth, textOptions);
+    const lineCount = getLineCount(slideBody, SLIDE_WIDTH, textOptions);
     const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
-    carousel.style.height = `${bodyHeight + slideCaptionSize + 32}px`;
+    carousel.style.height = `${bodyHeight + SLIDE_CAPTION_SIZE + 32}px`;
   });
 }
 
@@ -100,11 +103,16 @@ function calculateSlideHeight(carousel, slide) {
  * @param activeSlide {number} The active slide
  */
 function syncActiveDot(carousel, activeSlide) {
-  carousel.querySelectorAll('li').forEach((item, index) => {
+  carousel.querySelectorAll('ul.carousel-dots li').forEach((item, index) => {
+    const btn = item.querySelector('button');
     if (index === activeSlide) {
       item.classList.add('carousel-dots-active');
+      btn.setAttribute('aria-selected', 'true');
+      btn.setAttribute('tabindex', '0');
     } else {
       item.classList.remove('carousel-dots-active');
+      btn.removeAttribute('aria-selected');
+      btn.setAttribute('tabindex', '-1');
     }
   });
 }
@@ -113,14 +121,24 @@ function syncActiveDot(carousel, activeSlide) {
  * Scroll a single slide into view.
  *
  * @param carousel The carousel
- * @param slide {number}
+ * @param slideIndex {number} The slide index
  */
-function scrollToSlide(carousel, slide = 0) {
+function scrollToSlide(carousel, slideIndex = 0) {
   const carouselSlider = carousel.querySelector('.carousel-slide-container');
-  calculateSlideHeight(carouselSlider, carouselSlider.children[slide]);
-  carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slide, behavior: 'smooth' });
-  syncActiveDot(carousel, slide);
-  curSlide = slide;
+  calculateSlideHeight(carouselSlider, carouselSlider.children[slideIndex]);
+  carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slideIndex, behavior: 'smooth' });
+  syncActiveDot(carousel, slideIndex);
+  // sync slide
+  [...carouselSlider.children].forEach((slide, index) => {
+    if (index === slideIndex) {
+      slide.removeAttribute('tabindex');
+      slide.setAttribute('aria-hidden', 'false');
+    } else {
+      slide.setAttribute('tabindex', '-1');
+      slide.setAttribute('aria-hidden', 'true');
+    }
+  });
+  curSlide = slideIndex;
 }
 
 /**
@@ -182,11 +200,19 @@ function buildDots(slides = []) {
     const dotItem = document.createElement('li');
     dotItem.setAttribute('role', 'presentation');
     if (index === 0) {
-      dotItem.classList.add('carousel-dots--active');
+      dotItem.classList.add('carousel-dots-active');
     }
     const dotBtn = document.createElement('button');
+    dotBtn.setAttribute('id', `${SLIDE_CONTROL_ID_PREFIX}${index}`);
     dotBtn.setAttribute('type', 'button');
     dotBtn.setAttribute('role', 'tab');
+    dotBtn.setAttribute('aria-controls', `${SLIDE_ID_PREFIX}${index}`);
+    if (index === 0) {
+      dotBtn.setAttribute('aria-selected', 'true');
+      dotBtn.setAttribute('tabindex', '0');
+    } else {
+      dotBtn.setAttribute('tabindex', '-1');
+    }
     dotBtn.setAttribute('aria-label', `${index + 1} of ${slides.length}`);
     dotBtn.innerText = `${index + 1}`;
     dotItem.append(dotBtn);
@@ -200,6 +226,44 @@ function buildDots(slides = []) {
   });
 
   return dots;
+}
+
+/**
+ * Decorate a base slide element.
+ *
+ * @param slide A base block slide element
+ * @param index The slide's position
+ * @return {HTMLUListElement} A decorated carousel slide element
+ */
+function buildSlide(slide, index) {
+  slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
+  slide.setAttribute('data-slide-index', index);
+  slide.classList.add('carousel-slide');
+  slide.style.transform = `translateX(${index * 100}%)`;
+  // accessibility
+  slide.setAttribute('role', 'tabpanel');
+  slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+  slide.setAttribute('aria-describedby', `${SLIDE_CONTROL_ID_PREFIX}${index}`);
+  if (index !== 0) {
+    slide.setAttribute('tabindex', '-1');
+  }
+  // caption
+  const figure = document.createElement('figure');
+
+  const figureImg = document.createElement('img');
+  figureImg.src = '/styles/images/MegaphoneSimple.jpeg';
+  figureImg.alt = 'Megaphone Icon with purple background';
+  figureImg.width = SLIDE_CAPTION_SIZE;
+  figureImg.height = SLIDE_CAPTION_SIZE;
+
+  const figCaption = document.createElement('figcaption');
+  figCaption.classList.add('caption');
+  figCaption.append(slide.children[1]);
+
+  figure.append(figureImg);
+  figure.append(figCaption);
+  slide.append(figure);
+  return slide;
 }
 
 function startAutoScroll(block) {
@@ -263,34 +327,16 @@ export default function decorate(block) {
   const slides = [...block.children];
   maxSlide = slides.length - 1;
   slides.forEach((slide, index) => {
-    slide.classList.add('carousel-slide');
-    slide.style.transform = `translateX(${index * 100}%)`;
-
-    // caption
-    const figure = document.createElement('figure');
-
-    const figureImg = document.createElement('img');
-    figureImg.src = '/styles/images/MegaphoneSimple.jpeg';
-    figureImg.alt = 'Megaphone Icon with purple background';
-    figureImg.width = slideCaptionSize;
-    figureImg.height = slideCaptionSize;
-
-    const figCaption = document.createElement('figcaption');
-    figCaption.classList.add('caption');
-    figCaption.append(slide.children[1]);
-
-    figure.append(figureImg);
-    figure.append(figCaption);
-    slide.append(figure);
-    carousel.appendChild(slide);
+    carousel.appendChild(buildSlide(slide, index));
   });
 
+  // add decorated carousel to block
   block.append(carousel);
 
   // calculate height of first slide
   calculateSlideHeight(carousel, slides[0]);
 
-  // add nav buttons and dots
+  // add nav buttons and dots to block
   if (slides.length > 1) {
     const prevBtn = buildNav('prev');
     const nextBtn = buildNav('next');
