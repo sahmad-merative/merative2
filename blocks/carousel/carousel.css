@@ -154,7 +154,7 @@
 
 /* Media queries */
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1200px) {
     .carousel:hover .carousel-nav {
         opacity: 1;
     }
