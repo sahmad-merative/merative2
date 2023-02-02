@@ -35,6 +35,7 @@ const SLIDE_CAPTION_SIZE = 64;
 const SLIDE_ID_PREFIX = 'carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'carousel-slide-control';
 
+let resizeTimeout;
 let scrollInterval;
 let curSlide = 0;
 let maxSlide = 0;
@@ -372,5 +373,11 @@ export default function decorate(block) {
     } else {
       startAutoScroll(block);
     }
+  });
+
+  window.addEventListener('resize', () => {
+    // clear the timeout
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => calculateSlideHeight(carousel, slides[curSlide]), 500);
   });
 }
