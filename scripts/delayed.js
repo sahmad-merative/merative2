@@ -23,6 +23,7 @@ const loadScript = (url, attrs) => {
 sampleRUM('cwv');
 
 // OneTrust Cookies Consent Notice start
+
 const otId = placeholders.onetrustid;
 if (otId) {
   loadScript('https://cdn.cookielaw.org/scripttemplates/otSDKStub.js', {
