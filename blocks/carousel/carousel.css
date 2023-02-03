@@ -1,4 +1,11 @@
 /* Carousel block styles */
+
+/** Carousel section styling */
+.section.carousel-container {
+    background: var(--neutral-bone);
+    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
+}
+
 .carousel {
     position: relative;
     width: 100%;
@@ -27,16 +34,6 @@
     height: 100%;
     position: absolute;
     transition: all 0.5s;
-}
-
-.carousel .carousel-slide > div:nth-child(1) {
-    width: 100%;
-    font-size: var(--font-size-32);
-    line-height: 120%;
-    letter-spacing: .0175em;
-    font-weight: var(--font-weight-regular);
-    margin: 0 auto;
-    text-align: center;
 }
 
 .carousel .carousel-slide figure {
@@ -121,12 +118,6 @@
 
 .carousel .carousel-dots button {
     display: none;
-}
-
-/** Carousel section styling */
-.section.carousel-container {
-    background: var(--neutral-bone);
-    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
 }
 
 /* Links within carousel container */
