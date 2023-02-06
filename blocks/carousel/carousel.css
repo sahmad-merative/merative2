@@ -1,0 +1,169 @@
+/* Carousel block styles */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    order: 1;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carousel .carousel-slide-container {
+    width: 100%;
+    max-width: 740px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    transition: height 0.2s linear
+}
+
+.carousel .carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.5s;
+}
+
+.carousel .carousel-slide > div:nth-child(1) {
+    width: 100%;
+    font-size: var(--font-size-32);
+    line-height: 120%;
+    letter-spacing: .0175em;
+    font-weight: var(--font-weight-regular);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carousel .carousel-slide figure {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--spacer-layout-01);
+    justify-content: space-between;
+    margin: var(--spacer-layout-03) auto 0;
+    width: fit-content;
+}
+
+.carousel .carousel-slide figure img {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    margin-bottom: 0;
+    margin-right: var(--spacer-layout-02);
+}
+
+.carousel .carousel-slide figcaption.caption {
+    font-family: var(--sans-serif-font-semibold);
+    font-size: var(--font-size-16);
+    letter-spacing: var(--letter-spacing-001-em);
+    line-height: var(--line-height-160);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Carousel Navigation */
+.carousel .carousel-nav {
+    opacity: 0;
+    z-index: 2;
+    top: 125px;
+    height: 54px;
+    width: 54px;
+    position: absolute;
+    transition: 0.5s;
+    cursor: pointer;
+    background: url('../../icons/testimonial.svg');
+}
+
+.carousel .carousel-nav:hover {
+    background: url('../../icons/testimonial-hover.svg');
+}
+
+.carousel .carousel-nav-prev {
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.carousel .carousel-nav-next {
+    right: 0;
+}
+
+.carousel ul.carousel-dots {
+    width: 100%;
+    left: 50%;
+    margin-top: var(--spacer-layout-02);
+    margin-bottom: 0;
+    order: 2;
+    max-width: inherit;
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.carousel .carousel-dots li {
+    width: 12px;
+    height: 12px;
+    box-shadow: inset 0 0 100px 100px var(--neutral-sand);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel .carousel-dots li.carousel-dots-active {
+    box-shadow: inset 0 0 100px 100px var(--primary-purple);
+}
+
+.carousel .carousel-dots button {
+    display: none;
+}
+
+/** Carousel section styling */
+.section.carousel-container {
+    background: var(--neutral-bone);
+    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
+}
+
+/* Links within carousel container */
+.section.carousel-container .button-container {
+    text-align: center;
+    margin: var(--spacer-layout-05) 0 0;
+}
+
+.section.carousel-container .button-container a {
+    color: var(--primary-purple);
+    font-size: var(--font-size-16);
+    border-bottom: 2px solid var(--primary-purple);
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: var(--letter-spacing-001-em);
+}
+
+.section.carousel-container .button-container a:active,
+.section.carousel-container .button-container a:hover {
+    background: var(--gradient-left-right);
+    background-clip: text;
+    -webkit-background-clip: text;     /* stylelint-disable-line */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    border-image-slice: 1;
+    border-image-source: var(--gradient-left-right);
+}
+
+/* Media queries */
+
+@media screen and (min-width: 1200px) {
+    .carousel:hover .carousel-nav {
+        opacity: 1;
+    }
+
+    .carousel .carousel-slide figure {
+        flex-flow: row nowrap;
+        gap: var(--spacer-layout-02);
+    }
+}
