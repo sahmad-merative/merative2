@@ -1,0 +1,108 @@
+/* Bone style */
+
+.accordion {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.accordion-item>div {
+    padding-right: 40px;
+}
+
+.accordion-item::before,
+.accordion-item:last-child::after {
+    content: "";
+    z-index: 1;
+    background-color: var(--neutral-sand);
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 1px;
+    transition: all .5s ease-out;
+}
+
+.accordion-item:first-child::before {
+    background-color: transparent;
+}
+
+.accordion-item {
+    position: relative;
+    background-color: var(--neutral-bone);
+    cursor: pointer;
+}
+
+.accordion-item-content {
+    max-height: 0;
+    transition: all .5s ease-out;
+    overflow: hidden;
+}
+
+.accordion-item-header {
+    position: relative;
+    font-family: var(--sans-serif-font-regular);
+    font-size: var(--font-size-16);
+    display: flex;
+    align-items: center;
+    min-height: 50px
+}
+
+.accordion-item-open .accordion-item-content {
+    margin-bottom: 20px;
+}
+
+.accordion-item.accordion-item-open::before {  
+    height: 5px;
+}
+
+.accordion-arrow-down {
+    width: 16px;
+    position: absolute;
+    transition: all .5s ease-out;
+    display: block;
+    right: 0;
+    top: calc(50% - 11px); 
+    height: 16px;
+    background: url('../../icons/arrow-down-purple.svg') no-repeat;
+}
+
+.accordion-item-open .accordion-arrow-down {
+    transform: rotate(180deg);
+    top: calc(50% - 8px);
+}
+
+/* purple */
+.accordion.accordion-purple {
+    color: #fff;
+}
+
+.accordion.accordion-purple .accordion-item.accordion-item-open::before {  
+    height: 5px;
+    background-image: var(--gradient-left-right);
+}
+
+.accordion.accordion-purple .accordion-arrow-down {
+    background: url('../../icons/arrow-down-white.svg') no-repeat;
+}
+
+.accordion.accordion-purple .accordion-item:last-child::after,
+.accordion.accordion-purple .accordion-item::before {
+    background-color: #b66bf7;
+}
+
+.accordion.accordion-purple .accordion-item:first-child::before {
+    background-color: transparent;
+}
+
+.accordion.accordion-purple .accordion-item-header,
+.accordion.accordion-purple .accordion-item-content,
+.accordion.accordion-purple {
+    background-color: var(--primary-purple)
+}
+
+/* white */
+.accordion.accordion-white .accordion-item-header,
+.accordion.accordion-white .accordion-item-content
+.accordion.accordion-white {
+    background-color: var(--neutral-white);
+}
