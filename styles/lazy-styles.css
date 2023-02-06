@@ -155,12 +155,6 @@ div.stat-wrapper .stat {
   padding: var(--spacer-layout-05) var(--spacer-layout-02) var(--spacer-layout-04);
 }
 
-@media only screen and (min-width: 768px) {
-  div.stat-wrapper .stat {
-    padding: 80px 36px 32px;
-  }
-}
-
 div.stat-wrapper .stat > div {
   display: flex;
   align-items: start;
@@ -204,11 +198,6 @@ div.stat-wrapper .stat > div > div {
   margin-bottom: var(--spacer-layout-04);
   width: 100%;
 }
-@media (min-width: 900px) {
-  div.stat-wrapper .stat > div > div {
-    margin-left: 0;
-  }
-}
 
 /* Gray bar which resides below stats */
 div.stat-wrapper .stat::after {
@@ -217,4 +206,40 @@ div.stat-wrapper .stat::after {
   height: 1px;
   border-top: 1px solid #8b8883;
   padding-top: 32px;
+}
+
+/* Overriding default column styles b/c the 1st breakpoint for the Stat component is 768px — not 900px */
+@media (min-width: 768px) {
+  .columns.stat > div {
+    display: flex;
+    align-items: center;
+    flex-direction: unset;
+  }
+
+  .columns.stat > div > div {
+    flex: 1;
+  }
+
+  div.stat-wrapper .stat > div > div {
+    margin-left: 0;
+  }
+
+  .columns.stat > div > div:first-of-type {
+    margin-left: unset;
+  }
+
+  div.stat-wrapper .stat {
+    padding: 80px var(--spacer-layout-036) var(--spacer-layout-03);
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1192px) {
+  div.stat-wrapper .stat {
+    padding: var(--spacer-layout-07) var(--spacer-layout-156) var(--spacer-layout-05);
+  }
+
+  div.stat-wrapper .stat h1 {
+    font-size: 128px;
+  }
 }
