@@ -1,50 +1,99 @@
+import { createTag } from '../../scripts/scripts.js';
+
 /**
  * Leadspace block
  *
  */
+const selectors = Object.freeze({
+  videoBlock: '.leadspace.video',
+  videoWrapper: '.video-wrapper',
+  playButton: '.video-control.play button',
+  pauseButton: '.video-control.pause button',
+  openButton: 'button.open-video',
+  eventItem: '.leadspace.event p:not(.button-container)',
+});
+
+const buildOpenVideoButton = (label, duration) => {
+  const watchBtn = createTag('button', { class: 'open-video', type: 'button', 'aria-label': 'Play video' });
+  watchBtn.innerHTML = `<span><span>${label}</span><span>${duration}</span></span><span></span>`;
+  const btnContent = watchBtn.querySelector('span:nth-child(1)');
+  btnContent.classList.add('video-button-content');
+  btnContent.querySelector('span:nth-child(1)').classList.add('video-button-title');
+  btnContent.querySelector('span:nth-child(2)').classList.add('video-button-duration');
+  watchBtn.querySelector(':scope > span:nth-child(2)').classList.add('video-button-icon');
+  return watchBtn;
+}
+
+const buildVideoControlButton = (type, visible = true) => {
+  const controlBtn = createTag('div', { class: `video-control ${type}` });
+  controlBtn.innerHTML = `<button type="button"><span aria-hidden="true"></button>`;
+  const btn = controlBtn.querySelector('button');
+  btn.setAttribute('aria-label', `${type} video`);
+  btn.style.visibility = visible ? 'visible' : 'hidden';
+  return controlBtn;
+}
+
+const openVideoOverlay = () => {
+  alert('I was clicked!');
+}
+
+const togglePreviewVideo = (evt) => {
+  const target = evt.currentTarget;
+  const action = target.classList.contains('play') ? 'play' : 'pause';
+  const block = target.closest(selectors.videoBlock);
+  if (action === 'play') {
+    // play preview video
+    block.querySelector(`${selectors.videoWrapper} video`).play();
+    block.querySelector(selectors.playButton).style.visibility = 'hidden';
+    block.querySelector(selectors.pauseButton).style.visibility = 'visible';
+  } else {
+    // pause preview video
+    block.querySelector(`${selectors.videoWrapper} video`).pause();
+    block.querySelector(selectors.playButton).style.visibility = 'visible';
+    block.querySelector(selectors.pauseButton).style.visibility = 'hidden';
+  }
+}
 
 export default function decorate(block) {
   const col1 = block.firstElementChild?.children.item(0);
   const col2 = block.firstElementChild?.children.item(1);
-  const hasVideo = block.classList.contains('video');
+  const leadspaceType = block.classList.contains('video') ? 'video' : 'image';
 
   // decorate video
-  if (hasVideo) {
-    // video lead space blocks are a special case that do not follow normal processing rules
+  if (leadspaceType === 'video') {
+    // decorate block for displaying a video
     if (col1) {
       // watch video button
       const videoLink = col1.querySelector('p > strong > a');
       const videoDuration = col1.querySelector('p:last-of-type');
+      const button = buildOpenVideoButton(videoLink.textContent, videoDuration.textContent);
 
-      const watchBtn = document.createElement('button');
-      watchBtn.setAttribute('type', 'button');
-      watchBtn.setAttribute('aria-label', 'Play video');
-      watchBtn.innerHTML = `<span><span>${videoLink.textContent}</span><span>${videoDuration.textContent}</span></span><span></span>`;
-      const btnContent = watchBtn.querySelector('span:nth-child(1)');
-      btnContent.classList.add('video-button-content');
-      btnContent.querySelector('span:nth-child(1)').classList.add('video-button-title');
-      btnContent.querySelector('span:nth-child(2)').classList.add('video-button-duration');
-      watchBtn.querySelector(':scope > span:nth-child(2)').classList.add('video-button-icon');
+      // Display video overlay
+      button.addEventListener('click', openVideoOverlay);
 
-      watchBtn.addEventListener('click', () => {
-        alert('I was clicked!');
-      })
-
-      col1.removeChild(videoLink.parentElement.parentElement);
+      col1.removeChild(videoLink.closest('p'));
       col1.removeChild(videoDuration);
-
-      col1.appendChild(watchBtn);
+      col1.appendChild(button);
     }
 
     if (col2) {
-      // preview link
+      // convert preview link into a video
       const previewLink = col2.querySelector('a');
-      const video = document.createElement('div');
-      video.classList.add('video-wrapper');
+      const video = createTag('div', { class: 'video-wrapper' });
       video.innerHTML = `<video autoplay controls muted playsinline loop preload="auto">
         <source src="${previewLink.href}" type="video/mp4">
         </video>`;
       col2.replaceChild(video, previewLink);
+
+      // Add preview control buttons
+      const playButton = buildVideoControlButton('play',false);
+      const pauseButton = buildVideoControlButton('pause');
+
+      playButton.addEventListener('click', togglePreviewVideo);
+      pauseButton.addEventListener('click', togglePreviewVideo);
+
+      col2.appendChild(playButton);
+      col2.appendChild(pauseButton);
     }
     return;
   }
@@ -53,8 +102,7 @@ export default function decorate(block) {
 
   if (col1) {
     // group buttons
-    const buttonGroup = document.createElement('div');
-    buttonGroup.classList.add('button-group');
+    const buttonGroup = createTag('div', { class: 'button-group' });
 
     const buttons = [...col1.querySelectorAll('.button-container')] || [];
 
@@ -77,15 +125,15 @@ export default function decorate(block) {
     }
 
     // group events
-    const eventItems = [...col1.querySelectorAll('.leadspace.event p:not(.button-container) > em')] || [];
+    const eventItems = [...col1.querySelectorAll(`${selectors.eventItem} > em`)] || [];
 
-    const eventGroup = document.createElement('div');
-    eventGroup.classList.add('event-group');
+    const eventGroup = createTag('div', { class: 'event-group' });
 
     eventItems.forEach((item, index) => {
       item.parentElement?.classList.add('event-item', index === 0 ? 'location' : 'date');
       eventGroup.appendChild(item.parentElement);
     });
+
     if (eventGroup.children.length) {
       col1.append(eventGroup);
     }

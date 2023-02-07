@@ -133,7 +133,7 @@ main div.leadspace-wrapper {
     width: 100%;
 }
 
-.leadspace.video button {
+.leadspace.video button.open-video {
     width: auto;
     height: 66px;
     background-color: var(--neutral-carbon);
@@ -179,10 +179,62 @@ main div.leadspace-wrapper {
     margin: 0 0 0 24px;
 }
 
-.leadspace.video button:hover .video-button-icon {
+.leadspace.video button.open-video:hover .video-button-icon {
     background: url('./../../icons/play-button.svg') no-repeat 55% 50%, var(--gradient-left-right);
 }
 
+/* Video control button */
+.leadspace.video .video-control {
+    display: block;
+    position: absolute;
+    bottom: 18%;
+    right: 18%;
+    visibility: hidden;
+    z-index: 2;
+}
+
+.leadspace.video .video-control button {
+    width: 67px;
+    height: 67px;
+    max-height: 67px;
+    visibility: visible;
+    background: transparent;
+    border: 2px solid var(--neutral-white);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    padding: 0;
+    cursor: pointer;
+}
+
+.leadspace.video .video-control button:hover {
+    background-image: var(--gradient-left-right);
+    border: 0;
+    transition: all .2s ease-in-out;
+}
+
+.leadspace.video .video-control button > span {
+    background-size: contain;
+}
+
+.leadspace.video .video-control.pause button > span {
+    background-image: url('./../../icons/pause.svg');
+    background-repeat: space;
+    background-size: 35%;
+    width: 13px;
+    height: 19px;
+    margin-left: 0;
+}
+
+.leadspace.video .video-control.play button > span {
+    background-image: url('./../../icons/play-button.svg');
+    background-repeat: no-repeat;
+    height: 23px;
+    width: 15px;
+    margin-left: 5px;
+}
 
 /* Media queries */
 @media screen and (min-width: 768px) {
@@ -241,7 +293,7 @@ main div.leadspace-wrapper {
         align-items: center;
     }
 
-    .leadspace.video button {
+    .leadspace.video button.open-video {
         position: absolute;
         top: 60%;
         left: 100%;
