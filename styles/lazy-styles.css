@@ -89,7 +89,7 @@ border: 0;
 margin: 0;
 padding: 0;
 box-sizing: inherit;
-letter-spacing: .01em;
+letter-spacing: var(--letter-spacing-001-em);
 line-height: 160%;
 font-family: var(--sans-serif-font-light);
 font-weight: var(--font-weight-light);
@@ -99,7 +99,7 @@ font-size: 21px;
 main.error a.button-404{
   text-align: center;
   font-family: var(--sans-serif-font-medium);
-  letter-spacing: .01em;
+  letter-spacing: var(--letter-spacing-001-em);
   line-height: 160%;
   font-weight: var(--font-weight-medium);
   font-size: 100%;
@@ -130,7 +130,7 @@ main.error a.button-404  span{
   text-align: left;
   font-family: var(--sans-serif-font-medium);
   font-size: 16px;
-  letter-spacing: .01em;
+  letter-spacing: var(--letter-spacing-001-em);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
   color: #90f;
@@ -165,12 +165,12 @@ div.stat-wrapper .stat > div > div::before {
   display: block;
   content: " ";
   height: 1px;
-  background-image: linear-gradient(270deg, #fa1e32, #90f);
+  background-image: var(--gradient-left-right);
 }
 
 div.stat-wrapper .stat h1 {
   font-size: 96px;
-  line-height: 120%;
+  line-height: var(--line-height-120);
   letter-spacing: 0;
   font-weight: 300;
   padding: 0;
@@ -179,7 +179,7 @@ div.stat-wrapper .stat h1 {
 
 div.stat-wrapper .stat p {
   font-size: var(--font-size-16);
-  letter-spacing: .01em;
+  letter-spacing: var(--letter-spacing-001-em);
   line-height: 160%;
   font-weight: 400;
   color: var(--neutral-white);
