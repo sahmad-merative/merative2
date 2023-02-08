@@ -1,4 +1,4 @@
-import { createTag, getMetadata } from '../../scripts/scripts.js';
+import { createTag } from '../../scripts/scripts.js';
 
 const selectors = {
   accordion: 'accordion',
@@ -7,14 +7,6 @@ const selectors = {
   accordionItemContent: 'accordion-item-content',
   accordionItemOpen: 'accordion-item-open',
   arrow: 'accordion-arrow-down',
-};
-
-const accordionType = getMetadata('accordion-type') || 'single';
-
-const findAncestor = (el, cls) => {
-  let tmp = el.parentElement;
-  while (!tmp.classList.contains(cls)) tmp = tmp.parentElement;
-  return tmp;
 };
 
 const openItem = (item) => {
@@ -31,8 +23,8 @@ const closeItem = (item) => {
 
 const accordionTypesMap = {
   single: (e) => {
-    const item = findAncestor(e.currentTarget, selectors.accordionItem);
-    const accordionItem = findAncestor(e.currentTarget, selectors.accordion);
+    const item = e.currentTarget.closest(`.${selectors.accordionItem}`);
+    const accordionItem = e.currentTarget.closest(`.${selectors.accordion}`);
     const currentOpenItems = accordionItem.getElementsByClassName(selectors.accordionItemOpen);
     const isCurrent = (currentOpenItems.length && item.isSameNode(currentOpenItems[0]));
 
@@ -42,7 +34,7 @@ const accordionTypesMap = {
     if (!isCurrent) openItem(item);
   },
   multiple: (e) => {
-    const item = findAncestor(e.currentTarget, selectors.accordionItem);
+    const item = e.currentTarget.closest(`.${selectors.accordionItem}`);
     const isOpen = item.classList.contains(selectors.accordionItemOpen);
     if (!isOpen) openItem(item);
     else closeItem(item);
@@ -50,7 +42,13 @@ const accordionTypesMap = {
 };
 
 export default function decorate(block) {
-  [].slice.call(block.children).forEach((element) => {
+  let accordionType = 'single';
+  const dataSection = block.closest('[data-accordion-type]');
+  if (dataSection) {
+    accordionType = dataSection.dataset.accordionType;
+  }
+
+  [...block.children].forEach((element) => {
     const arrow = createTag('div', { class: selectors.arrow });
     element.classList.add('accordion-item');
     element.append(arrow);
