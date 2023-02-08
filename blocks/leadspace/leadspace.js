@@ -74,6 +74,7 @@ export default function decorate(block) {
       col1.removeChild(videoLink.closest('p'));
       col1.removeChild(videoDuration);
       col1.appendChild(button);
+
     }
 
     if (col2) {
@@ -95,6 +96,12 @@ export default function decorate(block) {
       col2.appendChild(playButton);
       col2.appendChild(pauseButton);
     }
+
+    // add scroll border decoration
+    const scrollBorder = createTag('div', { class: 'scroll-border-wrapper' });
+    scrollBorder.innerHTML = `<span class="scroll-border-line"></span><span class="scroll-border-text">SCROLL</span>`;
+    block.append(scrollBorder);
+
     return;
   }
 

@@ -4,14 +4,16 @@
 .section.leadspace-container {
     background: var(--neutral-bone);
     padding: 0;
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
 }
 
 /** Block styling **/
 main div.leadspace-wrapper {
+    position: relative;
     width: 100%;
     margin: 0;
-    padding: var(--spacer-layout-05) var(--spacer-layout-02) 0;
+    padding: 0 var(--spacer-layout-02) 0;
 }
 
 .leadspace > div {
@@ -20,18 +22,13 @@ main div.leadspace-wrapper {
     flex-flow: column;
 }
 
-/* Image Variants */
-.leadspace.half-circle img {
-    clip-path: circle(50% at 50% 100%);
-}
-
-.leadspace.quarter-circle img {
-    clip-path: circle(100% at 100% 100%);
-}
-
 /* Column Specific Styles */
 .leadspace > div > div {
     position: relative;
+}
+
+.leadspace > div > div:nth-child(1) {
+    margin: auto;
 }
 
 /* Eyebrow */
@@ -43,6 +40,7 @@ main div.leadspace-wrapper {
     line-height: var(--line-height-120);
 }
 
+/* Heading */
 .leadspace > div > div:nth-child(1) > h1 {
     margin: var(--spacer-layout-02) 0 var(--spacer-layout-01) 0;
 }
@@ -52,6 +50,7 @@ main div.leadspace-wrapper {
     display: flex;
 }
 
+/* Image Variants */
 .leadspace > div > div:nth-child(2) picture {
     display: inline-block;
     align-self: flex-end;
@@ -61,8 +60,16 @@ main div.leadspace-wrapper {
     margin-bottom: -4px;
 }
 
-.leadspace.event > div > div:nth-child(2) picture {
+.leadspace.event picture {
     display: none;
+}
+
+.leadspace.half-circle img {
+    clip-path: circle(50% at 50% 100%);
+}
+
+.leadspace.quarter-circle img {
+    clip-path: circle(100% at 100% 100%);
 }
 
 /* Button Group */
@@ -236,12 +243,16 @@ main div.leadspace-wrapper {
     margin-left: 5px;
 }
 
+.leadspace.video .scroll-border-wrapper {
+    display: none;
+}
+
 /* Media queries */
 @media screen and (min-width: 768px) {
     main div.leadspace-wrapper {
         max-width: 768px;
         margin: 0 auto;
-        padding: var(--spacer-layout-05) var(--spacer-layout-036) 0;
+        padding: 0 var(--spacer-layout-036) 0;
     }
 
     .leadspace > div {
@@ -259,7 +270,7 @@ main div.leadspace-wrapper {
     }
 
     .leadspace .button-group {
-        margin: var(--spacer-element-09) 0 104px 0;
+        margin: var(--spacer-element-09) 0;
     }
 
     .leadspace.event picture {
@@ -272,7 +283,7 @@ main div.leadspace-wrapper {
     main div.leadspace-wrapper {
         max-width: 1440px;
         margin: 0 auto;
-        padding: var(--spacer-layout-05) var(--spacer-layout-156) 0;
+        padding: 0 var(--spacer-layout-156) 0;
     }
 
     .leadspace > div {
@@ -298,5 +309,24 @@ main div.leadspace-wrapper {
         top: 60%;
         left: 100%;
         z-index: 2;
+    }
+
+    .leadspace.video.scroll-border .scroll-border-wrapper {
+        display: flex;
+        position: absolute;
+        bottom: -143px;
+        gap: var(--spacer-layout-03);
+    }
+
+    .leadspace.video .scroll-border-line {
+        width: 2px;
+        height: 286px;
+        background-image: var(--gradient-horizontal-down);
+    }
+
+    .leadspace.video .scroll-border-line {
+        font-size: var(--font-size-14);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-02-em);
     }
 }
