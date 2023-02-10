@@ -73,7 +73,7 @@
 
 /* purple */
 .accordion.accordion-purple {
-    color: #fff;
+    color: var(--neutral-white);
 }
 
 .accordion.accordion-purple .accordion-item.accordion-item-open::before {  
