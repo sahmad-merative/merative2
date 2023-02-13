@@ -102,10 +102,10 @@ export default async function decorate(block) {
     block.append(docDiv);
 
     // Add a download link if someone wants to download the document
-    const downloadLink = createTag('a', { id: 'download-link' });
+    const downloadLink = createTag('a', { class: 'download-link' });
     downloadLink.setAttribute('href', docUrl);
     downloadLink.setAttribute('target', '_blank');
-    downloadLink.textContent = 'Download Link';
+    downloadLink.textContent = 'Download PDF';
     block.prepend(downloadLink);
 
     window.setTimeout(() => embedPDFViewer(
