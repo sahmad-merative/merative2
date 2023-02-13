@@ -136,7 +136,7 @@ main .section {
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content p {
     font-size: 16px;
-    margin: var(--spacer-element-03) 0 var(--spacer-element-07);
+    margin: var(--spacer-element-03) 0 var(--spacer-element-08);
 }
 
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content > .blog-author {
@@ -201,11 +201,11 @@ main .section {
 }
 
 .blog-home .filters[aria-expanded="true"] > .filters-header.is-sticky {
-    box-shadow: 0 4px 4px -4px rgb(0 0 0 / 15%);
-    margin-left: -16px;
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+    box-shadow: 0 4px 4px -1px rgb(0 0 0 / 15%);
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
     z-index: 1000000;
 }
 
@@ -279,9 +279,14 @@ main .section {
 
 /* Filter items */
 /* stylelint-disable-next-line no-descending-specificity */
-.blog-home .filters > .filters-main > div {
+.blog-home .filters > .filters-main > div:not(:last-of-type) {
     border-bottom: 1px solid var(--neutral-sand);
-    padding-bottom: var(--spacer-element-08);
+    padding-bottom: var(--spacer-element-10);
+}
+
+.blog-home .filters > .filters-main > div:first-of-type {
+    border-bottom: 1px solid var(--neutral-sand);
+    padding-bottom: var(--spacer-element-07);
 }
 
 .blog-home .filters span.list-title,
@@ -332,25 +337,33 @@ main .section {
 
 
 
-.blog-home[data-block-status="loaded"] .filters a.category-link {
+.blog-home[data-block-status="loaded"] .filters a.category-link, .blog-home .filters a.category-link.active {
     display: block;
     padding-bottom: 16px;
 
     /* padding-top: 4px; */
 }
 
+
+
+.blog-home .filters[aria-expanded="false"] > .filters-header::before, .blog-home .filters a.category-link.active::before {
+    content:'';
+    border: solid 1px;
+    border-image: var(--gradient-horizontal-down) 0 1;
+    border-style: solid;
+    border-width: 0 0 0 4px;
+    height:24px;
+    padding-left: var(--spacer-layout-01);
+    
+}
+
 /* stylelint-disable-next-line no-descending-specificity */
 .blog-home .filters[aria-expanded="false"] > .filters-header,
 .blog-home .filters a.category-link.active {
     font-family: var(--sans-serif-font-semibold);
-    padding-left: var(--spacer-layout-01);
-    border: solid 1px;
-    border-image: var(--gradient-horizontal-down) 0 1;
-    border-style: solid;
-    border-width: 5px 0 5px 4px;
-    padding-bottom: unset;
     padding-top: unset;
     font-weight: 500;
+    display: flex;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -406,7 +419,6 @@ main .section {
     main .section {
         padding-top: var(--spacer-layout-05);
     }
-
     
     .blog-home-container {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
@@ -458,12 +470,17 @@ main .section {
     }
 
     .blog-home > .blog-content > .blog-cards > .blog-card > .card-content a {
-        font-size: 18px;
-        font-family: var(--sans-serif-font-light);
-        font-style: light;
-        font-weight: var(--font-weight-light);
+        font-size: 16px;
+        font-family: var(--sans-serif-font-regular);
+        font-style: regular;
+        font-weight: var(--font-weight-regular);
         line-height: var(--line-height-160);
         letter-spacing: var(--letter-spacing-1);
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content a {
+        font-size: 18px;
+        font-family: var(--sans-serif-font-light);
     }
 
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image,
@@ -504,6 +521,7 @@ main .section {
 
     .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content p {
         margin: var(--spacer-element-03) 0 var(--spacer-element-10);
+        font-size: 16px;
     }
 
 }
@@ -550,6 +568,14 @@ main .section {
 
     .blog-home > .blog-content > .blog-cards > .blog-card:not(.featured-article) {
         width: 396px;
+    }
+
+    .blog-home > .blog-content > .blog-cards > .blog-card.featured-article > .card-content a {
+        font-size: 24px;
+        font-family: var(--sans-serif-font-light);
+        font-weight: var(--font-weight-light);
+        line-height: var(--line-height-160);
+        letter-spacing: var(--letter-spacing-1);
     }
 
     .blog-home .filters {
