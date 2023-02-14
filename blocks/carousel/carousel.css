@@ -1,4 +1,11 @@
 /* Carousel block styles */
+
+/** Carousel section styling */
+.section.carousel-container {
+    background: var(--neutral-bone);
+    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
+}
+
 .carousel {
     position: relative;
     width: 100%;
@@ -27,16 +34,6 @@
     height: 100%;
     position: absolute;
     transition: all 0.5s;
-}
-
-.carousel .carousel-slide > div:nth-child(1) {
-    width: 100%;
-    font-size: var(--font-size-32);
-    line-height: 120%;
-    letter-spacing: .0175em;
-    font-weight: var(--font-weight-regular);
-    margin: 0 auto;
-    text-align: center;
 }
 
 .carousel .carousel-slide figure {
@@ -123,36 +120,10 @@
     display: none;
 }
 
-/** Carousel section styling */
-.section.carousel-container {
-    background: var(--neutral-bone);
-    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
-}
-
 /* Links within carousel container */
 .section.carousel-container .button-container {
     text-align: center;
     margin: var(--spacer-layout-05) 0 0;
-}
-
-.section.carousel-container .button-container a {
-    color: var(--primary-purple);
-    font-size: var(--font-size-16);
-    border-bottom: 2px solid var(--primary-purple);
-    font-weight: bold;
-    text-decoration: none;
-    letter-spacing: var(--letter-spacing-001-em);
-}
-
-.section.carousel-container .button-container a:active,
-.section.carousel-container .button-container a:hover {
-    background: var(--gradient-left-right);
-    background-clip: text;
-    -webkit-background-clip: text;     /* stylelint-disable-line */
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    border-image-slice: 1;
-    border-image-source: var(--gradient-left-right);
 }
 
 /* Media queries */
