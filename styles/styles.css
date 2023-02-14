@@ -167,6 +167,75 @@ sup {
     font-size: small;
 }
 
+/* Styles for Columns with the "stat" class, and "stat-wrapper" section metadata style */
+div.stat-wrapper {
+    padding: 0;
+}
+
+div.stat-wrapper .columns-wrapper {
+    width: 100%;
+    margin: 0;
+}
+
+div.stat-wrapper .stat {
+    background-color: var(--neutral-carbon);
+    color: var(--neutral-white);
+    padding: var(--spacer-layout-05) var(--spacer-layout-02) var(--spacer-layout-04);
+}
+
+div.stat-wrapper .stat > div {
+    display: flex;
+    align-items: start;
+    column-gap: var(--spacer-element-07);
+}
+
+/* Gradiant line, from purple to red */
+div.stat-wrapper .stat > div > div::before {
+    display: block;
+    content: " ";
+    height: 1px;
+    background-image: var(--gradient-left-right);
+}
+
+div.stat-wrapper .stat h1 {
+    font-size: 96px;
+    line-height: var(--line-height-120);
+    letter-spacing: 0;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+}
+
+div.stat-wrapper .stat p {
+    font-size: var(--font-size-16);
+    letter-spacing: var(--letter-spacing-001-em);
+    line-height: 160%;
+    font-weight: 400;
+    color: var(--neutral-white);
+    padding: 0;
+    margin: 0 0 var(--spacer-layout-03) 0;
+    overflow-wrap: break-word;
+}
+
+div.stat-wrapper .stat p:last-child {
+    margin-bottom: 0;
+}
+
+/* A single stat element */
+div.stat-wrapper .stat > div > div {
+    margin-bottom: var(--spacer-layout-04);
+    width: 100%;
+}
+
+/* Gray bar which resides below stats */
+div.stat-wrapper .stat::after {
+    display: block;
+    content: " ";
+    height: 1px;
+    border-top: 1px solid #8b8883;
+    padding-top: var(--spacer-element-08);
+}
+
 /* Mobile */
 @media only screen and (max-width: 768px) {
     main .section > div {
@@ -232,6 +301,29 @@ sup {
     main .section.back-to-top.active::after {
         width: 54px;
         height: 54px;
+    }
+
+    /* Stat related tablet styles */
+    .columns.stat > div {
+        display: flex;
+        align-items: center;
+        flex-direction: unset;
+    }
+
+    .columns.stat > div > div {
+        flex: 1;
+    }
+
+    div.stat-wrapper .stat > div > div {
+        margin-left: 0;
+    }
+
+    .columns.stat > div > div:first-of-type {
+        margin-left: unset;
+    }
+
+    div.stat-wrapper .stat {
+        padding: 80px var(--spacer-layout-036) var(--spacer-layout-03);
     }
 }
 
@@ -398,6 +490,15 @@ sup {
 
     main .article-content {
         padding-bottom: 160px;
+    }
+
+    /* Stat related desktop styles */
+    div.stat-wrapper .stat {
+        padding: var(--spacer-layout-07) var(--spacer-layout-156) var(--spacer-layout-05);
+    }
+
+    div.stat-wrapper .stat h1 {
+        font-size: 128px;
     }
 }
 
