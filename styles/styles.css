@@ -510,11 +510,6 @@ main .leadership-content img {
   border-radius: 15px;
 }
 
-main .leadership-head img {
-  clip-path: circle(50% at 50% 100%);
-  margin-bottom: -3px;
-}
-
 main .article-content picture img{
     border-radius: 10px;
     padding: 48px 0;
@@ -741,24 +736,8 @@ main .divider {
 }
 
 /* Leadership Sections */
-main .section.leadership-head {
-    padding: 0 32px;
-}
-
-main .section.leadership-head h1 {
-    margin: 5px 0;
-}
-
-main .section.leadership-head p {
-    margin: 5px 0;
-}
-
 main .section.leadership-content .columns>div>div {
   margin: 25px 0;
-}
-
-main .section.leadership-head .columns-2-cols>div>div:last-child {
-  margin: 0 -45px;
 }
 
 main .section.leadership-content {
@@ -784,25 +763,18 @@ main .section.leadership-content .columns > div > div > h6 {
 }
 
 @media (min-width: 768px) {
-    main .section.leadership-content .columns > div,
-    main .section.leadership-head .columns > div {
+    main .section.leadership-content .columns > div {
         align-items: normal;
         flex-direction: unset;
     }
 
-    main .section.leadership-content .columns > div > div,
-    main .section.leadership-head .columns > div > div {
+    main .section.leadership-content .columns > div > div {
         flex: 1;
         margin-left: 32px;
     }
 
-    main .section.leadership-content .columns > div > div:first-of-type,
-    main .section.leadership-head .columns > div > div:first-of-type {
+    main .section.leadership-content .columns > div > div:first-of-type {
         margin-left: unset;
-    }
-
-    main .section.leadership-head .columns > div > div:first-of-type {
-        align-self: center;
     }
 }
 
