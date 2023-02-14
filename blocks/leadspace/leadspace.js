@@ -22,20 +22,20 @@ const buildOpenVideoButton = (label, duration) => {
   btnContent.querySelector('span:nth-child(2)').classList.add('video-button-duration');
   watchBtn.querySelector(':scope > span:nth-child(2)').classList.add('video-button-icon');
   return watchBtn;
-}
+};
 
 const buildVideoControlButton = (type, visible = true) => {
   const controlBtn = createTag('div', { class: `video-control ${type}` });
-  controlBtn.innerHTML = `<button type="button"><span aria-hidden="true"></button>`;
+  controlBtn.innerHTML = '<button type="button"><span aria-hidden="true"></button>';
   const btn = controlBtn.querySelector('button');
   btn.setAttribute('aria-label', `${type} video`);
   btn.style.visibility = visible ? 'visible' : 'hidden';
   return controlBtn;
-}
+};
 
 const openVideoOverlay = () => {
   alert('I was clicked!');
-}
+};
 
 const togglePreviewVideo = (evt) => {
   const target = evt.currentTarget;
@@ -52,7 +52,7 @@ const togglePreviewVideo = (evt) => {
     block.querySelector(selectors.playButton).style.visibility = 'visible';
     block.querySelector(selectors.pauseButton).style.visibility = 'hidden';
   }
-}
+};
 
 export default function decorate(block) {
   const col1 = block.firstElementChild?.children.item(0);
@@ -74,7 +74,6 @@ export default function decorate(block) {
       col1.removeChild(videoLink.closest('p'));
       col1.removeChild(videoDuration);
       col1.appendChild(button);
-
     }
 
     if (col2) {
@@ -87,7 +86,7 @@ export default function decorate(block) {
       col2.replaceChild(video, previewLink);
 
       // Add preview control buttons
-      const playButton = buildVideoControlButton('play',false);
+      const playButton = buildVideoControlButton('play', false);
       const pauseButton = buildVideoControlButton('pause');
 
       playButton.addEventListener('click', togglePreviewVideo);
@@ -99,7 +98,7 @@ export default function decorate(block) {
 
     // add scroll border decoration
     const scrollBorder = createTag('div', { class: 'scroll-border-wrapper' });
-    scrollBorder.innerHTML = `<span class="scroll-border-line"></span><span class="scroll-border-text">SCROLL</span>`;
+    scrollBorder.innerHTML = '<span class="scroll-border-line"></span><span class="scroll-border-text">SCROLL</span>';
     block.append(scrollBorder);
 
     return;
@@ -145,5 +144,4 @@ export default function decorate(block) {
       col1.append(eventGroup);
     }
   }
-
 }

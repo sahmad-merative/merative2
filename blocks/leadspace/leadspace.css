@@ -60,14 +60,17 @@ main div.leadspace-wrapper {
     margin-bottom: -4px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .leadspace.event picture {
     display: none;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .leadspace.half-circle img {
     clip-path: circle(50% at 50% 100%);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .leadspace.quarter-circle img {
     clip-path: circle(100% at 100% 100%);
 }
@@ -322,9 +325,6 @@ main div.leadspace-wrapper {
         width: 2px;
         height: 286px;
         background-image: var(--gradient-horizontal-down);
-    }
-
-    .leadspace.video .scroll-border-line {
         font-size: var(--font-size-14);
         text-transform: uppercase;
         letter-spacing: var(--letter-spacing-02-em);
