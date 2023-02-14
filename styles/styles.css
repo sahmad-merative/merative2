@@ -435,6 +435,77 @@ button {
     margin: 0;
 }
 
+/* Button Styles  */
+main .button-container a {
+    position: relative;
+    cursor: pointer;
+    color: var(--primary-purple);
+    text-decoration: none;
+    font-family: var(--sans-serif-font-medium);
+    font-size: var(--font-size-16);
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-1);
+    line-height: var(--line-height-160);
+}
+
+main .button-container > strong > a,
+main .button-container > em > a {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 48px;
+    border-radius: 40px;
+    padding: 11px var(--spacer-layout-02);
+}
+
+/* Primary Button */
+main .button-container > strong > a.button.primary {
+    background: var(--primary-purple);
+    color: var(--neutral-white);
+}
+
+main .button-container > strong > a.button.primary::after {
+    display: inline-block;
+    content: '';
+    margin-left: var(--spacer-layout-02);
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background: url('../icons/arrow-white.svg') no-repeat right center;
+    background-size: contain;
+}
+
+/* Secondary Button */
+main .button-container > em > a.button.secondary {
+    border: 1px solid var(--primary-purple);
+    font-weight: 500;
+    font-style: normal;
+}
+
+main .button-container > strong > a.button.primary:hover,
+main .button-container > strong > a.button.primary:active,
+main .button-container > em > a.button.secondary:hover,
+main .button-container > em > a.button.secondary:active {
+    border-style: none;
+    background: var(--gradient-left-right);
+    color: var(--neutral-white);
+}
+
+/* Tertiary (Link) Button */
+main .button-container > a.primary {
+    border-bottom: 2px solid var(--primary-purple);
+}
+
+main .button-container > a.primary:active,
+main .button-container > a.primary:hover {
+    background: var(--gradient-left-right);
+    background-clip: text;
+    -webkit-background-clip: text; /* stylelint-disable-line */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    border-image-slice: 1;
+    border-image-source: var(--gradient-left-right);
+}
+
 main .leadership-content img {
   border-radius: 15px;
 }
@@ -667,77 +738,6 @@ main .divider {
     width: auto;
     margin: var(--spacer-layout-05) 0;
     border: 1px solid var(--neutral-sand);
-}
-
-/* Button Styles  */
-main .button-container a {
-    position: relative;
-    cursor: pointer;
-    color: var(--primary-purple);
-    text-decoration: none;
-    font-family: var(--sans-serif-font-medium);
-    font-size: var(--font-size-16);
-    font-weight: 500;
-    letter-spacing: var(--letter-spacing-1);
-    line-height: var(--line-height-160);
-}
-
-main .button-container > strong > a,
-main .button-container > em > a {
-    box-sizing: border-box;
-    display: inline-block;
-    height: 48px;
-    border-radius: 40px;
-    padding: 11px var(--spacer-layout-02);
-}
-
-/* Primary Button */
-main .button-container > strong > a.button.primary {
-    background: var(--primary-purple);
-    color: var(--neutral-white);
-}
-
-main .button-container > strong > a.button.primary::after {
-    display: inline-block;
-    content: '';
-    margin-left: var(--spacer-layout-02);
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    background: url('../icons/arrow-white.svg') no-repeat right center;
-    background-size: contain;
-}
-
-/* Secondary Button */
-main .button-container > em > a.button.secondary {
-    border: 1px solid var(--primary-purple);
-    font-weight: 500;
-    font-style: normal;
-}
-
-main .button-container > strong > a.button.primary:hover,
-main .button-container > strong > a.button.primary:active,
-main .button-container > em > a.button.secondary:hover,
-main .button-container > em > a.button.secondary:active {
-    border-style: none;
-    background: var(--gradient-left-right);
-    color: var(--neutral-white);
-}
-
-/* Tertiary (Link) Button */
-main .button-container > a.primary {
-    border-bottom: 2px solid var(--primary-purple);
-}
-
-main .button-container > a.primary:active,
-main .button-container > a.primary:hover {
-    background: var(--gradient-left-right);
-    background-clip: text;
-    -webkit-background-clip: text; /* stylelint-disable-line */
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    border-image-slice: 1;
-    border-image-source: var(--gradient-left-right);
 }
 
 /* Leadership Sections */

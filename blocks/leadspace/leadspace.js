@@ -34,7 +34,7 @@ const buildVideoControlButton = (type, visible = true) => {
 };
 
 const openVideoOverlay = () => {
-  alert('I was clicked!');
+  console.log('open video overlay');
 };
 
 const togglePreviewVideo = (evt) => {
@@ -100,6 +100,11 @@ export default function decorate(block) {
     const scrollBorder = createTag('div', { class: 'scroll-border-wrapper' });
     scrollBorder.innerHTML = '<span class="scroll-border-line"></span><span class="scroll-border-text">SCROLL</span>';
     block.append(scrollBorder);
+
+    // add video overlay
+    const videoOverlay = createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
+
+    block.append(videoOverlay);
 
     return;
   }
