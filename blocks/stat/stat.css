@@ -1,0 +1,91 @@
+/* Styles the "stat" block: https://www.figma.com/file/vw24IPXXt4vCh9BNumka9A/Web--Merative-Digital-Design-System-2.0?node-id=1461%3A12680&t=DNri9APpeJe1XGf2-0 */
+div.stat-container {
+    padding: 0;
+}
+
+div.stat-container .stat-wrapper {
+    width: 100%;
+    margin: 0;
+}
+
+div.stat-container .stat {
+    background-color: var(--neutral-carbon);
+    color: var(--neutral-white);
+    padding: var(--spacer-layout-05) var(--spacer-layout-02) var(--spacer-layout-04);
+}
+
+div.stat-container .stat > div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    column-gap: var(--spacer-element-07);
+}
+
+/* Gradiant line, from purple to red */
+div.stat-container .stat > div > div::before {
+    display: block;
+    content: " ";
+    height: 1px;
+    background-image: var(--gradient-left-right);
+}
+
+div.stat-container .stat h1 {
+    font-size: 96px;
+    line-height: var(--line-height-120);
+    letter-spacing: 0;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+}
+
+div.stat-container .stat p {
+    font-size: var(--font-size-16);
+    letter-spacing: var(--letter-spacing-001-em);
+    line-height: 160%;
+    font-weight: 400;
+    color: var(--neutral-white);
+    padding: 0;
+    margin: 0 0 var(--spacer-layout-03) 0;
+    overflow-wrap: break-word;
+}
+
+div.stat-container .stat p:last-child {
+    margin-bottom: 0;
+}
+
+/* A single stat element */
+div.stat-container .stat > div > div {
+    margin-bottom: var(--spacer-layout-04);
+    width: 100%;
+}
+
+/* Gray bar which resides below stats */
+div.stat-container .stat::after {
+    display: block;
+    content: " ";
+    height: 1px;
+    border-top: 1px solid #8b8883;
+    padding-top: var(--spacer-element-08);
+}
+
+/* Tablet (and larger) styles */
+@media (min-width: 768px) {
+    div.stat-container .stat {
+        padding: 80px var(--spacer-layout-036) var(--spacer-layout-03);
+    }
+
+    div.stat-container .stat > div {
+        flex-direction: unset;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1200px) {
+    div.stat-container .stat {
+        padding: var(--spacer-layout-07) var(--spacer-layout-156) var(--spacer-layout-05);
+    }
+
+    div.stat-container .stat h1 {
+        font-size: 128px;
+    }
+}
