@@ -115,7 +115,7 @@ export default function decorate(block) {
       // convert preview link into a video
       const previewLink = col2.querySelector('a');
       const video = createTag('div', { class: 'video-wrapper' });
-      video.innerHTML = `<video autoplay controls muted playsinline loop preload="auto">
+      video.innerHTML = `<video autoplay muted playsinline loop preload="auto">
         <source src="${previewLink.href}" type="video/mp4">
         </video>`;
       col2.replaceChild(video, previewLink);
