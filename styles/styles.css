@@ -306,7 +306,7 @@ sup {
     }
 
     h3 {
-        font-size: var(--font-size-28);;
+        font-size: var(--font-size-28);
     }
 
     h4 {
@@ -748,7 +748,7 @@ main .section.leadership-content {
 main .section.leadership-content .columns>div>div>p {
   font-style: normal;
   font-size: 28px;
-  line-height: 120%;
+  line-height: var(--line-height-120);
   letter-spacing: 0.0175em;
 }
 
@@ -757,7 +757,7 @@ main .section.leadership-content .columns > div > div > h6 {
     font-style: normal;
     font-size: 11px;
     font-weight: 500;
-    line-height: 120%;
+    line-height: var(--line-height-120);
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }

@@ -10,8 +10,37 @@ const selectors = Object.freeze({
   playButton: '.video-control.play button',
   pauseButton: '.video-control.pause button',
   openButton: 'button.open-video',
+  videoModal: '.leadspace.video .video-modal',
   eventItem: '.leadspace.event p:not(.button-container)',
 });
+
+const toggleVideoOverlay = () => {
+  const modal = document.querySelector(selectors.videoModal);
+  if (modal?.classList.contains('open')) {
+    modal.classList.remove('open');
+    modal.querySelector('video').pause();
+  } else {
+    modal.classList.add('open');
+    modal.querySelector('video').play();
+  }
+};
+
+const togglePreviewVideo = (evt) => {
+  const target = evt.currentTarget;
+  const action = target.classList.contains('play') ? 'play' : 'pause';
+  const block = target.closest(selectors.videoBlock);
+  if (action === 'play') {
+    // play preview video
+    block.querySelector(`${selectors.videoWrapper} video`).play();
+    block.querySelector(selectors.playButton).style.visibility = 'hidden';
+    block.querySelector(selectors.pauseButton).style.visibility = 'visible';
+  } else {
+    // pause preview video
+    block.querySelector(`${selectors.videoWrapper} video`).pause();
+    block.querySelector(selectors.playButton).style.visibility = 'visible';
+    block.querySelector(selectors.pauseButton).style.visibility = 'hidden';
+  }
+};
 
 const buildOpenVideoButton = (label, duration) => {
   const watchBtn = createTag('button', { class: 'open-video', type: 'button', 'aria-label': 'Play video' });
@@ -33,25 +62,29 @@ const buildVideoControlButton = (type, visible = true) => {
   return controlBtn;
 };
 
-const openVideoOverlay = () => {
-  console.log('open video overlay');
-};
+const buildVideoModal = (href) => {
+  const videoModal = createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
+  const videoOverlay = createTag('div', { class: 'video-modal-overlay' });
+  const videoContainer = createTag('div', { class: 'video-modal-container' });
 
-const togglePreviewVideo = (evt) => {
-  const target = evt.currentTarget;
-  const action = target.classList.contains('play') ? 'play' : 'pause';
-  const block = target.closest(selectors.videoBlock);
-  if (action === 'play') {
-    // play preview video
-    block.querySelector(`${selectors.videoWrapper} video`).play();
-    block.querySelector(selectors.playButton).style.visibility = 'hidden';
-    block.querySelector(selectors.pauseButton).style.visibility = 'visible';
-  } else {
-    // pause preview video
-    block.querySelector(`${selectors.videoWrapper} video`).pause();
-    block.querySelector(selectors.playButton).style.visibility = 'visible';
-    block.querySelector(selectors.pauseButton).style.visibility = 'hidden';
-  }
+  const videoHeader = createTag('div', { class: 'video-modal-header' });
+  const videoClose = createTag('button', { class: 'video-modal-close', 'aria-label': 'close' });
+
+  videoClose.addEventListener('click', toggleVideoOverlay);
+
+  const videoContent = createTag('div', { class: 'video-modal-content' });
+  videoContent.innerHTML = `<video controls playsinline loop preload="auto">
+        <source src="${href}" type="video/mp4" />
+        "Your browser does not support videos"
+        </video>`;
+
+  videoHeader.appendChild(videoClose);
+  videoContainer.appendChild(videoHeader);
+  videoContainer.appendChild(videoContent);
+  videoModal.appendChild(videoOverlay);
+  videoModal.appendChild(videoContainer);
+
+  return videoModal;
 };
 
 export default function decorate(block) {
@@ -62,14 +95,16 @@ export default function decorate(block) {
   // decorate video
   if (leadspaceType === 'video') {
     // decorate block for displaying a video
+    let videoHref;
     if (col1) {
       // watch video button
       const videoLink = col1.querySelector('p > strong > a');
       const videoDuration = col1.querySelector('p:last-of-type');
       const button = buildOpenVideoButton(videoLink.textContent, videoDuration.textContent);
+      videoHref = videoLink.href;
 
       // Display video overlay
-      button.addEventListener('click', openVideoOverlay);
+      button.addEventListener('click', toggleVideoOverlay);
 
       col1.removeChild(videoLink.closest('p'));
       col1.removeChild(videoDuration);
@@ -80,7 +115,7 @@ export default function decorate(block) {
       // convert preview link into a video
       const previewLink = col2.querySelector('a');
       const video = createTag('div', { class: 'video-wrapper' });
-      video.innerHTML = `<video autoplay controls muted playsinline loop preload="auto">
+      video.innerHTML = `<video autoplay muted playsinline loop preload="auto">
         <source src="${previewLink.href}" type="video/mp4">
         </video>`;
       col2.replaceChild(video, previewLink);
@@ -102,9 +137,10 @@ export default function decorate(block) {
     block.append(scrollBorder);
 
     // add video overlay
-    const videoOverlay = createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
-
-    block.append(videoOverlay);
+    if (videoHref) {
+      const videoModal = buildVideoModal(videoHref);
+      block.append(videoModal);
+    }
 
     return;
   }
@@ -114,7 +150,6 @@ export default function decorate(block) {
   if (col1) {
     // group buttons
     const buttonGroup = createTag('div', { class: 'button-group' });
-
     const buttons = [...col1.querySelectorAll('.button-container')] || [];
 
     buttons.forEach((button) => {
@@ -137,7 +172,6 @@ export default function decorate(block) {
 
     // group events
     const eventItems = [...col1.querySelectorAll(`${selectors.eventItem} > em`)] || [];
-
     const eventGroup = createTag('div', { class: 'event-group' });
 
     eventItems.forEach((item, index) => {
