@@ -1,4 +1,11 @@
 /* Carousel block styles */
+
+/** Carousel section styling */
+.section.carousel-container {
+    background: var(--neutral-bone);
+    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
+}
+
 .carousel {
     position: relative;
     width: 100%;
@@ -29,17 +36,15 @@
     transition: all 0.5s;
 }
 
-.carousel .carousel-slide > div:nth-child(1) {
-    width: 100%;
-    font-size: var(--font-size-32);
-    line-height: 120%;
-    letter-spacing: .0175em;
-    font-weight: var(--font-weight-regular);
-    margin: 0 auto;
-    text-align: center;
+.carousel .carousel-slide > div {
+    font-family: var(--serif-font);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-120);
+    letter-spacing: var(--letter-spacing-1-75);
+    font-size: var(--font-size-28);
 }
 
-.carousel .carousel-slide figure {
+.carousel .carousel-slide > figure {
     align-content: center;
     align-items: center;
     display: flex;
@@ -50,7 +55,7 @@
     width: fit-content;
 }
 
-.carousel .carousel-slide figure img {
+.carousel .carousel-slide > figure img {
     border-radius: 50%;
     height: 64px;
     width: 64px;
@@ -58,7 +63,7 @@
     margin-right: var(--spacer-layout-02);
 }
 
-.carousel .carousel-slide figcaption.caption {
+.carousel .carousel-slide > figure figcaption.caption {
     font-family: var(--sans-serif-font-semibold);
     font-size: var(--font-size-16);
     letter-spacing: var(--letter-spacing-001-em);
@@ -123,36 +128,10 @@
     display: none;
 }
 
-/** Carousel section styling */
-.section.carousel-container {
-    background: var(--neutral-bone);
-    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
-}
-
 /* Links within carousel container */
 .section.carousel-container .button-container {
     text-align: center;
     margin: var(--spacer-layout-05) 0 0;
-}
-
-.section.carousel-container .button-container a {
-    color: var(--primary-purple);
-    font-size: var(--font-size-16);
-    border-bottom: 2px solid var(--primary-purple);
-    font-weight: bold;
-    text-decoration: none;
-    letter-spacing: var(--letter-spacing-001-em);
-}
-
-.section.carousel-container .button-container a:active,
-.section.carousel-container .button-container a:hover {
-    background: var(--gradient-left-right);
-    background-clip: text;
-    -webkit-background-clip: text;     /* stylelint-disable-line */
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    border-image-slice: 1;
-    border-image-source: var(--gradient-left-right);
 }
 
 /* Media queries */

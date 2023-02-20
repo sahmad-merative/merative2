@@ -65,6 +65,8 @@
     font-weight: 500;
     letter-spacing: var(--letter-spacing-1);
     line-height: var(--line-height-160);
+    border: none;
+    -webkit-text-fill-color: unset;
 }
   
 .section.cta-container .cta.block .button-container > a::after {

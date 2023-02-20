@@ -59,10 +59,11 @@ function buildBackToTopBlock(main) {
 /**
  * Helper function to create DOM elements
  * @param {string} tag DOM element to be created
- * @param {array} attributes attributes to be added
+ * @param {object} attributes attributes to be added
+ * @param html {HTMLElement | SVGAElement | string} Additional html to be appended to tag
  */
 
-export function createTag(tag, attributes, html) {
+export function createTag(tag, attributes = {}, html = undefined) {
   const el = document.createElement(tag);
   if (html) {
     if (html instanceof HTMLElement || html instanceof SVGElement) {
