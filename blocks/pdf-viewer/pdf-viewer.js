@@ -83,11 +83,6 @@ export default async function decorate(block) {
   const showThumbnails = (blockConfig['show-thumbnails'] === 'true');
 
   if (docUrl) {
-    const docUrlMetaTag = document.createElement('meta');
-    docUrlMetaTag.setAttribute('name', 'document-link');
-    docUrlMetaTag.setAttribute('content', docUrl);
-    const headTag = document.getElementsByTagName('head')[0];
-    headTag.append(docUrlMetaTag);
     const randomUUID = window.crypto.randomUUID();
     const divId = `adobe-dc-view-${randomUUID}`;
     const docDiv = createTag('div', { id: divId });
@@ -100,13 +95,6 @@ export default async function decorate(block) {
     }
     block.textContent = '';
     block.append(docDiv);
-
-    // Add a download link if someone wants to download the document
-    const downloadLink = createTag('a', { class: 'download-link' });
-    downloadLink.setAttribute('href', docUrl);
-    downloadLink.setAttribute('target', '_blank');
-    downloadLink.textContent = 'Download PDF';
-    block.prepend(downloadLink);
 
     window.setTimeout(() => embedPDFViewer(
       divId,
