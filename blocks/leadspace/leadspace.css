@@ -417,6 +417,7 @@ main div.leadspace-wrapper {
         position: absolute;
         bottom: -143px;
         gap: var(--spacer-layout-03);
+        z-index: 2;
     }
 
     .leadspace.video .scroll-border-line {
