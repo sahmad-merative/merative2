@@ -605,7 +605,7 @@ main .section-bottom-grid p picture {
 
 /* Section Arc */
 main .section-arc-top {
-    height: 173px;
+    height: 81px;
     background: var(--neutral-bone);
     position: relative;
     padding: 0;
@@ -624,10 +624,11 @@ main .section-arc-top::before {
 }
 
 main .section-arc-bottom {
-    height: 173px;
+    height: 81px;
     background: var(--neutral-white);
     position: relative;
     padding: 0;
+    overflow: hidden;
     z-index: -1;
 }
 
@@ -639,7 +640,7 @@ main .section-arc-bottom::after {
     width: 800px;
     height: 800px;
     background: var(--neutral-bone);
-    clip-path: circle(50% at 50%);
+    clip-path: circle(50% at 50% -40%);
 }
 
 main .section-gradient {
@@ -651,17 +652,36 @@ main .section-bone {
 }
 
 @media screen and (min-width: 768px) {
-    main .section-arc-top::before {
+    main .section-arc-top,
+    main .section-arc-bottom {
+        height: 91px;
+    }
+
+    main .section-arc-top::before,
+    main .section-arc-bottom::after {
         width: 1758px;
         height: 1758px;
+    }
+
+    main .section-arc-bottom::after {
+        clip-path: circle(50% at 50% -45%);
     }
 }
 
 @media only screen and (min-width: 1200px) {
+    main .section-arc-top,
+    main .section-arc-bottom {
+        height: 260px;
+    }
+
     main .section-arc-top::before,
     main .section-arc-bottom::after {
         width: 2458px;
         height: 2458px;
+    }
+
+    main .section-arc-bottom::after {
+        clip-path: circle(50% at 50% -40%);
     }
 }
 
