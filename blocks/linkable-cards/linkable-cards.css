@@ -1,0 +1,58 @@
+.linkable-cards {
+  display: flex;
+  flex-direction: unset;
+  overflow: auto;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.linkable-cards > div {
+  flex: 1;
+  background: #6400a6;
+  border-radius: 10px;
+  min-height: 372px;
+  min-width: 68vw;
+  position: relative;
+}
+
+.linkable-cards > div > a {
+  padding: 40px 23px 90px;
+  display: block;
+  text-decoration: none;
+  color: var(--neutral-white);
+}
+
+.linkable-cards a:nth-child(1) > p:first-child {
+  font-family: var(--sans-serif-font-medium);
+  font-size: var(--font-size-11);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-02-em);
+  line-height: var(--line-height-120);
+  margin: 0;
+}
+
+.linkable-cards a:nth-child(1) > h3 {
+  font-size: 28px;
+  line-height: 120%;
+  letter-spacing: .0175em;
+  margin: 20px 0 25px;
+}
+
+.linkable-cards > div::after {
+  content: "";
+    display: inline-block;
+    height: 55px;
+    right: 20px;
+    bottom: 20px;
+    position: absolute;
+    width: 55px;
+    background: url("../../icons/download-arrow-white.svg") no-repeat center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .linkable-cards > div {
+    min-width: 316px
+  }
+}
