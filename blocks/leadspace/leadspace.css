@@ -48,34 +48,34 @@ main div.leadspace-wrapper {
     font-family: var(--sans-serif-font-medium);
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
-    padding: 4px 0;
+    font-size: var(--font-size-14);
+    padding: var(--spacer-element-02) 0;
     margin-right: var(--spacer-element-07);
-    line-height: 120%;
-    letter-spacing: 0.2em;
+    line-height: var(--line-height-120);
+    letter-spacing: var(--letter-spacing-02-em);
     text-transform: uppercase;
     color: var(--neutral-carbon);
 }
 
 .leadspace.document .document-tag {
-    padding: 4px 16px;
+    padding: var(--spacer-element-02) var(--spacer-element-05);
     background: var(--neutral-sand);
     border-radius: 100px;
     margin-right: var(--spacer-element-03);
 }
 
 .leadspace.document .download-link-container {
-    padding-top: 16px;
+    padding-top: var(--spacer-layout-01);
 }
 
 .leadspace.document a.download-link {
     font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 120%;
-    color: #90F;
-    padding-right: 24px;
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-120);
+    color: var(--primary-purple);
+    padding-right: var(--spacer-element-07);
     background: url('../../icons/arrow-down-download-purple.svg') no-repeat right center;
 }
 
