@@ -1,3 +1,4 @@
+import { getMetadata } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
 /**
@@ -181,6 +182,49 @@ export default function decorate(block) {
 
     if (eventGroup.children.length) {
       col1.append(eventGroup);
+    }
+
+    // only for Document pages
+    if (getMetadata('template') === 'Document') {
+      // get readtime from page metadata
+      const readtimeMeta = getMetadata('readtime');
+      // get audience and topic tags from page metadata
+      let tags = [];
+      const audience = getMetadata('audience');
+      if (audience) {
+        const audiences = audience.split(',');
+        tags = tags.concat(audiences);
+      }
+      const topic = getMetadata('topic');
+      if (topic) {
+        const topics = topic.split(',');
+        tags = tags.concat(topics);
+      }
+      if (tags.length > 0) {
+        const docTagContainer = createTag('div', { class: 'document-tag-container' });
+        tags.forEach((tag) => {
+          if (tag) {
+            const docTag = createTag('span', { class: 'document-tag' });
+            docTag.textContent = tag.trim();
+            docTagContainer.append(docTag);
+          }
+        });
+        const readtime = createTag('span', { class: 'readtime' });
+        readtime.textContent = readtimeMeta.trim();
+        docTagContainer.prepend(readtime);
+        block.prepend(docTagContainer);
+      }
+      // Get PDF URL and create download link
+      const docUrl = getMetadata('document-link');
+      if (docUrl) {
+        const downloadLinkContainer = createTag('div', { class: 'download-link-container' });
+        const downloadLink = createTag('a', { class: 'download-link' });
+        downloadLink.setAttribute('href', docUrl);
+        downloadLink.setAttribute('target', '_blank');
+        downloadLink.textContent = 'Download PDF';
+        downloadLinkContainer.append(downloadLink);
+        block.append(downloadLinkContainer);
+      }
     }
   }
 }

@@ -16,20 +16,67 @@ main div.leadspace-wrapper {
     padding: 0 var(--spacer-layout-02) 0;
 }
 
-.leadspace > div {
+.leadspace:not(.document) > div {
     width: 100%;
     display: flex;
     flex-flow: column;
     gap: var(--spacer-layout-01);
 }
 
+.leadspace.document {
+    padding-bottom: var(--spacer-layout-05);
+    padding-top: var(--spacer-layout-05);
+}
+
 /* Column Specific Styles */
+/* stylelint-disable-next-line no-descending-specificity */
 .leadspace > div > div {
     position: relative;
 }
 
-.leadspace > div > div:nth-child(1) {
+.leadspace:not(.document) > div > div:nth-child(1) {
     margin: auto;
+}
+
+.leadspace.document .document-tag-container {
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: var(--spacer-element-03);
+}
+
+.leadspace.document .readtime {
+    font-family: var(--sans-serif-font-medium);
+    font-style: normal;
+    font-weight: 500;
+    font-size: var(--font-size-14);
+    padding: var(--spacer-element-02) 0;
+    margin-right: var(--spacer-element-07);
+    line-height: var(--line-height-120);
+    letter-spacing: var(--letter-spacing-02-em);
+    text-transform: uppercase;
+    color: var(--neutral-carbon);
+}
+
+.leadspace.document .document-tag {
+    padding: var(--spacer-element-02) var(--spacer-element-05);
+    background: var(--neutral-sand);
+    border-radius: 100px;
+    margin-right: var(--spacer-element-03);
+}
+
+.leadspace.document .download-link-container {
+    padding-top: var(--spacer-layout-01);
+}
+
+.leadspace.document a.download-link {
+    font-family: var(--sans-serif-font-regular);
+    font-style: normal;
+    font-weight: 500;
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-120);
+    color: var(--primary-purple);
+    padding-right: var(--spacer-element-07);
+    background: url('../../icons/arrow-down-download-purple.svg') no-repeat right center;
 }
 
 /* Eyebrow */
@@ -47,6 +94,7 @@ main div.leadspace-wrapper {
 }
 
 /* Image/Video */
+/* stylelint-disable-next-line no-descending-specificity */
 .leadspace > div > div:nth-child(2) {
     display: flex;
     flex-direction: row;
@@ -324,11 +372,11 @@ main div.leadspace-wrapper {
         justify-content: stretch;
     }
 
-    .leadspace > div > div {
+    .leadspace:not(.document) > div > div {
         width: 50%;
     }
 
-    .leadspace > div > div:nth-child(1) > p:last-of-type {
+    .leadspace:not(.document) > div > div:nth-child(1) > p:last-of-type {
         max-width: 420px;
     }
 
@@ -372,6 +420,11 @@ main div.leadspace-wrapper {
         max-width: 1440px;
         margin: 0 auto;
         padding: 0 var(--spacer-layout-156) 0;
+    }
+
+    .leadspace.document {
+        padding-bottom: var(--spacer-layout-06);
+        padding-top: var(--spacer-layout-06);
     }
 
     .leadspace > div {
