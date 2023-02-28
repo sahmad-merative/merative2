@@ -4,17 +4,21 @@
     display: block;
     padding: unset;
 }
+
+.section.cta-container img {
+    margin: 40px 0;
+}
   
 .section.cta-container {
     background-color: #e7e2da;
-    margin: unset;
-    text-align: center;
+    margin: unset;    
     min-height: 291px;
 }
 
 .section.cta-container .cta.block {
     padding-top: 64px;
     padding-bottom: 64px;
+    text-align: center;
 }
 
 .section.cta-container .cta.block h2 {
