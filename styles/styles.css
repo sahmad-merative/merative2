@@ -637,11 +637,6 @@ main pre {
     white-space: pre;
 }
 
-
-main .section-bottom > div img {
-    width: auto;
-}
-
 main .section-top-grid > div > div:nth-child(odd) img {
     border-radius: 90% 0 0;
 }
