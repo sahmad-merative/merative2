@@ -248,6 +248,10 @@ main .section-bottom > div img {
   width: auto;
 }
 
+main .content-band.icon-list.picture-circle img {
+  border-radius: 50%;
+}
+
 main .content-band.icon-list img {
     width: auto;
 }
@@ -868,7 +872,7 @@ main .section.leadership-content .columns>div>div>p {
 }
 
 main .section .columns.row-header div > div > h4,
-main .section.section-header div:nth-child(1) > p:first-child {
+main .section.section-header>div:nth-child(1) > p:first-child {
   font-family: var(--sans-serif-font-medium);
   font-size: var(--font-size-11);
   text-transform: uppercase;
