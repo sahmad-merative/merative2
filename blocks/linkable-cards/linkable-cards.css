@@ -6,6 +6,12 @@
   margin-top: 40px;
 }
 
+.linkable-cards-container {
+  background: #7e00d3;
+  color: var(--neutral-white);
+  padding-bottom: 60px;
+}
+
 .linkable-cards > div {
   flex: 1;
   background: #6400a6;

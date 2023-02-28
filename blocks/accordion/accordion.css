@@ -5,6 +5,25 @@
     box-sizing: border-box;
 }
 
+.accordion-container p {
+    margin: 24px 0;
+    font-size: 16px;
+    letter-spacing: .01em;
+    line-height: 160%;
+    font-weight: 300;
+}
+
+.accordion-container blockquote {
+    margin: 0;
+}
+
+.accordion-container blockquote > p {
+    color: #d699ff;
+    font-weight: 400;
+    margin: 48px 0 0;
+}
+
+.accordion-container,
 .accordion-item>div {
     padding-right: 40px;
 }
