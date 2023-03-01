@@ -15,21 +15,19 @@ function getStringBetween(str, start, end) {
 }
 
 function removeCommas(str) {
-  const strTrimmed = str.trim();
-  const lastCommaIndex = strTrimmed.lastIndexOf(',');
-  const firstCommaIndex = strTrimmed.indexOf(',');
-  let strLastCommaRemoved;
-  let strFirstLastCommaRemoved;
+  let res = str.trim();
+  const lastCommaIndex = res.lastIndexOf(',');
+  const firstCommaIndex = res.indexOf(',');
 
-  if (lastCommaIndex === strTrimmed.length - 1) {
-    strLastCommaRemoved = str.substring(0, lastCommaIndex);
+  if (lastCommaIndex === res.length - 1) {
+    res = res.substring(0, lastCommaIndex);
   }
 
   if (firstCommaIndex === 0) {
-    strFirstLastCommaRemoved = strLastCommaRemoved.substring(1);
+    res = res.substring(1);
   }
 
-  return strFirstLastCommaRemoved.trim();
+  return res.trim();
 }
 
 export default function authorsParser(authors) {
