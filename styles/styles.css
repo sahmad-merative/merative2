@@ -1087,6 +1087,7 @@ main .section .column-content-top-border>div>div h1 {
     vertical-align: top;
   }
 }
+
 /* Video modal */
 .section .video-modal {
     display: none;
