@@ -295,7 +295,7 @@ main .section {
     display: block;
     font-family: var(--sans-serif-font-medium);
     font-weight: var(--font-weight-medium);
-    font-size: 11px;
+    font-size: var(--font-size-14);
     line-height: var(--line-height-120);
     color: var(--neutral-carbon);
     letter-spacing: var(--letter-spacing-02-em);
@@ -313,8 +313,8 @@ main .section {
 .blog-home .filters > .filters-main > div > span.list-title::after {
     content: '';
     position: absolute;
-    width: 14.5px;
-    height: 6.25px;
+    width: 24px;
+    height: 24px;
     right: var(--spacer-element-02);
     background: url('../../icons/arrow-up-black.svg') no-repeat;
 }
@@ -327,8 +327,8 @@ main .section {
 .blog-home .filters label,
 .blog-home .filters a.category-link,
 .blog-home .selected-filters .selected-value {
-    font-weight: var(--font-weight-regular);
-    font-family: var(--sans-serif-font-regular);
+    font-weight: var(--font-weight-light);
+    font-family: var(--sans-serif-font-light);
     font-size: var(--font-size-16);
     line-height: var(--line-height-160);
     color: var(--neutral-carbon);
@@ -339,7 +339,7 @@ main .section {
 
 .blog-home[data-block-status="loaded"] .filters a.category-link, .blog-home .filters a.category-link.active {
     display: block;
-    padding-bottom: 16px;
+    padding-bottom: var(--spacer-element-03);
 
     /* padding-top: 4px; */
 }
@@ -352,7 +352,7 @@ main .section {
     border-image: var(--gradient-horizontal-down) 0 1;
     border-style: solid;
     border-width: 0 0 0 4px;
-    height:24px;
+    height:32px;
     padding-left: var(--spacer-layout-01);
     
 }
@@ -371,7 +371,7 @@ main .section {
     display:flex;
     flex-direction: row;
     align-items:center; 
-    padding-bottom: 16px;
+    padding-bottom: var(--spacer-element-03);;
 }
 
 .blog-home[data-block-status="loaded"] .filters > .filters-main > div[aria-expanded = "false"] > div {
@@ -387,6 +387,7 @@ main .section {
     background: url('../../icons/arrow-up-black.svg') no-repeat;
     transform: rotate(180deg);
 }
+
 
 .blog-home .filters input {
     border: 1px solid #20201f;
@@ -407,6 +408,8 @@ main .section {
     flex-direction: row;
     gap: 8px;
 }
+
+
 
 .blog-home .clear-all-filters, .blog-home .selected-filters .selected-value, .blog-home .selected-filters-title {
     display: none;
@@ -620,6 +623,7 @@ main .section {
         font-size: var( --font-size-24);
         line-height: var(--line-height-160);
         letter-spacing: var(--letter-spacing-1);
+        margin-bottom: unset;
         }
 
 
