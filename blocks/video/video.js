@@ -132,7 +132,7 @@ const buildVideoModal = (href) => {
         src="https://www.youtube.com/embed/${videoId}?modestbranding=1&enablejsapi=1&playsinline=1"
         allowfullscreen
         data-videoid="${videoId}"></iframe>`;
-    // videoContainer.appendChild(videoContent);
+    videoContainer.appendChild(videoContent);
     if (!window.YT) {
       // set up async YouTube script
       /*
