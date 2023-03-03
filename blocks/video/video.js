@@ -1,5 +1,10 @@
 import { createTag } from '../../scripts/scripts.js';
 
+const selectors = Object.freeze({
+  videoModal: '.video-modal',
+  videoContent: '.video-modal-content',
+});
+
 /**
  * Keep track of all the YouTube players for each video on the page
  */
@@ -39,11 +44,11 @@ const getYouTubeId = (href) => {
   return null;
 };
 
-const getYouTubePlayer = (iframe) => {
-  if (!iframe) {
+const getYouTubePlayer = (element) => {
+  if (!element) {
     return undefined;
   }
-  return playerMap[iframe.dataset.videoid];
+  return playerMap[element.dataset.ytid];
 };
 
 /**
@@ -53,9 +58,9 @@ const getYouTubePlayer = (iframe) => {
  * @param block Block containing a video modal
  */
 const toggleVideoOverlay = (block) => {
-  const modal = block.querySelector('.video-modal');
-  const ytFrame = modal.querySelector('iframe');
-  const ytPlayer = getYouTubePlayer(ytFrame);
+  const modal = block.querySelector(selectors.videoModal);
+  const videoContent = modal.querySelector(selectors.videoContent);
+  const ytPlayer = getYouTubePlayer(videoContent);
   if (modal?.classList.contains('open')) {
     modal.classList.remove('open');
     if (ytPlayer) {
@@ -109,7 +114,7 @@ const loadYouTubePlayer = (element, videoId) => {
   // we have to create a new YT Player but then need to wait for its onReady event
   // before assigning it to the player map
   // eslint-disable-next-line no-new
-  new window.YT.Player(element.firstChild, {
+  new window.YT.Player(element, {
     videoId,
     events: {
       onReady: onPlayerReady,
@@ -136,24 +141,16 @@ const buildVideoModal = (href) => {
   if (getVideoType(href) === 'youtube') {
     // Create a YouTube compatible iFrame
     const videoId = getYouTubeId(href);
+    videoContent.dataset.ytid = videoId;
+    videoContent.innerHTML = `<div id="ytFrame-${videoId}"></div>`;
     if (!window.YT) {
-      videoContent.innerHTML = `<div id="ytFrame-${videoId}" data-videoid="${videoId}"></div>`;
-      // set up async YouTube script
-      /*
-      setTimeout(() => {
-        const ytScript = document.createElement('script');
-        ytScript.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
-      }, 3000);
-       */
       // onYouTubeIframeAPIReady will load the video after the script is loaded
       window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
-        videoContent,
+        videoContent.firstElementChild,
         videoId,
       );
     } else {
-      loadYouTubePlayer(videoContent, videoId);
+      loadYouTubePlayer(videoContent.firstElementChild, videoId);
     }
   } else {
     videoContent.innerHTML = `<video controls playsinline loop preload="auto">

@@ -79,7 +79,9 @@ if (otId) {
 //   }
 // }
 
-// YouTube API
-loadScript('https://www.youtube.com/iframe_api', {
-  type: 'text/javascript',
-});
+// YouTube API (only when page includes a YouTube video)
+if (document.querySelector('[data-ytid]')) {
+  loadScript('https://www.youtube.com/iframe_api', {
+    type: 'text/javascript',
+  });
+}
