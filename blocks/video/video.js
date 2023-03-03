@@ -130,7 +130,10 @@ const buildVideoModal = (href) => {
     const videoId = getYouTubeId(href);
     videoContent.innerHTML = `<iframe id="ytFrame-${videoId}" type="text/html" 
         src="https://www.youtube.com/embed/${videoId}?modestbranding=1&enablejsapi=1&playsinline=1"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture" 
         allowfullscreen
+        title="Content from Youtube"
+        loading="lazy"
         data-videoid="${videoId}"></iframe>`;
     videoContainer.appendChild(videoContent);
     if (!window.YT) {
