@@ -841,6 +841,66 @@ main .section .column-content-top-border>div>div h1 {
   margin: 0;
 }
 
+/* Video modal */
+.section .video-modal {
+  display: none;
+  position: relative;
+  z-index: 99999;
+}
+
+.section .video-modal.open {
+  display: block;
+}
+
+.section .video-modal-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--neutral-bone);
+  opacity: .8;
+  z-index: 0;
+}
+
+.section .video-modal-container {
+  display: block;
+  top: 30%;
+  left: 50%;
+  width: auto;
+  overflow: auto;
+  position: fixed;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+}
+
+.section .video-modal-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: end;
+}
+
+.section .video-modal-close {
+  width: 40px;
+  height: 40px;
+  background: url('../icons/close-button.svg') no-repeat;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.section .video-modal-content {
+  height: auto;
+  width: auto;
+}
+
+.section .video-modal-content video {
+  border-radius: 6px;
+  height: 193px;
+  width: 343px;
+  object-fit: cover;
+}
+
 /* Mobile */
 @media only screen and (max-width: 768px) {
   main .section>div {
@@ -932,8 +992,8 @@ main .section .column-content-top-border>div>div h1 {
     max-width: 60%;
   }
 
-  main .columns.row-header div>div>h2,
-  main .section.section-header div:nth-child(1)>h2 {
+  main .columns.row-header div > div > h2,
+  main .section.section-header div:nth-child(1) > h2 {
     max-width: 60%;
   }
 
@@ -964,6 +1024,17 @@ main .section .column-content-top-border>div>div h1 {
 
   main .section-arc-bottom::after {
     clip-path: circle(50% at 50% -45%);
+  }
+
+  .section .video-modal-container {
+    top: 50%;
+  }
+
+  .section .video-modal-content video {
+      border-radius: 20px;
+      width: 700px;
+      height: 100%;
+      max-height: 500px;
   }
 }
 
@@ -1160,7 +1231,7 @@ main .section .column-content-top-border>div>div h1 {
     margin-left: 150px;
   }
 
-  main .list-section ul>li {
+  main .list-section ul > li {
     display: block;
     font-size: 21px;
   }
@@ -1171,18 +1242,10 @@ main .section .column-content-top-border>div>div h1 {
     vertical-align: top;
   }
 
-  main .section-arc-top,
-  main .section-arc-bottom {
-    height: 260px;
-  }
-
-  main .section-arc-top::before,
-  main .section-arc-bottom::after {
-    width: 2458px;
-    height: 2458px;
-  }
-
-  main .section-arc-bottom::after {
-    clip-path: circle(50% at 50% -40%);
+  .section .video-modal-content video {
+    max-height: 581px;
+    width: 1033px;
   }
 }
+
+
