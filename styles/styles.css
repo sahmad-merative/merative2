@@ -1141,10 +1141,15 @@ main .section .column-content-top-border>div>div h1 {
     width: auto;
 }
 
+.section .video-modal-content iframe,
 .section .video-modal-content video {
     border-radius: 6px;
-    height: 193px;
-    width: 343px;
+    width: 328px;
+    height: 184px;
+    border: none;
+}
+
+.section .video-modal-content video {
     object-fit: cover;
 }
 
@@ -1153,17 +1158,18 @@ main .section .column-content-top-border>div>div h1 {
         top: 50%;
     }
 
+    .section .video-modal-content iframe,
     .section .video-modal-content video {
         border-radius: 20px;
-        width: 700px;
-        height: 100%;
-        max-height: 500px;
+        width: 630px;
+        height: 354px;
     }
 }
 
 @media screen and (min-width: 1200px) {
+    .section .video-modal-content iframe,
     .section .video-modal-content video {
-        max-height: 581px;
         width: 1033px;
+        height: 581px;
     }
 }
