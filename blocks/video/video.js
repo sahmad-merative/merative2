@@ -39,6 +39,13 @@ const getYouTubeId = (href) => {
   return null;
 };
 
+const getYouTubePlayer = (iframe) => {
+  if (!iframe) {
+    return undefined;
+  }
+  return playerMap[iframe.dataset.videoid];
+};
+
 /**
  * Toggle video overlay modal between open and closed.
  * When the overlay is opened the video will start playing.
@@ -48,7 +55,7 @@ const getYouTubeId = (href) => {
 const toggleVideoOverlay = (block) => {
   const modal = block.querySelector('.video-modal');
   const ytFrame = modal.querySelector('iframe');
-  const ytPlayer = ytFrame ? playerMap[ytFrame.dataset.videoid] : undefined;
+  const ytPlayer = getYouTubePlayer(ytFrame);
   if (modal?.classList.contains('open')) {
     modal.classList.remove('open');
     if (ytPlayer) {
@@ -99,14 +106,15 @@ const loadYouTubePlayer = (element, videoId) => {
   const onPlayerReady = (event) => {
     playerMap[videoId] = event.target;
   };
-
-  if (window.YT) {
-    window.YT.Player(element, {
-      events: {
-        onReady: onPlayerReady,
-      },
-    });
-  }
+  // we have to create a new YT Player but then need to wait for its onReady event
+  // before assigning it to the player map
+  // eslint-disable-next-line no-new
+  new window.YT.Player(element.firstChild, {
+    videoId,
+    events: {
+      onReady: onPlayerReady,
+    },
+  });
 };
 
 /**
@@ -128,38 +136,30 @@ const buildVideoModal = (href) => {
   if (getVideoType(href) === 'youtube') {
     // Create a YouTube compatible iFrame
     const videoId = getYouTubeId(href);
-    videoContent.innerHTML = `<iframe id="ytFrame-${videoId}" type="text/html" 
-        src="https://www.youtube.com/embed/${videoId}?modestbranding=1&enablejsapi=1&playsinline=1"
-        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture" 
-        allowfullscreen
-        title="Content from Youtube"
-        loading="lazy"
-        data-videoid="${videoId}"></iframe>`;
-    videoContainer.appendChild(videoContent);
     if (!window.YT) {
+      videoContent.innerHTML = `<div id="ytFrame-${videoId}" data-videoid="${videoId}"></div>`;
       // set up async YouTube script
-      /*
-      const ytScript = document.createElement('script');
-      ytScript.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
-      // onYouTubeIframeAPIReady will load the video after the script is loaded
-      window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
-        videoContent.firstElementChild,
-        videoId,
-      );
-
-       */
+      setTimeout(() => {
+        const ytScript = document.createElement('script');
+        ytScript.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
+        // onYouTubeIframeAPIReady will load the video after the script is loaded
+        window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
+          videoContent,
+          videoId,
+        );
+      }, 3000);
     } else {
-      loadYouTubePlayer(videoContent.firstElementChild, videoId);
+      loadYouTubePlayer(videoContent, videoId);
     }
   } else {
     videoContent.innerHTML = `<video controls playsinline loop preload="auto">
         <source src="${href}" type="video/mp4" />
         "Your browser does not support videos"
         </video>`;
-    videoContainer.appendChild(videoContent);
   }
+  videoContainer.appendChild(videoContent);
 
   videoModal.appendChild(videoOverlay);
   videoModal.appendChild(videoContainer);
