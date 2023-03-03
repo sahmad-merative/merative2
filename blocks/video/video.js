@@ -139,17 +139,19 @@ const buildVideoModal = (href) => {
     if (!window.YT) {
       videoContent.innerHTML = `<div id="ytFrame-${videoId}" data-videoid="${videoId}"></div>`;
       // set up async YouTube script
+      /*
       setTimeout(() => {
         const ytScript = document.createElement('script');
         ytScript.src = 'https://www.youtube.com/iframe_api';
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
-        // onYouTubeIframeAPIReady will load the video after the script is loaded
-        window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
-          videoContent,
-          videoId,
-        );
       }, 3000);
+       */
+      // onYouTubeIframeAPIReady will load the video after the script is loaded
+      window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
+        videoContent,
+        videoId,
+      );
     } else {
       loadYouTubePlayer(videoContent, videoId);
     }

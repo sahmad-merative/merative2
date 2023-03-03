@@ -78,3 +78,8 @@ if (otId) {
 //     });
 //   }
 // }
+
+// YouTube API
+loadScript('https://www.youtube.com/iframe_api', {
+  type: 'text/javascript',
+});
