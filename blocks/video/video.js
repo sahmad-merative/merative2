@@ -48,7 +48,7 @@ const getYouTubeId = (href) => {
 const toggleVideoOverlay = (block) => {
   const modal = block.querySelector('.video-modal');
   const ytFrame = modal.querySelector('iframe');
-  const ytPlayer = playerMap[ytFrame.dataset.videoid];
+  const ytPlayer = ytFrame ? playerMap[ytFrame.dataset.videoid] : undefined;
   if (modal?.classList.contains('open')) {
     modal.classList.remove('open');
     if (ytPlayer) {
@@ -131,17 +131,14 @@ const buildVideoModal = (href) => {
     videoContent.innerHTML = `<iframe id="ytFrame-${videoId}" type="text/html" 
         src="https://www.youtube.com/embed/${videoId}?modestbranding=1&enablejsapi=1&playsinline=1"
         allowfullscreen
-        data-videoId="${videoId}"></iframe>`;
+        data-videoid="${videoId}"></iframe>`;
     videoContainer.appendChild(videoContent);
     if (!window.YT) {
       // set up async YouTube script
-      /*
       const ytScript = document.createElement('script');
       ytScript.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
-
-       */
       // onYouTubeIframeAPIReady will load the video after the script is loaded
       window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
         videoContent.firstElementChild,
