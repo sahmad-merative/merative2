@@ -132,8 +132,16 @@ html {
     border-image: linear-gradient(180deg, #90f, #fa1e32) 0 1;
     border-style: solid;
     border-width: 5px 0 5px 5px;
+    left: var(--spacer-element-05);
+    position: relative;
 }
 
+
+.blog-left-nav .content-link:hover, .blog-left-nav .content-link.active:hover  {
+    text-decoration-line: underline;
+    text-decoration-color: var(--primary-purple);
+    text-decoration-thickness: 3px;
+}
 
 @media only screen and (min-width: 1200px) {
     .article-main-wrapper {
@@ -170,6 +178,14 @@ html {
         order: -1;
         flex: 1 0 100%;
     }
+
+    .blog-left-nav[data-block-status="loaded"] .social-share-links .social-share-linkedin,
+    .blog-left-nav[data-block-status="loaded"] .social-share-links .social-share-twitter,
+    .blog-left-nav[data-block-status="loaded"] .social-share-links .social-share-facebook,
+    .blog-left-nav[data-block-status="loaded"] .social-share-links .social-share-share{
+        margin : var(--spacer-element-07) var(--spacer-element-05) 0 0 ;
+        }
+        
 
     .scroll-margin {
         scroll-margin-top: 100px;
