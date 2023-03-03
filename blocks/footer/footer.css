@@ -231,9 +231,9 @@
 
   /* || End Styles for screen sizes less than or equal to 1200px */
    
-  /* || Begin Styles for screen sizes less than or equal to 576px */
+  /* || Mobile styles */
 
-  @media screen and (max-width: 768px){
+  @media only screen and (max-width: 768px){
     footer .footer{
       margin-bottom: 0;
       max-height: fit-content;
@@ -276,19 +276,27 @@
 
     footer .footer-links > div > div > h4 {
       color: var(--neutral-white);
-      font-size: 16px;
-      font-family: var(--sans-serif-font-medium);
+      font-size: var(--font-size-18);
+      font-family: var(--sans-serif-font-semibold);
       margin-top: 22px;
       margin-bottom: 24px;
       letter-spacing: .01em;
       line-height: 160%;
       font-weight: 500;
-    
+      background: url('../../icons/arrow-up-white.svg') no-repeat right center;
    }
+
+  .footer .footer-links #contact-us {
+    background-image: none;
+  }
 
    footer .footer-links .fold {
       background: url('../../icons/arrow-down-white.svg') no-repeat right center;
    }
+
+   footer .footer-links .unfold {
+    background: url('../../icons/arrow-up-white.svg') no-repeat right center;
+  }
 
   footer .footer-links+ul{
     list-style: none;
@@ -303,6 +311,10 @@
    display: none;
   }
 
+  footer .footer-links ul li a {
+    color: var(--neutral-grey-tint100);
+  }
+  
   footer .footer-links .active {
     list-style: none;
     margin: 0;

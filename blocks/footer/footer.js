@@ -15,10 +15,21 @@ function hideLinks(event, block) {
       activeSection.classList.remove('active');
     }
   });
+  const activeHeading = event.target;
+  const allLinks = block.querySelectorAll('.footer-links .link-section-heading');
+  allLinks.forEach((sectionHeading) => {
+    if(activeHeading != sectionHeading){
+      sectionHeading.classList.add('fold');
+    }
+  }
+
+  )
 }
 
 // expands the links of the section clicked on
 function showLinks(event, block) {
+  const activeLink = event.target;
+  activeLink.classList.toggle('fold');
   const sectionLinks = event.target.nextElementSibling;
   hideLinks(event, block);
   sectionLinks.classList.toggle('active');
