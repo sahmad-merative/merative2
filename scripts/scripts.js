@@ -15,7 +15,7 @@ import {
   readBlockConfig,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['hero', 'blog-home']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['leadspace', 'blog-home']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
 function buildHeroBlock(main) {
