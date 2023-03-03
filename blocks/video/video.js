@@ -135,10 +135,13 @@ const buildVideoModal = (href) => {
     videoContainer.appendChild(videoContent);
     if (!window.YT) {
       // set up async YouTube script
+      /*
       const ytScript = document.createElement('script');
       ytScript.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(ytScript, firstScriptTag);
+
+       */
       // onYouTubeIframeAPIReady will load the video after the script is loaded
       window.onYouTubeIframeAPIReady = () => loadYouTubePlayer(
         videoContent.firstElementChild,
