@@ -15,7 +15,7 @@
 }
 
 .mktoForm .mktoFieldWrap .mktoHtmlText {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 12px !important;
     letter-spacing: .01em !important;
@@ -24,25 +24,25 @@
 }
 
 .mktoForm .mktoFieldWrap .mktoHtmlText a {
-    color: #90f;
+    color: var(--primary-purple);
     padding: 0;
-    border-bottom: 1px solid #90f !important
+    border-bottom: 1px solid var(--primary-purple) !important
 }
 
 .mktoForm .mktoFieldWrap .mktoHtmlText a:active,
 .mktoForm .mktoFieldWrap .mktoHtmlText a:hover {
-    /* background: -webkit-gradient(linear,right top,left top,from(#fa1e32),to(#90f)) !important; */
-    background: linear-gradient(270deg, #fa1e32, #90f) !important;
+    /* background: -webkit-gradient(linear,right top,left top,from(#fa1e32),to(var(--primary-purple))) !important; */
+    background: linear-gradient(270deg, #fa1e32, var(--primary-purple)) !important;
 
     /* -webkit-background-clip:text !important; */
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     border-image-slice: 1 !important;
-    border-image-source: linear-gradient(270deg, #fa1e32, #90f) !important
+    border-image-source: linear-gradient(270deg, #fa1e32, var(--primary-purple)) !important
 }
 
 .mktoForm .mktoFieldWrap .mktoHtmlText p {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 12px !important;
     letter-spacing: .01em !important;
@@ -66,7 +66,7 @@
 }
 
 .mktoForm div:first-of-type .mktoFormCol .mktoFieldWrap .mktoHtmlText span {
-    color: #20201f !important
+    color: var(--neutral-carbon) !important
 }
 
 .mktoForm div:first-of-type .mktoFormCol .mktoFieldWrap .mktoHtmlText small {
@@ -80,7 +80,7 @@
     -webkit-box-align: center !important;
     -ms-flex-align: center !important;
     align-items: center !important;
-    background: #90f !important;
+    background: var(--primary-purple) !important;
     border: 0 !important;
     border-radius: 40px !important;
     
@@ -110,8 +110,8 @@
 
 .mktoForm .mktoButtonWrap .mktoButton:active,
 .mktoForm .mktoButtonWrap .mktoButton:hover {
-    /* background-image: -webkit-gradient(linear, right top, left top, from(#fa1e32), to(#90f)) !important; */
-    background-image: linear-gradient(270deg, #fa1e32, #90f) !important;
+    /* background-image: -webkit-gradient(linear, right top, left top, from(#fa1e32), to(var(--primary-purple))) !important; */
+    background-image: linear-gradient(270deg, #fa1e32, var(--primary-purple)) !important;
     
     /* -webkit-transition: all .2s ease-in-out !important; */
     transition: all .2s ease-in-out !important
@@ -132,7 +132,7 @@
 }
 
 .mktoForm .mktoLabel {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 16px !important;
     font-weight: 400 !important;
@@ -143,7 +143,7 @@
 }
 
 .mktoForm .mktoRequiredField .mktoLabel::after {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     content: "*" !important;
     display: inline-block !important
 }
@@ -157,9 +157,9 @@
     -moz-appearance: none !important; */
     appearance: none !important;
     background: #faf8f6 !important;
-    border-color: #20201f !important;
+    border-color: var(--neutral-carbon) !important;
     border-width: 0 0 1px !important;
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 16px !important;
     height: 43px !important;
@@ -177,7 +177,7 @@
 .mktoForm .mktoTextField.mktoRequired,
 .mktoForm select.mktoField.mktoRequired,
 .mktoForm textarea.mktoField.mktoRequired {
-    border-color: #20201f !important
+    border-color: var(--neutral-carbon) !important
 }
 
 .mktoForm .mktoEmailField.mktoRequired.mktoInvalid,
@@ -195,7 +195,7 @@
 .mktoForm .mktoTextField.mktoRequired.mktoValid,
 .mktoForm select.mktoField.mktoRequired.mktoValid,
 .mktoForm textarea.mktoField.mktoRequired.mktoValid {
-    border-color: #20201f !important
+    border-color: var(--neutral-carbon) !important
 }
 
 .mktoForm select.mktoField {
@@ -206,7 +206,7 @@
 }
 
 .mktoForm select.mktoField option {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 16px !important;
     letter-spacing: .16px;
@@ -227,12 +227,12 @@
 .mktoForm select.mktoField:focus,
 .mktoForm textarea.mktoField:focus {
     border-width: 0 !important;
-    outline: 1px solid #90f !important
+    outline: 1px solid var(--primary-purple) !important
 }
 
 .mktoForm .mktoFieldWrap:focus-within .mktoLabel,
 .mktoForm .mktoFieldWrap:focus-within .mktoLabel::after {
-    color: #90f !important
+    color: var(--primary-purple) !important
 }
 
 .mktoForm .mktoFieldWrap .mktoError {
@@ -303,7 +303,7 @@ input[type=radio]+label::before {
 }
 
 input[type=radio] {
-    accent-color: #20201f !important;
+    accent-color: var(--neutral-carbon) !important;
     vertical-align: middle !important;
     opacity: 1 !important;
     height: 20px !important;
@@ -328,7 +328,7 @@ input[type=radio] {
 }
 
 .mktoForm .mktoRadioList>label {
-    color: #20201f !important;
+    color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: 16px !important;
     letter-spacing: .16px;
