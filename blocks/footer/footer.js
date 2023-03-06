@@ -18,12 +18,10 @@ function hideLinks(event, block) {
   const activeHeading = event.target;
   const allLinks = block.querySelectorAll('.footer-links .link-section-heading');
   allLinks.forEach((sectionHeading) => {
-    if(activeHeading != sectionHeading){
+    if (activeHeading !== sectionHeading) {
       sectionHeading.classList.add('fold');
     }
-  }
-
-  )
+  });
 }
 
 // expands the links of the section clicked on
