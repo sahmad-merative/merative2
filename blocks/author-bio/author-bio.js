@@ -25,15 +25,20 @@ export default function decorate(block) {
   block.innerHTML = authorsQuantity > 1 ? `${prefix}` : '';
 
   authors.forEach((author) => {
+    const authorContainer = createTag('div', { class: 'author-container' });
     const authorImageTag = createTag('img', { class: 'author-img' });
     authorImageTag.setAttribute('src', author[imageField] || defaultAuthorImageSrc);
     authorImageTag.setAttribute('alt', 'author-image');
-    const authorNameTag = createTag('span', { class: 'author-name' });
+    const authorNameTag = createTag('div', { class: 'author-name' });
     authorNameTag.innerHTML = authorsQuantity === 1 ? `${prefix}` : '';
     const authorNameHighlight = createTag('span', { class: 'author-name-hightlight' });
-    authorNameHighlight.innerHTML = author[titleField] ? `${author[nameField]}, ${author[titleField]}` : author[nameField];
+    const authorTitleHighlight = createTag('span', { class: 'author-title-hightlight' });
+    authorNameHighlight.innerHTML = author[titleField] ? `${author[nameField]},` : author[nameField];
+    authorTitleHighlight.innerHTML = author[titleField] || '';
     authorNameTag.append(authorNameHighlight);
-    content.push(authorImageTag, authorNameTag);
+    authorNameTag.append(authorTitleHighlight);
+    authorContainer.append(authorImageTag, authorNameTag);
+    content.push(authorContainer);
   });
   block.append(...content);
 
