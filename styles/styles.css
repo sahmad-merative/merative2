@@ -397,7 +397,7 @@ main .content-band.icon-list.picture-circle img {
     }
 
     h4, h5 {
-        font-family: var(--sans-serif-font);
+        font-family: var(--sans-serif-font-regular);
         line-height: var(--line-height-160);
         letter-spacing: var(--letter-spacing-1);
     }
