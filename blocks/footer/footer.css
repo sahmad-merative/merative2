@@ -342,6 +342,12 @@
     justify-content:space-between;
   }
 
+  footer .footer-links+ul>li:first-of-type >p {
+    display: flex;
+  
+ }
+
+
   footer .footer ul .social-icons {
     width: 50%;
     position: relative;
@@ -379,17 +385,15 @@
     right: 70px;
   }
 
-
-
   footer .footer-links .icon-email {
     display: none;
   }
 
   footer .footer-links div:last-of-type > p:last-of-type {
     display: flex;
-    justify-content: end;
-    position: absolute;
-    right: 0;
+    width: 95vw;
+    justify-content:flex-end;
+    transform: translateY(25vh);
   }
 
   footer .footer-links #follow-us , 
@@ -399,10 +403,9 @@
 
   footer .footer-links #follow-us , 
   footer .footer-links #contact-us {
-    font-family: var(--sans-serif-font-medium);
+    font-family: var(--sans-serif-font-semibold);
     letter-spacing: .01em;
     line-height: 160%;
-    font-weight: 500;
     width: 100%;
   }
 }
