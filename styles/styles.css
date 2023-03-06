@@ -511,7 +511,7 @@ main .section-bottom .columns-2-cols {
 
 main .section-bottom .columns-2-cols h1 {
   font-weight: 300;
-  font-family: var(--sans-serif-font);
+  font-family: var(--sans-serif-font-regular);
   -webkit-text-fill-color: transparent;
   background: var(--gradient-diagonal-up);
   background-clip: text;
@@ -1097,7 +1097,7 @@ main .section .column-content-top-border>div>div h1 {
 
   h4,
   h5 {
-    font-family: var(--sans-serif-font);
+    font-family: var(--sans-serif-font-regular);
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-1);
   }
@@ -1148,7 +1148,7 @@ main .section .column-content-top-border>div>div h1 {
 
   h4,
   h5 {
-    font-family: var(--sans-serif-font);
+    font-family: var(--sans-serif-font-regular);
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-1);
   }
