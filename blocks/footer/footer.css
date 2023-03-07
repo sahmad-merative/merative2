@@ -8,7 +8,6 @@ footer {
 footer .footer-links>div{
   display: flex;
   padding-bottom: 1.5rem;
-   
 }
 
 footer .footer > div > div {
@@ -36,7 +35,6 @@ footer .footer-links > div > div> h4{
   margin: 0 0 24px;
   letter-spacing: .01em;
   line-height: 160%;
-  font-weight: 500;
 }
 
 footer .footer-links .icon {
@@ -78,7 +76,6 @@ footer .footer-links .icon.icon-twitter{
   margin: 0 21px 0 36px;
 }
   
-
 footer .footer-links div:last-of-type > p:last-of-type {
   display: flex;
 }
@@ -132,7 +129,7 @@ footer .footer-links ul li a{
 
 footer .footer-links+ul>li a{
   text-decoration: none;
-  color: var(--neutral-grey-tint120);
+  color: var(--neutral-white);
 }
 
 footer .footer-links ul li a:hover {
@@ -148,10 +145,11 @@ footer .footer-links+ul{
   justify-content: space-between;
   max-width: 80vw;
   margin: auto;
+  border-top: .25px solid var(--neutral-grey-tint120);
 }
 
 footer .footer-links+ul li{
-  color:var(--neutral-grey-tint120);
+  color:var(--neutral-white);
   font-size: 16px;
   flex: 1 1 auto;
 }
@@ -168,7 +166,6 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type span.cookie-consent:
 footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   border-bottom: 2px solid var(--gradient-left-right);
 }
-
 
 /* end styles for lower section */
 
@@ -245,25 +242,34 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     display: none;
   }
 
-  footer .footer-links #follow-us+p a:last-of-type{
-    align-self: flex-start;
-    padding: 0;
-  }
-
   footer .footer-links #contact-us{
     color: var(--neutral-white);
-    padding-right: 1rem;
     padding-left: 2rem;
     align-self:end;
     order: 3;
     border-left: .25px solid var(--neutral-grey-tint120);
   }
 
-  footer .footer-links #contact-us+p {
-    order: 4;
+  footer .footer-links #contact-us+p  {
+    order: 4;    
   }
 
-  footer .footer-links .icon-email,
+  footer .footer-links+ul>li a {
+    color: var(--neutral-grey-tint120);
+  }
+
+  footer .footer-links #contact-us+p > a {
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+    background: url('../../icons/envolop-icon-white.svg') no-repeat right center;
+  }
+
+  footer .footer-links #contact-us+p > a > span { 
+    display: none;
+  }
+
   footer .footer-links .icon-linkedin,
   footer .footer-links .icon-twitter {
     width: 35px;
@@ -277,7 +283,13 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   footer .footer-links+ul {
     max-width:85vw;
     padding: 0;
+    border-top: none ;
   }
+
+  footer .footer-links+ul li {
+    color: var(--neutral-grey-tint120);
+  }
+
 }
 
 /* || End Styles for screen sizes less than or equal to 1200px */
@@ -355,6 +367,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     justify-content: space-evenly;
     margin-left: 20px;
     margin-top: 0;
+    border-top: none;
   }
  
   footer .footer-links ul {

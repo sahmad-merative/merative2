@@ -84,7 +84,7 @@ export default async function decorate(block) {
   cookieConsent.addEventListener('click', () => { OneTrust.ToggleInfoDisplay(); });
 
   // code for building mobile footer
-  const mobileMedia = window.matchMedia('(max-width: 667px)');
+  const mobileMedia = window.matchMedia('(max-width: 768px)');
   if (mobileMedia.matches) {
     buildMobileFooter(block);
   }
