@@ -33,7 +33,7 @@
 .breadcrumb-navigation li::after {
     padding: 0 10px 0 0;
     content: "";
-    background: url(../../icons/arrow-breadcrumb.svg) no-repeat;
+    background: url('../../icons/arrow-breadcrumb.svg') no-repeat;
     top: 4px;
     position: relative;
     margin: 0 16px 0 10px;
