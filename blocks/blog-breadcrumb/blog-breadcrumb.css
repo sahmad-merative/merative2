@@ -1,6 +1,6 @@
 .section.blog-breadcrumb-container {
     padding-top: 0;
-    padding-bottom: var(--spacer-layout-03);
+    padding-bottom: var(--spacer-layout-01);
 }
 
 .section.blog-breadcrumb-container .breadcrumb-navigation {

@@ -113,9 +113,10 @@
 }
 
 .related-articles[data-block-status="loaded"] > .blog-card > .card-content > .blog-category:not(:empty) {
-    font-size: 14px;
-    letter-spacing: .16px;
-    background-color: #fff;
+    font-size: var(--font-size-16);
+    letter-spacing: var(--letter-spacing-001-em);
+    line-height: var(--line-height-160);
+    background-color: var(--neutral-white);
     opacity: 0.85;
     border-radius: 100px;
     left: var(--spacer-element-05);

@@ -338,6 +338,7 @@ main .article-content picture img {
   width: 744px;
   height: 496px;
   margin-bottom: 24px;
+  aspect-ratio: 3 / 2;
 }
 
 main .section-bottom>div img {
