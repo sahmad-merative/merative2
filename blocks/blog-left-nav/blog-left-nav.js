@@ -82,7 +82,8 @@ export default function decorate(block) {
 
   const headerTags = articleContentWrapper.querySelectorAll('h1, h2, h3');
   headerTags.forEach((headerTag) => {
-    anchorTagLinkCreation(headerTag.getAttribute('id'), headerTag.textContent);
+    // Ignore heading tags with no content
+    if (headerTag.textContent) anchorTagLinkCreation(headerTag.getAttribute('id'), headerTag.textContent);
   });
 
   const socialLinks = ['linkedin', 'twitter', 'facebook', 'share'];
