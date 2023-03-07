@@ -244,6 +244,11 @@ async function createFilters(categories, topics, audiences) {
   filtersHeaderArrow.classList.add('arrow');
   filtersHeader.append(filtersHeaderArrow);
 
+  // Add sticky Filter below header mobile/tablet
+  document.addEventListener('scroll', () => {
+    filters.classList.add('is-sticky');
+  });
+
   // Add sticky shadow to header if any scroll
   filtersMain.addEventListener('scroll', () => {
     if (filtersMain.scrollTop > 0) {

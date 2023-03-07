@@ -27,7 +27,7 @@ main .section {
     display: flex;
     flex-direction: column; 
     align-items: flex-start;
-    padding-top: var(--spacer-layout-03);
+    /* padding-top: var(--spacer-layout-03); */
     gap: var(--spacer-layout-03);
     font-family: var(--sans-serif-font-regular);
     font-style: normal;
@@ -169,12 +169,16 @@ main .section {
 }
 
 .blog-home .filters[aria-expanded="false"] {
-    padding: var(--spacer-layout-03) 0 0;
+    padding: var(--spacer-layout-03) 0;
     }
 
-.blog-home .filters.is-sticky[aria-expanded="false"]{
-    position: fixed;
-}
+    .blog-home .filters.is-sticky[aria-expanded="false"]{
+        position: sticky;
+        top: 93px;
+        z-index: 999;
+        background-color: var(--neutral-white);
+        margin-right: -2px;
+    }
     
 
 .blog-home[data-block-status="loaded"] .filters[aria-expanded="true"] {
@@ -352,10 +356,15 @@ main .section {
 .blog-home[data-block-status="loaded"] .filters a.category-link, .blog-home .filters a.category-link.active {
     display: block;
     padding-bottom: var(--spacer-element-05);
-
     /* padding-top: 4px; */
 }
 
+.blog-home[data-block-status="loaded"] .filters .blog-home-link a.category-link {
+    font-family: var(--sans-serif-font-medium);
+    font-size: var(--font-size-18);
+    line-height: var(--line-height-160);
+    letter-spacing: var(--letter-spacing-1);
+}
 
 
 .blog-home .filters[aria-expanded="false"] > .filters-header::before, .blog-home .filters a.category-link.active::before {
@@ -517,7 +526,7 @@ main .section {
     }
 
     .blog-home .filters[aria-expanded="false"] {
-    padding: var(--spacer-layout-03) 0 0;
+    padding: var(--spacer-layout-03) 0;
     }
 
     .blog-home .filters[aria-expanded="true"] {
@@ -628,6 +637,11 @@ main .section {
         padding-bottom: var(--spacer-element-03);
     }
     
+
+    .blog-home[data-block-status="loaded"] .filters .blog-home-link a.category-link {
+        font-size: var(--font-size-21);
+    }
+
     .blog-home[data-block-status="loaded"] .filters > .filters-main div {
         display: flex;
         flex-direction: column;
