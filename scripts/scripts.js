@@ -1,3 +1,4 @@
+import authorsParser from './authors-parser.js';
 import {
   sampleRUM,
   buildBlock,
@@ -15,7 +16,7 @@ import {
   readBlockConfig,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['hero', 'blog-home']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['leadspace', 'blog-home']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
 function buildHeroBlock(main) {
@@ -333,11 +334,18 @@ export async function createCard(row, style) {
   if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
   const author = document.createElement('div');
   author.classList.add('blog-author');
-  if (row.author && row.author !== '0') {
-    author.innerHTML += `By ${row.author}`;
-  } else {
+
+  if (!row.authors) {
     author.innerHTML += 'By Merative';
+  } else {
+    const authors = authorsParser(row.authors);
+    const authorNames = [];
+    authors.forEach((authorItem) => {
+      authorNames.push(authorItem.name);
+    });
+    author.innerHTML += `By ${authorNames.join(', ')}`;
   }
+
   if (row.readtime && row.readtime !== '0') author.innerHTML += ` | ${row.readtime}`;
   cardContent.append(author);
   const category = document.createElement('div');
