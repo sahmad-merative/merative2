@@ -436,6 +436,7 @@ main .section {
     flex-flow: wrap;
     flex-direction: row;
     gap: 8px;
+    margin-bottom: var(--spacer-layout-04);
 }
 
 
@@ -769,7 +770,7 @@ main .section {
         line-height: var(--line-height-160);
         color: var(--neutral-carbon);
         letter-spacing: var(--letter-spacing-001-em);
-        padding-top: var(--spacer-element-08);
+        padding-top: var( --spacer-layout-04);
         font-family: var(--sans-serif-font-medium);
         float:left;
     }
@@ -780,7 +781,7 @@ main .section {
         font-size: var(--font-size-16);
         line-height: var(--line-height-120);
         color: var(  --primary-purple);
-        padding-top: var(--spacer-element-08);
+        padding-top: var( --spacer-layout-04);
         font-family: var(--sans-serif-font-medium);
         float: right;
         text-decoration: underline;
