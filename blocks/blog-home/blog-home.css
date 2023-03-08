@@ -44,6 +44,12 @@ main .section {
     text-decoration: none;
 }
 
+.blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > h1,
+.blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > p {
+    padding-left: calc((100vw - var(--section-width-mobile))/2);
+    padding-right: calc((100vw - var(--section-width-mobile))/2);
+}
+
 .blog-home[data-block-status="loaded"] > .blog-content > .load-more {
     position: relative;
     display: block;
@@ -440,10 +446,17 @@ main .section {
 }
 
 @media only screen and (max-width: 1199px) {
-    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper {
-        padding: var(--spacer-layout-05) 0 var(--spacer-layout-04);
-        background-color: var(--neutral-bone);
-    }
+.blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper {
+    padding: var(--spacer-layout-05) 0 var(--spacer-layout-04);
+    background-color: var(--neutral-bone);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
 }
 
 
@@ -458,6 +471,11 @@ main .section {
         padding: var(--spacer-layout-05) var(--spacer-layout-036);
     }
 
+    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > h1,
+    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > p {
+    padding-left: calc((100vw - var(--section-width-tablet-small))/2);
+    padding-right: calc((100vw - var(--section-width-tablet-small))/2);
+}
 
     .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper p{
         font-family: var(--sans-serif-font-light);
@@ -665,10 +683,18 @@ main .section {
     .blog-home[data-block-status="loaded"] > .blog-content > .default-content-wrapper {
         grid-area: defaultcontent;
         width: 816px;
+        background-color: var(--neutral-white);
     }
 
     .blog-card.featured-article .card-content > p{
         margin: var(--spacer-element-03) 0 var(--spacer-element-10);
+    }
+
+
+    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > h1,
+    .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper > p {
+    padding-left: inherit;
+    padding-right: inherit;
     }
 
     .blog-home[data-block-status="loaded"] > .blog-content  > .default-content-wrapper p{
