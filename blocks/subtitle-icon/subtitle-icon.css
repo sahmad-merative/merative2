@@ -1,9 +1,9 @@
-main .iconnect p{
+main .subtitle-icon p{
     font-family: var(--sans-serif-font-light);
     font-weight: var(--font-weight-light);
   }
 
-  main .iconnect
+  main .subtitle-icon
   {
     font-size: var(--font-size-16);
     line-height: var(--line-height-160);
@@ -13,18 +13,18 @@ main .iconnect p{
     margin: var(--spacer-element-10) 0;
   }
   
-  main .iconnect h5
+  main .subtitle-icon h5
   {
     font-family: var(--sans-serif-font-medium);
     font-weight: var(--font-weight-medium);
     margin: 16px auto;
   }
   
-  main .iconnect p:has(a:first-child){
+  main .subtitle-icon p:has(a:first-child){
     text-align: unset;
   }
   
-  main  .iconnect p > a{
+  main  .subtitle-icon p > a{
     text-decoration: underline;
     }  
 
