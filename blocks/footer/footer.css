@@ -318,8 +318,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     padding-top: 3rem;
   }
 
-  footer .footer-links > div > div{
-   
+  footer .footer-links > div > div{ 
     flex: 1 1 0;
   }
 
@@ -340,8 +339,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     font-family: var(--sans-serif-font-semibold);
     letter-spacing: .01em;
     line-height: 160%;
-    background: url('../../icons/arrow-up-white.svg') no-repeat right center;
-    
+    background: url('../../icons/arrow-up-white.svg') no-repeat right center; 
     padding: 24px;
     margin: 0 auto;
   }
