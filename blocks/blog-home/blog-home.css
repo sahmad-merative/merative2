@@ -124,7 +124,6 @@ main .section {
 .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image {
     width: 328px;
     height: 287px;
-    height: 100%;
     object-fit: cover;
 }
 
@@ -733,7 +732,6 @@ main .section {
     .blog-home .blog-content  .blog-cards .blog-card.featured-article .card-image img {
         width: 396px;
         height: 346px;
-        height: 100%;
         object-fit: cover;
     }
 
