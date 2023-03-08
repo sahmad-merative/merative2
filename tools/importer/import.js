@@ -81,7 +81,7 @@ export default {
 
     // Add PDF block
     const pdfUrlEl = main.querySelector('.cmp-pdfviewer');
-    const pdfUrlPath = pdfUrlEl.getAttribute('data-cmp-document-path').replace('/content/dam/merative', '');
+    const pdfUrlPath = pdfUrlEl.getAttribute('data-cmp-document-path');
     const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlPath), 'https://main--merative2--hlxsites.hlx.page').toString();
     const pdfCells = [
       ['PDF Viewer'],
@@ -147,6 +147,20 @@ export default {
       element: main,
       path: new URL(url).pathname,
     });
+
+    // find pdf links in document pages (different than other pages)
+    const docEl = main.querySelector('.cmp-pdfviewer');
+    const docUrl = docEl.getAttribute('data-cmp-document-path');
+    if (docUrl && docUrl.endsWith('.pdf')) {
+      const u = new URL(docUrl, url);
+      const newPath = WebImporter.FileUtils.sanitizePath(u.pathname);
+      // no "element", the "from" property is provided instead -
+      // importer will download the "from" resource as "path"
+      results.push({
+        path: newPath,
+        from: u.toString(),
+      });
+    }
 
     // find pdf links
     main.querySelectorAll('a').forEach((a) => {
