@@ -1,26 +1,46 @@
 import { createTag, getMetadata } from '../../scripts/scripts.js';
+import authorsParser from '../../scripts/authors-parser.js';
 
 export default function decorate(block) {
   const defaultAuthorImageSrc = '../../styles/favicon-thumbnail-merative.svg';
   const defaultAuthor = 'Merative';
 
-  let authorImage = getMetadata('authorimage');
   const readtime = getMetadata('readtime');
-  let author = getMetadata('author');
+  let authors = getMetadata('authors');
+  const nameField = 'name';
+  const titleField = 'title';
+  const imageField = 'image';
+  const prefix = 'By ';
+  const content = [];
 
-  author = author || defaultAuthor;
-  authorImage = authorImage || defaultAuthorImageSrc;
+  if (!authors) {
+    authors = [{
+      [nameField]: defaultAuthor,
+      [imageField]: defaultAuthorImageSrc,
+    }];
+  }
 
-  block.innerHTML = '';
-  const authorImageTag = createTag('img', { class: 'author-img' });
-  authorImageTag.setAttribute('src', authorImage);
-  authorImageTag.setAttribute('alt', 'author-image');
-  const authorNameTag = createTag('span', { class: 'author-name' });
-  authorNameTag.innerHTML = 'By ';
-  const authorNameHighlight = createTag('span', { class: 'author-name-hightlight' });
-  authorNameHighlight.innerHTML = `${author}`;
-  authorNameTag.append(authorNameHighlight);
-  block.append(authorImageTag, authorNameTag);
+  const authorsQuantity = authors.length;
+  authors = authorsParser(authors);
+  block.innerHTML = authorsQuantity > 1 ? `${prefix}` : '';
+
+  authors.forEach((author) => {
+    const authorContainer = createTag('div', { class: 'author-container' });
+    const authorImageTag = createTag('img', { class: 'author-img' });
+    authorImageTag.setAttribute('src', author[imageField] || defaultAuthorImageSrc);
+    authorImageTag.setAttribute('alt', 'author-image');
+    const authorNameTag = createTag('div', { class: 'author-name' });
+    authorNameTag.innerHTML = authorsQuantity === 1 ? `${prefix}` : '';
+    const authorNameHighlight = createTag('span', { class: 'author-name-hightlight' });
+    const authorTitleHighlight = createTag('span', { class: 'author-title-hightlight' });
+    authorNameHighlight.innerHTML = author[titleField] ? `${author[nameField]},` : author[nameField];
+    authorTitleHighlight.innerHTML = author[titleField] || '';
+    authorNameTag.append(authorNameHighlight);
+    authorNameTag.append(authorTitleHighlight);
+    authorContainer.append(authorImageTag, authorNameTag);
+    content.push(authorContainer);
+  });
+  block.append(...content);
 
   if (readtime) {
     const pipeTag = createTag('span', { class: 'pipe' });
