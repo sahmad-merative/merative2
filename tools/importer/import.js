@@ -1,45 +1,168 @@
-/*
- * Copyright 2022 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-/* global WebImporter */
-/* eslint-disable no-console, class-methods-use-this */
+/* eslint-disable no-undef */
+const createMetadataBlock = (main, document) => {
+  const meta = {};
+
+  // find the <title> element
+  const title = document.querySelector('title');
+  if (title) {
+    meta.Title = title.innerHTML.replace(/[\n\t]/gm, '');
+  }
+
+  // find the <meta property="og:description"> element
+  const desc = document.querySelector('[property="og:description"]');
+  if (desc) {
+    meta.Description = desc.content;
+  }
+
+  // find the <meta property="og:image"> element
+  // const img = document.querySelector('[property="og:image"]');
+  // if (img) {
+  //   // create an <img> element
+  //   const el = document.createElement('img');
+  //   el.src = img.content;
+  //   meta.Image = el;
+  // }
+
+  // Get tags
+  let tags = '';
+  document.querySelectorAll('.cmp-pdfbasicinfo__tag').forEach((tag) => {
+    tags += tag.innerHTML;
+    tags += ',';
+    tag.remove();
+  });
+  if (tags) meta.Tags = tags;
+
+  const readtime = document.querySelector('.cmp-pdfbasicinfo__pretitle > span');
+  if (readtime) meta.ReadTime = readtime.innerHTML;
+  readtime.remove();
+
+  // helper to create the metadata block
+  const block = WebImporter.Blocks.getMetadataBlock(document, meta);
+
+  // append the block to the main element
+  main.append(block);
+
+  // returning the meta object might be usefull to other rules
+  return meta;
+};
+
 export default {
-  /**
-   * Apply DOM operations to the provided document and return
-   * the root element to be then transformed to Markdown.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @returns {HTMLElement} The root element to be transformed
-   */
-  transformDOM: ({
+  transform: ({
     // eslint-disable-next-line no-unused-vars
-    document, url, html, params,
+    document,
+    url,
   }) => {
-    // use helper method to remove header, footer, etc.
+    // Remove unnecessary parts of the content
     WebImporter.DOMUtils.remove(document.body, ['header', 'footer']);
-    return document.body;
+    const main = document.body;
+    const results = [];
+
+    // Remove other stuff that shows up in the page
+    const skipToContent = main.querySelector('.button--skipToContent');
+    skipToContent.remove();
+    main.querySelectorAll('iframe').forEach((el) => el.remove());
+    main.querySelector('div#onetrust-consent-sdk').remove();
+    main.querySelector('.cmp-pdfbasicinfo__action-container').remove();
+
+    // Add Leadspace block
+    const title = main.querySelector('h1.cmp-pdfbasicinfo__title');
+    const description = main.querySelector('.cmp-pdfbasicinfo__description');
+    const cells = [
+      ['Leadspace (document)'],
+      [title.outerHTML + description.innerHTML],
+    ];
+    const table = WebImporter.DOMUtils.createTable(cells, document);
+    main.prepend(table);
+    // remove elements already added to blocks from main
+    title.remove();
+    description.remove();
+
+    main.append('---');
+
+    // Add PDF block
+    const pdfUrlEl = main.querySelector('.cmp-pdfviewer');
+    const pdfUrlPath = pdfUrlEl.getAttribute('data-cmp-document-path').replace('/content/dam/merative', '');
+    const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlPath), 'https://main--merative2--hlxsites.hlx.page').toString();
+    const pdfCells = [
+      ['PDF Viewer'],
+      ['Document Link', pdfUrl],
+    ];
+    const pdfBlock = WebImporter.DOMUtils.createTable(pdfCells, document);
+    main.append(pdfBlock);
+
+    main.append('---');
+
+    // Add Related Documents block
+    const rrText = main.querySelector('.cmp-teaser .cmp-teaser__pretitle');
+    const rrSectionTitle = document.createElement('h5');
+    rrSectionTitle.innerHTML = rrText.innerHTML;
+    const relatedResourcesCmp = main.querySelectorAll('.customizedCard.teaser a');
+    let rrLinks = '';
+    relatedResourcesCmp.forEach((link) => {
+      const updatedLink = link.href.replace('/content/merative/us/en', '');
+      const rrURL = new URL(WebImporter.FileUtils.sanitizePath(updatedLink), 'https://main--merative2--hlxsites.hlx.page').toString();
+      const linkEl = document.createElement('a');
+      linkEl.href = rrURL;
+      linkEl.innerHTML += rrURL;
+      rrLinks += linkEl;
+      rrLinks += '\n';
+      link.remove();
+    });
+
+    const relatedResourcesCells = [
+      ['Related Resources'],
+      [rrLinks],
+    ];
+    const relatedResourcesBlock = WebImporter.DOMUtils.createTable(relatedResourcesCells, document);
+    main.append(rrSectionTitle);
+    main.append(relatedResourcesBlock);
+    rrText.remove();
+    main.append('---');
+
+    // Add CTA block
+    const ctaHeading = main.querySelector('.cmp-experiencefragment--consultation h2');
+    const ctaText = main.querySelectorAll('.cmp-experiencefragment--consultation p');
+    const ctaLinkText = main.querySelector('.cmp-experiencefragment--consultation a .cmp-button__text');
+
+    let ctaTextInner = '';
+    ctaText.forEach((paragraph) => {
+      ctaTextInner += paragraph.innerHTML;
+      paragraph.remove();
+    });
+    const ctaLink = `<a href="https://www.merative.com/contact">${ctaLinkText.innerHTML}</a>`;
+    // const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlEl.getAttribute('data-cmp-document-path')), 'https://main--merative2--hlxsites.hlx.page').toString();
+    const ctaCells = [
+      ['CTA'],
+      [ctaHeading.outerHTML + ctaTextInner + ctaLink],
+    ];
+    const ctaBlock = WebImporter.DOMUtils.createTable(ctaCells, document);
+    main.append(ctaBlock);
+    ctaHeading.remove();
+    main.querySelector('.cmp-experiencefragment--consultation a').remove();
+
+    createMetadataBlock(main, document);
+
+    // main page import - "element" is provided, i.e. a docx will be created
+    results.push({
+      element: main,
+      path: new URL(url).pathname,
+    });
+
+    // find pdf links
+    main.querySelectorAll('a').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (href && href.endsWith('.pdf')) {
+        const u = new URL(href, url);
+        const newPath = WebImporter.FileUtils.sanitizePath(u.pathname);
+        // no "element", the "from" property is provided instead -
+        // importer will download the "from" resource as "path"
+        results.push({
+          path: newPath,
+          from: u.toString(),
+        });
+      }
+    });
+
+    return results;
   },
-  /**
-   * Return a path that describes the document being transformed (file name, nesting...).
-   * The path is then used to create the corresponding Word document.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @return {string} The path
-   */
-  generateDocumentPath: ({
-    // eslint-disable-next-line no-unused-vars
-    document, url, html, params,
-  }) => new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
 };
