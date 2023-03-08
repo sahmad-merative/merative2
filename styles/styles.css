@@ -40,7 +40,9 @@
   --neutral-sand: #E7E2DA;
   --neutral-bone: #FAF8F6;
   --neutral-white: #FFF;
-
+  --neutral-grey-tint100: #B9B5AE;
+  --neutral-grey-tint120: #8B8883;
+  
   /* feedback */
   --feedback-green: #059641;
   --feedback-red: #D21313;
@@ -1308,5 +1310,3 @@ main .section .column-content-top-border>div>div h1 {
     gap: 50px;
   }  
 }
-
-
