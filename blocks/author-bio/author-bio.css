@@ -5,6 +5,8 @@ main .author-bio {
     line-height: var(--line-height-160);
     letter-spacing: var(--letter-spacing-1);
     display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
     align-items: center;
     color: var(--neutral-carbon);
 }
@@ -27,10 +29,21 @@ main .author-bio img.author-img{
 
 main .author-bio .author-name {
     margin-left: 16px;
+    max-width: 150px;
+}
+
+main .author-bio .author-name > span {
+    display: flex;
+    flex-flow: column;
 }
 
 main .author-bio .pipe {
     color: var(--neutral-sand);
     font-size: 20px;
     margin: 0 13px;
+}
+
+main .author-container {
+    display: flex;
+    align-items: center;
 }
