@@ -72,10 +72,13 @@ footer .footer-links .icon.icon-email, footer .footer-links .icon.icon-linkedin{
   margin: 0 0 36px;
 }
 
-footer .footer-links .icon.icon-twitter{
+/* footer .footer-links .icon.icon-twitter{
   margin: 0 21px 0 36px;
+} */
+footer .footer-links .icon.icon-twitter {
+  margin: 0 0 0 24px;
 }
-  
+
 footer .footer-links div:last-of-type > p:last-of-type {
   display: flex;
 }
@@ -84,10 +87,6 @@ footer .footer-links .icon-linkedin > svg{
   margin: 0.5rem auto;
   width: 20.75px;
   height: 19.83px;
-}
-
-footer .footer-links .icon-twitter{
-  margin-left: 21px;
 }
 
 footer .footer-links .icon-twitter > svg{
@@ -116,7 +115,7 @@ footer .footer-links ul{
 }
 
 footer .footer-links ul li{
-  margin-bottom: 1.875rem;
+  margin-bottom: 24px;
 }
 
 footer .footer-links ul li a{
@@ -171,7 +170,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
 
 /* Media queries */
 
-/* || Begin Styles for screen sizes greater than or equal to 1200 px */
+/* || Desktop Styles */
 
 @media screen and (min-width: 1200px) {
   footer .footer {
@@ -198,10 +197,11 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   }
 }
 
-/* || Begin Styles tablets */
+/* || Tablet Styless */
 @media  screen and (min-width: 768px) and (max-width: 1200px) {
   footer .footer-links {
-    margin: auto;
+    /* margin: auto; */
+    margin-left:32px;
     max-width: 85vw;
   }
 
@@ -226,7 +226,6 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   }
 
   footer .footer-links > div >div:first-child {
-    /* border: 2px solid blue; */
     flex-basis: 85vw;
     padding-bottom: 3rem;
   }
@@ -236,6 +235,10 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     border-bottom: 0.25px solid var(--neutral-grey-tint120);
     flex-basis: 85vw;
     height: 75px;
+  }
+
+  footer .footer-links > div > div> h4{
+    margin: 0 0 32px;
   }
 
   footer .footer-links #follow-us{
@@ -262,7 +265,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     display: block;
     width: 35px;
     height: 35px;
-    margin-top: 5px;
+    margin-top: -5px;
     background: url('../../icons/envolop-icon-white.svg') no-repeat right center;
   }
 
@@ -281,18 +284,21 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   }
 
   footer .footer-links+ul {
-    max-width:85vw;
+    max-width:70vw;
     padding: 0;
     border-top: none ;
+    margin-top: 12px;
+    margin-bottom:12px;
   }
 
   footer .footer-links+ul li {
     color: var(--neutral-grey-tint120);
+    flex: 1 1 fit-content;
+    position: relative;
+    right:calc(15vw - 32px);
   }
 
 }
-
-/* || End Styles for screen sizes less than or equal to 1200px */
    
 /* || Mobile styles */
 
@@ -320,6 +326,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
 
   footer .footer-links > div > div{ 
     flex: 1 1 0;
+    margin:0;
   }
 
   footer .footer-links > div > div:first-of-type {
@@ -330,7 +337,8 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
 
   footer .footer-links > div > div:last-of-type {
     border-bottom: none;
-    flex: 1 1 0;
+    height: 0;
+    /* border: 3px solid red; */
   }
 
   footer .footer-links > div > div > h4 {
@@ -340,7 +348,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     letter-spacing: .01em;
     line-height: 160%;
     background: url('../../icons/arrow-up-white.svg') no-repeat right center; 
-    padding: 24px;
+    padding: 16px 0;
     margin: 0 auto;
   }
 
@@ -371,12 +379,8 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     justify-content: space-evenly;
     margin-left: 20px;
     margin-top: 0;
+    padding-top: 0;
     border-top: none;
-  }
-
-  footer .footer-links ul li {
-    padding:1.5rem;
-    margin:0 auto;
   }
 
   footer .footer-links ul li a {
@@ -411,7 +415,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   }
   
   footer .footer-links .icon.icon-twitter {
-    margin: 0 30px 0 10px;
+    margin: 0 0 0 10px;
   }
 
   footer .footer-links .icon-email {
@@ -420,9 +424,9 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
 
   footer .footer-links div:last-of-type > p:last-of-type {
     display: flex;
-    width: 95vw;
+    position:relative;
     justify-content:flex-end;
-    transform: translateY(325%);
+    transform: translateY(225%);
   }
 
   footer .footer-links #follow-us , 
@@ -431,4 +435,4 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   }
 }
 
-/* || End Styles for screen sizes less than or equal to 667 px */
+/* || End Mobile Styles */
