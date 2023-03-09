@@ -338,7 +338,6 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
   footer .footer-links > div > div:last-of-type {
     border-bottom: none;
     height: 0;
-    /* border: 3px solid red; */
   }
 
   footer .footer-links > div > div > h4 {
