@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 const createMetadataBlock = (main, document) => {
   const meta = {};
+  // add the template
+  meta.Template = 'Document';
 
   // find the <title> element
   const title = document.querySelector('title');
@@ -30,7 +32,7 @@ const createMetadataBlock = (main, document) => {
     tags += ',';
     tag.remove();
   });
-  if (tags) meta.Tags = tags;
+  if (tags) meta.DocumentTags = tags;
 
   const readtime = document.querySelector('.cmp-pdfbasicinfo__pretitle > span');
   if (readtime) meta.ReadTime = readtime.innerHTML;
@@ -100,7 +102,7 @@ export default {
     let rrLinks = '';
     relatedResourcesCmp.forEach((link) => {
       const updatedLink = link.href.replace('/content/merative/us/en', '');
-      const rrURL = new URL(WebImporter.FileUtils.sanitizePath(updatedLink), 'https://main--merative2--hlxsites.hlx.page').toString();
+      const rrURL = new URL(WebImporter.FileUtils.sanitizePath(updatedLink), 'https://main--merative2--hlxsites.hlx.page').toString().replace('.html', '');
       const linkEl = document.createElement('a');
       linkEl.href = rrURL;
       linkEl.innerHTML += rrURL;
