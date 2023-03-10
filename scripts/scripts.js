@@ -331,7 +331,7 @@ export async function createCard(row, style) {
   link.href = row.path;
   if (row.title) link.innerHTML += `${row.title}`;
   cardContent.append(link);
-  if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
+  if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description.substring(0, 160)}...</p>`;
   const author = document.createElement('div');
   author.classList.add('blog-author');
 
@@ -374,7 +374,7 @@ export async function createDocumentCard(row, style) {
   card.append(category);
   // Add the title, description and link to card
   if (row.title) card.innerHTML += `<a href="${row.path}"><h3>${row.title}</h3></a>`;
-  if (row.description && row.description !== '0') card.innerHTML += `<a href="${row.path}"><p>${row.description}</p></a>`;
+  if (row.description && row.description !== '0') card.innerHTML += `<a href="${row.path}"><p>${row.description.substring(0, 160)}...</p></a>`;
   const link = document.createElement('a');
   link.classList.add('document-link');
   link.href = row.path;
