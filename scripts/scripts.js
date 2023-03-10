@@ -370,7 +370,7 @@ export async function createDocumentCard(row, style) {
   // Get category
   const category = document.createElement('div');
   category.classList.add('document-category');
-  if (row.category && row.category !== '0') category.innerHTML += row.category;
+  if (row.assetType && row.assetType !== '0') category.innerHTML += row.assetType;
   card.append(category);
   // Add the title, description and link to card
   if (row.title) card.innerHTML += `<a href="${row.path}"><h3>${row.title}</h3></a>`;
