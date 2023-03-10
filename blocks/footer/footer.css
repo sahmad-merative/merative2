@@ -198,7 +198,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
 }
 
 /* || Tablet Styless */
-@media  screen and (min-width: 768px) and (max-width: 1200px) {
+@media  screen and (min-width: 769px) and (max-width: 1200px) {
   footer .footer-links {
     /* margin: auto; */
     margin-left:32px;
@@ -425,7 +425,7 @@ footer div:last-of-type > ul:last-of-type > li:last-of-type a:hover{
     display: flex;
     position:relative;
     justify-content:flex-end;
-    transform: translateY(225%);
+    top: 120%; 
   }
 
   footer .footer-links #follow-us , 
