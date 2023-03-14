@@ -813,6 +813,29 @@ main .checked-list li::before {
   display: inline-block;
 }
 
+
+main .section.arrow-list ul{
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+main .section.arrow-list li{
+  list-style: none;
+  padding-bottom: var(--spacer-element-03);
+}
+
+main .section.arrow-list li::before{
+  background: url('../../icons/right-arrow-purple-small.svg') no-repeat;
+  content: "";
+  display: inline-block;
+  height: 9.3px;
+  position: relative;
+  vertical-align: middle;
+  width: 12px;
+  margin-right: 10.7px;
+  text-align:center;
+}
+
 main .border-top-neutral-sand {
   border-top: 1px solid var(--neutral-sand);
 }
