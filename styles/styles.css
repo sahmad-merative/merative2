@@ -996,6 +996,7 @@ main .section.what-we-do.teaser-list-container > .default-content-wrapper > p  {
   main .section.what-we-do.teaser-list-container > .default-content-wrapper {
      width: 100%; 
      padding-bottom: 0;
+     margin: 0 auto;
   }
 
 
