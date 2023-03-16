@@ -969,11 +969,51 @@ main .section.what-we-do.teaser-list-container > .default-content-wrapper > p  {
     margin: 0 auto;
   }
 
-  main .section-bottom .columns-2-cols h1 {
-    font-size: 32px;
-    line-height: 115px;
+  main .section-bottom .columns-2-cols { 
+    padding: 0;
   }
 
+  main .section-bottom .columns-2-cols h2 {
+    font-family: var(--serif-font);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 120%;
+    letter-spacing: 0.0175em;
+   
+    }
+
+  main .section-bottom .columns-2-cols h1 {
+    font-family: var(--serif-font);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 120%;
+    margin-bottom: 0;
+    margin-top:0;
+  }
+
+  main .section-bottom .columns-2-cols > div >:nth-child(2) {
+    margin: 24px 24px 0;
+  }
+
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(1)  {
+    font-family: var(--sans-serif-font-bold);
+    font-size: 13px;
+    line-height: 120%;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(2),
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(3)  {
+  font-family: var(--sans-serif-font-regular);
+  font-size: 16px;
+  line-height: 160%;
+  letter-spacing: 0.01em;
+  margin:0;
+  }
+ 
   /* Back to top button */
   main .section.back-to-top.active[data-section-status='loaded'] {
     height: 49px;
@@ -1121,6 +1161,22 @@ main .section.what-we-do.teaser-list-container > .default-content-wrapper > p  {
       height: 354px;
   }
 
+  main .section-bottom .columns-2-cols > div  {
+    flex-flow: row nowrap;
+    gap: 84px;
+  }
+
+  main .section-bottom .columns-2-cols > div > :nth-child(1) {
+   flex: 1 1 40%;
+  }
+
+  main .section-bottom .columns-2-cols > div > :nth-child(2) {
+    flex: 1 1 40%;
+   }
+
+   main .section-bottom .columns-2-cols { 
+    padding: 0;
+  }
 }
 
 /* Tablet Small */
@@ -1402,4 +1458,29 @@ main .section.what-we-do.teaser-list-container > .default-content-wrapper > p  {
     padding-right: 0;
     gap: 50px;
   }  
+
+  main .section-bottom .columns-2-cols > div > :nth-child(1) {
+    flex: 1 1 60%;
+}
+
+  main .section-bottom .columns-2-cols > div {
+    gap:120px;
+  }
+
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(1)  {
+    font-family: var(--sans-serif-font-bold);
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(2),
+  main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(3)  {
+  font-family: var(--sans-serif-font-regular);
+  font-size: 26px;
+  line-height: 160%;
+  letter-spacing: 0.01em;
+  margin:0;
+  }
 }
