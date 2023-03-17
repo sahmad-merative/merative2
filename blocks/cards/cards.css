@@ -134,7 +134,7 @@
     .cards.newscard>ul>li {
         display: flex;
         gap:32px;
-        margin: 32px 0px 32px 0;
+        margin: 32px 0 ;
     }
 
     .cards.newscard .cards-card-body {
