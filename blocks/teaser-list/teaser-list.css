@@ -1,12 +1,3 @@
-/* .teaser-list {
-    position: relative;
-    display: block;
-}
-
-.teaser-list .teaser-card {
-    padding: 1em;
-} */
-
 .section.what-we-do.teaser-list-container {
     width: 100%;
     gap:0;
@@ -19,11 +10,11 @@
     margin: 0 auto;
     }
 
-.section.what-we-do>.default-content-wrapper>h2 {
+.section.what-we-do > .default-content-wrapper > h2 {
     margin: var(--spacer-layout-03) auto 0;
     }
 
-.section.what-we-do>.default-content-wrapper>h4 {
+.section.what-we-do > .default-content-wrapper > h4 {
     font-family: var(--sans-serif-font-medium);
     font-size: var(--font-size-11);
     letter-spacing: 3.2px;
@@ -35,7 +26,7 @@
     font-family: var(--sans-serif-font-light);
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: var(--font-size-16);
     line-height: 160%;
     letter-spacing: 0.01em;
     color: var(--neutral-carbon);
@@ -78,7 +69,7 @@
 .teaser-list .teaser-card .teaser-link {
     text-decoration: none;
     font-family: var(--sans-serif-font-medium);
-    font-size: 16px;
+    font-size: var(--font-size-16);
     letter-spacing: .16px;
     line-height: 120%;
     border-bottom: 2px solid var(--primary-purple);
@@ -88,7 +79,7 @@
 @media only screen and (min-width: 768px) {
     .teaser-list {
         gap: var(--spacer-layout-04);
-    }
+        }
 
 .section.what-we-do>.default-content-wrapper>h4 {
         margin: 0 auto var(--spacer-layout-03);
@@ -157,6 +148,6 @@
         }
 
     .teaser-list .teaser-card:last-child {
-        border-bottom: 1px solid #e7e2da;
+        border-bottom: 1px solid var(--neutral-sand);
         }
     }

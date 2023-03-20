@@ -325,7 +325,7 @@ main .checked-list li {
 
 main .list-section ul li {
   padding: 12px 16px;
-  background-color: #faf8f6;
+  background-color: var(--neutral-bone);
   margin-bottom: 16px;
   border-radius: 40px;
   min-width: calc(50% + 1px);
@@ -690,7 +690,7 @@ main .section.leadership-content .columns>div>div {
 }
 
 main .section.leadership-content {
-  background: #fff;
+  background: var(--neutral-white);
   padding: 39px 0;
 }
 
@@ -722,7 +722,7 @@ main .border-bottom-gradient::after {
 }
 
 main .bottom-sand-gradient {
-  background-image: linear-gradient(180deg, #fff 23.78%, #faf8f6);
+  background-image: linear-gradient(180deg, var(--neutral-white) 23.78%, var(--neutral-bone));
   border-bottom: 1px solid var(--neutral-sand);
 }
 
@@ -765,7 +765,7 @@ main .section .bg-white {
 }
 
 main .checked-list li::before {
-  background: #faf8f6 url('../../styles/images/CheckBulletPurple.svg') no-repeat;
+  background: var(--neutral-bone) url('../../styles/images/CheckBulletPurple.svg') no-repeat;
   border-radius: 50px;
   content: "";
   height: 24px;

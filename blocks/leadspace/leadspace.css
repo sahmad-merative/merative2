@@ -97,7 +97,7 @@ main div.leadspace-wrapper {
     justify-content: flex-end;
     padding-bottom: var(--spacer-layout-036);
     width: 325px;
-    }
+}
 
 /* Image Variants */
 .leadspace > div:first-child > div:nth-child(2) picture {

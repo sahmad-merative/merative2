@@ -7,7 +7,7 @@
     grid-gap: 16px;
 }
 
-.cards>ul>li {
+.cards > ul > li {
     border: 1px solid var(--neutral-sand);
     background-color: var(--neutral-bone)
 }
@@ -20,11 +20,11 @@
     line-height: 0;
 }
 
-.cards .cards-card-body>*:first-child {
+.cards .cards-card-body > *:first-child {
     margin-top: 0;
 }
 
-.cards>ul>li img {
+.cards ul > li img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -32,7 +32,7 @@
 
 /* changes for news card */
 
-.cards.newscard>ul {
+.cards.newscard > ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -50,7 +50,7 @@
     font-family: var(--sans-serif-font-medium);
 }
 
-.cards.newscard>ul>li {
+.cards.newscard > ul > li {
     border: 0;
     display: flex;
 
@@ -73,8 +73,8 @@
 }
 
 .cards.newscard .cards-card-body a {
-    font-family: 'Alliance Medium', sans-serif;
-    font-size: 16px;
+    font-family: var(--sans-serif-font-medium);
+    font-size: var(--font-size-16);
     letter-spacing: .16px;
     line-height: 120%;
     border-bottom: 2px solid #90f;
@@ -98,7 +98,7 @@
 }
 
 @media (min-width: 768px) {
-    .cards.newscard>ul>li {
+    .cards.newscard > ul > li {
         gap:32px;
         margin: 32px 0 ;
     }
@@ -108,11 +108,11 @@
         display: block;
     }
 
-    .cards.newscard .cards-card-body>*:first-child {
+    .cards.newscard .cards-card-body > *:first-child {
         margin-top: 0;
     }
 
-    .cards.newscard>ul>li img {
+    .cards.newscard > ul > li img {
         border-radius: 0 90% 0 0;
         object-fit: cover;
         aspect-ratio: 1 / 1;
@@ -129,7 +129,7 @@
         margin-inline-start: 0;
         margin-inline-end: 0;
         font-family: var(--serif-font);
-        color: #20201f;
+        color: var(--neutral-carbon);
         line-height: 120%;
         font-style: normal;
         font-weight: 300;
@@ -138,7 +138,7 @@
 }
 
 @media (min-width: 1200px) {
-    .cards.newscard>ul {
+    .cards.newscard > ul {
         list-style: none;
         margin: 0;
         padding: 0;
@@ -148,21 +148,13 @@
         grid-gap: 16px;
     }
 
-    .cards.newscard>ul>li {
+    .cards.newscard > ul > li {
         gap: var(--spacer-layout-06);
-        }
+    }
 
     .cards.newscard .cards-card-body::before {
         font-size: var(--font-size-14);
     }
-
-    /* .cards.newscard>ul>li {
-        background-color: var(--neutral-bone);
-        border: 0;
-        display: grid;
-        grid-template-columns: 33% 67%;
-        grid-gap: 165px;
-    } */
 
     .cards.newscard .cards-card-image {
         line-height: 0;
@@ -170,7 +162,7 @@
         aspect-ratio: 1 / 1;
     }
 
-    .cards.newscard .cards-card-body>*:first-child {
+    .cards.newscard .cards-card-body > *:first-child {
         margin-top: 0;
     }
 
