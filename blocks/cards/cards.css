@@ -166,7 +166,7 @@
         margin-top: 0;
     }
 
-    .cards.newscard>ul>li img {
+    .cards.newscard > ul > li img {
         height: 555px;
         width: 555px;
         max-width: 555px;
