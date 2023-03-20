@@ -53,7 +53,7 @@
     position: absolute;
     width: 55px;
     background: url("../../icons/download-arrow-white.svg") no-repeat center;
-    border: 2px solid #fff;
+    border: 2px solid var(--neutral-white);
     border-radius: 50%;
 }
 
