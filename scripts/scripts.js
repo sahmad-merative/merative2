@@ -114,9 +114,14 @@ function buildPageDivider(main) {
   allPageDivider.forEach((el) => {
     const alt = el.innerText.trim();
     const lower = alt.toLowerCase();
-    if (lower === 'divider') {
-      el.innerText = '';
-      el.classList.add('divider');
+    if (lower.startsWith('divider')) {
+      if (lower === 'divider' || lower.includes('element')) {
+        el.innerText = '';
+        el.classList.add('divider');
+      } else if (lower.includes('layout')) {
+        el.innerText = '';
+        el.classList.add('divider', 'layout');
+      }
     }
   });
 }

@@ -716,6 +716,12 @@ main .divider {
   border: 1px solid var(--neutral-sand);
 }
 
+main .divider.layout {
+  background-image: var(--gradient-vertical);
+  border: none;
+  height: 1px;
+}
+
 main .section .columns.row-header div > div > h2,
 main .section .columns.row-header div > div > h4 {
   margin-left: 0;
