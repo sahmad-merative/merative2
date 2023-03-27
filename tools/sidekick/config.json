@@ -1,5 +1,15 @@
 {
     "project": "Merative Blogs",
     "host": "www.merative.com",
-    "plugins": []
+    "plugins": [
+        {
+            "id": "library",
+            "title": "Library",
+            "environments": [ "edit" ],
+            "isPalette": true,
+            "paletteRect": "top: auto; bottom: 20px; left: 20px; height: 398px; width: 360px;",
+            "url": "/block-library/library",
+            "includePaths": [ "**.docx**" ]
+        }
+    ]
 }
