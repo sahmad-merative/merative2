@@ -412,6 +412,21 @@ main .columns.mobile-odd-flex-reverse > div:nth-child(odd) {
   flex-direction: column-reverse;
 }
 
+/* Any lists */
+main ul {
+  padding-inline-start: var(--spacer-element-07);
+}
+
+main ul li {
+  margin: var(--spacer-element-02) 0;
+  line-height: 1.6;
+}
+
+main ul li::marker {
+  color: var(--primary-purple);
+}
+
+/* Special case lists */
 main .checked-list li {
   position: relative;
   list-style: none;
