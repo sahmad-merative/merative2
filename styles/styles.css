@@ -741,12 +741,6 @@ main .section.back-to-top.active:hover::before {
   height: 1px;
 }
 
-.default-content-wrapper > p:first-of-type > code.divider.layout {
-  margin: 0;
-  padding: 0;
-  }
-
-
 main .section .columns.row-header div > div > h2,
 main .section .columns.row-header div > div > h4 {
   margin-left: 0;
