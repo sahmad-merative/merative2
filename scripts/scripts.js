@@ -124,6 +124,10 @@ function buildPageDivider(main) {
       }
     }
   });
+  const dividersLayout = main.querySelectorAll('div + div > p:first-of-type > code.divider.layout');
+  dividersLayout.forEach((dividerLayout) => {
+    dividerLayout.closest('div').classList.add('no-pad');
+  });
 }
 
 // auto block build for blog left nav
