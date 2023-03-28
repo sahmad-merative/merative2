@@ -274,7 +274,12 @@ blockquote {
 main .section > div {
   width: 80vw;
   margin: 0 auto;
-  }
+}
+
+/* Block Library needs full width */
+main .section > div.library-config-wrapper {
+  width: 100vw;
+}
 
 main .columns-gap-50 > div {
   gap: 50px
