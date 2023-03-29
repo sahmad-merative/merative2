@@ -57,14 +57,9 @@
     bottom: 20px;
     position: absolute;
     width: 55px;
-    background: url("../../icons/download-arrow-white.svg") no-repeat center;
-    border: 2px solid #fff;
+    background: url("../../icons/download-arrow-purple.svg") no-repeat center;
+    border: 2px solid var(--primary-purple);
     border-radius: 50%;
-}
-
-.linkable-cards > div::after {
-  background: url("../../icons/download-arrow-purple.svg") no-repeat center;
-  border: 2px solid var(--primary-purple);
 }
 
 .linkable-cards > div:hover {
