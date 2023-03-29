@@ -300,6 +300,12 @@ main .column-content-top-border div > div {
   max-width: 350px;
 }
 
+.content-band.icon-list h4 {
+  margin: 0;
+  letter-spacing: var(--letter-spacing-001-em);
+  font-size: var(--font-size-18);
+  }
+
 .section > .default-content-wrapper > h4:first-of-type { /* eyebrow */
   font-size: var(--font-size-11);
   letter-spacing: .2em;
@@ -308,15 +314,33 @@ main .column-content-top-border div > div {
   margin: 0 0 var(--spacer-layout-03);
   }
 
+main .section-top div > h1 {
+  margin: var(--spacer-element-08) 0 var(--spacer-element-07);
+  }
+
+main .section .column-content-top-border > div > div h1 {
+  font-size: 96px;
+  line-height: 120%;
+  letter-spacing: 0;
+  font-weight: 300;
+  margin: 0;
+  }
+
+main .article-content-wrapper h2:first-of-type {
+  margin: unset;
+  }
+
+main .columns.row-header div > div > h2,
+main .section.section-header > div:nth-child(1) > h1,
+main .section.section-header > div:nth-child(1) > h2 {
+  margin: 24px 0;
+  }
+
 main .section:first-of-type > .default-content-wrapper:first-of-type > h1:first-of-type {
   margin-top: 0;
   }
 
 /* Section Top and Bottom */
-main .section-top div > h1 {
-  margin: var(--spacer-element-08) 0 var(--spacer-element-07);
-}
-
 main .columns.columns-gap-50 > div {
   gap: 50px;
 }
@@ -382,24 +406,6 @@ main .section.notification-section > div > p::before {
   background-image: var(--gradient-diagonal-down);
 }
 
-main .article-content-wrapper h2:first-of-type {
-  margin: unset;
-}
-
-main .section .column-content-top-border > div > div h1 {
-  font-size: 96px;
-  line-height: 120%;
-  letter-spacing: 0;
-  font-weight: 300;
-  margin: 0;
-  }
-
-main .columns.row-header div > div > h2,
-main .section.section-header > div:nth-child(1) > h1,
-main .section.section-header > div:nth-child(1) > h2 {
-  margin: 24px 0;
-}
-
 main .section.section-header-right-content > div:nth-child(1) > h2,
 main .section.section-header-right-content > div:nth-child(1) > h4 {
   margin: 24px 0;
@@ -423,12 +429,6 @@ main .columns.content-band.icon-list > div {
   letter-spacing: var(--letter-spacing-001-em);
   margin-bottom: 0;
 }
-
-.content-band.icon-list h4 {
-  margin: 0;
-  letter-spacing: var(--letter-spacing-001-em);
-  font-size: var(--font-size-18);
-  }
 
 main .section.columns-image-content > div:nth-child(3) {
   display: none;
@@ -456,6 +456,10 @@ main .list-section ul li {
 }
 
 /* The individual unit of content */
+main .section.leadership-content .columns > div {
+  margin-bottom: 0;
+  }
+
 main .columns.content-band.icon-list > div > div {
   margin-top: var(--spacer-element-05);
 }
@@ -773,7 +777,7 @@ main .section.leadership-content .columns > div > div > p {
   line-height: var(--line-height-120);
   letter-spacing: 0.0175em;
   margin-top: 0;
-}
+  }
 
 main .section .columns.row-header div > div > h4,
 main .section.section-header > div:nth-child(1) > p:first-child {
@@ -790,17 +794,10 @@ main .section.leadership-content .columns > div > div {
   margin: 0 0 var(--spacer-element-10);
 }
 
-main .section.leadership-content .columns > div {
-  margin-bottom: 0;
-  }
-
 main .section.leadership-content {
   background: var(--neutral-white);
 }
 
-main .section.leadership-content h2 {
-  font-size: var(--font-size-32);
-  }
 main .two-columns-section {
   padding-top: 60px;
 }
@@ -1255,10 +1252,6 @@ main .column-content-top-border > div > div::before {
     margin-bottom: 48px;
   }
 
-  .section > .default-content-wrapper > h4:first-of-type {
-    font-size: var(--font-size-14);
-  }
-
   /* Back to top button */
   main .section.back-to-top.active[data-section-status='loaded'] {
     height: 78px;
@@ -1300,7 +1293,11 @@ main .column-content-top-border > div > div::before {
   /* Content-band desktop styles */
   .content-band.icon-list h4 {
     font-size: var(--font-size-21);
-  }
+    }
+
+  .section > .default-content-wrapper > h4:first-of-type {
+    font-size: var(--font-size-14);
+    }
 
   .columns-image-content > div:nth-child(1) {
     grid-area: top-right;
