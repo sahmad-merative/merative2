@@ -32,6 +32,7 @@ main div.leadspace-wrapper {
 /* stylelint-disable-next-line no-descending-specificity */
 .leadspace > div:first-child > div {
     position: relative;
+    width: 100%;
 }
 
 .leadspace:not(.document) > div:first-child > div:nth-child(1) {
@@ -116,7 +117,7 @@ main div.leadspace-wrapper {
 
 /* stylelint-disable-next-line no-descending-specificity */
 .leadspace.half-circle img {
-    clip-path: circle(50% at 50% 100%);
+    clip-path: circle(60% at 50% 100%);
 }
 
 .leadspace.quarter-circle img {
@@ -304,7 +305,7 @@ main div.leadspace-wrapper {
     }
 
     .leadspace:not(.document) > div:first-child > div {
-    width: 50%;
+        width: 50%;
     }
 
     .leadspace:not(.document) > div:first-child > div:nth-child(1) > p:last-of-type {
@@ -319,7 +320,7 @@ main div.leadspace-wrapper {
 
     .leadspace.event picture {
         display: block;
-        }
+    }
 
     .leadspace > div:first-child > div:nth-child(2) picture {
         font-size: 0;
