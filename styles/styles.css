@@ -271,6 +271,16 @@ blockquote {
   margin: var(--spacer-element-05) 0 var(--spacer-element-05);
 }
 
+main .no-pad.section {
+  margin: 0;
+  padding: 0;
+  }
+
+main .no-pad.section p {
+  margin: 0;
+  padding: 0;
+  }
+
 main .section > div {
   width: 80vw;
   margin: 0 auto;
@@ -723,14 +733,14 @@ main .section.back-to-top.active:hover::before {
   margin-right: 16px;
 }
 
-main .divider {
+.divider {
   display: block;
   width: auto;
   margin: var(--spacer-layout-05) 0;
   border: 1px solid var(--neutral-sand);
 }
 
-main .divider.layout {
+.divider.layout {
   background-image: var(--gradient-vertical);
   border: none;
   height: 1px;
