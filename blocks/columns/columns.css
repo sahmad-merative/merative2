@@ -3,6 +3,10 @@
     flex-direction: column;
     }
 
+.columns > div {
+    margin-bottom: var(--spacer-element-09);
+    }
+
 .columns-container h2 {
     margin: var(--spacer-element-07) 0;
     }
@@ -27,6 +31,42 @@ main .section-top-grid > div > div {
 
 main .section-top-grid > div > div > h1 {
     padding: 0;
+    }
+
+.terms div {
+    margin: var(--spacer-element-05) 0;
+    }
+
+.terms, .terms p {
+    font-size: var(--font-size-16);
+    letter-spacing: .01em;
+    line-height: var(--line-height-160);
+    margin-top: 0;
+    }
+
+.terms div p:last-of-type {
+    margin-bottom: 0;
+    }
+
+.terms > div:nth-child(1) > div:nth-child(2) > p:nth-child(1) > em > strong {
+    color: var(--feedback-green);
+    font-style: normal;
+    padding-left: 30px;
+    position: relative;
+    }
+
+.terms > div:nth-child(1) > div:nth-child(2) > p:nth-child(1) > em > strong::after {
+    background-color: var(--feedback-green);
+    border-radius: 50%;
+    color: #fff;
+    content: "✓";
+    font-size: var(--font-size-12);
+    height: calc(var(--font-size-12) * 1.5);
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: calc(var(--font-size-12) * 1.5);
     }
 
 .teaser-list-manual .teaser-list div div {
@@ -169,6 +209,11 @@ main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(3)  {
         margin-left: var(--spacer-layout-04);
         }
 
+    .terms > div > div:nth-of-type(even) {
+        flex: 2;
+        margin-left: var(--spacer-layout-04);
+        }
+
     .columns.section-bottom-grid div {
         padding-bottom: var(--spacer-element-04);
         }
@@ -272,6 +317,10 @@ main .section-bottom .columns-2-cols > div >:nth-child(2) p:nth-of-type(3)  {
         font-weight: var(--font-weight-light);
         line-height: var(--line-height-160);
         letter-spacing: var(--letter-spacing-1);
+        }
+
+    .terms div {
+        margin: var(--spacer-element-06) 0;
         }
 
     .teaser-list-manual p {

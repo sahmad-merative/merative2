@@ -298,6 +298,10 @@ main .column-content-top-border div > div {
   margin: 0 0 var(--spacer-layout-03);
   }
 
+main .section:first-of-type > .default-content-wrapper:first-of-type > h1:first-of-type {
+  margin-top: 0;
+  }
+
 /* Section Top and Bottom */
 main .section-top div > h1 {
   margin: var(--spacer-element-08) 0 var(--spacer-element-07);
