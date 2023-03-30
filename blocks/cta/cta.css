@@ -38,50 +38,8 @@
 /* CTA Button */
 .section.cta-container .cta.block .button-container {
     margin: 0 auto;
-}
-
-.section.cta-container .cta.block p.button-container{
     padding-top: 32px;
     width: unset;
-}
-
-.section.cta-container .cta.block .button-container > a {
-    position:relative;
-    display: inline-block;
-    text-decoration: none;
-    color: var(--neutral-white);
-    background: #90f;
-    border-radius: 40px;
-    cursor: pointer;
-    padding: 11px 16px 11px 24px;
-    width: auto;
-    height: auto;
-    align-items: center;
-    text-align: left;
-    vertical-align: middle;
-    justify-content: space-between;
-    font-family: var(--sans-serif-font-medium);
-    font-size: var(--font-size-16);
-    font-weight: 500;
-    letter-spacing: var(--letter-spacing-1);
-    line-height: var(--line-height-160);
-    border: none;
-    -webkit-text-fill-color: unset;
-}
-
-.section.cta-container .cta.block .button-container > a::after {
-    display: inline-block;
-    content: '';
-    margin-left: 24px;
-    vertical-align: sub;
-    width: 20px;
-    height: 20px;
-    background: url('../../icons/arrow-white.svg') no-repeat right center;
-    background-size: contain;
-}
-
-.section.cta-container .cta.block .button-container > a:hover {
-    background: var(--gradient-diagonal-up);
 }
 
 @media only screen and (min-width: 768px) {

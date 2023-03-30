@@ -142,7 +142,19 @@ export function decorateIcons(element = document) {
         img.src = `data:image/svg+xml,${encodeURIComponent(iconHTML)}`;
         span.appendChild(img);
       } else {
-        span.innerHTML = iconHTML;
+        const svgContainer = document.createElement('div');
+        svgContainer.innerHTML = iconHTML;
+        // add linear gradient def
+        const svg = svgContainer.querySelector('svg');
+        if (svg) {
+          const defs = document.createElement('defs');
+          defs.innerHTML = `<linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FA1E32"></stop>
+              <stop offset="100%" stop-color="#9900FF"></stop>
+            </linearGradient>`;
+          svg.prepend(defs);
+        }
+        span.innerHTML = svgContainer.innerHTML;
       }
     }
   });
@@ -241,7 +253,7 @@ export function readBlockConfig(block) {
 
 /**
  * Decorates all sections in a container element.
- * @param {Element} $main The container element
+ * @param {Element} main The container element
  */
 export function decorateSections(main) {
   main.querySelectorAll(':scope > div').forEach((section) => {
@@ -472,11 +484,35 @@ export function decorateTemplateAndTheme() {
   if (theme) addClasses(document.body, theme);
 }
 
+const iconMap = Object.freeze({
+  video: { expression: /^.*\.(mp4)$/i, className: 'icon-play-button'},
+  download: { expression: /^.*\.(pdf)$/i, className: 'icon-download'},
+  bookmark: { expression: /^#.+$/i, className: 'icon-arrow'},
+  external: { expression: /^((?!merative.com).)*$/i, className: 'icon-arrow'},
+});
+
+function getButtonIcon(button) {
+  if (button.querySelector('span.icon')) {
+    // use custom icon
+    return;
+  }
+  // automatically apply icon
+  if (!button.href) {
+    return;
+  }
+  const iconEntry = Object.entries(iconMap).find(([, item]) => {
+    return item.expression.test(button.href);
+  });
+  if (iconEntry) {
+    const [iconVariant, iconItem] = iconEntry;
+    return [iconItem.className, iconVariant];
+  }
+}
+
 /**
  * decorates paragraphs containing a single link as buttons.
  * @param {Element} element container element
  */
-
 export function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
@@ -497,6 +533,17 @@ export function decorateButtons(element) {
           && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
+        }
+        // add icon
+        const iconClass = getButtonIcon(a);
+        if (iconClass) {
+          // add span
+          const span = document.createElement('span');
+          span.classList.add('icon', ...iconClass);
+          a.appendChild(span);
+        }
+        if (a.querySelector('span.icon')) {
+          a.classList.add('has-icon');
         }
       }
     }

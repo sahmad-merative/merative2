@@ -149,6 +149,19 @@ export default function decorate(block) {
   // Default (aka non-video) processing
 
   if (col1) {
+    // group events
+    const eventItems = [...col1.querySelectorAll(`${selectors.eventItem} > em`)] || [];
+    const eventGroup = createTag('div', { class: 'event-group' });
+
+    eventItems.forEach((item, index) => {
+      item.parentElement?.classList.add('event-item', index === 0 ? 'location' : 'date');
+      eventGroup.appendChild(item.parentElement);
+    });
+
+    if (eventGroup.children.length) {
+      col1.append(eventGroup);
+    }
+
     // group buttons
     const buttonGroup = createTag('div', { class: 'button-group' });
     const buttons = [...col1.querySelectorAll('.button-container')] || [];
@@ -169,19 +182,6 @@ export default function decorate(block) {
 
     if (buttonGroup.children.length) {
       col1.append(buttonGroup);
-    }
-
-    // group events
-    const eventItems = [...col1.querySelectorAll(`${selectors.eventItem} > em`)] || [];
-    const eventGroup = createTag('div', { class: 'event-group' });
-
-    eventItems.forEach((item, index) => {
-      item.parentElement?.classList.add('event-item', index === 0 ? 'location' : 'date');
-      eventGroup.appendChild(item.parentElement);
-    });
-
-    if (eventGroup.children.length) {
-      col1.append(eventGroup);
     }
 
     // only for Document pages

@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.columns > div > div > *:first-child {
-    margin-top: 0;
-}
-
 .columns-container h2 {
     margin: var(--spacer-element-07) 0;
 }
