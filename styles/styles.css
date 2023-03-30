@@ -14,6 +14,7 @@
   /* ----colors--- */
 
   /* primary */
+  /* stylelint-disable-next-line color-hex-length */
   --primary-purple: #9900FF;
 
   /* Merative figma design spec */
@@ -585,19 +586,11 @@ main .button-container > strong > a.button.primary {
   color: var(--neutral-white);
 }
 
-main .button-container > strong > a.button.primary span.icon svg * {
-  stroke: var(--neutral-white);
-}
-
 /* Secondary Button */
 main .button-container > em > a.button.secondary {
   border: 1px solid var(--primary-purple);
   font-weight: 500;
   font-style: normal;
-}
-
-main .button-container > em > a.button span.icon svg * {
-  stroke: var(--primary-purple);
 }
 
 main .button-container > em > a.button.secondary.has-icon::after,
@@ -612,11 +605,6 @@ main .button-container > em > a.button.secondary:active {
   border-style: none;
   background: var(--gradient-left-right);
   color: var(--neutral-white);
-}
-
-main .button-container > em > a.button.secondary:hover span.icon svg *,
-main .button-container > em > a.button.secondary:active span.icon svg * {
-  stroke: var(--neutral-white);
 }
 
 /* Tertiary (Link) Button */
@@ -655,7 +643,20 @@ main .button-container > a.primary span.icon svg * {
 }
 
 main .button-container > a.primary:hover span.icon svg * {
-  stroke: url(#gradient);
+  stroke: url("#gradient");
+}
+
+main .button-container > strong > a.button.primary span.icon svg * {
+  stroke: var(--neutral-white);
+}
+
+main .button-container > em > a.button.secondary span.icon svg * {
+  stroke: var(--primary-purple);
+}
+
+main .button-container > em > a.button.secondary:hover span.icon svg *,
+main .button-container > em > a.button.secondary:active span.icon svg * {
+  stroke: var(--neutral-white);
 }
 
 main .article-content .icon > svg {

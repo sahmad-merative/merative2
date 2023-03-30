@@ -485,28 +485,23 @@ export function decorateTemplateAndTheme() {
 }
 
 const iconMap = Object.freeze({
-  video: { expression: /^.*\.(mp4)$/i, className: 'icon-play-button'},
-  download: { expression: /^.*\.(pdf)$/i, className: 'icon-download'},
-  bookmark: { expression: /^#.+$/i, className: 'icon-arrow'},
-  external: { expression: /^((?!merative.com).)*$/i, className: 'icon-arrow'},
+  video: { expression: /^.*\.(mp4)$/i, className: 'icon-play-button' },
+  download: { expression: /^.*\.(pdf)$/i, className: 'icon-download' },
+  bookmark: { expression: /^#.+$/i, className: 'icon-arrow' },
+  external: { expression: /^((?!merative.com).)*$/i, className: 'icon-arrow' },
 });
 
 function getButtonIcon(button) {
-  if (button.querySelector('span.icon')) {
-    // use custom icon
-    return;
+  if (button.querySelector('span.icon') || !button.href) {
+    return undefined;
   }
   // automatically apply icon
-  if (!button.href) {
-    return;
-  }
-  const iconEntry = Object.entries(iconMap).find(([, item]) => {
-    return item.expression.test(button.href);
-  });
+  const iconEntry = Object.entries(iconMap).find(([, item]) => item.expression.test(button.href));
   if (iconEntry) {
     const [iconVariant, iconItem] = iconEntry;
     return [iconItem.className, iconVariant];
   }
+  return undefined;
 }
 
 /**
