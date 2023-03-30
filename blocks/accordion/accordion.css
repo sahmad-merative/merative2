@@ -79,6 +79,7 @@
 }
 
 .accordion-item.accordion-item-open::before {
+    background-image: var(--gradient-left-right);
     height: 5px;
 }
 

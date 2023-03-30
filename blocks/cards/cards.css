@@ -72,31 +72,6 @@
     padding-top: 25px;
 }
 
-.cards.newscard .cards-card-body a {
-    font-family: var(--sans-serif-font-medium);
-    font-size: var(--font-size-16);
-    letter-spacing: .16px;
-    line-height: 120%;
-    border-bottom: 2px solid #90f;
-    border-radius: 0;
-    color: #90f;
-    display: inline-block;
-    background: none;
-    text-align: left;
-    padding-left: 0;
-    text-decoration: none;
-}
-
-.cards.newscard .cards-card-body a::after {
-    background-image: url('./../../icons/external-arrow-purple.svg');
-    content: "";
-    display: inline-block;
-    height: 10px;
-    margin-left: 8px;
-    width: 10px;
-    padding-right: 0;
-}
-
 @media (min-width: 768px) {
     .cards.newscard > ul > li {
         gap:32px;

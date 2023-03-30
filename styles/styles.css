@@ -254,7 +254,7 @@ h5 {
 
 h4 + h2 {
   margin-top: 0;
-  }
+}
 
 sup {
   vertical-align: super;
@@ -304,15 +304,17 @@ main .column-content-top-border div > div {
   margin: 0;
   letter-spacing: var(--letter-spacing-001-em);
   font-size: var(--font-size-18);
-  }
+}
 
-.section > .default-content-wrapper > h4:first-of-type { /* eyebrow */
+/* eyebrow */
+.section > .default-content-wrapper > h4:first-of-type {
   font-size: var(--font-size-11);
   letter-spacing: .2em;
   line-height: var(--line-height-120);
   color: var(--neutral-carbon);
   margin: 0 0 var(--spacer-layout-03);
-  }
+  text-transform: uppercase;
+}
 
 main .section-top div > h1 {
   margin: var(--spacer-element-08) 0 var(--spacer-element-07);
@@ -438,6 +440,21 @@ main .columns.mobile-odd-flex-reverse > div:nth-child(odd) {
   flex-direction: column-reverse;
 }
 
+/* Any lists */
+main ul {
+  padding-inline-start: var(--spacer-element-07);
+}
+
+main ul li {
+  margin: var(--spacer-element-02) 0;
+  line-height: 1.6;
+}
+
+main ul li::marker {
+  color: var(--primary-purple);
+}
+
+/* Special case lists */
 main .checked-list li {
   position: relative;
   list-style: none;
@@ -466,7 +483,6 @@ main .columns.content-band.icon-list > div > div {
 
 main .columns.content-band li {
   list-style-image: url("../icons/arrow-purple.svg");
-  margin-left: var(--spacer-element-07);
   margin-bottom: var(--spacer-element-03);
   line-height: var(--line-height-160);
 }
@@ -521,8 +537,15 @@ button {
   margin: 0;
   }
 
-main .button-container a {
+main .button-container {
   position: relative;
+  display: block;
+  width: fit-content;
+}
+
+main .button-container a {
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
   color: var(--primary-purple);
   text-decoration: none;
@@ -530,16 +553,31 @@ main .button-container a {
   font-size: var(--font-size-16);
   font-weight: 500;
   letter-spacing: var(--letter-spacing-1);
-  line-height: var(--line-height-160);
 }
 
 main .button-container > strong > a,
 main .button-container > em > a {
   box-sizing: border-box;
-  display: inline-block;
   height: 48px;
   border-radius: 40px;
   padding: 11px var(--spacer-layout-02);
+}
+
+/** Button icons **/
+main .button-container a.button span.icon {
+  display: inline-block;
+  content: '';
+  margin-left: var(--spacer-element-03);
+  width: 24px;
+  height: 24px;
+}
+
+main .button-container a.button span.icon.external {
+  transform: rotate(-45deg);
+}
+
+main .button-container a.button span.icon.bookmark {
+  transform: rotate(90deg);
 }
 
 /* Primary Button */
@@ -548,22 +586,16 @@ main .button-container > strong > a.button.primary {
   color: var(--neutral-white);
 }
 
-main .button-container > strong > a.button.primary::after {
-  display: inline-block;
-  content: '';
-  margin-left: var(--spacer-layout-02);
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
-  background: url('../icons/arrow-white.svg') no-repeat right center;
-  background-size: contain;
-}
-
 /* Secondary Button */
 main .button-container > em > a.button.secondary {
   border: 1px solid var(--primary-purple);
   font-weight: 500;
   font-style: normal;
+}
+
+main .button-container > em > a.button.secondary.has-icon::after,
+main .button-container > a.primary.has-icon::after {
+  background-color: var(--primary-purple);
 }
 
 main .button-container > strong > a.button.primary:hover,
@@ -576,7 +608,15 @@ main .button-container > em > a.button.secondary:active {
 }
 
 /* Tertiary (Link) Button */
-main .button-container > a.primary {
+main .button-container > a.primary:not(.has-icon) {
+  border-bottom: 2px solid var(--primary-purple);
+}
+
+main .button-container > a.primary.has-icon::before {
+  content: '';
+  position: absolute;
+  width: calc(100% - 32px);
+  height: 100%;
   border-bottom: 2px solid var(--primary-purple);
 }
 
@@ -590,6 +630,33 @@ main .button-container > a.primary:hover {
   color: transparent;
   border-image-slice: 1;
   border-image-source: var(--gradient-left-right);
+}
+
+main .button-container > a.primary:active::before,
+main .button-container > a.primary:hover::before {
+  border-image-slice: 1;
+  border-image-source: var(--gradient-left-right);
+}
+
+main .button-container > a.primary span.icon svg * {
+  stroke: var(--primary-purple);
+}
+
+main .button-container > a.primary:hover span.icon svg * {
+  stroke: url("#gradient");
+}
+
+main .button-container > strong > a.button.primary span.icon svg * {
+  stroke: var(--neutral-white);
+}
+
+main .button-container > em > a.button.secondary span.icon svg * {
+  stroke: var(--primary-purple);
+}
+
+main .button-container > em > a.button.secondary:hover span.icon svg *,
+main .button-container > em > a.button.secondary:active span.icon svg * {
+  stroke: var(--neutral-white);
 }
 
 main .article-content .icon > svg {
