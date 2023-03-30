@@ -35,8 +35,10 @@ const createMetadataBlock = (main, document) => {
   if (tags) meta.DocumentTags = tags;
 
   const readtime = document.querySelector('.cmp-pdfbasicinfo__pretitle > span');
-  if (readtime) meta.ReadTime = readtime.innerHTML;
-  readtime.remove();
+  if (readtime) {
+    meta.ReadTime = readtime.innerHTML;
+    readtime.remove();
+  }
 
   // helper to create the metadata block
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
@@ -64,83 +66,92 @@ export default {
     skipToContent.remove();
     main.querySelectorAll('iframe').forEach((el) => el.remove());
     main.querySelector('div#onetrust-consent-sdk').remove();
-    main.querySelector('.cmp-pdfbasicinfo__action-container').remove();
+    if (main.querySelector('.cmp-pdfbasicinfo__action-container')) main.querySelector('.cmp-pdfbasicinfo__action-container').remove();
 
     // Add Leadspace block
     const title = main.querySelector('h1.cmp-pdfbasicinfo__title');
     const description = main.querySelector('.cmp-pdfbasicinfo__description');
-    const cells = [
-      ['Leadspace (document)'],
-      [title.outerHTML + description.innerHTML],
-    ];
-    const table = WebImporter.DOMUtils.createTable(cells, document);
-    main.prepend(table);
-    // remove elements already added to blocks from main
-    title.remove();
-    description.remove();
+    if (title && description) {
+      const cells = [
+        ['Leadspace (document)'],
+        [title.outerHTML + description.innerHTML],
+      ];
+      const table = WebImporter.DOMUtils.createTable(cells, document);
+      main.prepend(table);
+      // remove elements already added to blocks from main
+      title.remove();
+      description.remove();
+    }
 
     main.append('---');
 
     // Add PDF block
     const pdfUrlEl = main.querySelector('.cmp-pdfviewer');
-    const pdfUrlPath = pdfUrlEl.getAttribute('data-cmp-document-path');
-    const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlPath), 'https://main--merative2--hlxsites.hlx.page').toString();
-    const pdfCells = [
-      ['PDF Viewer'],
-      ['Document Link', pdfUrl],
-    ];
-    const pdfBlock = WebImporter.DOMUtils.createTable(pdfCells, document);
-    main.append(pdfBlock);
-
-    main.append('---');
+    if (pdfUrlEl) {
+      const pdfUrlPath = pdfUrlEl.getAttribute('data-cmp-document-path');
+      const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlPath), 'https://main--merative2--hlxsites.hlx.page').toString();
+      const pdfCells = [
+        ['PDF Viewer'],
+        ['Document Link', pdfUrl],
+      ];
+      const pdfBlock = WebImporter.DOMUtils.createTable(pdfCells, document);
+      main.append(pdfBlock);
+      main.append('---');
+    }
 
     // Add Related Documents block
     const rrText = main.querySelector('.cmp-teaser .cmp-teaser__pretitle');
-    const rrSectionTitle = document.createElement('h5');
-    rrSectionTitle.innerHTML = rrText.innerHTML;
-    const relatedResourcesCmp = main.querySelectorAll('.customizedCard.teaser a');
-    let rrLinks = '';
-    relatedResourcesCmp.forEach((link) => {
-      const updatedLink = link.href.replace('/content/merative/us/en', '');
-      const rrURL = new URL(WebImporter.FileUtils.sanitizePath(updatedLink), 'https://main--merative2--hlxsites.hlx.page').toString().replace('.html', '');
-      const linkEl = document.createElement('a');
-      linkEl.href = rrURL;
-      linkEl.innerHTML += rrURL;
-      rrLinks += linkEl;
-      rrLinks += '\n';
-      link.remove();
-    });
+    if (rrText) {
+      const rrSectionTitle = document.createElement('h5');
+      rrSectionTitle.innerHTML = rrText.innerHTML;
+      const relatedResourcesCmp = main.querySelectorAll('.customizedCard.teaser a');
+      let rrLinks = '';
+      relatedResourcesCmp.forEach((link) => {
+        const updatedLink = link.href.replace('/content/merative/us/en', '');
+        const rrURL = new URL(WebImporter.FileUtils.sanitizePath(updatedLink), 'https://main--merative2--hlxsites.hlx.page').toString().replace('.html', '');
+        const linkEl = document.createElement('a');
+        linkEl.href = rrURL;
+        linkEl.innerHTML += rrURL;
+        rrLinks += linkEl;
+        rrLinks += '\n';
+        link.remove();
+      });
 
-    const relatedResourcesCells = [
-      ['Related Resources'],
-      [rrLinks],
-    ];
-    const relatedResourcesBlock = WebImporter.DOMUtils.createTable(relatedResourcesCells, document);
-    main.append(rrSectionTitle);
-    main.append(relatedResourcesBlock);
-    rrText.remove();
-    main.append('---');
+      const relatedResourcesCells = [
+        ['Related Resources'],
+        [rrLinks],
+      ];
+
+      const relatedResourcesBlock = WebImporter.DOMUtils
+        .createTable(relatedResourcesCells, document);
+      main.append(rrSectionTitle);
+      main.append(relatedResourcesBlock);
+      rrText.remove();
+      main.append('---');
+    }
 
     // Add CTA block
     const ctaHeading = main.querySelector('.cmp-experiencefragment--consultation h2');
     const ctaText = main.querySelectorAll('.cmp-experiencefragment--consultation p');
     const ctaLinkText = main.querySelector('.cmp-experiencefragment--consultation a .cmp-button__text');
 
-    let ctaTextInner = '';
-    ctaText.forEach((paragraph) => {
-      ctaTextInner += paragraph.innerHTML;
-      paragraph.remove();
-    });
-    const ctaLink = `<a href="https://www.merative.com/contact">${ctaLinkText.innerHTML}</a>`;
-    // const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlEl.getAttribute('data-cmp-document-path')), 'https://main--merative2--hlxsites.hlx.page').toString();
-    const ctaCells = [
-      ['CTA'],
-      [ctaHeading.outerHTML + ctaTextInner + ctaLink],
-    ];
-    const ctaBlock = WebImporter.DOMUtils.createTable(ctaCells, document);
-    main.append(ctaBlock);
-    ctaHeading.remove();
-    main.querySelector('.cmp-experiencefragment--consultation a').remove();
+    if (ctaText && ctaHeading && ctaLinkText) {
+      let ctaTextInner = '';
+      ctaText.forEach((paragraph) => {
+        ctaTextInner += paragraph.innerHTML;
+        paragraph.remove();
+      });
+      const ctaLink = `<a href="https://www.merative.com/contact">${ctaLinkText.innerHTML}</a>`;
+      // const pdfUrl = new URL(WebImporter.FileUtils.sanitizePath(pdfUrlEl.getAttribute('data-cmp-document-path')), 'https://main--merative2--hlxsites.hlx.page').toString();
+      const ctaCells = [
+        ['CTA'],
+        [ctaHeading.outerHTML + ctaTextInner + ctaLink],
+      ];
+      const ctaBlock = WebImporter.DOMUtils.createTable(ctaCells, document);
+      main.append(ctaBlock);
+      ctaHeading.remove();
+      main.querySelector('.cmp-experiencefragment--consultation a').remove();
+    }
 
     createMetadataBlock(main, document);
 
@@ -152,16 +163,18 @@ export default {
 
     // find pdf links in document pages (different than other pages)
     const docEl = main.querySelector('.cmp-pdfviewer');
-    const docUrl = docEl.getAttribute('data-cmp-document-path');
-    if (docUrl && docUrl.endsWith('.pdf')) {
-      const u = new URL(docUrl, url);
-      const newPath = WebImporter.FileUtils.sanitizePath(u.pathname);
-      // no "element", the "from" property is provided instead -
-      // importer will download the "from" resource as "path"
-      results.push({
-        path: newPath,
-        from: u.toString(),
-      });
+    if (docEl) {
+      const docUrl = docEl.getAttribute('data-cmp-document-path');
+      if (docUrl && docUrl.endsWith('.pdf')) {
+        const u = new URL(docUrl, url);
+        const newPath = WebImporter.FileUtils.sanitizePath(u.pathname);
+        // no "element", the "from" property is provided instead -
+        // importer will download the "from" resource as "path"
+        results.push({
+          path: newPath,
+          from: u.toString(),
+        });
+      }
     }
 
     // find pdf links

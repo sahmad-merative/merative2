@@ -30,7 +30,8 @@
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 
     /* additional styles */
-    padding-top: 48px;
+    padding-top: var(--spacer-element-07);
+    padding-bottom: var(--spacer-element-08);
     font-family: var(--sans-serif-font-regular);
     font-style: normal;
     font-weight: var(--font-weight-light);
@@ -133,7 +134,7 @@
 /* Tablet styles */
 @media only screen and (min-width: 768px) {
     .related-resources[data-block-status="loaded"] > .document-card {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
     }
 
     /* Gap is 24px within the card except for the gap between
@@ -156,7 +157,7 @@
         gap: var(--spacer-element-10) var(--spacer-element-07);
     }
 
-    .related-resources[data-block-status="loaded"] > .document-card {
+   .related-resources[data-block-status="loaded"] > .document-card {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -172,6 +173,7 @@
     }
 
     .related-resources .document-card h3 {
-        font-size: 32px;
+        font-size: var(--font-size-32);
+        padding-bottom: var(--spacer-element-08);
     }
 }
