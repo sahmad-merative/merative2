@@ -346,12 +346,21 @@ input[type=radio] {
     align-items: center !important
 }
 
+.mktoForm .mktoRadioList{
+    display: flex;
+    width: auto !important;
+    align-items: center;
+    padding: 0.3em;
+    float: left;
+}
+
 .mktoForm .mktoRadioList>label {
     color: var(--neutral-carbon) !important;
     font-family: var(--sans-serif-font-light) !important;
     font-size: var(--font-size-16) !important;
     letter-spacing: .16px;
-    line-height: 160% !important
+    line-height: 160% !important;
+    margin: 0 32px 0 8px !important;
 }
 
 /* Media queries */
@@ -379,5 +388,10 @@ input[type=radio] {
     .section.marketo-container > div:last-of-type {
         margin-left: 8%;
         margin-top: 0;
+    }
+
+    .marketo.contactus{
+        width: 648px;
+        margin-right: 130px;
     }
 }
