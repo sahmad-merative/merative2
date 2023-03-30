@@ -57,14 +57,9 @@
     bottom: 20px;
     position: absolute;
     width: 55px;
-    background: url("../../icons/download-arrow-white.svg") no-repeat center;
-    border: 2px solid #fff;
+    background: url("../../icons/download-arrow-purple.svg") no-repeat center;
+    border: 2px solid var(--primary-purple);
     border-radius: 50%;
-}
-
-.linkable-cards.neutral-bone-style > div::after {
-  background: url("../../icons/download-arrow-purple.svg") no-repeat center;
-  border: 2px solid var(--primary-purple);
 }
 
 .linkable-cards > div:hover {
@@ -84,18 +79,17 @@
 
 .linkable-cards.neutral-bone-style > div {
   background-color: var(--neutral-bone);
-  color: black;
+  color: var(--neutral-carbon);
 }
 
 .linkable-cards > div > a {
   margin: var(--spacer-element-10) var(--spacer-element-06);
   display: block;
   text-decoration: none;
-  color: var(--neutral-white);
 }
 
-.linkable-cards.neutral-bone-style > div a {
-  color: inherit;
+.linkable-cards > div a {
+  color: var(--neutral-carbon);
 }
 
 /* if we make all eyebrows h4 then we don't need this */
