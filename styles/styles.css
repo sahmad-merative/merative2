@@ -300,12 +300,6 @@ main .column-content-top-border div > div {
   max-width: 350px;
 }
 
-.content-band.icon-list h4 {
-  margin: 0;
-  letter-spacing: var(--letter-spacing-001-em);
-  font-size: var(--font-size-18);
-}
-
 /* eyebrow */
 .section > .default-content-wrapper > h4:first-of-type {
   font-size: var(--font-size-11);
@@ -411,18 +405,11 @@ main .section.notification-section > div > p::before {
 main .section.section-header-right-content > div:nth-child(1) > h2,
 main .section.section-header-right-content > div:nth-child(1) > h4 {
   margin: 24px 0;
+  width: 100%
 }
 
 main .sticky-bottom-image .default-content-wrapper:last-child > p {
   margin-bottom: 0;
-}
-
-main .section.section-header-right-content>div:nth-child(1) > p {
-  font-family: var(--sans-serif-font-medium);
-  font-size: var(--font-size-11);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-02-em);
-  line-height: var(--line-height-120);
 }
 
 /* Content-band styles, icon-list variation */
@@ -1128,7 +1115,7 @@ main .column-content-top-border > div > div::before {
   /* Content-band tablet styles */
   .content-band.columns > div {
     flex-direction: unset;
-    column-gap: var(--spacer-element-09);
+    column-gap: var(--spacer-layout-03);
     }
 
   .content-band.columns > div > div {
@@ -1362,6 +1349,10 @@ main .column-content-top-border > div > div::before {
     font-size: var(--font-size-21);
     }
 
+  .content-band.columns > div {
+    column-gap: var(--spacer-layout-05);
+    }
+
   .section > .default-content-wrapper > h4:first-of-type {
     font-size: var(--font-size-14);
     }
@@ -1388,7 +1379,32 @@ main .column-content-top-border > div > div::before {
 
   main .section-bottom .columns-2-cols > div {
     gap:120px;
-  }
+    }
+
+  main .section.section-header-right-content > div:nth-child(1) {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    }
+
+  main .columns.mobile-odd-flex-reverse > div:nth-child(odd) {
+    flex-direction: inherit;
+    }
+
+  main .section.columns-image-content > div:nth-child(3) {
+    grid-area: left;
+    display: block;
+    width: auto;
+    margin-right: 70px;
+    }
+
+  main .columns.content-band.icon-list > div > div {
+    margin-top: var(--spacer-layout-04);
+    }
+
+  main .content-band.icon-list.picture-circle h3 {
+    margin: var(--spacer-layout-02) auto;
+    }
 
   main .sticky-bottom-image .default-content-wrapper:last-child > p {
     display: inline-block;
@@ -1415,10 +1431,8 @@ main .column-content-top-border > div > div::before {
     font-size: var(--font-size-16);
   }
 
-  main .section.section-header-right-content>div:nth-child(1) > p{
-    position: absolute;
-    top: 0;
-    max-width: 60%;
+  main .section.section-header-right-content>div:nth-child(1) > p {
+    flex: 1 1 28%;
   }
 
   main .list-section .default-content-wrapper:first-child > h2,
@@ -1444,20 +1458,11 @@ main .column-content-top-border > div > div::before {
     width: 285px;
   }
 
-  main .section.section-header-right-content>div:nth-child(1) > h4 {
-    max-width: 335px;
-  }
-
-  main .section.section-header-right-content>div:nth-child(1) > h2 {
-    width: 60%;
-  }
-
-  main .section.section-header-right-content>div:nth-child(1) {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-    position: relative;
-  }
+  main .section.section-header-right-content > div:nth-child(1) > h2 {
+    flex: 1 1 720px;
+    margin-top: var(--spacer-element-04);
+    margin-right: var(--spacer-layout-05);
+    }
 
   .flex-40-60 {
     max-width: calc(var(--section-width-desktop));
@@ -1466,23 +1471,12 @@ main .column-content-top-border > div > div::before {
     margin-right: auto;
   }
 
-  main .columns.mobile-odd-flex-reverse > div:nth-child(odd) {
-    flex-direction: inherit;
-  }
-
   .columns-image-content {
     display: grid;
     justify-content: center;
     grid-template: "left top-right"
                    "left bottom-right"
                    "left bottom-right" auto / 300px calc(var(--section-width-desktop ) - 300px);
-  }
-
-  main .section.columns-image-content > div:nth-child(3) {
-    grid-area: left;
-    display: block;
-    width: auto;
-    margin-right: 70px;
   }
 
   main .section.flex-60-40.section-header > div:nth-child(1) > p {
