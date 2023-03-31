@@ -386,6 +386,7 @@ input[type=radio] {
         margin: 0 auto;
     }
 
+    /* only wrap if h2 title is present in the section */
     .section.marketo-container.multiple.h2 {
         flex-wrap: wrap;
     }
