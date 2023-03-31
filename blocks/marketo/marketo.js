@@ -31,8 +31,14 @@ export default async function decorate(block) {
   const divId = blockConfig['div-id'];
 
   // Handle H2s in the section
-  const h2 = block.parentElement.parentElement.querySelector('h2');
-  if (h2 && h2.parentElement) h2.parentElement.classList.add('h2');
+  const section = block.parentElement.parentElement;
+  if (section.children.length > 0) section.classList.add('multiple');
+  const h2 = section.querySelector('h2');
+
+  if (h2 && h2.parentElement) {
+    h2.parentElement.classList.add('h2');
+    section.classList.add('h2');
+  }
 
   if (formId && divId) {
     const formDiv = createTag('form', { id: `mktoForm_${divId}` });

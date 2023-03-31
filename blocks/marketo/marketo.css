@@ -379,33 +379,31 @@ input[type=radio] {
 }
 
 @media screen and (min-width: 1200px) {
-    .section.marketo-container {
+    .section.marketo-container.multiple {
         display: flex;
         flex-direction: row;
-        /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
-        flex-wrap: wrap;
         width: var(--section-width-desktop);
         margin: 0 auto;
     }
 
-    .section.marketo-container > div {
-        width: unset;
+    .section.marketo-container.multiple.h2 {
+        flex-wrap: wrap;
     }
-    
-    .section.marketo-container > .h2 {
+
+    .section.marketo-container.multiple > .h2 {
         flex-basis: 100%;
     }
 
-    .section.marketo-container > div:not(.h2) {
-        flex-basis: 40%;
+    .section.marketo-container.multiple > div:not(.h2) {
+        flex-basis: 45%;
     }
 
-    .section.marketo-container > div:last-of-type {
+    .section.marketo-container.multiple > div:last-of-type {
         margin-left: 8%;
         margin-top: 0;
     }
 
-    .marketo.contactus{
+    .section.marketo-container.multiple .marketo.contactus {
         width: 648px;
         margin-right: 130px;
     }
