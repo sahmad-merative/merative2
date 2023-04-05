@@ -1006,6 +1006,7 @@ main .section.section-bottom-image > .default-content-wrapper:last-child > p:las
 main .section.bg-neutral-carbon,
 main .section .bg-neutral-carbon {
     background: var(--neutral-carbon);
+    color: var(--neutral-white);
 }
 
 main .columns.column-content-top-border {
