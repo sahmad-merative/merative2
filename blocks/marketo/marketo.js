@@ -1,5 +1,7 @@
 import { createTag } from '../../scripts/scripts.js';
-import { readBlockConfig } from '../../scripts/lib-franklin.js';
+import { readBlockConfig, fetchPlaceholders } from '../../scripts/lib-franklin.js';
+
+const placeholders = await fetchPlaceholders();
 
 const loadScript = (url, attrs) => {
   const head = document.querySelector('head');
@@ -15,20 +17,36 @@ const loadScript = (url, attrs) => {
   return script;
 };
 
-const embedMarketoForm = (formId, divId) => {
+const embedMarketoForm = (marketoId, formId, successUrl) => {
   // PDF Viewer for doc pages
-  if (formId && divId) {
+  if (formId && marketoId) {
     const mktoScriptTag = loadScript('//go.merative.com/js/forms2/js/forms2.min.js');
     mktoScriptTag.onload = () => {
-      window.MktoForms2.loadForm('//go.merative.com', `${formId}`, divId);
+      if (successUrl) {
+        window.MktoForms2.loadForm('//go.merative.com', `${marketoId}`, formId, (form) => {
+          // Add an onSuccess handler
+          // eslint-disable-next-line no-unused-vars
+          form.onSuccess((values, followUpUrl) => {
+            // Take the lead to a different page on successful submit,
+            // ignoring the form's configured followUpUrl
+            // eslint-disable-next-line no-restricted-globals
+            location.href = successUrl;
+            // Return false to prevent the submission handler continuing with its own processing
+            return false;
+          });
+        });
+      } else {
+        window.MktoForms2.loadForm('//go.merative.com', `${marketoId}`, formId);
+      }
     };
   }
 };
 
 export default async function decorate(block) {
   const blockConfig = readBlockConfig(block);
+  const marketoId = placeholders.marketoid;
   const formId = blockConfig['form-id'];
-  const divId = blockConfig['div-id'];
+  const successUrl = blockConfig['success-url'];
 
   // Handle H2s in the section
   const section = block.parentElement.parentElement;
@@ -40,11 +58,18 @@ export default async function decorate(block) {
     section.classList.add('h2');
   }
 
-  if (formId && divId) {
-    const formDiv = createTag('form', { id: `mktoForm_${divId}` });
+  if (formId && marketoId) {
+    const formDiv = createTag('form', { id: `mktoForm_${formId}` });
     block.textContent = '';
     block.append(formDiv);
 
-    window.setTimeout(() => embedMarketoForm(formId, divId), 3000);
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        embedMarketoForm(marketoId, formId, successUrl);
+        observer.disconnect();
+      }
+    });
+    observer.observe(block);
+    // window.setTimeout(() => embedMarketoForm(marketoId, formId, successUrl), 3000);
   }
 }
