@@ -1,3 +1,4 @@
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
 const socialLinks = Object.freeze({
@@ -7,7 +8,7 @@ const socialLinks = Object.freeze({
 
 export default function decorate(block) {
   const headshotElements = block.querySelectorAll(':scope > div > div');
-  [...headshotElements].forEach((headshot) => {
+  headshotElements.forEach((headshot) => {
     headshot.classList.add('headshot-item');
     const picture = createTag('div', { class: 'headshot-avatar' });
     picture.appendChild(headshot.querySelector('p:first-child'));
@@ -26,5 +27,6 @@ export default function decorate(block) {
     });
     linkContainer.append(...links);
     details.appendChild(linkContainer);
+    decorateIcons(linkContainer);
   });
 }
