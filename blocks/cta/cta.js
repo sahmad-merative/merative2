@@ -4,7 +4,7 @@ export default function decorate(block) {
   const col1 = block.firstElementChild?.children.item(0);
   // group buttons
   const buttonGroup = createTag('div', { class: 'button-group' });
-  const buttons = [...col1.querySelectorAll('.button-container')] || [];
+  const buttons = [...col1.querySelectorAll('.button-container')];
 
   buttons.forEach((button) => {
     const isPrimary = button.querySelector('strong');
@@ -22,7 +22,7 @@ export default function decorate(block) {
 
   if (buttonGroup.children.length) {
     const pictures = col1.querySelectorAll('p.only-picture');
-    if (pictures !== 'undefined' && pictures !== null) {
+    if (pictures.length > 0) {
       pictures[pictures.length - 1].insertAdjacentElement('beforeBegin', buttonGroup);
     } else {
       col1.append(buttonGroup);
