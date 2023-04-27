@@ -644,8 +644,8 @@ main .columns > div > div > h4:first-child {
   }
 
   /* Content band and Overview content */
-  .overview .default-content-wrapper:first-child > *,
-  .content-band .default-content-wrapper:first-child > * {
+  .overview.columns-container .default-content-wrapper:first-child > *,
+  .content-band.columns-container .default-content-wrapper:first-child > * {
     max-width: 648px; /* 7 columns (72px) + 6 gutters (24px) */
   }
 
