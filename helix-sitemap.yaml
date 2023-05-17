@@ -1,5 +1,5 @@
 sitemaps:
-   merative:
+   merative-blog:
      origin: https://www.merative.com
      source: /query-index.json
      destination: /sitemap.xml
