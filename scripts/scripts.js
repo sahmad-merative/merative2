@@ -1,4 +1,3 @@
-import authorsParser from './authors-parser.js';
 import {
   sampleRUM,
   buildBlock,
@@ -352,6 +351,7 @@ export async function createCard(row, style) {
   if (!row.authors) {
     author.innerHTML += 'By Merative';
   } else {
+    const authorsParser = await import('./authors-parser.js');
     const authors = authorsParser(row.authors);
     const authorNames = [];
     authors.forEach((authorItem) => {
