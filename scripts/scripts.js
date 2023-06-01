@@ -94,10 +94,11 @@ function buildTags(main) {
   if (category) {
     tagsElement.append(buildBlock('tags', { elems: [] }));
     const firstH2 = main.querySelector('h2:first-of-type');
-    const p = main.querySelector('p:first-of-type');
+    const image = main.querySelector('p.only-picture');
+    const comparePosition = firstH2.compareDocumentPosition(image);
     // eslint-disable-next-line no-bitwise
-    if (firstH2 && p && (firstH2.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING)) {
-      firstH2.after(tagsElement);
+    if (firstH2 && image && (comparePosition & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      image.before(tagsElement);
     }
   }
 }
