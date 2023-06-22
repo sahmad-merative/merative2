@@ -66,9 +66,23 @@
   box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 15%);
 }
 
+.linkable-cards.purple-cards > div {
+  background-color: #6400A6;
+}
+
+.linkable-cards.purple-cards > div::after {
+    background: url("../../icons/download-arrow-white.svg") no-repeat center;
+    border: 2px solid var(--neutral-white);
+    border-radius: 50%;
+}
+
 .section .linkable-cards > div:hover::after {
   cursor: pointer;
   transition: all .2s ease-out;
+  background: url("../../icons/download-arrow-white.svg") no-repeat center, var(--gradient-left-right);
+}
+
+.section .linkable-cards.purple-cards > div:hover::after {
   background: url("../../icons/download-arrow-white.svg") no-repeat center, var(--gradient-left-right);
 }
 
@@ -89,6 +103,10 @@
   color: var(--neutral-carbon);
 }
 
+.linkable-cards.purple-cards > div a {
+  color: var(--neutral-white);
+}
+
 /* if we make all eyebrows h4 then we don't need this */
 .linkable-cards a:nth-child(1) > p:first-child {
   font-family: var(--sans-serif-font-medium);
@@ -105,25 +123,6 @@
 
 .linkable-cards.lc-static-style {
   flex-wrap: wrap;
-}
-
-.linkable-cards.purple-cards > div {
-  background-color: #6400A6;
-}
-
-.section .linkable-cards.purple-cards > div:hover::after {
-  background: url("../../icons/download-arrow-white.svg") no-repeat center, var(--gradient-left-right);
-}
-
-.linkable-cards.purple-cards > div::after {
-    background: url("../../icons/download-arrow-white.svg") no-repeat center;
-    border: 2px solid var(--neutral-white);
-    border-radius: 50%;
-}
-
-
-.linkable-cards.purple-cards > div a {
-  color: var(--neutral-white);
 }
 
 @media (min-width: 768px) {
