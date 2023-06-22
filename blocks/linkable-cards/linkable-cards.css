@@ -107,6 +107,24 @@
   flex-wrap: wrap;
 }
 
+.linkable-cards.purple-cards > div {
+  background-color: #6400A6;
+}
+
+.linkable-cards.purple-cards > div::after {
+    background: url("../../icons/download-arrow-white.svg") no-repeat center;
+    border: 2px solid var(--neutral-white);
+    border-radius: 50%;
+}
+
+.section .linkable-cards.purple-cards > div:hover::after {
+  background: url("../../icons/download-arrow-white.svg") no-repeat center, var(--gradient-left-right);
+}
+
+.linkable-cards.purple-cards > div a {
+  color: var(--neutral-white);
+}
+
 @media (min-width: 768px) {
   .linkable-cards > div {
     min-height: 405px;
