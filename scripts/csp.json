@@ -31,7 +31,9 @@
       "*.kampyle.com",
       "js.driftt.com",
       "https://rum.hlx.page/",
-      "https://*.hotjar.com"
+      "https://*.hotjar.com",
+      "*.spotify.com",
+      "embed.podcasts.apple.com"
   ],
   "connect-src": [
       "'self'",
@@ -87,7 +89,9 @@
     "merative.demdex.net",
     "*.medallia.com",
     "*.kampyle.com",
-    "js.driftt.com"
+    "js.driftt.com",
+    "*.spotify.com",
+    "embed.podcasts.apple.com"
   ],
   "style-src": [
     "'self'",
