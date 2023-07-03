@@ -471,7 +471,7 @@ export async function getPDFsDocuments() {
   const result = await resp.json();
   return (result);
 }
-  
+
 export function decorateExternalLinks(main) {
   main.querySelectorAll('a').forEach((a) => {
     const href = a.getAttribute('href');

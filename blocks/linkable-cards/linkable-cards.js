@@ -1,6 +1,6 @@
 import { getPDFsDocuments, createDocumentCard } from '../../scripts/scripts.js';
 import { decorateButtons, decorateIcons } from '../../scripts/lib-franklin.js';
-import { setRowDetails } from '../related-resources/related-resources.js'
+import { setRowDetails } from '../related-resources/related-resources.js';
 
 export default async function decorate(block) {
   let html = '';
@@ -18,15 +18,15 @@ export default async function decorate(block) {
     block.textContent = '';
     [...cardList.data].forEach((element, index) => {
       if (index < 3) {
-            setRowDetails(element, blockCopy);
-            if (element.title && element.description) {
-              block.append(createDocumentCard(element, ['document-card']));
-            }
-          decorateButtons(block, {
-            decorateClasses: false,
-            excludeIcons: [],
-          });
-          decorateIcons(block);
+        setRowDetails(element, blockCopy);
+        if (element.title && element.description) {
+          block.append(createDocumentCard(element, ['document-card']));
+        }
+        decorateButtons(block, {
+          decorateClasses: false,
+          excludeIcons: [],
+        });
+        decorateIcons(block);
       }
     });
   }
