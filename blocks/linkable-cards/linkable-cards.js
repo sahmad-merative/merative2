@@ -1,3 +1,7 @@
+import { getPDFsDocuments, createDocumentCard } from '../../scripts/scripts.js';
+import { decorateButtons, decorateIcons } from '../../scripts/lib-franklin.js';
+import { setRowDetails } from '../related-resources/related-resources.js'
+
 export default async function decorate(block) {
   let html = '';
   if ([...block.children].length > 0) {
@@ -9,14 +13,20 @@ export default async function decorate(block) {
       block.innerHTML = html;
     });
   } else { // fetchign documents and populating top 3 cards.
-    const resp = await fetch(`${window.hlx.codeBasePath}/documents/query-index.json`);
-    const json = await resp.json();
-    [...json.data].forEach((element, index) => {
+    const cardList = await getPDFsDocuments();
+    const blockCopy = block.cloneNode(true);
+    block.textContent = '';
+    [...cardList.data].forEach((element, index) => {
       if (index < 3) {
-        html += `<div><a href="e${element.path}"><p>${element.parent}</p>
-        <h3 id="for-contract-research-organizations">${element.title}</h3>
-        <p>${element.description}</p></a></div>`;
-        block.innerHTML = html;
+            setRowDetails(element, blockCopy);
+            if (element.title && element.description) {
+              block.append(createDocumentCard(element, ['document-card']));
+            }
+          decorateButtons(block, {
+            decorateClasses: false,
+            excludeIcons: [],
+          });
+          decorateIcons(block);
       }
     });
   }
