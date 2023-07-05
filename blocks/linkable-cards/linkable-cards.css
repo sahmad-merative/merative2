@@ -30,18 +30,11 @@
 
 /* Linkable cards block */
 .linkable-cards {
-  display: flex;
-  flex-direction: unset;
   overflow: auto;
-  gap: 24px;
-  
-  /* overflow: auto; */
   margin-top: 40px;
-  position: relative;
-  /* display: flex; */
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--spacer-element-10) var(--spacer-element-07); */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacer-element-10) var(--spacer-element-07);
   margin-right: -15px;
 }
 
