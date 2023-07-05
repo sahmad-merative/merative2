@@ -30,12 +30,18 @@
 
 /* Linkable cards block */
 .linkable-cards {
+  display: flex;
+  flex-direction: unset;
   overflow: auto;
+  gap: 24px;
+  
+  /* overflow: auto; */
   margin-top: 40px;
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--spacer-element-10) var(--spacer-element-07);
+  /* display: flex; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacer-element-10) var(--spacer-element-07); */
   margin-right: -15px;
 }
 
@@ -119,6 +125,11 @@
 .linkable-cards a.document-link span.icon.video svg * {
   stroke: none;
   fill: var(--primary-purple);
+}
+
+.section.linkable-cards-container > div:last-child > *:last-child > *:last-child {
+  margin: 0 var(--spacer-element-02) var(--spacer-element-06);
+  padding: 48px 24px 24px;
 }
 
 .linkable-cards.purple-cards a.document-link span.icon.video svg * {
