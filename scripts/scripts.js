@@ -398,7 +398,7 @@ export async function createCard(row, style) {
   link.href = row.path;
   if (row.title) link.innerHTML += `${row.title}`;
   cardContent.append(link);
-  if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description.substring(0, 160)}...</p>`;
+  if (row.description && row.description !== '0') cardContent.innerHTML += `<p>${row.description}</p>`;
   const author = document.createElement('div');
   author.classList.add('blog-author');
 
