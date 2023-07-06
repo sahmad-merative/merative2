@@ -462,6 +462,16 @@ export async function lookupDocuments(pathnames) {
   return (result);
 }
 
+/**
+ * Gets pdf and documents list that are indexed
+ */
+
+export async function getPDFsDocuments() {
+  const resp = await fetch(`${window.hlx.codeBasePath}/documents/query-index.json`);
+  const result = await resp.json();
+  return (result);
+}
+
 export function decorateExternalLinks(main) {
   main.querySelectorAll('a').forEach((a) => {
     const href = a.getAttribute('href');
