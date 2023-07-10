@@ -300,6 +300,47 @@ export async function getAllBlogs(category) {
 }
 
 /**
+ * Gets details about all blogs that are indexed
+ * or only blogs belonging to a specific category
+ * @param {String} category name of the category
+ */
+
+export async function getAllArticles(category) {
+  if (!window.allArticles) {
+    const resp = await fetch(`${window.hlx.codeBasePath}/query-index.json`);
+    const json = await resp.json();
+    json.data.forEach((row) => {
+      if (row.image.startsWith('/default-meta-image.png')) {
+        row.image = getRandomDefaultImage();
+      } else {
+        row.image = `/${window.hlx.codeBasePath}${row.image}`;
+      }
+    });
+    window.allArticles = json.data;
+  }
+  const blogArticles = window.allArticles.filter((e) => e.template === 'Blog Article' && e.topic.trim().toLowerCase().includes('thought leadership'));
+  blogArticles.sort((a, b) => {
+    if (a.lastModified > b.lastModified) return -1;
+    if (a.lastModified < b.lastModified) return 1;
+    return 0;
+  });
+  // move featured article to the top of the sorted list
+  const featuredArticleIndex = blogArticles.findIndex((el) => (el['featured-article'] === 'true'));
+  if (featuredArticleIndex > -1) {
+    const featuredArticle = blogArticles[featuredArticleIndex];
+    blogArticles.splice(featuredArticleIndex, 1);
+    blogArticles.unshift(featuredArticle);
+  }
+  if (category) {
+    // return only blogs that have the same category
+    // const result = blogArticles.filter((e) => e.topic.trim().toLowerCase().includes(category));
+    const result = blogArticles.filter((e) => e.category.trim() === category);
+    return (result);
+  }
+  return (blogArticles);
+}
+
+/**
  * Gets details about all blog category pages that are indexed
  * for left nav
  */
