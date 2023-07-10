@@ -207,8 +207,8 @@ async function createCategories(categoriesList) {
 	return (categoriesElement);
 }
 
-async function createFilters(categories, topics, audiences) {
-	// Create DOM elements for topics and audiences to display in the left nav
+async function createFilters(categories, topics, audiences, contentTypes) {
+	// Create DOM elements for topics, audiences and contentTypes to display in the left nav
 	// Root filters div
 	const filters = createTag('div', {
 		class: 'filters',
@@ -319,6 +319,26 @@ async function createFilters(categories, topics, audiences) {
 		filtersMain.append(topicsElement);
 	}
 
+	// Content Type filters
+const contentTypeElement = createTag('div', {
+  class: 'content-type',
+  role: 'button',
+  'aria-expanded': 'true',
+});
+const contentTypeLabel = createTag('span', { class: 'list-title' });
+contentTypeLabel.append('Content Type');
+contentTypeElement.append(contentTypeLabel);
+contentTypeLabel.addEventListener('click', () => {
+  const expanded = contentTypeElement.getAttribute('aria-expanded') === 'true';
+  contentTypeElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+});
+if (contentTypes.size) {
+  await contentTypes.forEach(async (contentType) => {
+    contentTypeElement.append(await createCheckboxList(contentType));
+  });
+  filtersMain.append(contentTypeElement);
+}
+
 	// Add event listeners to all Checkboxes
 	const blogFilters = filtersMain.querySelectorAll('input[type=checkbox][name=blogFilters]');
 	await addEventListeners(blogFilters);
@@ -352,11 +372,17 @@ export default async function decorate(block) {
 	const categoriesList = await getBlogCategoryPages();
 	const topics = new Set();
 	const audiences = new Set();
+	const contentTypes = new Set();
 	if (blogList.length) {
 		const blogContent = createTag('div', { class: 'blog-content' });
 		// Get default content in this section and add it to blog-content
 		const defaultContent = document.querySelectorAll('.thought-leadership-home-container > .default-content-wrapper');
 		defaultContent.forEach((div) => blogContent.append(div));
+		if (!defaultContent.length) {
+			var emptyDiv = document.createElement('div');
+			emptyDiv.setAttribute('class', 'default-content-wrapper');
+			blogContent.appendChild(emptyDiv);
+		}
 		// Create the selected filters DOM structure
 		const selectedFilters = createTag('div', { class: 'selected-filters' });
 		const selectedFiltersdiv = createTag('div', { class: 'selected-filters-div' });
@@ -395,6 +421,13 @@ export default async function decorate(block) {
 					if (audienceValue.trim() !== '') audiences.add(audienceValue.trim());
 				});
 			}
+			if (row['page-type'] && row['page-type'] !== '0') {
+				blogCard.setAttribute('page-type', row['page-type']);
+				const contentTypeValues = row['page-type'].split(',');
+				contentTypeValues.forEach((contentTypeValue) => {
+					if (contentTypeValue.trim() !== '') contentTypes.add(contentTypeValue.trim());
+				});
+			}
 			blogCards.append(blogCard);
 		});
 
@@ -417,8 +450,7 @@ export default async function decorate(block) {
 		loadMoreElement.addEventListener('click', () => {
 			loadMoreCards();
 		});
-
-		blogContent.append(await createFilters(categoriesList, topics, audiences));
+		blogContent.append(await createFilters(categoriesList, topics, audiences, contentTypes));
 		blogContent.append(selectedFilters);
 		blogContent.append(blogCards);
 		blogContent.append(loadMoreElement);
