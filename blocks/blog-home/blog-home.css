@@ -12,6 +12,7 @@ main {
 main .section {
     padding: unset;
 }
+
 .thought-leadership-home h1,
 .blog-home h1, h4, h5 {
     margin: unset;
@@ -42,6 +43,7 @@ main .section {
     color: var(--neutral-carbon);
     padding-bottom: 32px;
 }
+
 .thought-leadership-home a,
 .blog-home a {
     text-decoration: none;
@@ -119,6 +121,7 @@ main .section {
     text-decoration-line: underline;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .thought-leadership-home > .blog-content > .blog-cards > .blog-card > .card-image,
 .thought-leadership-home > .blog-content > .blog-cards > .blog-card:hover > .card-image,
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-image,
@@ -158,6 +161,7 @@ main .section {
     font-weight: 400;
     color: inherit;
 }
+
 .thought-leadership-home > .blog-content > .blog-cards > .blog-card > .card-content,
 .blog-home > .blog-content > .blog-cards > .blog-card > .card-content {
     padding: var(--spacer-element-08) var(--spacer-element-07);
