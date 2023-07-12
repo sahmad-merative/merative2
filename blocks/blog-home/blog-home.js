@@ -4,8 +4,12 @@ import {
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
+const MODE = 'blog-home';
 
-function loadMoreCards(num) {
+export function loadMoreCards(num) {
+  if (!loadMoreElement) {
+    loadMoreElement = document.querySelector('.load-more');
+  }
   const numCards = num !== undefined ? num : NUM_CARDS_SHOWN_AT_A_TIME;
   // Get cards that are not hidden and not active to load them
   const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
@@ -49,13 +53,13 @@ function toggleBodyOverflow(val) {
   }
 }
 
-function updateFiltersCount(count) {
+function updateFiltersCount(count, mode) {
   // update the number of checked filters to show in mobile and tablet views
-  const mobileFiltersCount = document.querySelector('.blog-home .filters > .filters-header > h4');
+  const mobileFiltersCount = document.querySelector(`.${mode} .filters > .filters-header > h4`);
   mobileFiltersCount.innerHTML = `Filters (${count})`;
 }
 
-function clearFilters() {
+function clearFilters(mode) {
   // get's called when nothing is selected. every card shows
   const hiddenCards = document.querySelectorAll('.blog-card');
   hiddenCards.forEach((card) => {
@@ -64,24 +68,25 @@ function clearFilters() {
   });
 
   // clear our selected filters on the top
-  const selectedFilters = document.querySelector('.blog-home .selected-filters');
+  const selectedFilters = document.querySelector(`.${mode} .selected-filters`);
   const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
   selectedFiltersList.textContent = '';
   const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
   selectedFiltersTitle.textContent = '';
   const clearAllFilters = document.querySelector('.clear-all-filters');
   clearAllFilters.textContent = '';
-  updateFiltersCount('0');
+  updateFiltersCount('0', mode);
   loadMoreCards(7);
 }
 
-async function createCheckboxList(label) {
+async function createCheckboxList(label, group) {
   const div = document.createElement('div');
   const inputEl = createTag('input', {
     type: 'checkbox',
     name: 'blogFilters',
     id: label,
     value: label,
+    'data-group': group,
   });
   const labelEl = createTag('label', { for: label });
   labelEl.append(label);
@@ -90,7 +95,7 @@ async function createCheckboxList(label) {
   return (div);
 }
 
-function uncheckCheckbox(val) {
+function uncheckCheckbox(val, mode) {
   // Deselect val from the checkbox list if it is selected
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   if (checkboxes.length) {
@@ -101,21 +106,23 @@ function uncheckCheckbox(val) {
           checkbox.checked = false;
           // update the cards to reflect the deselection
           // eslint-disable-next-line no-use-before-define
-          refreshCards();
+          refreshCards(mode);
         }
       });
     }
   }
 }
 
-function refreshCards() {
+function refreshCards(mode) {
   let hits = 0;
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   // Convert checkboxes to an array to use filter and map.
   // Use Array.filter to remove unchecked checkboxes.
   // Use Array.map to extract only the checkbox values from the array of objects.
-  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => i.value);
-  updateFiltersCount(checkedList.length);
+  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
+    value: i.value, group: i.dataset.group,
+  }));
+  updateFiltersCount(checkedList.length, mode);
   if (checkedList.length) {
     const blogCards = document.querySelectorAll('.blog-card');
     blogCards.forEach((card) => {
@@ -124,7 +131,7 @@ function refreshCards() {
       if (card.hasAttribute('topics')) {
         const filterGroupValues = card.getAttribute('topics').split(',');
         const found = filterGroupValues
-          .some((checkedItem) => checkedList.includes(checkedItem.trim()));
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
         if (found) {
           card.removeAttribute('aria-hidden');
         }
@@ -132,7 +139,15 @@ function refreshCards() {
       if (card.hasAttribute('audiences')) {
         const filterGroupValues = card.getAttribute('audiences').split(',');
         const found = filterGroupValues
-          .some((checkedItem) => checkedList.includes(checkedItem.trim()));
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
+        if (found) {
+          card.removeAttribute('aria-hidden');
+        }
+      }
+      if (card.hasAttribute('content-types') && mode === 'thought-leadership-home') {
+        const filterGroupValues = card.getAttribute('content-types').split(',');
+        const found = filterGroupValues
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
         if (found) {
           card.removeAttribute('aria-hidden');
         }
@@ -141,6 +156,9 @@ function refreshCards() {
       if (hits < NUM_CARDS_SHOWN_AT_A_TIME) card.setAttribute('card-active', 'true');
     });
 
+    if (!loadMoreElement) {
+      loadMoreElement = document.querySelector('.load-more');
+    }
     // update load more number
     if (hits.length > NUM_CARDS_SHOWN_AT_A_TIME) {
       if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
@@ -163,40 +181,48 @@ function refreshCards() {
     const clearAllFilters = document.querySelector('.clear-all-filters');
     clearAllFilters.innerText = 'Clear all';
     clearAllFilters.addEventListener('click', () => {
-      clearFilters();
+      clearFilters(mode);
       deselectAllCheckboxes();
       clearAllFilters.innerText = '';
     });
 
-    checkedList.forEach((val) => {
+    checkedList.forEach((item) => {
       const selectedValue = createTag('div', { class: 'selected-value' });
-      selectedValue.append(val);
+      selectedValue.append(item.value);
       selectedFiltersList.append(selectedValue);
       // Add another event listener for click events to remove this item and uncheck the checkbox
       selectedValue.addEventListener('click', () => {
-        uncheckCheckbox(val);
+        uncheckCheckbox(item.value, mode);
         selectedValue.innerText = '';
       });
     });
   } else {
-    clearFilters();
+    clearFilters(mode);
   }
 }
 
-async function addEventListeners(checkboxes) {
-  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', refreshCards));
+async function addEventListeners(checkboxes, mode) {
+  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', () => refreshCards(mode)));
 }
 
-async function createCategories(categoriesList) {
+async function createCategories(categoriesList, mode) {
   const categoriesElement = createTag('div', { class: 'categories' });
   const catLabel = createTag('span', { class: 'category-title' });
   catLabel.append('Categories');
   categoriesElement.append(catLabel);
+  const urlBypass = {
+    '/blog/enterprise-imaging': '/thought-leadership/solutions/merge',
+    '/blog/healthcare-analytics': '/thought-leadership/solutions/health-insights',
+    '/blog/real-world-evidence': '/thought-leadership/solutions/marketscan',
+    '/blog/clinical-development': '/thought-leadership/solutions/zelta',
+    '/blog/clinical-decision-support': '/thought-leadership/solutions/micromedex',
+    '/blog/health-human-services': '/thought-leadership/solutions/curam',
+  };
   categoriesList.forEach((row) => {
     if ((row.path !== '0') && (row.title !== '0')) {
       const link = document.createElement('a');
       link.classList.add('category-link');
-      link.href = row.path;
+      link.href = (mode === 'blog-home') ? row.path : urlBypass[row.path];
       if (window.location.pathname === row.path) {
         link.classList.add('active');
         if (row.title) link.innerHTML += `<h5>${row.title}</h5>`;
@@ -207,7 +233,7 @@ async function createCategories(categoriesList) {
   return (categoriesElement);
 }
 
-async function createFilters(categories, topics, audiences) {
+export async function createFilters(categories, topics, audiences, contentTypes, mode) {
   // Create DOM elements for topics and audiences to display in the left nav
   // Root filters div
   const filters = createTag('div', {
@@ -261,7 +287,7 @@ async function createFilters(categories, topics, audiences) {
   resetDiv.addEventListener('click', () => {
     // clear the filters & refresh cards, deselect any checked checkboxes,
     // close the filter modal and make sure body scroll is back to normal
-    clearFilters();
+    clearFilters(mode);
     deselectAllCheckboxes();
     toggleBodyOverflow('false');
     filters.setAttribute('aria-expanded', 'false');
@@ -294,7 +320,7 @@ async function createFilters(categories, topics, audiences) {
   });
   if (audiences.size) {
     await audiences.forEach(async (audience) => {
-      audiencesElement.append(await createCheckboxList(audience));
+      audiencesElement.append(await createCheckboxList(audience, 'audiences'));
     });
     filtersMain.append(audiencesElement);
   }
@@ -314,17 +340,39 @@ async function createFilters(categories, topics, audiences) {
   });
   if (topics.size) {
     await topics.forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic));
+      topicsElement.append(await createCheckboxList(topic, 'topics'));
     });
     filtersMain.append(topicsElement);
   }
 
+  if (mode === 'thought-leadership-home' && contentTypes) {
+    // Content Type filters
+    const contentTypeElement = createTag('div', {
+      class: 'content-types',
+      role: 'button',
+      'aria-expanded': 'true',
+    });
+    const contentTypeLabel = createTag('span', { class: 'list-title' });
+    contentTypeLabel.append('Content Type');
+    contentTypeElement.append(contentTypeLabel);
+    contentTypeLabel.addEventListener('click', () => {
+      const expanded = contentTypeElement.getAttribute('aria-expanded') === 'true';
+      contentTypeElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    if (contentTypes.size) {
+      await contentTypes.forEach(async (contentType) => {
+        contentTypeElement.append(await createCheckboxList(contentType, 'content-types'));
+      });
+      filtersMain.append(contentTypeElement);
+    }
+  }
+
   // Add event listeners to all Checkboxes
   const blogFilters = filtersMain.querySelectorAll('input[type=checkbox][name=blogFilters]');
-  await addEventListeners(blogFilters);
+  await addEventListeners(blogFilters, mode);
 
   // Add Categories to filters main section
-  filtersMain.prepend(await createCategories(categories));
+  filtersMain.prepend(await createCategories(categories, mode));
 
   // Add Blog home link to the top of filters main section
   const blogHomeEl = createTag('div', { class: 'blog-home-link' });
@@ -418,7 +466,7 @@ export default async function decorate(block) {
       loadMoreCards();
     });
 
-    blogContent.append(await createFilters(categoriesList, topics, audiences));
+    blogContent.append(await createFilters(categoriesList, topics, audiences, false, MODE));
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
     blogContent.append(loadMoreElement);
