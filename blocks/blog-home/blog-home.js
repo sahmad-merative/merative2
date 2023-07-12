@@ -55,8 +55,8 @@ function toggleBodyOverflow(val) {
 
 function updateFiltersCount(count, mode) {
   // update the number of checked filters to show in mobile and tablet views
-  const mobileFiltersCount = document.querySelector(`.${mode} .filters > .filters-header > h4`);
-  mobileFiltersCount.innerHTML = `Filters (${count})`;
+  const mobileFiltersCount = document.querySelector(`.${mode} .filters > .filters-header > h2`);
+  mobileFiltersCount.innerHTML = count !== null && count !== 0 ? `Filters (${count})` : 'Filters';
 }
 
 function clearFilters(mode) {
@@ -75,6 +75,11 @@ function clearFilters(mode) {
   selectedFiltersTitle.textContent = '';
   const clearAllFilters = document.querySelector('.clear-all-filters');
   clearAllFilters.textContent = '';
+
+  if (selectedFiltersList.classList.contains('active')) {
+    selectedFiltersList.classList.remove('active');
+  }
+
   updateFiltersCount('0', mode);
   loadMoreCards(7);
 }
@@ -190,6 +195,7 @@ function refreshCards(mode) {
       const selectedValue = createTag('div', { class: 'selected-value' });
       selectedValue.append(item.value);
       selectedFiltersList.append(selectedValue);
+      selectedFiltersList.classList.add('active');
       // Add another event listener for click events to remove this item and uncheck the checkbox
       selectedValue.addEventListener('click', () => {
         uncheckCheckbox(item.value, mode);
@@ -256,7 +262,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
 
   // Filters header section
   const filtersHeader = createTag('div', { class: 'filters-header' });
-  filtersHeader.innerHTML = '<h4>Filters</h4>';
+  filtersHeader.innerHTML = '<h2>Filters</h2>';
   filtersHeader.addEventListener('click', () => {
     const expanded = filters.getAttribute('aria-expanded') === 'true';
     filters.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -380,7 +386,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   blogHomeLink.href = '/blog';
   if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += '<h4>Merative Blog</h4>';
+    blogHomeLink.innerHTML += '<h2>Merative Blog</h2>';
   } else {
     blogHomeLink.innerHTML += 'Merative Blog';
   }

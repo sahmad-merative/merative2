@@ -113,11 +113,21 @@ const loadYouTubePlayer = (element, videoId) => {
   const onPlayerReady = (event) => {
     playerMap[videoId] = event.target;
   };
+
+  // Create a new iframe element
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${videoId}`;
+
+  // Add the data-hj-allow-iframe attribute
+  iframe.setAttribute('data-hj-allow-iframe', '');
+
+  // Append the iframe to the specified element
+  element.appendChild(iframe);
+
   // we have to create a new YT Player but then need to wait for its onReady event
   // before assigning it to the player map
   // eslint-disable-next-line no-new
-  new window.YT.Player(element, {
-    videoId,
+  new window.YT.Player(iframe, {
     events: {
       onReady: onPlayerReady,
     },
@@ -218,6 +228,22 @@ export default function decorate(block) {
 
       // Display video overlay when play button is pressed
       playButton.addEventListener('click', () => toggleVideoOverlay(block, videoHref));
+    }
+  }
+
+  // decorate video title that's placed below the image
+  const secondRow = block.querySelector('div:nth-of-type(2)');
+  if (secondRow) {
+    const videoTitleElement = secondRow.querySelector('div');
+
+    if (videoTitleElement) {
+      const videoTitleText = videoTitleElement.textContent;
+      const paragraphElement = document.createElement('p');
+      paragraphElement.textContent = videoTitleText;
+      videoTitleElement.innerHTML = '';
+      videoTitleElement.appendChild(paragraphElement);
+
+      videoTitleElement.classList.add('video-title');
     }
   }
 }
