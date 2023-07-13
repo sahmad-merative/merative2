@@ -214,7 +214,7 @@ async function addEventListeners(checkboxes, mode) {
 async function createCategories(categoriesList, mode) {
   const categoriesElement = createTag('div', { class: 'categories' });
   const catLabel = createTag('span', { class: 'category-title' });
-  catLabel.append('Categories');
+  catLabel.append(mode === 'thought-leadership-home' ? 'Solutions' : 'Categories');
   categoriesElement.append(catLabel);
   const urlBypass = {
     '/blog/enterprise-imaging': '/thought-leadership/solutions/merge',
@@ -331,26 +331,6 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     filtersMain.append(audiencesElement);
   }
 
-  // Topic filters
-  const topicsElement = createTag('div', {
-    class: 'topics',
-    role: 'button',
-    'aria-expanded': 'true',
-  });
-  const topicLabel = createTag('span', { class: 'list-title' });
-  topicLabel.append('Topic');
-  topicsElement.append(topicLabel);
-  topicLabel.addEventListener('click', () => {
-    const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
-    topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  });
-  if (topics.size) {
-    await topics.forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic, 'topics'));
-    });
-    filtersMain.append(topicsElement);
-  }
-
   if (mode === 'thought-leadership-home' && contentTypes) {
     // Content Type filters
     const contentTypeElement = createTag('div', {
@@ -373,6 +353,26 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     }
   }
 
+  // Topic filters
+  const topicsElement = createTag('div', {
+    class: 'topics',
+    role: 'button',
+    'aria-expanded': 'true',
+  });
+  const topicLabel = createTag('span', { class: 'list-title' });
+  topicLabel.append('Topics');
+  topicsElement.append(topicLabel);
+  topicLabel.addEventListener('click', () => {
+    const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
+    topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  if (topics.size) {
+    await topics.forEach(async (topic) => {
+      topicsElement.append(await createCheckboxList(topic, 'topics'));
+    });
+    filtersMain.append(topicsElement);
+  }
+
   // Add event listeners to all Checkboxes
   const blogFilters = filtersMain.querySelectorAll('input[type=checkbox][name=blogFilters]');
   await addEventListeners(blogFilters, mode);
@@ -386,9 +386,9 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   blogHomeLink.href = '/blog';
   if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += '<h2>Merative Blog</h2>';
+    blogHomeLink.innerHTML += `${mode === 'thought-leadership-home' ? '<h4>Thought leadership</h4>' : '<h2>Merative Blog</h2>'}`;
   } else {
-    blogHomeLink.innerHTML += 'Merative Blog';
+    blogHomeLink.innerHTML += `${mode === 'thought-leadership-home' ? 'Thought leadership' : 'Merative Blog'}`;
   }
   blogHomeEl.append(blogHomeLink);
   filtersMain.prepend(blogHomeEl);
