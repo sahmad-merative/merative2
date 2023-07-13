@@ -455,7 +455,6 @@ export function sortArrayOfObjects(arr, property, type) {
       });
       break;
     default:
-      console.log('Unknown type');
   }
   return result;
 }
