@@ -1,5 +1,5 @@
 import {
-  getAllBlogs, createCard, getBlogCategoryPages, createTag,
+  getAllBlogs, createCard, getBlogCategoryPages, createTag, sortArrayOfObjects,
 } from '../../scripts/scripts.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
@@ -149,7 +149,7 @@ function refreshCards(mode) {
           card.removeAttribute('aria-hidden');
         }
       }
-      if (card.hasAttribute('content-types') && mode === 'thought-leadership-home') {
+      if (card.hasAttribute('content-types') && mode !== MODE) {
         const filterGroupValues = card.getAttribute('content-types').split(',');
         const found = filterGroupValues
           .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
@@ -214,7 +214,7 @@ async function addEventListeners(checkboxes, mode) {
 async function createCategories(categoriesList, mode) {
   const categoriesElement = createTag('div', { class: 'categories' });
   const catLabel = createTag('span', { class: 'category-title' });
-  catLabel.append(mode === 'thought-leadership-home' ? 'Solutions' : 'Categories');
+  catLabel.append(mode !== MODE ? 'Solutions' : 'Categories');
   categoriesElement.append(catLabel);
   const urlBypass = {
     '/blog/enterprise-imaging': '/thought-leadership/solutions/merge',
@@ -224,11 +224,11 @@ async function createCategories(categoriesList, mode) {
     '/blog/clinical-decision-support': '/thought-leadership/solutions/micromedex',
     '/blog/health-human-services': '/thought-leadership/solutions/curam',
   };
-  categoriesList.forEach((row) => {
+  (mode !== MODE ? sortArrayOfObjects(categoriesList, 'title', 'string') : categoriesList).forEach((row) => {
     if ((row.path !== '0') && (row.title !== '0')) {
       const link = document.createElement('a');
       link.classList.add('category-link');
-      link.href = (mode === 'blog-home') ? row.path : urlBypass[row.path];
+      link.href = (mode === MODE) ? row.path : urlBypass[row.path];
       if (window.location.pathname === row.path) {
         link.classList.add('active');
         if (row.title) link.innerHTML += `<h5>${row.title}</h5>`;
@@ -325,13 +325,13 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     audiencesElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (audiences.size) {
-    await audiences.forEach(async (audience) => {
+    await (mode !== MODE ? sortArrayOfObjects(audiences, '', 'set') : audiences).forEach(async (audience) => {
       audiencesElement.append(await createCheckboxList(audience, 'audiences'));
     });
     filtersMain.append(audiencesElement);
   }
 
-  if (mode === 'thought-leadership-home' && contentTypes) {
+  if (mode !== MODE && contentTypes) {
     // Content Type filters
     const contentTypeElement = createTag('div', {
       class: 'content-types',
@@ -346,7 +346,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
       contentTypeElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
     if (contentTypes.size) {
-      await contentTypes.forEach(async (contentType) => {
+      await (mode !== MODE ? sortArrayOfObjects(contentTypes, '', 'set') : contentTypes).forEach(async (contentType) => {
         contentTypeElement.append(await createCheckboxList(contentType, 'content-types'));
       });
       filtersMain.append(contentTypeElement);
@@ -367,7 +367,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (topics.size) {
-    await topics.forEach(async (topic) => {
+    await (mode !== MODE ? sortArrayOfObjects(topics, '', 'set') : topics).forEach(async (topic) => {
       topicsElement.append(await createCheckboxList(topic, 'topics'));
     });
     filtersMain.append(topicsElement);
@@ -386,9 +386,9 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   blogHomeLink.href = '/blog';
   if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += `${mode === 'thought-leadership-home' ? '<h4>Thought leadership</h4>' : '<h2>Merative Blog</h2>'}`;
+    blogHomeLink.innerHTML += `${mode !== MODE ? '<h4>Thought leadership</h4>' : '<h2>Merative Blog</h2>'}`;
   } else {
-    blogHomeLink.innerHTML += `${mode === 'thought-leadership-home' ? 'Thought leadership' : 'Merative Blog'}`;
+    blogHomeLink.innerHTML += `${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}`;
   }
   blogHomeEl.append(blogHomeLink);
   filtersMain.prepend(blogHomeEl);

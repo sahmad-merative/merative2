@@ -330,7 +330,11 @@ export async function getAllBlogs(category) {
     window.allBlogs = json.data;
   }
   const blogArticles = window.allBlogs.filter((e) => e.template === 'Blog Article');
-
+  blogArticles.sort((a, b) => {
+    if (a.lastModified > b.lastModified) return -1;
+    if (a.lastModified < b.lastModified) return 1;
+    return 0;
+  });
   // move featured article to the top of the sorted list
   const featuredArticleIndex = blogArticles.findIndex((el) => (el['featured-article'] === 'true'));
   if (featuredArticleIndex > -1) {
@@ -415,6 +419,46 @@ export async function getBlogCategoryPages() {
  * @param {Object} row JSON Object typically coming from an index array item
  * @param {String} style Class name that needs to be added to the card root div
  */
+
+export function sortArrayOfObjects(arr, property, type) {
+  let result = [];
+  let sortedArray;
+  // Check if the array empty
+  if (!arr.length && type !== 'set') {
+    return result;
+  }
+  if (!arr.size && type === 'set') {
+    return new Set([]);
+  }
+
+  switch (type) {
+    case 'set':
+      // Convert Set to Array
+      sortedArray = Array.from(arr).sort();
+      result = new Set(sortedArray);
+      break;
+    case 'number':
+      result = arr.sort((a, b) => (a[property] - b[property]));
+      break;
+    case 'string':
+      result = arr.sort((a, b) => {
+        const title1 = a[property]?.toLowerCase();
+        const title2 = b[property]?.toLowerCase();
+
+        if (title1 < title2) {
+          return -1;
+        }
+        if (title1 > title2) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+    default:
+      console.log('Unknown type');
+  }
+  return result;
+}
 
 export async function createCard(row, style) {
   // Create card div
