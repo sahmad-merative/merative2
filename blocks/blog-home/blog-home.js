@@ -174,7 +174,7 @@ function refreshCards(mode) {
     }
 
     // refresh selected filters at the top
-    const selectedFilters = document.querySelector('.blog-home .selected-filters');
+    const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
     const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
     selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
     const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
@@ -386,7 +386,10 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   blogHomeLink.href = '/blog';
   if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += `${mode !== MODE ? '<h4>Thought leadership</h4>' : '<h2>Merative Blog</h2>'}`;
+    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
+  } else if (/(^\/thought-leadership$)/.test(window.location.pathname)) {
+    blogHomeLink.classList.add('active');
+    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
   } else {
     blogHomeLink.innerHTML += `${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}`;
   }

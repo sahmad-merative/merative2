@@ -534,7 +534,7 @@ h5 {
 }
 
 /* Selected filters */
-.bthought-leadershiplog-home .selected-filters-list,
+.thought-leadership-home .selected-filters-list,
 .blog-home .selected-filters-list {
   display: flex;
   flex-flow: wrap;
@@ -821,7 +821,7 @@ h5 {
   }
 
 
-  .blthought-leadershipog-home[data-block-status="loaded"] .filters .thought-leadership-home-link a.category-link,
+  .thought-leadership-home[data-block-status="loaded"] .filters .thought-leadership-home-link a.category-link,
   .blog-home[data-block-status="loaded"] .filters .blog-home-link a.category-link {
     font-size: var(--font-size-21);
   }
@@ -946,6 +946,7 @@ h5 {
     padding: var(--spacer-element-02) 28px var(--spacer-element-02) var(--spacer-element-05);
     border: 1px solid var(--neutral-sand);
     border-radius: 100px;
+    cursor: pointer;
   }
 
   .thought-leadership-home .selected-filters .selected-value:not(:empty)::after,
