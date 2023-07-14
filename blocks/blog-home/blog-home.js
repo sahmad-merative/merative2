@@ -61,7 +61,6 @@ function pushValueToQueryParameter(group, value) {
       }
       break;
     default:
-      console.log('Unknown Type');
   }
   getSetParam();
 }
@@ -90,7 +89,6 @@ function popValueFromQueryParameter(group, value) {
       }
       break;
     default:
-      console.log('Unknown Type');
   }
   getSetParam();
 }

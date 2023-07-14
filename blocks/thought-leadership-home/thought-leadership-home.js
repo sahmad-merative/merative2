@@ -24,7 +24,6 @@ function loadPersistedValues() {
         checkbox.checked = selectedContentTypes.includes(checkbox.value);
         break;
       default:
-        console.log('Unknown Type');
     }
   });
   const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
