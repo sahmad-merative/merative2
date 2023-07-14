@@ -1,11 +1,121 @@
 import {
-  getAllBlogs, createCard, getBlogCategoryPages, createTag,
+  getAllBlogs, createCard, getBlogCategoryPages, createTag, sortArrayOfObjects,
 } from '../../scripts/scripts.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
+const MODE = 'blog-home';
+let url = new URL(window.location.href);
+const params = new URLSearchParams(url.search);
+export const selectedAudience = params.get('audience') ? params.get('audience').split(',') : [];
+export const selectedTopics = params.get('topics') ? params.get('topics').split(',') : [];
+export const selectedContentTypes = params.get('content-types') ? params.get('content-types').split(',') : [];
 
-function loadMoreCards(num) {
+function getSetParam() {
+  if (selectedAudience.length > 0) {
+    params.set('audience', selectedAudience);
+  } else {
+    params.delete('audience');
+  }
+  if (selectedTopics.length > 0) {
+    params.set('topics', selectedTopics);
+  } else {
+    params.delete('topics');
+  }
+  if (selectedContentTypes.length > 0) {
+    params.set('content-types', selectedContentTypes);
+  } else {
+    params.delete('content-types');
+  }
+
+  // Update the URL with the modified parameters
+  url.search = params?.toString();
+  const newURL = url?.toString();
+
+  // Update the browsers history with new URL
+  window.history.replaceState({ path: newURL }, '', newURL);
+}
+
+function pushValueToQueryParameter(group, value) {
+  let audienceIndex;
+  let topicIndex;
+  let contentTypeIndex;
+
+  switch (group) {
+    case 'audience':
+      audienceIndex = selectedAudience?.indexOf(value);
+      if (audienceIndex === -1) {
+        selectedAudience.push(value);
+      }
+      break;
+    case 'topics':
+      topicIndex = selectedTopics.indexOf(value);
+      if (topicIndex === -1) {
+        selectedTopics.push(value);
+      }
+      break;
+    case 'content-types':
+      contentTypeIndex = selectedContentTypes.indexOf(value);
+      if (contentTypeIndex === -1) {
+        selectedContentTypes.push(value);
+      }
+      break;
+    default:
+      console.log('Unknown Type');
+  }
+  getSetParam();
+}
+
+function popValueFromQueryParameter(group, value) {
+  let audienceIndex;
+  let topicIndex;
+  let contentTypeIndex;
+  switch (group) {
+    case 'audience':
+      audienceIndex = selectedAudience.indexOf(value);
+      if (audienceIndex !== -1) {
+        selectedAudience.splice(audienceIndex, 1);
+      }
+      break;
+    case 'topics':
+      topicIndex = selectedTopics.indexOf(value);
+      if (topicIndex !== -1) {
+        selectedTopics.splice(topicIndex, 1);
+      }
+      break;
+    case 'content-types':
+      contentTypeIndex = selectedContentTypes.indexOf(value);
+      if (contentTypeIndex !== -1) {
+        selectedContentTypes.splice(contentTypeIndex, 1);
+      }
+      break;
+    default:
+      console.log('Unknown Type');
+  }
+  getSetParam();
+}
+
+function clearAllQueryParam() {
+  // Clear all the array
+  params.delete('audience');
+  params.delete('topics');
+  params.delete('content-types');
+
+  // Get the current URL
+  url = new URL(window.location.href);
+
+  // Clear all the query parameter
+  url.search = '';
+
+  // Update the URL without reloading the page
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState(null, '', url?.toString());
+}
+
+export function loadMoreCards(num) {
+  if (!loadMoreElement) {
+    loadMoreElement = document.querySelector('.load-more');
+  }
   const numCards = num !== undefined ? num : NUM_CARDS_SHOWN_AT_A_TIME;
   // Get cards that are not hidden and not active to load them
   const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
@@ -49,13 +159,13 @@ function toggleBodyOverflow(val) {
   }
 }
 
-function updateFiltersCount(count) {
+function updateFiltersCount(count, mode) {
   // update the number of checked filters to show in mobile and tablet views
-  const mobileFiltersCount = document.querySelector('.blog-home .filters > .filters-header > h2');
+  const mobileFiltersCount = document.querySelector(`.${mode} .filters > .filters-header > h2`);
   mobileFiltersCount.innerHTML = count !== null && count !== 0 ? `Filters (${count})` : 'Filters';
 }
 
-function clearFilters() {
+function clearFilters(mode) {
   // get's called when nothing is selected. every card shows
   const hiddenCards = document.querySelectorAll('.blog-card');
   hiddenCards.forEach((card) => {
@@ -64,7 +174,7 @@ function clearFilters() {
   });
 
   // clear our selected filters on the top
-  const selectedFilters = document.querySelector('.blog-home .selected-filters');
+  const selectedFilters = document.querySelector(`.${mode} .selected-filters`);
   const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
   selectedFiltersList.textContent = '';
   const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
@@ -76,17 +186,21 @@ function clearFilters() {
     selectedFiltersList.classList.remove('active');
   }
 
-  updateFiltersCount(null);
+  updateFiltersCount('0', mode);
   loadMoreCards(7);
+  if (mode !== MODE) {
+    clearAllQueryParam();
+  }
 }
 
-async function createCheckboxList(label) {
+async function createCheckboxList(label, group) {
   const div = document.createElement('div');
   const inputEl = createTag('input', {
     type: 'checkbox',
     name: 'blogFilters',
     id: label,
     value: label,
+    'data-group': group,
   });
   const labelEl = createTag('label', { for: label });
   labelEl.append(label);
@@ -95,7 +209,7 @@ async function createCheckboxList(label) {
   return (div);
 }
 
-function uncheckCheckbox(val) {
+function uncheckCheckbox(val, mode) {
   // Deselect val from the checkbox list if it is selected
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   if (checkboxes.length) {
@@ -106,21 +220,56 @@ function uncheckCheckbox(val) {
           checkbox.checked = false;
           // update the cards to reflect the deselection
           // eslint-disable-next-line no-use-before-define
-          refreshCards();
+          refreshCards(mode);
         }
       });
     }
   }
 }
 
-function refreshCards() {
+export function populateTopFilterSection(mode, checkedList) {
+  // refresh selected filters at the top
+  const selectedFilters = document.querySelector(`.${mode} .selected-filters`);
+  const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
+  selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
+  const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
+
+  // Clear out any existing filters before showing the new ones based on filterGroup
+  selectedFiltersList.textContent = '';
+
+  // Clear out all filters
+  const clearAllFilters = document.querySelector('.clear-all-filters');
+  clearAllFilters.innerText = 'Clear all';
+  clearAllFilters.addEventListener('click', () => {
+    clearFilters(mode);
+    deselectAllCheckboxes();
+    clearAllFilters.innerText = '';
+    if (mode !== MODE) clearAllQueryParam();
+  });
+  checkedList.forEach((item) => {
+    const selectedValue = createTag('div', { class: 'selected-value' });
+    selectedValue.append(item.value);
+    selectedFiltersList.append(selectedValue);
+    selectedFiltersList.classList.add('active');
+    // Add another event listener for click events to remove this item and uncheck the checkbox
+    selectedValue.addEventListener('click', () => {
+      uncheckCheckbox(item.value, mode);
+      selectedValue.innerText = '';
+      popValueFromQueryParameter(item.group, item.value);
+    });
+  });
+}
+
+function refreshCards(mode) {
   let hits = 0;
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   // Convert checkboxes to an array to use filter and map.
   // Use Array.filter to remove unchecked checkboxes.
   // Use Array.map to extract only the checkbox values from the array of objects.
-  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => i.value);
-  updateFiltersCount(checkedList.length);
+  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
+    value: i.value, group: i.dataset.group,
+  }));
+  updateFiltersCount(checkedList.length, mode);
   if (checkedList.length) {
     const blogCards = document.querySelectorAll('.blog-card');
     blogCards.forEach((card) => {
@@ -129,7 +278,7 @@ function refreshCards() {
       if (card.hasAttribute('topics')) {
         const filterGroupValues = card.getAttribute('topics').split(',');
         const found = filterGroupValues
-          .some((checkedItem) => checkedList.includes(checkedItem.trim()));
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
         if (found) {
           card.removeAttribute('aria-hidden');
         }
@@ -137,7 +286,15 @@ function refreshCards() {
       if (card.hasAttribute('audiences')) {
         const filterGroupValues = card.getAttribute('audiences').split(',');
         const found = filterGroupValues
-          .some((checkedItem) => checkedList.includes(checkedItem.trim()));
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
+        if (found) {
+          card.removeAttribute('aria-hidden');
+        }
+      }
+      if (card.hasAttribute('content-types') && mode !== MODE) {
+        const filterGroupValues = card.getAttribute('content-types').split(',');
+        const found = filterGroupValues
+          .some((checkedItem) => checkedList.find((item) => item.value === checkedItem.trim()));
         if (found) {
           card.removeAttribute('aria-hidden');
         }
@@ -146,6 +303,9 @@ function refreshCards() {
       if (hits < NUM_CARDS_SHOWN_AT_A_TIME) card.setAttribute('card-active', 'true');
     });
 
+    if (!loadMoreElement) {
+      loadMoreElement = document.querySelector('.load-more');
+    }
     // update load more number
     if (hits.length > NUM_CARDS_SHOWN_AT_A_TIME) {
       if (loadMoreElement.hasAttribute('aria-hidden')) loadMoreElement.removeAttribute('aria-hidden');
@@ -155,50 +315,31 @@ function refreshCards() {
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
 
-    // refresh selected filters at the top
-    const selectedFilters = document.querySelector('.blog-home .selected-filters');
-    const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
-    selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-    const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
-
-    // Clear out any existing filters before showing the new ones based on filterGroup
-    selectedFiltersList.textContent = '';
-
-    // Clear out all filters
-    const clearAllFilters = document.querySelector('.clear-all-filters');
-    clearAllFilters.innerText = 'Clear all';
-    clearAllFilters.addEventListener('click', () => {
-      clearFilters();
-      deselectAllCheckboxes();
-      clearAllFilters.innerText = '';
-    });
-
-    checkedList.forEach((val) => {
-      const selectedValue = createTag('div', { class: 'selected-value' });
-      selectedValue.append(val);
-      selectedFiltersList.append(selectedValue);
-      selectedFiltersList.classList.add('active');
-      // Add another event listener for click events to remove this item and uncheck the checkbox
-      selectedValue.addEventListener('click', () => {
-        uncheckCheckbox(val);
-        selectedValue.innerText = '';
-      });
-    });
+    populateTopFilterSection(mode, checkedList);
   } else {
-    clearFilters();
+    clearFilters(mode);
   }
 }
 
-async function addEventListeners(checkboxes) {
-  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', refreshCards));
+async function addEventListeners(checkboxes, mode) {
+  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', (event) => {
+    if (mode !== MODE) {
+      if (event.target.checked) {
+        pushValueToQueryParameter(event.target.dataset.group, event.target.value);
+      } else {
+        popValueFromQueryParameter(event.target.dataset.group, event.target.value);
+      }
+    }
+    refreshCards(mode);
+  }));
 }
 
-async function createCategories(categoriesList) {
+async function createCategories(categoriesList, mode) {
   const categoriesElement = createTag('div', { class: 'categories' });
   const catLabel = createTag('span', { class: 'category-title' });
-  catLabel.append('Categories');
+  catLabel.append(mode !== MODE ? 'Solutions' : 'Categories');
   categoriesElement.append(catLabel);
-  categoriesList.forEach((row) => {
+  (mode !== MODE ? sortArrayOfObjects(categoriesList, 'title', 'string') : categoriesList).forEach((row) => {
     if ((row.path !== '0') && (row.title !== '0')) {
       const link = document.createElement('a');
       link.classList.add('category-link');
@@ -213,7 +354,7 @@ async function createCategories(categoriesList) {
   return (categoriesElement);
 }
 
-async function createFilters(categories, topics, audiences) {
+export async function createFilters(categories, topics, audiences, contentTypes, mode) {
   // Create DOM elements for topics and audiences to display in the left nav
   // Root filters div
   const filters = createTag('div', {
@@ -267,7 +408,7 @@ async function createFilters(categories, topics, audiences) {
   resetDiv.addEventListener('click', () => {
     // clear the filters & refresh cards, deselect any checked checkboxes,
     // close the filter modal and make sure body scroll is back to normal
-    clearFilters();
+    clearFilters(mode);
     deselectAllCheckboxes();
     toggleBodyOverflow('false');
     filters.setAttribute('aria-expanded', 'false');
@@ -299,10 +440,32 @@ async function createFilters(categories, topics, audiences) {
     audiencesElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (audiences.size) {
-    await audiences.forEach(async (audience) => {
-      audiencesElement.append(await createCheckboxList(audience));
+    await (mode !== MODE ? sortArrayOfObjects(audiences, '', 'set') : audiences).forEach(async (audience) => {
+      audiencesElement.append(await createCheckboxList(audience, 'audience'));
     });
     filtersMain.append(audiencesElement);
+  }
+
+  if (mode !== MODE && contentTypes) {
+    // Content Type filters
+    const contentTypeElement = createTag('div', {
+      class: 'content-types',
+      role: 'button',
+      'aria-expanded': 'true',
+    });
+    const contentTypeLabel = createTag('span', { class: 'list-title' });
+    contentTypeLabel.append('Content Type');
+    contentTypeElement.append(contentTypeLabel);
+    contentTypeLabel.addEventListener('click', () => {
+      const expanded = contentTypeElement.getAttribute('aria-expanded') === 'true';
+      contentTypeElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    if (contentTypes.size) {
+      await (mode !== MODE ? sortArrayOfObjects(contentTypes, '', 'set') : contentTypes).forEach(async (contentType) => {
+        contentTypeElement.append(await createCheckboxList(contentType, 'content-types'));
+      });
+      filtersMain.append(contentTypeElement);
+    }
   }
 
   // Topic filters
@@ -312,35 +475,38 @@ async function createFilters(categories, topics, audiences) {
     'aria-expanded': 'true',
   });
   const topicLabel = createTag('span', { class: 'list-title' });
-  topicLabel.append('Topic');
+  topicLabel.append('Topics');
   topicsElement.append(topicLabel);
   topicLabel.addEventListener('click', () => {
     const expanded = topicsElement.getAttribute('aria-expanded') === 'true';
     topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (topics.size) {
-    await topics.forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic));
+    await (mode !== MODE ? sortArrayOfObjects(topics, '', 'set') : topics).forEach(async (topic) => {
+      topicsElement.append(await createCheckboxList(topic, 'topics'));
     });
     filtersMain.append(topicsElement);
   }
 
   // Add event listeners to all Checkboxes
   const blogFilters = filtersMain.querySelectorAll('input[type=checkbox][name=blogFilters]');
-  await addEventListeners(blogFilters);
+  await addEventListeners(blogFilters, mode);
 
   // Add Categories to filters main section
-  filtersMain.prepend(await createCategories(categories));
+  filtersMain.prepend(await createCategories(categories, mode));
 
   // Add Blog home link to the top of filters main section
   const blogHomeEl = createTag('div', { class: 'blog-home-link' });
   const blogHomeLink = createTag('a', { class: 'category-link' });
-  blogHomeLink.href = '/blog';
+  blogHomeLink.href = mode === MODE ? '/blog' : '/thought-leadership';
   if (/(^\/blog$)/.test(window.location.pathname)) {
     blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += '<h2>Merative Blog</h2>';
+    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
+  } else if (/(^\/thought-leadership$)/.test(window.location.pathname)) {
+    blogHomeLink.classList.add('active');
+    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
   } else {
-    blogHomeLink.innerHTML += 'Merative Blog';
+    blogHomeLink.innerHTML += `${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}`;
   }
   blogHomeEl.append(blogHomeLink);
   filtersMain.prepend(blogHomeEl);
@@ -424,7 +590,7 @@ export default async function decorate(block) {
       loadMoreCards();
     });
 
-    blogContent.append(await createFilters(categoriesList, topics, audiences));
+    blogContent.append(await createFilters(categoriesList, topics, audiences, false, MODE));
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
     blogContent.append(loadMoreElement);
