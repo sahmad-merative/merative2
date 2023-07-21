@@ -32,6 +32,7 @@
       "js.driftt.com",
       "https://rum.hlx.page/",
       "https://*.hotjar.com",
+      "*.tt.omtrdc.net",
       "*.spotify.com",
       "embed.podcasts.apple.com"
   ],
@@ -76,7 +77,8 @@
     "cdn.cookielaw.org",
     "cm.everesttech.net",
     "*.medallia.com",
-    "*.kampyle.com"
+    "*.kampyle.com",
+    "*.salesloft.com"
   ],
   "frame-src": [
     "'self'",
@@ -90,9 +92,7 @@
     "merative.demdex.net",
     "*.medallia.com",
     "*.kampyle.com",
-    "js.driftt.com",
-    "*.spotify.com",
-    "embed.podcasts.apple.com"
+    "js.driftt.com"
   ],
   "style-src": [
     "'self'",
@@ -103,7 +103,8 @@
     "assets.adobedtm.com",
     "cdn.cookielaw.org",
     "*.medallia.com",
-    "*.kampyle.com"
+    "*.kampyle.com",
+    "*.tt.omtrdc.net"
   ],
   "font-src": [
     "'self'",
