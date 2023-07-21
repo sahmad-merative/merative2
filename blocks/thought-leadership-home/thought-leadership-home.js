@@ -1,11 +1,37 @@
 import {
   createCard, getSolutionCategoryPages, createTag, getThoughtLeadership,
 } from '../../scripts/scripts.js';
-import { loadMoreCards, createFilters } from '../blog-home/blog-home.js';
+import {
+  loadMoreCards, createFilters, populateTopFilterSection, selectedAudience,
+  selectedTopics, selectedContentTypes,
+} from '../blog-home/blog-home.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 const MODE = 'thought-leadership-home';
 let loadMoreElement;
+
+function loadPersistedValues() {
+  const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
+  Array.from(checkboxes).forEach((checkbox) => {
+    switch (checkbox.dataset.group) {
+      case 'audience':
+        checkbox.checked = selectedAudience.includes(checkbox.value);
+        break;
+      case 'topics':
+        checkbox.checked = selectedTopics.includes(checkbox.value);
+        break;
+      case 'content-types':
+        checkbox.checked = selectedContentTypes.includes(checkbox.value);
+        break;
+      default:
+        console.log('Unknown Type');
+    }
+  });
+  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
+    value: i.value, group: i.dataset.group,
+  }));
+  populateTopFilterSection(MODE, checkedList);
+}
 
 export default async function decorate(block) {
   const category = block.textContent.trim();
@@ -99,6 +125,7 @@ export default async function decorate(block) {
     blogContent.append(blogCards);
     blogContent.append(loadMoreElement);
     block.append(blogContent);
+    loadPersistedValues();
   } else {
     block.remove();
   }

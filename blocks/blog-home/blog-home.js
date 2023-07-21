@@ -5,6 +5,115 @@ import {
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
 const MODE = 'blog-home';
+let url = new URL(window.location.href);
+const params = new URLSearchParams(url.search);
+export const selectedAudience = params.get('audience') ? params.get('audience').split(',') : [];
+export const selectedTopics = params.get('topics') ? params.get('topics').split(',') : [];
+export const selectedContentTypes = params.get('content-types') ? params.get('content-types').split(',') : [];
+
+function getSetParam() {
+  if (selectedAudience.length > 0) {
+    params.set('audience', selectedAudience);
+  } else {
+    params.delete('audience');
+  }
+  if (selectedTopics.length > 0) {
+    params.set('topics', selectedTopics);
+  } else {
+    params.delete('topics');
+  }
+  if (selectedContentTypes.length > 0) {
+    params.set('content-types', selectedContentTypes);
+  } else {
+    params.delete('content-types');
+  }
+
+  // Update the URL with the modified parameters
+  url.search = params?.toString();
+  const newURL = url?.toString();
+
+  // Update the browsers history with new URL
+  window.history.replaceState({ path: newURL }, '', newURL);
+}
+
+function pushValueToQueryParameter(group, value) {
+  let audienceIndex;
+  let topicIndex;
+  let contentTypeIndex;
+
+  switch (group) {
+    case 'audience':
+      audienceIndex = selectedAudience?.indexOf(value);
+      if (audienceIndex === -1) {
+        selectedAudience.push(value);
+      }
+      break;
+    case 'topics':
+      topicIndex = selectedTopics.indexOf(value);
+      if (topicIndex === -1) {
+        selectedTopics.push(value);
+      }
+      break;
+    case 'content-types':
+      contentTypeIndex = selectedContentTypes.indexOf(value);
+      if (contentTypeIndex === -1) {
+        selectedContentTypes.push(value);
+      }
+      break;
+    default:
+      console.log('Unknown Type');
+  }
+  getSetParam();
+}
+
+function popValueFromQueryParameter(group, value) {
+  let audienceIndex;
+  let topicIndex;
+  let contentTypeIndex;
+  switch (group) {
+    case 'audience':
+      audienceIndex = selectedAudience.indexOf(value);
+      if (audienceIndex !== -1) {
+        selectedAudience.splice(audienceIndex, 1);
+      }
+      break;
+    case 'topics':
+      topicIndex = selectedTopics.indexOf(value);
+      if (topicIndex !== -1) {
+        selectedTopics.splice(topicIndex, 1);
+      }
+      break;
+    case 'content-types':
+      contentTypeIndex = selectedContentTypes.indexOf(value);
+      if (contentTypeIndex !== -1) {
+        selectedContentTypes.splice(contentTypeIndex, 1);
+      }
+      break;
+    default:
+      console.log('Unknown Type');
+  }
+  getSetParam();
+}
+
+function clearAllQueryParam() {
+  // Clear all the array
+  params.delete('audience');
+  params.delete('topics');
+  params.delete('content-types');
+
+  selectedAudience.splice(0, selectedAudience.length);
+  selectedContentTypes.splice(0, selectedContentTypes.length);
+  selectedTopics.splice(0, selectedTopics.length);
+
+  // Get the current URL
+  url = new URL(window.location.href);
+  // Clear all the query parameter
+  url.search = '';
+
+  // Update the URL without reloading the page
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState(null, '', url?.toString());
+}
 
 export function loadMoreCards(num) {
   if (!loadMoreElement) {
@@ -82,6 +191,9 @@ function clearFilters(mode) {
 
   updateFiltersCount(null, mode);
   loadMoreCards(7);
+  if (mode !== MODE) {
+    clearAllQueryParam();
+  }
 }
 
 async function createCheckboxList(label, group) {
@@ -116,6 +228,40 @@ function uncheckCheckbox(val, mode) {
       });
     }
   }
+}
+
+export function populateTopFilterSection(mode, checkedList) {
+  // refresh selected filters at the top
+  const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
+  const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
+  selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
+  const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
+
+  // Clear out any existing filters before showing the new ones based on filterGroup
+  selectedFiltersList.textContent = '';
+
+  // Clear out all filters
+  const clearAllFilters = document.querySelector('.clear-all-filters');
+  clearAllFilters.innerText = 'Clear all';
+  clearAllFilters.addEventListener('click', () => {
+    clearFilters(mode);
+    deselectAllCheckboxes();
+    clearAllFilters.innerText = '';
+    if (mode !== MODE) clearAllQueryParam();
+  });
+
+  checkedList.forEach((item) => {
+    const selectedValue = createTag('div', { class: 'selected-value' });
+    selectedValue.append(item.value);
+    selectedFiltersList.append(selectedValue);
+    selectedFiltersList.classList.add('active');
+    // Add another event listener for click events to remove this item and uncheck the checkbox
+    selectedValue.addEventListener('click', () => {
+      uncheckCheckbox(item.value, mode);
+      selectedValue.innerText = '';
+      popValueFromQueryParameter(item.group, item.value);
+    });
+  });
 }
 
 function refreshCards(mode) {
@@ -173,42 +319,23 @@ function refreshCards(mode) {
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
 
-    // refresh selected filters at the top
-    const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
-    const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
-    selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-    const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
-
-    // Clear out any existing filters before showing the new ones based on filterGroup
-    selectedFiltersList.textContent = '';
-
-    // Clear out all filters
-    const clearAllFilters = document.querySelector('.clear-all-filters');
-    clearAllFilters.innerText = 'Clear all';
-    clearAllFilters.addEventListener('click', () => {
-      clearFilters(mode);
-      deselectAllCheckboxes();
-      clearAllFilters.innerText = '';
-    });
-
-    checkedList.forEach((item) => {
-      const selectedValue = createTag('div', { class: 'selected-value' });
-      selectedValue.append(item.value);
-      selectedFiltersList.append(selectedValue);
-      selectedFiltersList.classList.add('active');
-      // Add another event listener for click events to remove this item and uncheck the checkbox
-      selectedValue.addEventListener('click', () => {
-        uncheckCheckbox(item.value, mode);
-        selectedValue.innerText = '';
-      });
-    });
+    populateTopFilterSection(mode, checkedList);
   } else {
     clearFilters(mode);
   }
 }
 
 async function addEventListeners(checkboxes, mode) {
-  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', () => refreshCards(mode)));
+  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', (event) => {
+    if (mode !== MODE) {
+      if (event.target.checked) {
+        pushValueToQueryParameter(event.target.dataset.group, event.target.value);
+      } else {
+        popValueFromQueryParameter(event.target.dataset.group, event.target.value);
+      }
+    }
+    refreshCards(mode);
+  }));
 }
 
 async function createCategories(categoriesList, mode) {
@@ -319,7 +446,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   });
   if (audiences.size) {
     await sortArrayOfObjects(audiences, '', 'set').forEach(async (audience) => {
-      audiencesElement.append(await createCheckboxList(audience));
+      audiencesElement.append(await createCheckboxList(audience, 'audience'));
     });
     filtersMain.append(audiencesElement);
   }
@@ -361,7 +488,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   });
   if (topics.size) {
     await sortArrayOfObjects(topics, '', 'set').forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic));
+      topicsElement.append(await createCheckboxList(topic, 'topics'));
     });
     filtersMain.append(topicsElement);
   }
