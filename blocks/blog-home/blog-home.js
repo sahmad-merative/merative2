@@ -5,110 +5,6 @@ import {
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
 const MODE = 'blog-home';
-let url = new URL(window.location.href);
-const params = new URLSearchParams(url.search);
-export const selectedAudience = params.get('audience') ? params.get('audience').split(',') : [];
-export const selectedTopics = params.get('topics') ? params.get('topics').split(',') : [];
-export const selectedContentTypes = params.get('content-types') ? params.get('content-types').split(',') : [];
-
-function getSetParam() {
-  if (selectedAudience.length > 0) {
-    params.set('audience', selectedAudience);
-  } else {
-    params.delete('audience');
-  }
-  if (selectedTopics.length > 0) {
-    params.set('topics', selectedTopics);
-  } else {
-    params.delete('topics');
-  }
-  if (selectedContentTypes.length > 0) {
-    params.set('content-types', selectedContentTypes);
-  } else {
-    params.delete('content-types');
-  }
-
-  // Update the URL with the modified parameters
-  url.search = params?.toString();
-  const newURL = url?.toString();
-
-  // Update the browsers history with new URL
-  window.history.replaceState({ path: newURL }, '', newURL);
-}
-
-function pushValueToQueryParameter(group, value) {
-  let audienceIndex;
-  let topicIndex;
-  let contentTypeIndex;
-
-  switch (group) {
-    case 'audience':
-      audienceIndex = selectedAudience?.indexOf(value);
-      if (audienceIndex === -1) {
-        selectedAudience.push(value);
-      }
-      break;
-    case 'topics':
-      topicIndex = selectedTopics.indexOf(value);
-      if (topicIndex === -1) {
-        selectedTopics.push(value);
-      }
-      break;
-    case 'content-types':
-      contentTypeIndex = selectedContentTypes.indexOf(value);
-      if (contentTypeIndex === -1) {
-        selectedContentTypes.push(value);
-      }
-      break;
-    default:
-  }
-  getSetParam();
-}
-
-function popValueFromQueryParameter(group, value) {
-  let audienceIndex;
-  let topicIndex;
-  let contentTypeIndex;
-  switch (group) {
-    case 'audience':
-      audienceIndex = selectedAudience.indexOf(value);
-      if (audienceIndex !== -1) {
-        selectedAudience.splice(audienceIndex, 1);
-      }
-      break;
-    case 'topics':
-      topicIndex = selectedTopics.indexOf(value);
-      if (topicIndex !== -1) {
-        selectedTopics.splice(topicIndex, 1);
-      }
-      break;
-    case 'content-types':
-      contentTypeIndex = selectedContentTypes.indexOf(value);
-      if (contentTypeIndex !== -1) {
-        selectedContentTypes.splice(contentTypeIndex, 1);
-      }
-      break;
-    default:
-  }
-  getSetParam();
-}
-
-function clearAllQueryParam() {
-  // Clear all the array
-  params.delete('audience');
-  params.delete('topics');
-  params.delete('content-types');
-
-  // Get the current URL
-  url = new URL(window.location.href);
-
-  // Clear all the query parameter
-  url.search = '';
-
-  // Update the URL without reloading the page
-  // eslint-disable-next-line no-restricted-globals
-  history.replaceState(null, '', url?.toString());
-}
 
 export function loadMoreCards(num) {
   if (!loadMoreElement) {
@@ -116,7 +12,7 @@ export function loadMoreCards(num) {
   }
   const numCards = num !== undefined ? num : NUM_CARDS_SHOWN_AT_A_TIME;
   // Get cards that are not hidden and not active to load them
-  const activeCards = document.querySelectorAll('.blog-card:not([aria-hidden="true"]):not([card-active="true"])');
+  const activeCards = document.querySelectorAll('.card-item:not([aria-hidden="true"]):not([card-active="true"])');
   if (activeCards) {
     activeCards.forEach((activeCard, i) => {
       if (i < numCards) activeCard.setAttribute('card-active', 'true');
@@ -165,7 +61,7 @@ function updateFiltersCount(count, mode) {
 
 function clearFilters(mode) {
   // get's called when nothing is selected. every card shows
-  const hiddenCards = document.querySelectorAll('.blog-card');
+  const hiddenCards = document.querySelectorAll('.card-item');
   hiddenCards.forEach((card) => {
     card.removeAttribute('aria-hidden');
     card.setAttribute('card-active', 'false');
@@ -184,11 +80,8 @@ function clearFilters(mode) {
     selectedFiltersList.classList.remove('active');
   }
 
-  updateFiltersCount('0', mode);
+  updateFiltersCount(null, mode);
   loadMoreCards(7);
-  if (mode !== MODE) {
-    clearAllQueryParam();
-  }
 }
 
 async function createCheckboxList(label, group) {
@@ -225,39 +118,6 @@ function uncheckCheckbox(val, mode) {
   }
 }
 
-export function populateTopFilterSection(mode, checkedList) {
-  // refresh selected filters at the top
-  const selectedFilters = document.querySelector(`.${mode} .selected-filters`);
-  const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
-  selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-  const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
-
-  // Clear out any existing filters before showing the new ones based on filterGroup
-  selectedFiltersList.textContent = '';
-
-  // Clear out all filters
-  const clearAllFilters = document.querySelector('.clear-all-filters');
-  clearAllFilters.innerText = 'Clear all';
-  clearAllFilters.addEventListener('click', () => {
-    clearFilters(mode);
-    deselectAllCheckboxes();
-    clearAllFilters.innerText = '';
-    if (mode !== MODE) clearAllQueryParam();
-  });
-  checkedList.forEach((item) => {
-    const selectedValue = createTag('div', { class: 'selected-value' });
-    selectedValue.append(item.value);
-    selectedFiltersList.append(selectedValue);
-    selectedFiltersList.classList.add('active');
-    // Add another event listener for click events to remove this item and uncheck the checkbox
-    selectedValue.addEventListener('click', () => {
-      uncheckCheckbox(item.value, mode);
-      selectedValue.innerText = '';
-      popValueFromQueryParameter(item.group, item.value);
-    });
-  });
-}
-
 function refreshCards(mode) {
   let hits = 0;
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
@@ -269,7 +129,7 @@ function refreshCards(mode) {
   }));
   updateFiltersCount(checkedList.length, mode);
   if (checkedList.length) {
-    const blogCards = document.querySelectorAll('.blog-card');
+    const blogCards = document.querySelectorAll('.card-item');
     blogCards.forEach((card) => {
       card.setAttribute('aria-hidden', 'true');
       card.setAttribute('card-active', 'false');
@@ -313,23 +173,42 @@ function refreshCards(mode) {
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
 
-    populateTopFilterSection(mode, checkedList);
+    // refresh selected filters at the top
+    const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
+    const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
+    selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
+    const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
+
+    // Clear out any existing filters before showing the new ones based on filterGroup
+    selectedFiltersList.textContent = '';
+
+    // Clear out all filters
+    const clearAllFilters = document.querySelector('.clear-all-filters');
+    clearAllFilters.innerText = 'Clear all';
+    clearAllFilters.addEventListener('click', () => {
+      clearFilters(mode);
+      deselectAllCheckboxes();
+      clearAllFilters.innerText = '';
+    });
+
+    checkedList.forEach((item) => {
+      const selectedValue = createTag('div', { class: 'selected-value' });
+      selectedValue.append(item.value);
+      selectedFiltersList.append(selectedValue);
+      selectedFiltersList.classList.add('active');
+      // Add another event listener for click events to remove this item and uncheck the checkbox
+      selectedValue.addEventListener('click', () => {
+        uncheckCheckbox(item.value, mode);
+        selectedValue.innerText = '';
+      });
+    });
   } else {
     clearFilters(mode);
   }
 }
 
 async function addEventListeners(checkboxes, mode) {
-  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', (event) => {
-    if (mode !== MODE) {
-      if (event.target.checked) {
-        pushValueToQueryParameter(event.target.dataset.group, event.target.value);
-      } else {
-        popValueFromQueryParameter(event.target.dataset.group, event.target.value);
-      }
-    }
-    refreshCards(mode);
-  }));
+  checkboxes.forEach((checkbox) => checkbox.addEventListener('change', () => refreshCards(mode)));
 }
 
 async function createCategories(categoriesList, mode) {
@@ -337,7 +216,8 @@ async function createCategories(categoriesList, mode) {
   const catLabel = createTag('span', { class: 'category-title' });
   catLabel.append(mode !== MODE ? 'Solutions' : 'Categories');
   categoriesElement.append(catLabel);
-  (mode !== MODE ? sortArrayOfObjects(categoriesList, 'title', 'string') : categoriesList).forEach((row) => {
+
+  categoriesList.forEach((row) => {
     if ((row.path !== '0') && (row.title !== '0')) {
       const link = document.createElement('a');
       link.classList.add('category-link');
@@ -438,8 +318,8 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     audiencesElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (audiences.size) {
-    await (mode !== MODE ? sortArrayOfObjects(audiences, '', 'set') : audiences).forEach(async (audience) => {
-      audiencesElement.append(await createCheckboxList(audience, 'audience'));
+    await sortArrayOfObjects(audiences, '', 'set').forEach(async (audience) => {
+      audiencesElement.append(await createCheckboxList(audience));
     });
     filtersMain.append(audiencesElement);
   }
@@ -459,7 +339,7 @@ export async function createFilters(categories, topics, audiences, contentTypes,
       contentTypeElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
     if (contentTypes.size) {
-      await (mode !== MODE ? sortArrayOfObjects(contentTypes, '', 'set') : contentTypes).forEach(async (contentType) => {
+      await sortArrayOfObjects(contentTypes, '', 'set').forEach(async (contentType) => {
         contentTypeElement.append(await createCheckboxList(contentType, 'content-types'));
       });
       filtersMain.append(contentTypeElement);
@@ -480,8 +360,8 @@ export async function createFilters(categories, topics, audiences, contentTypes,
     topicsElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
   if (topics.size) {
-    await (mode !== MODE ? sortArrayOfObjects(topics, '', 'set') : topics).forEach(async (topic) => {
-      topicsElement.append(await createCheckboxList(topic, 'topics'));
+    await sortArrayOfObjects(topics, '', 'set').forEach(async (topic) => {
+      topicsElement.append(await createCheckboxList(topic));
     });
     filtersMain.append(topicsElement);
   }
@@ -493,21 +373,33 @@ export async function createFilters(categories, topics, audiences, contentTypes,
   // Add Categories to filters main section
   filtersMain.prepend(await createCategories(categories, mode));
 
-  // Add Blog home link to the top of filters main section
-  const blogHomeEl = createTag('div', { class: 'blog-home-link' });
-  const blogHomeLink = createTag('a', { class: 'category-link' });
-  blogHomeLink.href = mode === MODE ? '/blog' : '/thought-leadership';
-  if (/(^\/blog$)/.test(window.location.pathname)) {
-    blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
-  } else if (/(^\/thought-leadership$)/.test(window.location.pathname)) {
-    blogHomeLink.classList.add('active');
-    blogHomeLink.innerHTML += `<h2>${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}</h2>`;
+  // Create sidebar elements
+  const sidebarHeadingElement = createTag('div', { class: 'sidebar-heading' });
+  const sidebarLink = createTag('a', { class: 'category-link' });
+
+  // Set sidebar title and attributes
+  const isThoughtLeadership = mode !== MODE;
+  const sidebarTitle = isThoughtLeadership ? 'Thought leadership' : 'Merative Blog';
+  const sidebarPath = isThoughtLeadership ? '/thought-leadership' : '/blog';
+
+  sidebarLink.href = sidebarPath;
+  sidebarLink.title = sidebarTitle;
+
+  // Check active state based on current URL
+  const isBlogPage = /^\/blog$/.test(window.location.pathname);
+  const isThoughtLeadershipPage = /^\/thought-leadership$/.test(window.location.pathname);
+
+  if (isBlogPage || isThoughtLeadershipPage) {
+    sidebarLink.classList.add('active');
   } else {
-    blogHomeLink.innerHTML += `${mode !== MODE ? 'Thought leadership' : 'Merative Blog'}`;
+    sidebarLink.classList.remove('active');
   }
-  blogHomeEl.append(blogHomeLink);
-  filtersMain.prepend(blogHomeEl);
+
+  // Set sidebar content
+  sidebarLink.innerHTML += `<h2>${sidebarTitle}</h2>`;
+  sidebarHeadingElement.append(sidebarLink);
+
+  filtersMain.prepend(sidebarHeadingElement);
   filters.prepend(filtersHeader);
   filters.append(filtersMain);
   filters.append(filtersFooter);
@@ -538,9 +430,9 @@ export default async function decorate(block) {
     selectedFilters.append(selectedFiltersdiv);
     selectedFilters.append(selectedFiltersList);
     // Create blog cards DOM structure
-    const blogCards = createTag('div', { class: 'blog-cards' });
+    const blogCards = createTag('div', { class: 'card-group' });
     await blogList.forEach(async (row, i) => {
-      const blogCard = await createCard(row, 'blog-card');
+      const blogCard = await createCard(row, 'card-item');
       // first render show featured article and 6 cards so total 7
       // If featured article, then add class name and make active no matter what
       if (row['featured-article'] && row['featured-article'] === 'true') {
@@ -569,7 +461,7 @@ export default async function decorate(block) {
     });
 
     // Full card should be clickable
-    blogCards.querySelectorAll('.blog-card').forEach((card) => {
+    blogCards.querySelectorAll('.card-item').forEach((card) => {
       card.addEventListener('click', () => {
         const alink = card.getElementsByClassName('blog-link');
         document.location.href = alink[0].href;

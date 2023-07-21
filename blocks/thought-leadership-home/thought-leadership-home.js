@@ -1,56 +1,32 @@
 import {
-  createCard, getBlogCategoryPages, createTag, getAllArticles,
+  createCard, getSolutionCategoryPages, createTag, getThoughtLeadership,
 } from '../../scripts/scripts.js';
-import {
-  loadMoreCards, createFilters, populateTopFilterSection, selectedAudience,
-  selectedTopics, selectedContentTypes,
-} from '../blog-home/blog-home.js';
+import { loadMoreCards, createFilters } from '../blog-home/blog-home.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 const MODE = 'thought-leadership-home';
 let loadMoreElement;
 
-function loadPersistedValues() {
-  const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
-  Array.from(checkboxes).forEach((checkbox) => {
-    switch (checkbox.dataset.group) {
-      case 'audience':
-        checkbox.checked = selectedAudience.includes(checkbox.value);
-        break;
-      case 'topics':
-        checkbox.checked = selectedTopics.includes(checkbox.value);
-        break;
-      case 'content-types':
-        checkbox.checked = selectedContentTypes.includes(checkbox.value);
-        break;
-      default:
-    }
-  });
-  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
-    value: i.value, group: i.dataset.group,
-  }));
-  populateTopFilterSection(MODE, checkedList);
-}
-
 export default async function decorate(block) {
   const category = block.textContent.trim();
   block.textContent = '';
-  // Make a call to get all blog details from the blog index
-  const blogList = await getAllArticles(category);
-  const categoriesList = await getBlogCategoryPages();
+  // Make a call to get all thought leadership articles from the global query-index
+  const blogList = await getThoughtLeadership(category);
+  const categoriesList = await getSolutionCategoryPages();
   const topics = new Set();
-  const audience = new Set();
+  const audiences = new Set();
   const contentTypes = new Set();
   if (blogList.length) {
     const blogContent = createTag('div', { class: 'blog-content' });
-    // Get default content in this section and add it to blog-content
-    const defaultContent = document.querySelectorAll('.thought-leadership-home-container > .default-content-wrapper');
+    // Get default content and hero block in this section and add it to content section ara
+    const defaultContent = document.querySelectorAll('.thought-leadership-home-container > .default-content-wrapper, .thought-leadership-home-container .hero-wrapper');
     defaultContent.forEach((div) => blogContent.append(div));
     if (!defaultContent.length) {
       const emptyDiv = document.createElement('div');
       emptyDiv.setAttribute('class', 'default-content-wrapper');
       blogContent.appendChild(emptyDiv);
     }
+
     // Create the selected filters DOM structure
     const selectedFilters = createTag('div', { class: 'selected-filters' });
     const selectedFiltersdiv = createTag('div', { class: 'selected-filters-div' });
@@ -62,9 +38,9 @@ export default async function decorate(block) {
     selectedFilters.append(selectedFiltersdiv);
     selectedFilters.append(selectedFiltersList);
     // Create blog cards DOM structure
-    const blogCards = createTag('div', { class: 'blog-cards' });
+    const blogCards = createTag('div', { class: 'card-group' });
     await blogList.forEach(async (row, i) => {
-      const blogCard = await createCard(row, 'blog-card');
+      const blogCard = await createCard(row, 'card-item');
       // first render show featured article and 6 cards so total 7
       // If featured article, then add class name and make active no matter what
       if (row['featured-article'] && row['featured-article'] === 'true') {
@@ -83,15 +59,15 @@ export default async function decorate(block) {
         });
       }
       if (row.audience && row.audience !== '0') {
-        blogCard.setAttribute('audience', row.audience);
+        blogCard.setAttribute('audiences', row.audience);
         const audienceValues = row.audience.split(',');
         audienceValues.forEach((audienceValue) => {
-          if (audienceValue.trim() !== '') audience.add(audienceValue.trim());
+          if (audienceValue.trim() !== '') audiences.add(audienceValue.trim());
         });
       }
-      if (row['page-type'] && row['page-type'] !== '0') {
-        blogCard.setAttribute('page-type', row['page-type']);
-        const contentTypeValues = row['page-type'].split(',');
+      if (row.assettype && row.assettype !== '0') {
+        blogCard.setAttribute('assettype', row.assettype);
+        const contentTypeValues = row.assettype.split(',');
         contentTypeValues.forEach((contentTypeValue) => {
           if (contentTypeValue.trim() !== '') contentTypes.add(contentTypeValue.trim());
         });
@@ -100,7 +76,7 @@ export default async function decorate(block) {
     });
 
     //  Full card should be clickable
-    blogCards.querySelectorAll('.blog-card').forEach((card) => {
+    blogCards.querySelectorAll('.card-item').forEach((card) => {
       card.addEventListener('click', () => {
         const alink = card.getElementsByClassName('blog-link');
         document.location.href = alink[0].href;
@@ -118,12 +94,11 @@ export default async function decorate(block) {
     loadMoreElement.addEventListener('click', () => {
       loadMoreCards();
     });
-    blogContent.append(await createFilters(categoriesList, topics, audience, contentTypes, MODE));
+    blogContent.append(await createFilters(categoriesList, topics, audiences, contentTypes, MODE));
     blogContent.append(selectedFilters);
     blogContent.append(blogCards);
     blogContent.append(loadMoreElement);
     block.append(blogContent);
-    loadPersistedValues();
   } else {
     block.remove();
   }
