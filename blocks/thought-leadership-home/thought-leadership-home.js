@@ -66,7 +66,7 @@ export default async function decorate(block) {
         });
       }
       if (row.assettype && row.assettype !== '0') {
-        blogCard.setAttribute('assettype', row.assettype);
+        blogCard.setAttribute('content-types', row.assettype);
         const contentTypeValues = row.assettype.split(',');
         contentTypeValues.forEach((contentTypeValue) => {
           if (contentTypeValue.trim() !== '') contentTypes.add(contentTypeValue.trim());
