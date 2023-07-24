@@ -230,41 +230,7 @@ function uncheckCheckbox(val, mode) {
   }
 }
 
-export function populateTopFilterSection(mode, checkedList) {
-  // refresh selected filters at the top
-  const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
-  const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
-  selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
-  const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
-
-  // Clear out any existing filters before showing the new ones based on filterGroup
-  selectedFiltersList.textContent = '';
-
-  // Clear out all filters
-  const clearAllFilters = document.querySelector('.clear-all-filters');
-  clearAllFilters.innerText = 'Clear all';
-  clearAllFilters.addEventListener('click', () => {
-    clearFilters(mode);
-    deselectAllCheckboxes();
-    clearAllFilters.innerText = '';
-    if (mode !== MODE) clearAllQueryParam();
-  });
-
-  checkedList.forEach((item) => {
-    const selectedValue = createTag('div', { class: 'selected-value' });
-    selectedValue.append(item.value);
-    selectedFiltersList.append(selectedValue);
-    selectedFiltersList.classList.add('active');
-    // Add another event listener for click events to remove this item and uncheck the checkbox
-    selectedValue.addEventListener('click', () => {
-      uncheckCheckbox(item.value, mode);
-      selectedValue.innerText = '';
-      popValueFromQueryParameter(item.group, item.value);
-    });
-  });
-}
-
-function refreshCards(mode) {
+export function refreshCards(mode) {
   let hits = 0;
   const checkboxes = document.querySelectorAll('input[type=checkbox][name=blogFilters]');
   // Convert checkboxes to an array to use filter and map.
@@ -319,7 +285,37 @@ function refreshCards(mode) {
       loadMoreElement.setAttribute('aria-hidden', 'true');
     }
 
-    populateTopFilterSection(mode, checkedList);
+    // refresh selected filters at the top
+    const selectedFilters = document.querySelector(mode === MODE ? '.blog-home .selected-filters' : '.thought-leadership-home .selected-filters');
+    const selectedFiltersTitle = selectedFilters.querySelector('.selected-filters-title');
+    selectedFiltersTitle.innerHTML = '<h4>Showing results for</h4><br />';
+    const selectedFiltersList = selectedFilters.querySelector('.selected-filters-list');
+
+    // Clear out any existing filters before showing the new ones based on filterGroup
+    selectedFiltersList.textContent = '';
+
+    // Clear out all filters
+    const clearAllFilters = document.querySelector('.clear-all-filters');
+    clearAllFilters.innerText = 'Clear all';
+    clearAllFilters.addEventListener('click', () => {
+      clearFilters(mode);
+      deselectAllCheckboxes();
+      clearAllFilters.innerText = '';
+      if (mode !== MODE) clearAllQueryParam();
+    });
+
+    checkedList.forEach((item) => {
+      const selectedValue = createTag('div', { class: 'selected-value' });
+      selectedValue.append(item.value);
+      selectedFiltersList.append(selectedValue);
+      selectedFiltersList.classList.add('active');
+      // Add another event listener for click events to remove this item and uncheck the checkbox
+      selectedValue.addEventListener('click', () => {
+        uncheckCheckbox(item.value, mode);
+        selectedValue.innerText = '';
+        popValueFromQueryParameter(item.group, item.value);
+      });
+    });
   } else {
     clearFilters(mode);
   }

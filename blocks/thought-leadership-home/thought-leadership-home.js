@@ -2,7 +2,7 @@ import {
   createCard, getSolutionCategoryPages, createTag, getThoughtLeadership,
 } from '../../scripts/scripts.js';
 import {
-  loadMoreCards, createFilters, populateTopFilterSection, selectedAudience,
+  loadMoreCards, createFilters, refreshCards, selectedAudience,
   selectedTopics, selectedContentTypes,
 } from '../blog-home/blog-home.js';
 
@@ -27,10 +27,7 @@ function loadPersistedValues() {
         console.log('Unknown Type');
     }
   });
-  const checkedList = Array.from(checkboxes).filter((i) => i.checked).map((i) => ({
-    value: i.value, group: i.dataset.group,
-  }));
-  populateTopFilterSection(MODE, checkedList);
+  refreshCards(MODE);
 }
 
 export default async function decorate(block) {
