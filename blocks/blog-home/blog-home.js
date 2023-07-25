@@ -5,114 +5,58 @@ import {
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
 let loadMoreElement;
 const MODE = 'blog-home';
-let url = new URL(window.location.href);
-const params = new URLSearchParams(url.search);
-export const selectedAudience = params.get('audience') ? params.get('audience').split(',') : [];
-export const selectedTopics = params.get('topics') ? params.get('topics').split(',') : [];
-export const selectedContentTypes = params.get('content-types') ? params.get('content-types').split(',') : [];
 
-function getSetParam() {
-  if (selectedAudience.length > 0) {
-    params.set('audience', selectedAudience);
-  } else {
-    params.delete('audience');
-  }
-  if (selectedTopics.length > 0) {
-    params.set('topics', selectedTopics);
-  } else {
-    params.delete('topics');
-  }
-  if (selectedContentTypes.length > 0) {
-    params.set('content-types', selectedContentTypes);
-  } else {
-    params.delete('content-types');
-  }
+// Function to update the query parameter with the current state of global object.
+function updateQueryParameter() {
+  const params = new URLSearchParams();
 
-  // Update the URL with the modified parameters
-  url.search = params?.toString();
-  const newURL = url?.toString();
+  // Convert global object to a query parameter string
+  // eslint-disable-next-line no-restricted-syntax
+  for (const group in window.queryParam) {
+    if (Object.prototype.hasOwnProperty.call(window.queryParam, group)) {
+      const values = window.queryParam[group];
+      values.forEach((value) => {
+        params.append(group, value);
+      });
+    }
+  }
 
   // Update the browsers history with new URL
-  window.history.replaceState({ path: newURL }, '', newURL);
+  if (params.toString()) {
+    window.history.replaceState(null, '', `?${params.toString()}`);
+  } else {
+    window.history.replaceState(null, '', window.location.pathname);
+  }
 }
 
 function pushValueToQueryParameter(group, value) {
-  let audienceIndex;
-  let topicIndex;
-  let contentTypeIndex;
-
-  switch (group) {
-    case 'audience':
-      audienceIndex = selectedAudience?.indexOf(value);
-      if (audienceIndex === -1) {
-        selectedAudience.push(value);
-      }
-      break;
-    case 'topics':
-      topicIndex = selectedTopics.indexOf(value);
-      if (topicIndex === -1) {
-        selectedTopics.push(value);
-      }
-      break;
-    case 'content-types':
-      contentTypeIndex = selectedContentTypes.indexOf(value);
-      if (contentTypeIndex === -1) {
-        selectedContentTypes.push(value);
-      }
-      break;
-    default:
-      console.log('Unknown Type');
+  if (!window.queryParam) {
+    window.queryParam = {};
   }
-  getSetParam();
+  if (Object.prototype?.hasOwnProperty?.call((window.queryParam || {}), group)) {
+    window.queryParam[group].push(value);
+  } else {
+    window.queryParam[group] = [value];
+  }
+  updateQueryParameter();
 }
 
 function popValueFromQueryParameter(group, value) {
-  let audienceIndex;
-  let topicIndex;
-  let contentTypeIndex;
-  switch (group) {
-    case 'audience':
-      audienceIndex = selectedAudience.indexOf(value);
-      if (audienceIndex !== -1) {
-        selectedAudience.splice(audienceIndex, 1);
-      }
-      break;
-    case 'topics':
-      topicIndex = selectedTopics.indexOf(value);
-      if (topicIndex !== -1) {
-        selectedTopics.splice(topicIndex, 1);
-      }
-      break;
-    case 'content-types':
-      contentTypeIndex = selectedContentTypes.indexOf(value);
-      if (contentTypeIndex !== -1) {
-        selectedContentTypes.splice(contentTypeIndex, 1);
-      }
-      break;
-    default:
-      console.log('Unknown Type');
+  if (Object.prototype?.hasOwnProperty?.call((window.queryParam || {}), group)) {
+    const index = window.queryParam[group].indexOf(value);
+    if (index !== -1) {
+      window.queryParam[group].splice(index, 1);
+    }
   }
-  getSetParam();
+  updateQueryParameter();
 }
 
 function clearAllQueryParam() {
-  // Clear all the array
-  params.delete('audience');
-  params.delete('topics');
-  params.delete('content-types');
+  // Clear the global object
+  window.queryParam = {};
 
-  selectedAudience.splice(0, selectedAudience.length);
-  selectedContentTypes.splice(0, selectedContentTypes.length);
-  selectedTopics.splice(0, selectedTopics.length);
-
-  // Get the current URL
-  url = new URL(window.location.href);
-  // Clear all the query parameter
-  url.search = '';
-
-  // Update the URL without reloading the page
-  // eslint-disable-next-line no-restricted-globals
-  history.replaceState(null, '', url?.toString());
+  // Clear all the query parameter from the URL
+  window.history.replaceState(null, '', window.location.pathname);
 }
 
 export function loadMoreCards(num) {
@@ -323,11 +267,13 @@ export function refreshCards(mode) {
 
 async function addEventListeners(checkboxes, mode) {
   checkboxes.forEach((checkbox) => checkbox.addEventListener('change', (event) => {
+    const { group } = event.target.dataset;
+    const { value } = event.target;
     if (mode !== MODE) {
       if (event.target.checked) {
-        pushValueToQueryParameter(event.target.dataset.group, event.target.value);
+        pushValueToQueryParameter(group, value);
       } else {
-        popValueFromQueryParameter(event.target.dataset.group, event.target.value);
+        popValueFromQueryParameter(group, value);
       }
     }
     refreshCards(mode);
