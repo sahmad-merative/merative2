@@ -22,7 +22,7 @@ main > .section.video-promo-wrapper > div:first-child {
 
 .video.block > div:not(.video-modal) > div:only-child {
     background-color: unset;
-    border-radius: 20px;
+    border-radius: var(--spacer-element-06);
 }
 
 main > .section.video-promo-wrapper > div.video-wrapper {
@@ -30,16 +30,11 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 }
 
 .video.block > div:not(.video-modal) > div > p:first-of-type {
-    margin-top: var(--spacer-layout-05);
     text-transform: uppercase;
     font-size: var(--font-size-11);
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     line-height: var(--line-height-120);
     letter-spacing: var(--letter-spacing-02-em);
-}
-
-.video.block > div:not(.video-modal) > div > p:last-of-type {
-    margin-bottom: var(--spacer-layout-05);
 }
 
 .video.block > div:not(.video-modal) > div > h2 {
@@ -57,9 +52,10 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 96px;
-    height: 96px;
-    max-height: 96px;
+    width: var(--spacer-layout-06);
+    height: var(--spacer-layout-06);
+    max-height: var(--spacer-layout-06);
+    font-size: 14px;
     visibility: visible;
     background-color: var(--primary-purple);
     color: var(--neutral-white);
@@ -82,9 +78,9 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     content: '';
     background: url('./../../icons/play-button.svg') no-repeat;
     background-size: contain;
-    height: 16px;
+    height: var(--spacer-element-05);
     width: 10px;
-    margin-left: 12px;
+    margin-left: var(--spacer-element-04);
 }
 
 .video.block .video-text {
@@ -92,7 +88,7 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 64px 23px 96px 24px;
+    padding: var(--spacer-layout-05) var(--spacer-element-07) var(--spacer-layout-06) var(--spacer-element-07);
     width: 100%;
 }
 
@@ -108,9 +104,16 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     }
 
     .video.block .video-text {
-        padding: 64px 33px 64px 20px;
         max-width: 728px;
         order: unset;
+    }
+
+    .video.block .video-text:not(.text-left) {
+        padding: var(--spacer-layout-05) var(--spacer-element-08) var(--spacer-layout-05) var(--spacer-element-06);
+    }
+
+    .video.block .video-text.text-left {
+        padding: var(--spacer-layout-05) var(--spacer-element-06) var(--spacer-layout-05) var(--spacer-layout-036);
     }
 
     .video.block > div:not(.video-modal) {
@@ -139,8 +142,22 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     }
 
     .video.block .video-text {
-        padding: 160px 148px 160px 120px;
         max-width: 728px;
+    }
+
+    .video.block .video-text:not(.text-left) {
+        padding: var(--spacer-layout-07) 148px var(--spacer-layout-07) 120px;
+    }
+
+    .video.block .video-text.text-left {
+        padding: var(--spacer-layout-07) 112px var(--spacer-layout-07) var(--spacer-layout-156);
+    }
+
+    .video.block .video-image .open-video {
+        width: 124px;
+        height: 124px;
+        max-height: 124px;
+        font-size: var(--font-size-18);
     }
 
     main > .section.video-promo-wrapper > div:last-child {

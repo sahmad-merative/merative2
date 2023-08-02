@@ -176,4 +176,10 @@ export default function decorate(block) {
       playButton.addEventListener('click', () => toggleVideoOverlay(block));
     }
   }
+
+  // Check if the div is the first element of its parent
+  const divElement = block.querySelector('.video-text');
+  if (!divElement.previousElementSibling) {
+    divElement.classList.add('text-left');
+  }
 }
