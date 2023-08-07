@@ -122,6 +122,7 @@
     "'none'"
   ],
   "media-src": [
-    "'self'"
+    "'self'",
+    "data: blob: *;"
   ]
 }

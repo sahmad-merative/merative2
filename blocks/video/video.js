@@ -35,19 +35,16 @@ const loadYouTubePlayer = (element, videoId) => {
   const onPlayerReady = (event) => {
     event.target.playVideo();
   };
-  // onYouTubeIframeAPIReady will load the video after the script is loaded
-  window.onYouTubeIframeAPIReady(
-    // eslint-disable-next-line no-new
-    player = new window.YT.Player(element, {
-      videoId,
-      playerVars: {
-        start: 0, // Always start from the beginning
-      },
-      events: {
-        onReady: onPlayerReady,
-      },
-    }),
-  );
+  // eslint-disable-next-line no-new
+  player = new window.YT.Player(element, {
+    videoId,
+    playerVars: {
+      start: 0, // Always start from the beginning
+    },
+    events: {
+      onReady: onPlayerReady,
+    },
+  });
 };
 
 const toggleVideoOverlay = (block) => {
@@ -156,6 +153,9 @@ export default function decorate(block) {
   if (picture) {
     const pictureContainer = picture.closest('div');
     pictureContainer.classList.add('video-image');
+    if (pictureContainer.parentNode.childElementCount === 1) {
+      pictureContainer.classList.add('single-video');
+    }
     pictureContainer.appendChild(picture);
   }
 
@@ -178,8 +178,8 @@ export default function decorate(block) {
   }
 
   // Check if the div is the first element of its parent
-  const divElement = block.querySelector('.video-text');
-  if (!divElement.previousElementSibling) {
-    divElement.classList.add('text-left');
+  const textDivElement = block.querySelector('.video-text');
+  if (!textDivElement?.previousElementSibling) {
+    textDivElement?.classList.add('text-left');
   }
 }

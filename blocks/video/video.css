@@ -31,6 +31,7 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 
 .video.block > div:not(.video-modal) > div > p:first-of-type {
     text-transform: uppercase;
+    font-family: var(--sans-serif-font-medium);
     font-size: var(--font-size-11);
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-120);
@@ -38,7 +39,7 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 }
 
 .video.block > div:not(.video-modal) > div > h2 {
-    margin: var(--spacer-layout-02) 0 ;
+    margin: var(--spacer-layout-01) 0 ;
 }
 
 .video.block .video-image {
@@ -166,6 +167,10 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 
     main > .section.video-promo-wrapper > div:first-child {
         padding-top: unset;
+    }
+
+    .video.block .video-image.single-video {
+        max-width: 744px;
     }
 
     .video.block .video-image {
