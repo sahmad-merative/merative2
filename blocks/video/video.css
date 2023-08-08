@@ -36,10 +36,15 @@ main > .section.video-promo-wrapper > div.video-wrapper {
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-120);
     letter-spacing: var(--letter-spacing-02-em);
+    margin: 0;
+}
+
+.video.block > div:not(.video-modal) > div > p:last-of-type {
+    margin: 0;
 }
 
 .video.block > div:not(.video-modal) > div > h2 {
-    margin: var(--spacer-layout-01) 0 ;
+    margin: var(--spacer-element-07) 0 ;
 }
 
 .video.block .video-image {
@@ -144,6 +149,10 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 
     .video.block .video-text {
         max-width: 728px;
+    }
+
+    .video.block > div:not(.video-modal) > div > h2 {
+        margin: var(--spacer-element-08) 0 ;
     }
 
     .video.block .video-text:not(.text-left) {

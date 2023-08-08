@@ -10,6 +10,11 @@ const videoTypeMap = Object.freeze({
   external: [/vimeo\.com/],
 });
 
+/**
+ * Determine the type of video from its href.
+ * @param href
+ * @return {undefined|youtube|external}
+ */
 const getVideoType = (href) => {
   const videoEntry = Object.entries(videoTypeMap).find(
     ([, allowedUrls]) => allowedUrls.some((urlToCompare) => urlToCompare.test(href)),
@@ -20,6 +25,11 @@ const getVideoType = (href) => {
   return undefined;
 };
 
+/**
+ * Extract YouTube video id from its URL.
+ * @param href A valid YouTube URL
+ * @return {string|null}
+ */
 const getYouTubeId = (href) => {
   const ytExp = /(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)/;
   const match = href.match(ytExp);
@@ -30,6 +40,11 @@ const getYouTubeId = (href) => {
 };
 
 let player;
+/**
+ * Create a new YT Player and store the result of its player ready event.
+ * @param element iFrame element YouTube player will be attached to.
+ * @param videoId The YouTube video id
+ */
 const loadYouTubePlayer = (element, videoId) => {
   // The API will call this function when the video player is ready.
   const onPlayerReady = (event) => {
@@ -47,6 +62,12 @@ const loadYouTubePlayer = (element, videoId) => {
   });
 };
 
+/**
+ * Toggle video overlay modal between open and closed.
+ * When the overlay is opened the video will start playing.
+ * When the overlay is closed the video will be paused.
+ * @param block Block containing a video modal
+ */
 const toggleVideoOverlay = (block) => {
   const modal = block.querySelector(selectors.videoModal);
   const videoContent = modal.querySelector(selectors.videoContent);
@@ -71,7 +92,7 @@ const toggleVideoOverlay = (block) => {
     modal.classList.add('open');
     if (videoType === 'youtube') {
       // Create a YouTube compatible iFrame
-      videoContent.innerHTML = `<div id="ytFrame-${videoId}"></div>`;
+      videoContent.innerHTML = `<div id="ytFrame-${videoId}" data-hj-allow-iframe="true"></div>`;
       loadYouTubePlayer(`ytFrame-${videoId}`, videoId);
     } else {
       modal.querySelector('video')?.play();
@@ -79,6 +100,13 @@ const toggleVideoOverlay = (block) => {
   }
 };
 
+/**
+ * Decorate the video link as a play button.
+ * @param link Existing video link
+ * @param videoType Type of the video
+ * @param label Label for the button
+ * @return {HTMLElement} The new play button
+ */
 const decorateVideoLink = (link, videoType, label = 'Play') => {
   let playBtn = link;
   if (videoType !== 'external') {
@@ -97,6 +125,11 @@ const decorateVideoLink = (link, videoType, label = 'Play') => {
   return playBtn;
 };
 
+/**
+ * Display video within a modal overlay. Video can be served directly or via YouTube.
+ * @param href
+ * @return {HTMLElement}
+ */
 const buildVideoModal = (href, videoType) => {
   const videoModal = createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
   const videoOverlay = createTag('div', { class: 'video-modal-overlay' });
