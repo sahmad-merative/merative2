@@ -40,6 +40,7 @@ const getYouTubeId = (href) => {
 };
 
 let player;
+
 /**
  * Create a new YT Player and store the result of its player ready event.
  * @param element iFrame element YouTube player will be attached to.
@@ -50,6 +51,7 @@ const loadYouTubePlayer = (element, videoId) => {
   const onPlayerReady = (event) => {
     event.target.playVideo();
   };
+
   // eslint-disable-next-line no-new
   player = new window.YT.Player(element, {
     videoId,
@@ -77,7 +79,7 @@ const toggleVideoOverlay = (block) => {
   if (modal?.classList?.contains('open')) {
     modal.classList.remove('open');
     if (videoType === 'youtube') {
-      player.stopVideo();
+      player?.stopVideo();
       // Destroy the iframe when the video is closed.
       const iFrame = document.getElementById(`ytFrame-${videoId}`);
       if (iFrame) {
@@ -93,7 +95,18 @@ const toggleVideoOverlay = (block) => {
     if (videoType === 'youtube') {
       // Create a YouTube compatible iFrame
       videoContent.innerHTML = `<div id="ytFrame-${videoId}" data-hj-allow-iframe="true"></div>`;
-      loadYouTubePlayer(`ytFrame-${videoId}`, videoId);
+      if (window.YT) {
+        loadYouTubePlayer(`ytFrame-${videoId}`, videoId);
+      } else {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        // eslint-disable-next-line func-names
+        window.onYouTubePlayerAPIReady = function () {
+          loadYouTubePlayer(`ytFrame-${videoId}`, videoId);
+        };
+      }
     } else {
       modal.querySelector('video')?.play();
     }
