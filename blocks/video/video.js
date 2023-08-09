@@ -15,7 +15,7 @@ const videoTypeMap = Object.freeze({
  * @param href
  * @return {undefined|youtube|external}
  */
-const getVideoType = (href) => {
+export const getVideoType = (href) => {
   const videoEntry = Object.entries(videoTypeMap).find(
     ([, allowedUrls]) => allowedUrls.some((urlToCompare) => urlToCompare.test(href)),
   );
@@ -70,7 +70,7 @@ const loadYouTubePlayer = (element, videoId) => {
  * When the overlay is closed the video will be paused.
  * @param block Block containing a video modal
  */
-const toggleVideoOverlay = (block) => {
+export const toggleVideoOverlay = (block) => {
   const modal = block.querySelector(selectors.videoModal);
   const videoContent = modal.querySelector(selectors.videoContent);
   const videoType = videoContent.getAttribute('data-videoType');
@@ -143,7 +143,7 @@ const decorateVideoLink = (link, videoType, label = 'Play') => {
  * @param href
  * @return {HTMLElement}
  */
-const buildVideoModal = (href, videoType) => {
+export const buildVideoModal = (href, videoType) => {
   const videoModal = createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
   const videoOverlay = createTag('div', { class: 'video-modal-overlay' });
   const videoContainer = createTag('div', { class: 'video-modal-container' });
