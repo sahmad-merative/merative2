@@ -109,6 +109,10 @@
   --gradient-diagonal-up: linear-gradient(214.42deg, var(--primary-red) 12.94%, var(--primary-purple) 88.28%);
   --gradient-vertical: linear-gradient(90deg, var(--primary-purple) 0%, var(--primary-red) 100%);
   --gradient-left-right: linear-gradient(270deg, var(--primary-red), var(--primary-purple));
+  --gradient-to-right: linear-gradient(-270deg, var(--primary-purple) 0%, var(--primary-purple) 50%, var(--primary-red) 100%);
+  --gradient-to-right-transparent: linear-gradient(-270deg, transparent 0%, transparent 50%, var(--primary-purple) 100%);
+  --gradient-to-right-transparent-hover: linear-gradient(-270deg, transparent 0%, var(--primary-purple) 50%, var(--primary-red) 100%);
+  --gradient-to-right-white: linear-gradient(-270deg, var(--neutral-white) 0%, var(--neutral-white) 50%, var(--primary-red) 100%);
 
   /* neutrals */
   --neutral-carbon: #20201F;
@@ -199,6 +203,7 @@
   --gap-120: 120px;
 
   /* section widths */
+  --secton-max-container: 1128px;
   --section-width-desktop: 1128px;
   --section-width-mobile: 328px;
   --section-width-tablet-small: 696px;
@@ -406,7 +411,6 @@ main source {
 }
 
 .section > div {
-  width: calc(100% - 47px);
   margin: 0 auto;
 }
 
@@ -444,6 +448,13 @@ main .section[data-section-status='initialized'] {
 
 .columns.section-bottom-grid > div {
   row-gap: 0;
+}
+
+/* Section Container */
+main .section > div {
+  max-width: var(--secton-max-container);
+  margin: 0 auto;
+  width: calc(100% - var(--spacer-layout-04));
 }
 
 main .section > div:first-child {
@@ -761,8 +772,12 @@ a.button span.icon.bookmark {
 
 /* Primary Button */
 .button-container a.button.primary {
-  background: var(--primary-purple);
   color: var(--neutral-white);
+  border: 2px solid var(--primary-purple);
+  background-image: var(--gradient-to-right);
+  background-position: 0 0;
+  background-size: 200% auto;
+  transition: all .4s ease-in-out;
 }
 
 .button-container a.button.primary strong {
@@ -774,6 +789,11 @@ a.button span.icon.bookmark {
   border: 2px solid var(--primary-purple);
   font-weight: 500;
   font-style: normal;
+  padding: 13px 26px;
+  background-image: var(--gradient-to-right-white);
+  background-position: 0 0;
+  background-size: 200% auto;
+  transition: color .3s ease-in-out, background-position .4s ease-in-out;
 }
 
 .button-container a.button.secondary em {
@@ -787,15 +807,16 @@ a.button span.icon.bookmark {
 
 .button-container a.button.primary:hover,
 .button-container a.button.primary:active {
-  background: var(--gradient-left-right);
+  border: 2px solid transparent;
+  background-position: 96% 0;
 }
 
 .button-container a.button.secondary:hover,
 .button-container a.button.secondary:active {
-  border: none;
-  background: var(--gradient-left-right);
+  border: 2px solid transparent;
   color: var(--neutral-white);
-  padding: 13px 26px;
+  background-image: var(--gradient-to-right);
+  background-position: 96% 0;
   }
 
 /* Tertiary (Link) Button */
@@ -1304,9 +1325,9 @@ main pre {
     min-width: inherit;
   }
 
+  /* Section Container */
   main .section > div {
-    width: var(--section-width-tablet-small);
-    margin: 0 auto;
+    width: calc(100% - 72px);
   }
 
   .columns.column-content-top-border div {
@@ -1485,9 +1506,10 @@ main pre {
     padding-top: calc(var(--nav-height) + 37px);
   }
 
+  /* Section Container */
   main .section > div {
-    width: var(--section-width-desktop);
     margin: 0 auto;
+    width: 100%;
   }
 
   .tags {

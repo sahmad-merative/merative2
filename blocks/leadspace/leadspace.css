@@ -221,12 +221,6 @@ main div.leadspace-wrapper {
   margin-top: var(--spacer-element-05);
 }
 
-/* Secondary Button */
-.leadspace .button-group .button-container > em > a.button.secondary:hover,
-.leadspace .button-group .button-container > em > a.button.secondary:active {
-  margin-right: var(--spacer-element-01);
-}
-
 /* Events */
 .leadspace.event p.event-item {
   display: flex;
@@ -260,7 +254,7 @@ main div.leadspace-wrapper {
 /* Video */
 .leadspace.video .video-wrapper {
   clip-path: circle(50% at 50% 50%);
-  margin-right: -40%;
+  margin-right: -33.333%;
   line-height: 0;
 }
 
@@ -315,6 +309,7 @@ main div.leadspace-wrapper {
   height: 66px;
   width: 66px;
   margin: 0 0 0 var(--spacer-layout-03);
+  transition: background .3s ease-in;
 }
 
 .leadspace.video button.open-video:hover .video-button-icon {
@@ -325,8 +320,8 @@ main div.leadspace-wrapper {
 .leadspace.video .video-control {
   display: block;
   position: absolute;
-  bottom: 15%;
-  right: 10%;
+  bottom: var(--spacer-element-08);
+  right: 20%;
   visibility: hidden;
   z-index: 2;
 }
@@ -345,12 +340,15 @@ main div.leadspace-wrapper {
   flex-direction: row-reverse;
   padding: 0;
   cursor: pointer;
+  background-image: var(--gradient-to-right-transparent);
+  background-position: 0 0;
+  background-size: 200% auto;
+  transition: all .4s ease-in-out;
 }
 
 .leadspace.video .video-control button:hover {
-  background-image: var(--gradient-left-right);
-  border: 0;
-  transition: all .2s ease-in-out;
+  background-image: var(--gradient-to-right-transparent-hover);
+  background-position: 100% 0;
 }
 
 .leadspace.video .video-control button > span {
@@ -383,6 +381,15 @@ main div.leadspace-wrapper {
   .leadspace:not(.document) > div:first-child {
     flex-flow: row nowrap;
     align-items: flex-end;
+  }
+
+  /* Leadspace Video - Homepage */
+  .home-video.leadspace-container > div:last-child {
+    padding-bottom: 0;
+  }
+
+  .leadspace.video > div:first-child {
+    align-items: center;
   }
 
   .leadspace:not(.document) > div:first-child > div {
@@ -442,7 +449,7 @@ main div.leadspace-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: unset;
-    width: 50%;
+    width: 66.6666%;
   }
 
   .leadspace:not(.event) .button-group,
@@ -451,9 +458,9 @@ main div.leadspace-wrapper {
   }
 
   .leadspace.video .video-wrapper {
-    clip-path: circle(50% at 50% 50%);
-    margin-right: -91%;
-    margin-top: -145px;
+    clip-path: circle(60% at 75% 32%);
+    margin-right: -10%;
+    margin-top: 0;
     margin-left: var(--spacer-layout-02);
   }
 
@@ -473,7 +480,8 @@ main div.leadspace-wrapper {
   }
 
   .leadspace.video .video-control {
-    right: 0;
+    right: 16%;
+    bottom: 16%;
   }
 
   .section.leadspace-container > div:first-child > .leadspace:not(.document) {
@@ -487,10 +495,6 @@ main div.leadspace-wrapper {
 
 /** Desktop */
 @media screen and (min-width: 1200px) {
-  .home-video.leadspace-container .leadspace-wrapper {
-    padding-top: 0;
-  }
-
   .leadspace, .leadspace p {
     font-size: var(--font-size-21);
   }
@@ -537,6 +541,19 @@ main div.leadspace-wrapper {
     flex-flow: row nowrap;
   }
 
+  /* Leadspace Video - Homepage */
+  .home-video.leadspace-container > div:last-child {
+    padding-bottom: var(--spacer-layout-05);
+  }
+
+  .home-video.leadspace-container .leadspace-wrapper {
+    padding-top: 0;
+  }
+  
+  .leadspace.video > div:first-child {
+    align-items: flex-start;
+  }
+
   .leadspace:not(.document) > div:first-child > div {
     width: 552px;
   }
@@ -554,6 +571,11 @@ main div.leadspace-wrapper {
     font-size: var(--font-size-14);
   }
 
+  .leadspace.video > div:first-child > div:nth-child(1) h1,
+  .leadspace.video > div:first-child > div:nth-child(1) p {
+    max-width: 550px;
+  }
+
   .leadspace.brand-logo > div:first-child > div:nth-child(1) > p:last-of-type{
     max-width: 420px;
   }
@@ -567,6 +589,7 @@ main div.leadspace-wrapper {
   .leadspace.video > div:first-child > div:nth-child(1) {
     width: 648px;
     margin: var(--spacer-layout-07) 0;
+    padding: 0;
   }
 
   .leadspace > div > div:nth-child(1) img {
@@ -588,7 +611,7 @@ main div.leadspace-wrapper {
 
   .leadspace.video > div:first-child > div:nth-child(2) {
     width: 45%;
-    height: 850px;
+    height: 888px;
   }
 
   .leadspace .button-group,
@@ -637,7 +660,7 @@ main div.leadspace-wrapper {
   .leadspace.video.scroll-border .scroll-border-wrapper {
     display: flex;
     position: absolute;
-    bottom: -106px;
+    bottom: -92px;
     gap: var(--spacer-layout-03);
     z-index: 2;
   }

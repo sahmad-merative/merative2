@@ -26,7 +26,8 @@ main > .section.video-promo-wrapper > div:first-child {
 }
 
 main > .section.video-promo-wrapper > div.video-wrapper {
-    width: unset;
+    max-width: 1440px;
+    width: 100%;
 }
 
 .video.block > div:not(.video-modal) > div > p:first-of-type, .video.block > div:not(.video-modal) > div > p:first-of-type > code {
@@ -186,9 +187,5 @@ main > .section.video-promo-wrapper > div.video-wrapper {
 
     .video.block .video-image {
         max-width: 710px;
-    }
-
-    main > .section.video-promo-wrapper > div.video-wrapper {
-        width: unset;
     }
 }
