@@ -93,19 +93,19 @@ export function getMetadata(name) {
  * @returns {string} The cookie value
  */
 export function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-      }
+  const name = cname.concat('=');
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i += 1) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
   }
-  return "";
+  return '';
 }
 
 /**
@@ -115,14 +115,20 @@ export function getCookie(cname) {
 * @param {number} exdays The cookie expiry days (default 30 days)
 * @param {string} path The cookie path (optional)
 *
-* example - setCookie("username", cookieExist, 5); this cookie expires in 5 days.
+* example - setCookie('username', cookieExist, 5); this cookie expires in 5 days.
 */
-export function setCookie(cname, cvalue, exdays=30, path="/") {
-  const expires_date = exdays * 1000 * 60 * 60 * 24;
+export function setCookie(cname, cvalue, exdays = 30, path = '/') {
+  const expiresDate = exdays * 1000 * 60 * 60 * 24;
   const today = new Date();
-  today.setTime(today.getTime() + (expires_date));
-  const expires = "expires=" + today.toGMTString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=" + path;
+  today.setTime(today.getTime() + (expiresDate));
+  const expires = 'expires='.concat(today.toGMTString());
+  const cookieString = cname.concat('=')
+    .concat(cvalue)
+    .concat(';')
+    .concat(expires)
+    .concat(';path=')
+    .concat(path);
+  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
 }
 
 /**
@@ -130,9 +136,9 @@ export function setCookie(cname, cvalue, exdays=30, path="/") {
 * @param {string} cname The cookie name (or property)
 * @param {string} path The cookie path (optional)
 */
-export function deleteCookie(cname, path="/") {
+export function deleteCookie(cname, path = '/') {
   if (getCookie(cname)) {
-    document.cookie = cname + "=;expires=Sat, 01-Jan-2000 00:00:01 GMT;path=" + path;
+    document.cookie = cname.concat('=;expires=Sat, 01-Jan-2000 00:00:01 GMT;path=').concat(path);
   }
 }
 
@@ -143,11 +149,11 @@ export function deleteCookie(cname, path="/") {
 */
 export function createStringToHash(str) {
   let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
-      hash = hash & hash;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i) | 0; // eslint-disable-line no-bitwise
+    hash &= hash; // eslint-disable-line no-bitwise
   }
-return hash;
+  return hash;
 }
 
 /**

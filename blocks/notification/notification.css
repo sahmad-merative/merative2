@@ -7,13 +7,13 @@
   flex-direction: row;
   border-radius: 10px;
   background: var(--neutral-white);
-  box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 15%);
 }
 
 .notification > div > div:first-child {
   padding: 50px 16px 16px;
-  border-radius: 10px 0px 0px 10px;
-  background-image: var(--gradients-diagonal-down, linear-gradient(129deg, #90F 0%, #FA1E32 100%));
+  border-radius: 10px 0 0 10px;
+  background-image: linear-gradient(129deg, var(--primary-purple) 0%, var(--primary-red) 100%);
 }
 
 .notification > div .notification-outer-block {
