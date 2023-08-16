@@ -74,6 +74,8 @@ main .section > div.notification-wrapper:last-child {
   .notification > div .notification-outer-block {
       flex-direction: row;
       align-items: normal;
+      justify-content: space-between;
+      width: 100%;
       gap: var(--spacer-layout-02);
       padding: var(--spacer-layout-02);
   }
