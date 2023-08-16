@@ -88,6 +88,69 @@ export function getMetadata(name) {
 }
 
 /**
+ * Retrieves the content of a cookie.
+ * @param {string} cname The cookie name (or property)
+ * @returns {string} The cookie value
+ */
+export function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
+/**
+* Set the content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} cvalue The cookie value
+* @param {number} exdays The cookie expiry days (default 30 days)
+* @param {string} path The cookie path (optional)
+*
+* example - setCookie("username", cookieExist, 5); this cookie expires in 5 days.
+*/
+export function setCookie(cname, cvalue, exdays=30, path="/") {
+  const expires_date = exdays * 1000 * 60 * 60 * 24;
+  const today = new Date();
+  today.setTime(today.getTime() + (expires_date));
+  const expires = "expires=" + today.toGMTString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=" + path;
+}
+
+/**
+* Delete content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} path The cookie path (optional)
+*/
+export function deleteCookie(cname, path="/") {
+  if (getCookie(cname)) {
+    document.cookie = cname + "=;expires=Sat, 01-Jan-2000 00:00:01 GMT;path=" + path;
+  }
+}
+
+/**
+* Create a unique hash from a specific string
+* @param {string} str The String value
+* @returns {number} The created hash code of string
+*/
+export function createStringToHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash = hash & hash;
+  }
+return hash;
+}
+
+/**
  * sets the Content-Security-Policy meta tag to the document based on JSON file
  */
 async function setCSP() {
