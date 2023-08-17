@@ -9,42 +9,47 @@ import {
  * @param {Element} block The notification block element
  */
 export default async function decorate(block) {
-  const outerDivElement = document.createElement('div');
-  outerDivElement.className = 'notification-outer-block';
+  [...block.children].forEach((notificationElement) => {
+    const outerDivElement = document.createElement('div');
+    outerDivElement.className = 'notification-block__outer';
 
-  const innerDivElement = document.createElement('div');
-  innerDivElement.className = 'notification-inner-block';
+    const innerDivElement = document.createElement('div');
+    innerDivElement.className = 'notification-block__inner';
 
-  const titleDivElement = document.createElement('div');
-  titleDivElement.className = 'notification-title-block';
+    const titleDivElement = document.createElement('div');
+    titleDivElement.className = 'notification-block__title';
 
-  const firstDivElement = block.querySelector('div');
-  const contentDivEle = firstDivElement.lastElementChild;
+    const contentDivEle = notificationElement.lastElementChild;
+    const titleElement = contentDivEle.querySelector('strong');
+    const titleSpanElement = document.createElement('span');
+    titleSpanElement.innerHTML = titleElement.textContent;
+    titleElement.replaceWith(titleSpanElement);
 
-  titleDivElement.append(contentDivEle.querySelector('strong'));
-  innerDivElement.append(titleDivElement);
-  innerDivElement.append(contentDivEle);
-  outerDivElement.append(innerDivElement);
+    titleDivElement.append(titleSpanElement);
+    innerDivElement.append(titleDivElement);
+    innerDivElement.append(contentDivEle);
+    outerDivElement.append(innerDivElement);
 
-  const hashCode = createStringToHash(contentDivEle.textContent);
-  const notificationHashId = 'notification'.concat(hashCode);
-  firstDivElement.className = notificationHashId;
-  if (getCookie(notificationHashId) === 'seen') {
-    block.style.display = 'none';
-  }
-  const closeDivElement = document.createElement('div');
-  closeDivElement.className = 'notification-close-cross-block';
-  closeDivElement.addEventListener('click', () => {
-    setCookie(notificationHashId, 'seen');
-    block.style.display = 'none';
+    const hashCode = createStringToHash(contentDivEle.textContent);
+    const notificationHashId = 'notification'.concat(hashCode);
+    notificationElement.className = notificationHashId;
+    if (getCookie(notificationHashId) === 'seen') {
+      notificationElement.style.display = 'none';
+    }
+    const closeDivElement = document.createElement('div');
+    closeDivElement.className = 'notification-block__close-btn';
+    closeDivElement.addEventListener('click', () => {
+      setCookie(notificationHashId, 'seen');
+      notificationElement.style.display = 'none';
+    });
+
+    const closeElement = document.createElement('img');
+    closeElement.className = 'notification-block__close-btn-icon';
+    closeElement.src = '../../icons/x.svg';
+    closeElement.alt = 'close cross icon';
+
+    closeDivElement.append(closeElement);
+    outerDivElement.append(closeDivElement);
+    notificationElement.append(outerDivElement);
   });
-
-  const closeElement = document.createElement('img');
-  closeElement.className = 'notification-close-cross';
-  closeElement.src = '../../icons/x.svg';
-  closeElement.alt = 'close cross icon';
-
-  closeDivElement.append(closeElement);
-  outerDivElement.append(closeDivElement);
-  firstDivElement.append(outerDivElement);
 }

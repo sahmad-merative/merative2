@@ -1,5 +1,5 @@
-.notification {
-  padding-bottom: var(--spacer-element-04);
+.section > div:last-child > .notification:last-child {
+  margin-bottom: var(--spacer-element-04);
 }
 
 .notification > div {
@@ -8,15 +8,16 @@
   border-radius: 10px;
   background: var(--neutral-white);
   box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 15%);
+  margin-bottom: var(--spacer-element-04);
 }
 
 .notification > div > div:first-child {
   padding: 50px 16px 16px;
   border-radius: 10px 0 0 10px;
-  background-image: linear-gradient(129deg, var(--primary-purple) 0%, var(--primary-red) 100%);
+  background-image: var(--gradient-horizontal-down);
 }
 
-.notification > div .notification-outer-block {
+.notification > div .notification-block__outer {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
@@ -26,38 +27,38 @@
   font-style: normal;
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-160);
-  letter-spacing: 0.16px;
+  letter-spacing: var(--letter-spacing-001-em);
 }
 
-.notification .notification-outer-block .notification-inner-block {
+.notification .notification-block__outer .notification-block__inner {
   margin-top: var(--spacer-layout-01);
 }
 
-.notification .notification-outer-block .notification-title-block {
+.notification .notification-block__outer .notification-block__title {
   margin-bottom: var(--spacer-element-03);
   min-width: 182px;
 }
 
-.notification .notification-outer-block .notification-close-cross-block {
+.notification .notification-block__outer .notification-block__close-btn {
   min-width: var(--spacer-layout-02);
   width: var(--spacer-layout-02);
   height: var(--spacer-layout-02);
 }
 
-.notification .notification-outer-block .notification-title-block strong {
-  font-family: var(--sans-serif-font-medium);
+.notification .notification-block__outer .notification-block__title span {
+  font-family: var(--sans-serif-font-regular);
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-regular);
 }
 
-.notification .notification-outer-block .notification-inner-block a {
+.notification .notification-block__outer .notification-block__inner a {
   color: var(--primary-purple);
   text-decoration-line: underline;
 }
 
 .notification.notification-overlapped {
   position: relative;
-  top: -24px;
+  top: calc(var(--spacer-element-07) * -1);
 }
 
 main .section > div.notification-wrapper:first-child,
@@ -71,41 +72,43 @@ main .section > div.notification-wrapper:last-child {
       padding: var(--spacer-layout-02) var(--spacer-layout-01) var(--spacer-layout-01);
   }
 
-  .notification > div .notification-outer-block {
+  .notification > div .notification-block__outer {
       flex-direction: row;
       align-items: normal;
       justify-content: space-between;
       width: 100%;
-      gap: var(--spacer-layout-02);
+      gap: var(--gap-24);
       padding: var(--spacer-layout-02);
   }
 
-  .notification .notification-outer-block .notification-inner-block {
+  .notification .notification-block__outer .notification-block__inner {
       margin-top: 0;
   }
 
   .notification.notification-overlapped {
-      top: -16px;
+      top: calc(var(--spacer-element-05) * -1);
   }
 }
 
 /* Desktop */
 @media only screen and (min-width: 1200px) {
   .notification > div > div:first-child {
-      padding: var(--spacer-layout-01);
+      padding: var(--spacer-element-04) var(--spacer-element-05);
+      min-height: var(--spacer-layout-05);
   }
   
-  .notification > div .notification-outer-block {
+  .notification > div .notification-block__outer {
+      padding: var(--spacer-layout-01) var(--spacer-layout-02);
       width: 100%;
       justify-content: space-between;
   }
 
-  .notification .notification-outer-block .notification-inner-block {
+  .notification .notification-block__outer .notification-block__inner {
       display: flex;
-      gap: var(--spacer-layout-02);
+      gap: var(--gap-24);
   }
 
-  .notification .notification-outer-block .notification-title-block {
+  .notification .notification-block__outer .notification-block__title {
       margin-bottom: 0;
   }
 }
