@@ -936,11 +936,6 @@ main ul a:not(.button):active {
   margin: 0;
 }
 
-/* Back to top button */
-.section.back-to-top {
-  display: none;
-}
-
 main pre {
   background-color: var(--neutral-sand);
   padding: 1em;
@@ -958,51 +953,11 @@ main pre {
 }
 
 /* What we do Section */
-
 .section .columns.column-content-top-border > div > div p {
   margin-top: 0;
   letter-spacing: .01em;
   line-height: 160%;
   font-weight: bold;
-}
-
-/* Back to top button */
-.section.back-to-top.active[data-section-status='loaded'] {
-  position: fixed;
-  display: block;
-  padding: 0;
-  right: 20px;
-  bottom: 20px;
-  z-index: 999;
-  height: 49px;
-  width: 49px;
-}
-
-.section.back-to-top.active::before,
-.section.back-to-top.active::after {
-  content: '';
-  position: fixed;
-  border: 2px solid #90f;
-  border-radius: 50%;
-  background-position: 50%;
-  transform: rotate(-90deg);
-  width: 49px;
-  height: 49px;
-  background-color: var(--neutral-white);
-}
-
-.section.back-to-top.active::after {
-  background: url('../icons/right-arrow-purple-large.svg') no-repeat center center;
-}
-
-.section.back-to-top.active:hover::after {
-  background: url('../icons/arrow-white.svg') no-repeat center center;
-  border: unset;
-}
-
-.section.back-to-top.active:hover::before {
-  background: var(--gradient-diagonal-up);
-  border: unset;
 }
 
 /* blog article */
@@ -1304,18 +1259,6 @@ main pre {
     max-width: 60%;
   }
 
-  /* Back to top button */
-  main .section.back-to-top.active[data-section-status='loaded'] {
-    height: 54px;
-    width: 54px;
-  }
-
-  main .section.back-to-top.active::before,
-  main .section.back-to-top.active::after {
-    width: 54px;
-    height: 54px;
-  }
-
   main .desktop-reverse > div {
     flex-flow: row-reverse;
   }
@@ -1514,18 +1457,6 @@ main pre {
 
   .tags {
     margin-bottom: 48px;
-  }
-
-  /* Back to top button */
-  main .section.back-to-top.active[data-section-status='loaded'] {
-    height: 78px;
-    width: 78px;
-  }
-
-  main .section.back-to-top.active::before,
-  main .section.back-to-top.active::after {
-    width: 78px;
-    height: 78px;
   }
 
   main .section.leadership-content .columns > div > div > h6 {
