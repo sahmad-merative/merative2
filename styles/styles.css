@@ -1310,6 +1310,13 @@ main .section.section-content-body > div:last-child {
   margin-top: 0;
 }
 
+/* Section - Content body with sidebar text */
+.section-content-body.section-with-sidebar .section-content-body__text .default-content-wrapper p,
+.section-content-body.section-with-sidebar .section-content-body__text .default-content-wrapper ul,
+.section-content-body.section-with-sidebar .section-content-body__text .default-content-wrapper ol {
+  font-size: var(--font-size-16);
+}
+
 /* Section - Content body with Read more/less button */
 .section-content-body .section-content-body__text.show-more {
   border-bottom: 1px solid var(--neutral-sand);
