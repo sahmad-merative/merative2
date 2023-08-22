@@ -17,6 +17,12 @@
   background-image: var(--gradient-horizontal-down);
 }
 
+.notification > div > div:first-child .icon {
+  background-image: url('../../icons/info.svg');
+  width: 32px;
+  height: 32px;
+}
+
 .notification > div .notification-block__outer {
   display: flex;
   flex-direction: column-reverse;

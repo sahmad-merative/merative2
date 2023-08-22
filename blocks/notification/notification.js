@@ -51,5 +51,11 @@ export default async function decorate(block) {
     closeDivElement.append(closeElement);
     outerDivElement.append(closeDivElement);
     notificationElement.append(outerDivElement);
+
+    // icon replace to info icon
+    const iconElement = notificationElement.firstElementChild.querySelector('.icon');
+    const iconDivElement = document.createElement('div');
+    iconDivElement.className = 'icon info-icon';
+    iconElement.replaceWith(iconDivElement);
   });
 }
