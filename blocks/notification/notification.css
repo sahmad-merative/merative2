@@ -1,5 +1,5 @@
 .section > div:last-child > .notification:last-child {
-  margin-bottom: var(--spacer-element-04);
+  padding-bottom: var(--spacer-element-04);
 }
 
 .notification > div {
@@ -67,6 +67,10 @@
   top: calc(var(--spacer-element-07) * -1);
 }
 
+.section > div:last-child > .notification.notification-overlapped:last-child {
+  margin-bottom: calc(var(--spacer-element-07) * -1);
+}
+
 main .section > div.notification-wrapper:first-child,
 main .section > div.notification-wrapper:last-child {
   padding: 0;
@@ -94,6 +98,11 @@ main .section > div.notification-wrapper:last-child {
   .notification.notification-overlapped {
       top: calc(var(--spacer-element-05) * -1);
   }
+
+  .section > div:last-child > .notification.notification-overlapped:last-child {
+    margin-bottom: calc(var(--spacer-element-05) * -1);
+  }
+  
 }
 
 /* Desktop */
