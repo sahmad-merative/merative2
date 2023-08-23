@@ -91,7 +91,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
     padding-top: var(--spacer-layout-03);
 }
 
-.carousel .carousel-slide>div {
+.carousel .carousel-slide > div {
     flex-direction: column;
     font-family: var(--serif-font);
     font-weight: var(--font-weight-light);
@@ -134,7 +134,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
     position: relative;
 }
 
-.carousel .carousel-slide>.figure img {
+.carousel .carousel-slide > .figure img {
     border-radius: 50%;
     height: 64px;
     width: 64px;
@@ -151,15 +151,15 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 .carousel.image-carousel-full-width .carousel-slide-container {
     max-width: 100%;
     display: flex;
-    gap: 24px;
+    gap: var(--gap-24);
     flex-wrap: nowrap;
 }
 
 .carousel.image-carousel-full-width.no-animation-effect .carousel-slide-container {
     display: grid;
     grid-template-columns: 90px 90px;
-    row-gap: 16px;
-    column-gap: 48px;
+    row-gap: var(--spacer-element-05);
+    column-gap: var(--gap-48);
     width: auto;
     max-width: none;
 }
@@ -208,63 +208,64 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 }
 
 /* Media queries */
+
 /* Tablet */
 @media screen and (min-width: 768px) {
     .carousel.image-carousel-full-width .carousel-slide-container {
-        gap: 64px;
+        gap: var(--spacer-layout-05);
     }
 
     .carousel.image-carousel-full-width.no-animation-effect .carousel-slide-container {
         grid-template-columns: 90px 90px 90px 90px;
-        column-gap: 64px;
+        column-gap: var(--spacer-layout-05);
     }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
-    .carousel-container {
-        background: var(--neutral-bone);
-        padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
-    }
+.carousel-container {
+    background: var(--neutral-bone);
+    padding: var(--spacer-layout-06) 0 var(--spacer-layout-06);
+}
 
-    main .section div.carousel-wrapper {
-        padding-top: var(--spacer-layout-07);
-        padding-bottom: var(--spacer-layout-04);
-    }
+main .section div.carousel-wrapper {
+    padding-top: var(--spacer-layout-07);
+    padding-bottom: var(--spacer-layout-04);
+}
 
-    .section.carousel-container .default-content-wrapper {
-        padding-top: 0;
-        padding-bottom: var(--spacer-layout-07);
-    }
+.section.carousel-container .default-content-wrapper {
+    padding-top: 0;
+    padding-bottom: var(--spacer-layout-07);
+}
 
-    .carousel .carousel-slide-container {
-        width: 100%;
-        max-width: 740px;
-        position: relative;
-        overflow: hidden;
-        margin: 0 auto;
-        transition: height 0.2s linear
-    }
+.carousel .carousel-slide-container {
+    width: 100%;
+    max-width: 740px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    transition: height 0.2s linear
+}
 
-    .carousel ul.carousel-dots {
-        margin-top: var(--spacer-layout-02);
-    }
+.carousel ul.carousel-dots {
+    margin-top: var(--spacer-layout-02);
+}
 
-    .carousel .carousel-slide {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transition: all 0.5s;
-    }
+.carousel .carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.5s;
+}
 
-    .carousel .carousel-slide div {
-        display: flex;
-        flex-direction: column;
-        font-family: var(--serif-font);
-        font-weight: var(--font-weight-light);
-        line-height: 124%;
-        font-size: 31px;
-    }
+.carousel .carousel-slide div {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--serif-font);
+    font-weight: var(--font-weight-light);
+    line-height: 124%;
+    font-size: 31px;
+}
 
 
     /* Testimonial */
@@ -283,17 +284,17 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
         padding-top: var(--spacer-layout-02);
     }
 
-    .carousel.testimonial p {
-        margin-left: 1em;
-        font-size: var(--font-size-16);
-        font-family: var(--sans-serif-font-regular);
-        letter-spacing: var(--letter-spacing-1);
-    }
+.carousel.testimonial p {
+    margin-left: 1em;
+    font-size: var(--font-size-16);
+    font-family: var(--sans-serif-font-regular);
+    letter-spacing: var(--letter-spacing-1);
+}
 
     .carousel:hover .carousel-nav {
         opacity: 1;
     }
-
+    
     .carousel .carousel-slide .figure p {
         text-align: left;
         margin: 0;
@@ -306,7 +307,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 
     .carousel-container .carousel.image-carousel-full-width .carousel-slide-container {
         gap: 108px;
-        padding: 0 48px;
+        padding: 0 var(--spacer-element-10);
     }
 
     .carousel.image-carousel-full-width.no-animation-effect .carousel-slide-container {
