@@ -36,7 +36,8 @@
       "*.spotify.com",
       "embed.podcasts.apple.com",
       "bat.bing.com",
-      "https://www.clarity.ms"
+      "https://www.clarity.ms",
+      "*.licdn.com"
   ],
   "connect-src": [
       "'self'",
@@ -62,7 +63,8 @@
       "https://*.hotjar.com",
       "https://*.hotjar.io",
       "wss://*.hotjar.com",
-      "*.clarity.ms"
+      "*.clarity.ms",
+      "cdn.linkedin.oribi.io"
   ],
   "img-src": [
     "'self'",
@@ -83,7 +85,8 @@
     "*.kampyle.com",
     "*.salesloft.com",
     "bat.bing.com",
-    "*.clarity.ms"
+    "*.clarity.ms",
+    "px.ads.linkedin.com"
   ],
   "frame-src": [
     "'self'",
