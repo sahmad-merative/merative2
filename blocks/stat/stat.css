@@ -14,6 +14,10 @@ div.stat-container .stat {
     padding: var(--spacer-layout-05) var(--spacer-layout-02) var(--spacer-layout-04);
 }
 
+div.stat-container.carousel-container .stat {
+    padding-bottom: 0;
+}
+
 div.stat-container .stat > div {
     display: flex;
     flex-direction: column;
@@ -53,6 +57,10 @@ div.stat-container .stat p:last-child {
     margin-bottom: 0;
 }
 
+div.stat-container .stat p.button-container {
+    margin: 0;
+}
+
 /* A single stat element */
 div.stat-container .stat > div > div {
     margin-bottom: var(--spacer-layout-04);
@@ -82,10 +90,14 @@ div.stat-container .stat::after {
 /* Desktop styles */
 @media (min-width: 1200px) {
     div.stat-container .stat {
-        padding: var(--spacer-layout-07) var(--spacer-layout-156) var(--spacer-layout-05);
+        padding: var(--spacer-layout-07) 0 var(--spacer-layout-05);
     }
 
     div.stat-container .stat h1 {
         font-size: 128px;
+    }
+
+    div.stat-container.carousel-container .stat::after {
+        padding-top: var(--spacer-element-10);
     }
 }

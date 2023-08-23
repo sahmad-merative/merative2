@@ -253,7 +253,9 @@ function buildSlide(slide, index) {
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
   slide.classList.add('carousel-slide');
-  slide.style.transform = `translateX(${index * 100}%)`;
+  if (carouselType !== 'image-carousel-full-width') {
+    slide.style.transform = `translateX(${index * 100}%)`;
+  }
   // accessibility
   slide.setAttribute('role', 'tabpanel');
   slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
@@ -294,10 +296,15 @@ function startAutoScroll(block) {
  * @param block HTML block from Franklin
  */
 export default function decorate(block) {
+  let isAnimationEnabled = true;
   const carousel = document.createElement('div');
   carousel.classList.add('carousel-slide-container');
   if (block.classList.contains('image-carousel-full-width')) {
     carouselType = 'image-carousel-full-width';
+    if (block.children.length < 5) {
+      block.classList.add('no-animation-effect');
+      isAnimationEnabled = false;
+    }
   }
   if (block.classList.contains('testimonial')) {
     carouselType = 'testimonial';
@@ -309,41 +316,43 @@ export default function decorate(block) {
   let startScroll = 0;
   let prevScroll = 0;
 
-  carousel.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - carousel.offsetLeft;
-    startScroll = carousel.scrollLeft;
-    prevScroll = startScroll;
-  });
+  if (isAnimationEnabled) {
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      startScroll = carousel.scrollLeft;
+      prevScroll = startScroll;
+    });
 
-  carousel.addEventListener('mouseenter', () => {
-    stopAutoScroll();
-  });
+    carousel.addEventListener('mouseenter', () => {
+      stopAutoScroll();
+    });
 
-  carousel.addEventListener('mouseleave', () => {
-    if (isDown) {
-      snapScroll(carousel, carousel.scrollLeft > startScroll ? 1 : -1);
-    }
-    startAutoScroll(block);
-    isDown = false;
-  });
+    carousel.addEventListener('mouseleave', () => {
+      if (isDown) {
+        snapScroll(carousel, carousel.scrollLeft > startScroll ? 1 : -1);
+      }
+      startAutoScroll(block);
+      isDown = false;
+    });
 
-  carousel.addEventListener('mouseup', () => {
-    if (isDown) {
-      snapScroll(carousel, carousel.scrollLeft > startScroll ? 1 : -1);
-    }
-    isDown = false;
-  });
+    carousel.addEventListener('mouseup', () => {
+      if (isDown) {
+        snapScroll(carousel, carousel.scrollLeft > startScroll ? 1 : -1);
+      }
+      isDown = false;
+    });
 
-  carousel.addEventListener('mousemove', (e) => {
-    if (!isDown) {
-      return;
-    }
-    e.preventDefault();
-    const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX);
-    carousel.scrollLeft = prevScroll - walk;
-  });
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) {
+        return;
+      }
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX);
+      carousel.scrollLeft = prevScroll - walk;
+    });
+  }
 
   // process each slide
   const slides = [...block.children];
@@ -384,16 +393,18 @@ export default function decorate(block) {
     });
   };
 
-  const carouselObserver = new IntersectionObserver(handleAutoScroll, intersectionOptions);
-  carouselObserver.observe(block);
+  if (isAnimationEnabled) {
+    const carouselObserver = new IntersectionObserver(handleAutoScroll, intersectionOptions);
+    carouselObserver.observe(block);
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopAutoScroll();
-    } else {
-      startAutoScroll(block);
-    }
-  });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoScroll();
+      } else {
+        startAutoScroll(block);
+      }
+    });
+  }
 
   window.addEventListener('resize', () => {
     // clear the timeout
