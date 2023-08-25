@@ -761,11 +761,13 @@ export function sortArrayOfObjects(arr, property, type) {
 export function decorateExternalLinks(main) {
   main.querySelectorAll('a').forEach((a) => {
     const href = a.getAttribute('href');
-    const extension = href.split('.').pop().trim();
-    if (!href.startsWith('/')
-      && !href.startsWith('#')) {
-      if (!href.includes('merative.com') || (extension === 'pdf')) {
-        a.setAttribute('target', '_blank');
+    if (href) {
+      const extension = href.split('.').pop().trim();
+      if (!href.startsWith('/')
+        && !href.startsWith('#')) {
+        if (!href.includes('merative.com') || (extension === 'pdf')) {
+          a.setAttribute('target', '_blank');
+        }
       }
     }
   });

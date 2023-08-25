@@ -215,6 +215,7 @@
 
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 html *,
@@ -1484,7 +1485,11 @@ main > .section-content-body.section-with-sidebar .section-content-body__text p 
 }
 
 /* All except desktop */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {  
+  html {
+    scroll-padding-top: var(--nav-height-mobile);
+  }
+
   h1,
   h2,
   h3 {
@@ -1539,6 +1544,10 @@ main > .section-content-body.section-with-sidebar .section-content-body__text p 
 
 /* Desktop */
 @media only screen and (min-width: 1200px) {
+  html {
+    scroll-padding-top: var(--sticky-nav-height);
+  }
+
   h1,
   h2,
   h3 {
