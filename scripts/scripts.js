@@ -62,6 +62,75 @@ export function getMetadata(name) {
 }
 
 /**
+ * Retrieves the content of a cookie.
+ * @param {string} cname The cookie name (or property)
+ * @returns {string} The cookie value
+ */
+export function getCookie(cname) {
+  const name = cname.concat('=');
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i += 1) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+}
+
+/**
+* Set the content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} cvalue The cookie value
+* @param {number} exdays The cookie expiry days (default 30 days)
+* @param {string} path The cookie path (optional)
+*
+* example - setCookie('username', cookieExist, 5); this cookie expires in 5 days.
+*/
+export function setCookie(cname, cvalue, exdays = 30, path = '/') {
+  const expiresDate = exdays * 1000 * 60 * 60 * 24;
+  const today = new Date();
+  today.setTime(today.getTime() + (expiresDate));
+  const expires = 'expires='.concat(today.toGMTString());
+  const cookieString = cname.concat('=')
+    .concat(cvalue)
+    .concat(';')
+    .concat(expires)
+    .concat(';path=')
+    .concat(path);
+  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
+}
+
+/**
+* Delete content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} path The cookie path (optional)
+*/
+export function deleteCookie(cname, path = '/') {
+  if (getCookie(cname)) {
+    document.cookie = cname.concat('=;expires=Sat, 01-Jan-2000 00:00:01 GMT;path=').concat(path);
+  }
+}
+
+/**
+* Create a unique hash from a specific string
+* @param {string} str The String value
+* @returns {number} The created hash code of string
+*/
+export function createStringToHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i) | 0; // eslint-disable-line no-bitwise
+    hash &= hash; // eslint-disable-line no-bitwise
+  }
+  return hash;
+}
+
+/**
  * sets the Content-Security-Policy meta tag to the document based on JSON file
  */
 async function setCSP() {
