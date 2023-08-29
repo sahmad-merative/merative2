@@ -1487,7 +1487,7 @@ main > .section-content-body.section-with-sidebar .section-content-body__text p 
 /* All except desktop */
 @media only screen and (max-width: 1200px) {  
   html {
-    scroll-padding-top: var(--nav-height-mobile);
+    scroll-padding-top: calc(var(--nav-height-mobile) + var(--spacer-element-03));
   }
 
   h1,
@@ -1545,7 +1545,7 @@ main > .section-content-body.section-with-sidebar .section-content-body__text p 
 /* Desktop */
 @media only screen and (min-width: 1200px) {
   html {
-    scroll-padding-top: var(--sticky-nav-height);
+    scroll-padding-top: calc(var(--sticky-nav-height) + var(--spacer-element-03));
   }
 
   h1,
