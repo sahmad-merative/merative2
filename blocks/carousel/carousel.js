@@ -138,7 +138,13 @@ function syncActiveDot(carousel, activeSlide) {
 function scrollToSlide(carousel, slideIndex = 0) {
   const carouselSlider = carousel.querySelector('.carousel-slide-container');
   calculateSlideHeight(carouselSlider, carouselSlider.children[slideIndex]);
-  carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slideIndex, behavior: 'smooth' });
+  let extraSpace = 0;
+  if (carouselType === 'image-carousel-full-width' && slideIndex !== 0) {
+    if (screen.width <= 768) {
+      extraSpace = 61;
+    }
+  }
+  carouselSlider.scrollTo({ left: carouselSlider.offsetWidth * slideIndex + extraSpace, behavior: 'smooth' });
   syncActiveDot(carousel, slideIndex);
   // sync slide
   [...carouselSlider.children].forEach((slide, index) => {

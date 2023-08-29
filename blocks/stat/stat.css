@@ -33,7 +33,8 @@ div.stat-container .stat > div > div::before {
     background-image: var(--gradient-left-right);
 }
 
-div.stat-container .stat h1 {
+div.stat-container .stat h1,
+div.stat-container .stat h2 {
     font-size: 96px;
     line-height: var(--line-height-120);
     letter-spacing: 0;
@@ -51,6 +52,11 @@ div.stat-container .stat p {
     padding: 0;
     margin: 0 0 var(--spacer-layout-03) 0;
     overflow-wrap: break-word;
+}
+
+div.stat-container .stat p a.tertiary {
+    color: var(--neutral-white);
+    border-bottom: 2px solid var(--neutral-white);
 }
 
 div.stat-container .stat p:last-child {
@@ -93,8 +99,13 @@ div.stat-container .stat::after {
         padding: var(--spacer-layout-07) 0 var(--spacer-layout-05);
     }
 
-    div.stat-container .stat h1 {
+    div.stat-container .stat h1,
+    div.stat-container .stat h2 {
         font-size: 128px;
+    }
+
+    div.stat-container .stat h2 {
+        margin-bottom: 16px;
     }
 
     div.stat-container.carousel-container .stat::after {

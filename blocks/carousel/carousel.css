@@ -151,7 +151,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 .carousel.image-carousel-full-width .carousel-slide-container {
     max-width: 100%;
     display: flex;
-    gap: var(--gap-24);
+    gap: 20px;
     flex-wrap: nowrap;
 }
 
@@ -212,7 +212,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 /* Tablet */
 @media screen and (min-width: 768px) {
     .carousel.image-carousel-full-width .carousel-slide-container {
-        gap: var(--spacer-layout-05);
+        gap: 61px;
     }
 
     .carousel.image-carousel-full-width.no-animation-effect .carousel-slide-container {
