@@ -90,10 +90,13 @@ div.stat-container .stat::after {
 
     div.stat-container .stat > div {
         flex-direction: unset;
+        justify-content: space-between;
+        column-gap: normal;
     }
 
-    div.stat-container .stat h2 {
-        font-size: 90px;
+    div.stat-container .stat > div.no-effect {
+        justify-content: normal;
+        column-gap: var(--spacer-element-07);
     }
 }
 
@@ -101,6 +104,11 @@ div.stat-container .stat::after {
 @media (min-width: 1200px) {
     div.stat-container .stat {
         padding: var(--spacer-layout-07) 0 var(--spacer-layout-05);
+    }
+
+    div.stat-container .stat > div {
+        justify-content: normal;
+        column-gap: var(--spacer-element-07);
     }
 
     div.stat-container .stat h1,
