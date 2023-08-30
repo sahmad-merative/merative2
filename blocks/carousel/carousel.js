@@ -140,7 +140,7 @@ function scrollToSlide(carousel, slideIndex = 0) {
   calculateSlideHeight(carouselSlider, carouselSlider.children[slideIndex]);
   let extraSpace = 0;
   if (carouselType === 'image-carousel-full-width' && slideIndex !== 0) {
-    if (screen.width > 375 && screen.width <= 768) {
+    if (window.screen.width > 375 && window.screen.width <= 768) {
       extraSpace = 61;
     }
   }

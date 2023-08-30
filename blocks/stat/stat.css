@@ -91,6 +91,10 @@ div.stat-container .stat::after {
     div.stat-container .stat > div {
         flex-direction: unset;
     }
+
+    div.stat-container .stat h2 {
+        font-size: 90px;
+    }
 }
 
 /* Desktop styles */
