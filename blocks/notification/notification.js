@@ -16,17 +16,24 @@ export default async function decorate(block) {
     const innerDivElement = document.createElement('div');
     innerDivElement.className = 'notification-block__inner';
 
-    const titleDivElement = document.createElement('div');
-    titleDivElement.className = 'notification-block__title';
-
     const contentDivEle = notificationElement.lastElementChild;
     const titleElement = contentDivEle.querySelector('strong');
-    const titleSpanElement = document.createElement('span');
-    titleSpanElement.innerHTML = titleElement.textContent;
-    titleElement.replaceWith(titleSpanElement);
+    if (titleElement) {
+      if (titleElement.textContent) {
+        const titleDivElement = document.createElement('div');
+        titleDivElement.className = 'notification-block__title';
 
-    titleDivElement.append(titleSpanElement);
-    innerDivElement.append(titleDivElement);
+        const titleSpanElement = document.createElement('span');
+        titleSpanElement.innerHTML = titleElement.textContent;
+        titleElement.replaceWith(titleSpanElement);
+
+        titleDivElement.append(titleSpanElement);
+        innerDivElement.append(titleDivElement);
+      } else {
+        titleElement.remove();
+      }
+    }
+
     innerDivElement.append(contentDivEle);
     outerDivElement.append(innerDivElement);
 
