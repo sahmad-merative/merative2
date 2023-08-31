@@ -32,6 +32,8 @@ main .section div.carousel-wrapper {
     padding-top: var(--spacer-layout-06);
 }
 
+/* Section - Stat Container  */
+
 main .section.stat-container.carousel-container div.carousel-wrapper {
     padding-top: 0;
 }
@@ -306,12 +308,12 @@ main .section div.carousel-wrapper {
     }
 
     .carousel-container .carousel.image-carousel-full-width .carousel-slide-container {
-        gap: 108px;
+        gap: var(--gap-108);
         padding: 0 var(--spacer-element-10);
     }
 
     .carousel.image-carousel-full-width.no-animation-effect .carousel-slide-container {
         grid-template-columns: 120px 120px 120px 120px;
-        column-gap: 108px;
+        column-gap: var(--gap-108);
     }
 }

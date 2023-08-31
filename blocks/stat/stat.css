@@ -35,10 +35,10 @@ div.stat-container .stat > div > div::before {
 
 div.stat-container .stat h1,
 div.stat-container .stat h2 {
-    font-size: 96px;
+    font-size: var(--font-size-96);
     line-height: var(--line-height-120);
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
     padding: 0;
     margin: 0;
 }
@@ -46,8 +46,8 @@ div.stat-container .stat h2 {
 div.stat-container .stat p {
     font-size: var(--font-size-16);
     letter-spacing: var(--letter-spacing-001-em);
-    line-height: 160%;
-    font-weight: 400;
+    line-height: var(--line-height-160);
+    font-weight: var(--font-weight-regular);
     color: var(--neutral-white);
     padding: 0;
     margin: 0 0 var(--spacer-layout-03) 0;
@@ -98,6 +98,14 @@ div.stat-container .stat::after {
         justify-content: normal;
         column-gap: var(--spacer-element-07);
     }
+
+    .max-width-third {
+        max-width: calc((100% / 3) - var(--spacer-element-05));
+    }
+
+    .max-width-half {
+        max-width: calc(50% - var(--spacer-element-04));
+    }
 }
 
 /* Desktop styles */
@@ -113,14 +121,22 @@ div.stat-container .stat::after {
 
     div.stat-container .stat h1,
     div.stat-container .stat h2 {
-        font-size: 128px;
+        font-size: var(--font-size-128);
     }
 
     div.stat-container .stat h2 {
-        margin-bottom: 16px;
+        margin-bottom: var(--spacer-element-05);
     }
 
     div.stat-container.carousel-container .stat::after {
         padding-top: var(--spacer-element-10);
+    }
+
+    .max-width-third {
+        max-width: none;
+    }
+
+    .max-width-half {
+        max-width: none;
     }
 }
