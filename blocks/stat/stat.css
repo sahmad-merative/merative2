@@ -44,6 +44,7 @@ div.stat-container .stat h2 {
 }
 
 div.stat-container .stat p {
+    font-family: var(--sans-serif-font-regular);
     font-size: var(--font-size-16);
     letter-spacing: var(--letter-spacing-001-em);
     line-height: var(--line-height-160);
@@ -117,6 +118,10 @@ div.stat-container .stat::after {
     div.stat-container .stat > div {
         justify-content: normal;
         column-gap: var(--spacer-element-07);
+    }
+
+    div.stat-container .stat > div > div {
+        margin-bottom: var(--spacer-layout-05);
     }
 
     div.stat-container .stat h1,

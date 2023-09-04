@@ -14,18 +14,14 @@ function setMaxWidth(elements, className) {
  * @param {Element} block The stat block element
  */
 export default async function decorate(block) {
-  const { width } = window.screen;
+  const statParent = block.firstElementChild;
+  const childLenth = statParent.children.length;
 
-  if (width >= 768 && width < 1200) {
-    const statParent = block.firstElementChild;
-    const childLenth = statParent.children.length;
-
-    if (childLenth === 3) {
-      setMaxWidth(statParent.children, 'max-width-third');
-    } else if (childLenth === 2) {
-      setMaxWidth(statParent.children, 'max-width-half');
-    } else {
-      statParent.classList.add('no-effect');
-    }
+  if (childLenth === 3) {
+    setMaxWidth(statParent.children, 'max-width-third');
+  } else if (childLenth === 2) {
+    setMaxWidth(statParent.children, 'max-width-half');
+  } else {
+    statParent.classList.add('no-effect');
   }
 }
