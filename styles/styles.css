@@ -143,6 +143,8 @@
   --sans-serif-font-semibold: "Alliance No.1 Semibold", "Alliance No.1 Semibold Fallback";
 
   /* font sizes */
+  --font-size-128: 128px;
+  --font-size-96: 96px;
   --font-size-64: 64px;
   --font-size-45: 45px;
   --font-size-36: 36px;
@@ -209,6 +211,7 @@
   --gap-24: 24px;
   --gap-48: 48px;
   --gap-84: 84px;
+  --gap-108: 108px;
   --gap-120: 120px;
   --gap-216: 216px;
 
