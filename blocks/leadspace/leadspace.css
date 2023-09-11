@@ -421,7 +421,7 @@ main div.leadspace-wrapper {
 
   .leadspace.brand-logo > div:first-child > div:nth-child(2) {
     margin-left: var(--spacer-element-07);
-    max-width: 336px;
+    max-width: unset;
   }
 
   .leadspace > div:first-child > div:nth-child(2) picture {
@@ -444,7 +444,6 @@ main div.leadspace-wrapper {
   }
 
   .leadspace:not(.document) > div:first-child > div:nth-child(1) {
-    width: 334px;
     padding: var(--spacer-layout-05) 0;
   }
 
