@@ -36,7 +36,6 @@ const SLIDE_CAPTION_SIZE_WITH_ICON = 89;
 const SLIDE_ID_PREFIX = 'carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'carousel-slide-control';
 
-let resizeTimeout;
 let scrollInterval;
 let curSlide = 0;
 let maxSlide = 0;
@@ -92,20 +91,24 @@ function calculateSlideHeight(carousel, slide) {
   if (carouselType === 'default' || carouselType === 'testimonial' || carouselType === 'case-study') {
     requestAnimationFrame(() => {
       const slideBody = slide.querySelector('div');
-      const slideH3 = slide.querySelector('H3');
+      const slideH3 = slide.querySelector('h3');
       const bodyStyle = window.getComputedStyle(slideBody);
       const textOptions = {
         font: `${bodyStyle.fontWeight} ${bodyStyle.fontSize} ${bodyStyle.fontFamily}`,
       };
-      const lineCount = getLineCount(
-        slideH3.textContent,
-        parseInt(bodyStyle.width, 10),
-        textOptions,
-      );
-      const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
-      const figureStyle = window.getComputedStyle(slide.querySelector('.figure'));
-      const figureHeight = (figureStyle && figureStyle.height !== 'auto') ? parseFloat(figureStyle.height) : SLIDE_CAPTION_SIZE_WITH_ICON;
-      carousel.style.height = `${bodyHeight + figureHeight}px`;
+
+      // Check if slideH3 exists before accessing its textContent
+      if (slideH3) {
+        const lineCount = getLineCount(
+          slideH3.textContent,
+          parseInt(bodyStyle.width, 10),
+          textOptions,
+        );
+        const bodyHeight = parseFloat(bodyStyle.lineHeight) * lineCount;
+        const figureStyle = window.getComputedStyle(slide.querySelector('.figure'));
+        const figureHeight = (figureStyle && figureStyle.height !== 'auto') ? parseFloat(figureStyle.height) : SLIDE_CAPTION_SIZE_WITH_ICON;
+        carousel.style.height = `${bodyHeight + figureHeight}px`;
+      }
     });
   }
 }
@@ -293,7 +296,7 @@ function startAutoScroll(block) {
   if (!scrollInterval) {
     scrollInterval = setInterval(() => {
       scrollToSlide(block, curSlide < maxSlide ? curSlide + 1 : 0);
-    }, 8000);
+    }, 10000);
   }
 }
 
@@ -387,10 +390,7 @@ export default function decorate(block) {
   // add decorated carousel to block
   block.append(carousel);
 
-  // calculate height of first slide
-  if (carouselType !== 'case-study') {
-    calculateSlideHeight(carousel, slides[0]);
-  }
+  calculateSlideHeight(carousel, slides[0]);
 
   // add nav buttons and dots to block
   if (slides.length > 1) {
@@ -431,9 +431,10 @@ export default function decorate(block) {
     });
   }
 
-  window.addEventListener('resize', () => {
-    // clear the timeout
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => calculateSlideHeight(carousel, slides[curSlide]), 500);
+  // Observe the carousel container for resize events
+  const carouselContainer = block.querySelector('.carousel-slide-container');
+  const resizeObserver = new ResizeObserver(() => {
+    calculateSlideHeight(carouselContainer, carouselContainer.children[curSlide]);
   });
+  resizeObserver.observe(carouselContainer);
 }

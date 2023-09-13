@@ -285,12 +285,15 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 }
   
 .carousel.case-study .carousel-slide-container .carousel-slide > div.only-picture > picture {
+    width: 100%;
     display: flex;
     position: absolute;
     bottom: 0;
 }
 
-/* Media queries */
+.carousel.case-study .carousel-slide-container .carousel-slide > div.only-picture > picture img {
+    width: 100%;
+}
 
 /* Tablet */
 @media screen and (min-width: 768px) {
@@ -326,7 +329,7 @@ main .section.stat-container.carousel-container div.carousel-wrapper {
 
     main .section div.carousel-wrapper {
         padding-top: var(--spacer-layout-07);
-        padding-bottom: var(--spacer-layout-04);
+        padding-bottom: var(--spacer-layout-07);
     }
 
     .section.carousel-container .default-content-wrapper {
