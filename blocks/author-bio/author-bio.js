@@ -25,7 +25,7 @@ export default async function decorate(block) {
       let isAuthorFlag = false;
 
       // Add name
-      if (people.title) {
+      if (people.title && people.title !== '0') {
         author[nameField] = people.title;
         isAuthorFlag = true;
       }
@@ -36,7 +36,7 @@ export default async function decorate(block) {
         isAuthorFlag = true;
       }
       // Add title
-      if (people['display-title']) {
+      if (people['display-title'] && people['display-title'] !== '0') {
         author[titleField] = people['display-title'];
         isAuthorFlag = true;
       }
