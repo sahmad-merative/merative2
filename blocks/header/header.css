@@ -67,6 +67,28 @@ header nav .nav-sections > ul > li {
   font-weight: 500;
 }
 
+/* nav link with icon */
+header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a.link-with-icon,
+header nav .nav-sections .mega-menu aside div.link-with-icon-list a.link-with-icon {
+  display: flex;
+  gap: var(--gap-16);
+  border: none;
+  margin: 0 0 var(--spacer-element-03);
+  text-decoration: none;
+}
+
+header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a.link-with-icon > *,
+header nav .nav-sections .mega-menu aside div.link-with-icon-list a.link-with-icon,
+header nav .nav-sections .mega-menu aside div.link-with-icon-list a.link-with-icon > * {
+  margin: 0;
+  height: var(--spacer-layout-02);
+}
+
+header nav .nav-sections .mega-menu a.link-with-icon span.icon svg {
+  width: var(--spacer-layout-02);
+  height: var(--spacer-layout-02);
+}
+
 /* tablet nav */
 @media only screen and (min-width: 768px) {
   header nav {
@@ -180,7 +202,8 @@ header nav .nav-sections > ul > li {
   }
 
   header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop > ul,
-  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] .level-two > ul {
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] .level-two > ul,
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] .level-two > div.link-with-icon-list {
     display: none;
   }
 
@@ -226,6 +249,14 @@ header nav .nav-sections > ul > li {
     flex-direction: column;
     position: relative;
     background-color: var(--neutral-white);
+  }
+
+  /* nav link with icon */
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] .level-two[aria-expanded='true'] > div.link-with-icon-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-24);
+    margin-bottom: var(--spacer-layout-04);
   }
 
   header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] li.level-three {
@@ -584,6 +615,7 @@ header nav .nav-sections > ul > li {
     transition: transform .3s;
   }
 
+  header nav .nav-sections > ul > li[aria-expanded='true'] > ul.level-two.mega-menu aside li > div.link-with-icon-list,
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul.level-two.mega-menu aside li > ul,
   header nav .nav-sections > ul > li[aria-expanded='true'] > ul > li.level-two.mega-menu li.level-three {
     display: none;
@@ -742,6 +774,11 @@ header nav .nav-sections > ul > li {
 
   header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a > h5 {
     margin: 0 0 var(--spacer-element-02);
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a.link-with-icon > h5 {
+    font-size: var(--font-size-14);
+    letter-spacing: 0.14px;
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a > p {

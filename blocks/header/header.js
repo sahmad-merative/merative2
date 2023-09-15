@@ -40,6 +40,18 @@ function copyMegaMenu(navItem) {
   } else {
     megaContent.innerHTML = navItem.querySelector('ul').outerHTML;
   }
+  let linkWithIcon = navItem.querySelector(':scope > div.link-with-icon-list');
+  if (!linkWithIcon) {
+    const linkWithIconList = [...navItem.querySelectorAll('a.link-with-icon')];
+    if (linkWithIconList.length) {
+      linkWithIcon = createTag('div', { class: 'link-with-icon-list' });
+      linkWithIconList.forEach((element) => {
+        const link = element.cloneNode(true);
+        linkWithIcon.appendChild(link);
+      });
+      navItem.appendChild(linkWithIcon);
+    }
+  }
 }
 
 function buildMegaMenu(navItem) {
@@ -55,6 +67,9 @@ function buildMegaMenu(navItem) {
       link.prepend(linkParent.previousElementSibling);
     }
     link.setAttribute('title', link.querySelector('h5').textContent);
+    if (link.querySelector('span.icon')) {
+      link.classList.add('link-with-icon');
+    }
     cell.appendChild(link);
     linkParent.remove();
   });
@@ -245,7 +260,10 @@ export default async function decorate(block) {
     }
     const url = new URL(link.href);
     if (url.pathname.startsWith('/fragments/')) {
-      const fragmentBlock = await fetchFragment(link.href);
+      //line number 264 and 265 is for testing purpose only, once approved these lines will be removed and 266 will be used.
+      const navLink = link.href.replace('fragments', 'drafts/saad/fragments');
+      const fragmentBlock = await fetchFragment(navLink);
+      // const fragmentBlock = await fetchFragment(link.href);
       const navItem = link.parentElement;
       navItem.append(fragmentBlock);
       navItem.classList.add('fragment');
