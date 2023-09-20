@@ -745,11 +745,6 @@ header nav .nav-sections .mega-menu a.link-with-icon span.icon svg {
     margin: 0 0 var(--spacer-element-05);
   }
 
-  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-header > div > div:last-child {
-    flex: unset;
-    width: 306px;
-  }
-
   header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-header > div > div:last-child p  {
     margin: 0;
   }
@@ -785,6 +780,16 @@ header nav .nav-sections .mega-menu a.link-with-icon span.icon svg {
     margin: 0 0 var(--spacer-element-05);
     font-size: var(--font-size-14);
     line-height: 160%;
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-header > div,
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div {
+    justify-content: space-between;
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-header > div > div,
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div {
+    max-width: 336px;
   }
 
   /* Featured Fragment */
