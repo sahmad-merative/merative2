@@ -279,6 +279,16 @@ header nav .nav-sections .mega-menu a.link-with-icon span.icon svg {
     background: url('../../icons/arrow-purple.svg') no-repeat right;
   }
 
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] li.level-four > a,
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] li.level-three > a {
+    font-family: var(--sans-serif-font-regular);
+  }
+
+  header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] li.level-two:not(.mega-menu) a {
+    font-family: var(--sans-serif-font-light);
+    font-weight: var(--font-weight-light);
+  }
+
   header nav[aria-expanded='true'] .nav-sections > ul > li.nav-drop[aria-expanded='true'] li.level-two:not(.mega-menu) > ul {
     display: none;
   }
@@ -760,6 +770,10 @@ header nav .nav-sections .mega-menu a.link-with-icon span.icon svg {
     border-bottom: 1px solid var(--neutral-sand);
     margin: var(--spacer-element-05) 0;
     color: currentcolor;
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a.link-with-icon:first-child {
+    margin-top: var(--spacer-element-05);
   }
 
   header nav .nav-sections > ul > li[aria-expanded='true'] .mega-menu-content .columns.solution-list > div > div > a:last-child  {
