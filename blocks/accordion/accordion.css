@@ -102,8 +102,10 @@ main .section.accordion-container blockquote {
 
 .accordion .accordion-arrow-down {
   display: block;
+  flex-shrink: 0;
   width: 32px;
-  height: 19px;
+  height: 20px;
+  margin-left: var(--spacer-element-08);
   transition: all .5s ease-out;
   background: url('../../icons/caret-down-accordion-purple.svg') no-repeat center/contain;
 }
