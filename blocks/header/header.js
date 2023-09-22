@@ -260,10 +260,7 @@ export default async function decorate(block) {
     }
     const url = new URL(link.href);
     if (url.pathname.startsWith('/fragments/')) {
-      //line number 264 and 265 is for testing purpose only, once approved these lines will be removed and 266 will be used.
-      const navLink = link.href.replace('fragments', 'drafts/saad/fragments');
-      const fragmentBlock = await fetchFragment(navLink);
-      // const fragmentBlock = await fetchFragment(link.href);
+      const fragmentBlock = await fetchFragment(link.href);
       const navItem = link.parentElement;
       navItem.append(fragmentBlock);
       navItem.classList.add('fragment');
