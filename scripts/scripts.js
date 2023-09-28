@@ -776,9 +776,9 @@ export function removeDuplicateEnteries(arr, type) {
   }
 
   arr.forEach((item) => {
-    const _key = item.toString().trim().toLowerCase();
-    if (!mapArr.has(_key)) {
-      mapArr.set(_key, item);
+    const key = item.toString().trim().toLowerCase();
+    if (!mapArr.has(key)) {
+      mapArr.set(key, item);
     }
   });
   result = [...mapArr.values()];

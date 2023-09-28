@@ -1,5 +1,6 @@
 import {
-  getAllBlogs, createCard, getBlogCategoryPages, createTag, sortArrayOfObjects, removeDuplicateEnteries,
+  getAllBlogs, createCard, getBlogCategoryPages,
+  createTag, sortArrayOfObjects, removeDuplicateEnteries,
 } from '../../scripts/scripts.js';
 
 const NUM_CARDS_SHOWN_AT_A_TIME = 6;
@@ -193,7 +194,8 @@ export function refreshCards(mode) {
       if (card.hasAttribute(attribute)) {
         const filterGroupValues = card.getAttribute(attribute).split(',');
         const found = filterGroupValues.some(
-          (checkedItem) => checkedList.find((item) => item.value && checkedItem.trim() && item.value.toLowerCase() === checkedItem.trim().toLowerCase()),
+          (checkedItem) => checkedList.find((item) => item.value && checkedItem.trim()
+          && item.value.toLowerCase() === checkedItem.trim().toLowerCase()),
         );
         if (found) {
           card.removeAttribute('aria-hidden');
