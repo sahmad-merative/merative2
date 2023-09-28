@@ -757,6 +757,38 @@ export async function getPDFsDocuments() {
   return (result);
 }
 
+/**
+ * Remove duplicate enteries from array or set
+ * @param {Array | Set} arr Array or Set object
+ * @param {string} type Identifier to check Array or Set. Value: set or array
+ * @returns {Array | Set} Result
+ */
+export function removeDuplicateEnteries(arr, type) {
+  const mapArr = new Map();
+  let result = [];
+
+  // Check if the array empty
+  if (!arr.length && type !== 'set') {
+    return result;
+  }
+  if (!arr.size && type === 'set') {
+    return new Set([]);
+  }
+
+  arr.forEach((item) => {
+    const _key = item.toString().trim().toLowerCase();
+    if (!mapArr.has(_key)) {
+      mapArr.set(_key, item);
+    }
+  });
+  result = [...mapArr.values()];
+  if (type === 'set') {
+    result = new Set(result);
+  }
+
+  return result;
+}
+
 export function sortArrayOfObjects(arr, property, type) {
   let result = [];
   let sortedArray;
